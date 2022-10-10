@@ -1,0 +1,5 @@
+package Object;
+
+public enum Nationalité {
+    FRANCE, ROYAUME_UNI,ESPAGNE,ETATS_UNIS,CANADA,COREE_DU_SUD,JAPON,MEXIQUE,ISRAEL
+}
