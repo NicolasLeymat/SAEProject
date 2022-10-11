@@ -29,18 +29,13 @@ public class Connexion {
     }
     try {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-    }
-    catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    try {
         Connection connect =DriverManager.getConnection(url,identifiant,mdp);
         return connect;
     }
     catch (SQLException e) {
         e.printStackTrace();
     }
+
     return null;
     }
 }
