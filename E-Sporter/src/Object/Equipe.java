@@ -1,7 +1,13 @@
 package Object;
 
+import Object.Equipe.Ecurie;
+
 public class Equipe {
 	
+	public class Ecurie {
+
+	}
+
 	private String nom;
 	private int nbJoueurs;
 	private int points;
