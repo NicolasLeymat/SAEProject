@@ -9,10 +9,9 @@ private String prénom;
 private String pseudo;
 private DateFormat datenaissance;
 private Nationalité nationalité;
-
 private Equipe equipe;
 
-public Joueur(String nom, String prénom, String pseudo, String datenaissance, Nationalité nationalité) throws Exception {
+public Joueur(String nom, String prénom, String pseudo, String datenaissance, Nationalité nationalité, Equipe equipe) throws Exception {
     this.nom = nom;
     this.prénom = prénom;
     this.pseudo = pseudo;
@@ -46,6 +45,8 @@ public Joueur(String nom, String prénom, String pseudo, String datenaissance, N
     }
 
     public void setEquipe(Equipe equipe) {
+    	this.equipe.setNbJoueurs(this.equipe.getNbJoueurs()-1);
         this.equipe = equipe;
+        this.equipe.setNbJoueurs(this.equipe.getNbJoueurs()+1);
     }
 }
