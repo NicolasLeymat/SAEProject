@@ -1,4 +1,6 @@
 /bin/
-/.classpath/
 /.project/
 /.properties/
+/.settings/
+/.classpath/
+/.metadata/
