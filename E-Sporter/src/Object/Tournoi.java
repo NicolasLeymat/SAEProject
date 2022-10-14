@@ -5,8 +5,9 @@ public class Tournoi {
 	private String nom;
 	private String dateTournoi;
 	private int notoriete;
+	private Jeu jeu;
 
-	public Tournoi(String nom, String dateTournoi, int notoriete) throws Exception {
+	public Tournoi(String nom, String dateTournoi, int notoriete, Jeu jeu) throws Exception {
 		
 		if (notoriete > 3 || notoriete < 0) {
 			throw new Exception();
@@ -16,6 +17,7 @@ public class Tournoi {
 		this.dateTournoi = dateTournoi;
 		//this.championnat = championnat;
 		this.notoriete = notoriete;
+		this.jeu = jeu;
 	}
 
 	public String getNom() {

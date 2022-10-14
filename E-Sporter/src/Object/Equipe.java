@@ -1,23 +1,21 @@
 package Object;
 
-import Object.Equipe.Ecurie;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Equipe {
-	
-	public class Ecurie {
-
-	}
 
 	private String nom;
-	private int nbJoueurs;
 	private int points;
 	private Ecurie ecurie;
 	private String jeu;
 
 	//Il faudrait peut être changer le type de jeu
-	public Equipe(String nom, int nbJoueurs, int points, Ecurie ecurie, String jeu) {
+	public Equipe(String nom, int points, Ecurie ecurie, String jeu) {
 		this.nom = nom;
-		this.nbJoueurs = nbJoueurs;
 		this.points = points;
 		this.ecurie = ecurie;
 		this.jeu = jeu;
@@ -45,14 +43,6 @@ public class Equipe {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public int getNbJoueurs() {
-		return nbJoueurs;
-	}
-
-	public void setNbJoueurs(int nbJoueurs) {
-		this.nbJoueurs = nbJoueurs;
 	}
 
 	public int getPoints() {
