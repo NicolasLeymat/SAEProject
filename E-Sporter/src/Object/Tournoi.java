@@ -55,4 +55,8 @@ public class Tournoi {
 		this.listeEquipe.add(equipe);
 	}
 	
+	public Jeu getJeu() {
+		return jeu;
+	}
+	
 }
