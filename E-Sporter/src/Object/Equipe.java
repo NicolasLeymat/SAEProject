@@ -78,7 +78,7 @@ public class Equipe {
 		this.listeJoueurs.add(joueur);
 	}
 
-	public void enregistrerEquipe(Connection connex, String nom, int nombreJoueur, int points, Scanner e) {
+	public int enregistrerEquipe(Connection connex) {
 		PreparedStatement pst;
 		int lastId = this.getLastId(connex);
 		try {
@@ -87,11 +87,14 @@ public class Equipe {
 			pst.setString(2, nom);
 			pst.setInt(3, listeJoueurs.size());
 			pst.setInt(4, points);
+			pst.setInt(5,this.ecurie.getId());
+			pst.setInt(6,this.jeu.getId());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
-			
 			e1.printStackTrace();
+			return -1;
 		}
+		return 0;
 
 	}
 }
