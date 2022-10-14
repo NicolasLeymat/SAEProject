@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Equipe {
 
+
 	private String nom;
 	private int points;
 	private Ecurie ecurie;
