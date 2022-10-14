@@ -5,18 +5,18 @@ import java.text.DateFormat;
 
 public class Joueur {
 private String nom;
-private String prénom;
+private String prenom;
 private String pseudo;
 private DateFormat datenaissance;
-private Nationalite nationalité;
+private Nationalite nationalite;
 private Equipe equipe;
 
-public Joueur(String nom, String prénom, String pseudo, String datenaissance, Nationalite nationalité, Equipe equipe) throws Exception {
+public Joueur(String nom, String prenom, String pseudo, String datenaissance, Nationalite nationalite, Equipe equipe) throws Exception {
     this.nom = nom;
-    this.prénom = prénom;
+    this.prenom = prenom;
     this.pseudo = pseudo;
     this.datenaissance.parse(datenaissance);
-    this.nationalité = nationalité;
+    this.nationalite = nationalite;
     this.equipe = equipe;
 }
 
@@ -24,8 +24,8 @@ public Joueur(String nom, String prénom, String pseudo, String datenaissance, N
         return nom;
     }
 
-    public String getPrénom() {
-        return prénom;
+    public String getPrenom() {
+        return prenom;
     }
 
     public String getPseudo() {
@@ -36,8 +36,8 @@ public Joueur(String nom, String prénom, String pseudo, String datenaissance, N
         return datenaissance;
     }
 
-    public Nationalite getNationalité() {
-        return nationalité;
+    public Nationalite getNationalite() {
+        return nationalite;
     }
 
     public Equipe getEquipe() {
