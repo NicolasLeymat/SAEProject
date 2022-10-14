@@ -8,10 +8,10 @@ private String nom;
 private String prénom;
 private String pseudo;
 private DateFormat datenaissance;
-private Nationalité nationalité;
+private Nationalite nationalité;
 private Equipe equipe;
 
-public Joueur(String nom, String prénom, String pseudo, String datenaissance, Nationalité nationalité, Equipe equipe) throws Exception {
+public Joueur(String nom, String prénom, String pseudo, String datenaissance, Nationalite nationalité, Equipe equipe) throws Exception {
     this.nom = nom;
     this.prénom = prénom;
     this.pseudo = pseudo;
@@ -36,7 +36,7 @@ public Joueur(String nom, String prénom, String pseudo, String datenaissance, N
         return datenaissance;
     }
 
-    public Nationalité getNationalité() {
+    public Nationalite getNationalité() {
         return nationalité;
     }
 
