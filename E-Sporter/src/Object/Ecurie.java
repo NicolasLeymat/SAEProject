@@ -28,5 +28,10 @@ public class Ecurie {
 	public Equipe getEquipe(int i) {
 		return this.listeEquipes.get(i);
 	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

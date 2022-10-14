@@ -24,6 +24,11 @@ public class Jeu {
 	public void addModeDeJeu(String mode, int nbJoueurs) {
 		this.modeDeJeu.put(mode, nbJoueurs);
 	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
