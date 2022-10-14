@@ -14,11 +14,11 @@ public class Equipe {
 	private String nom;
 	private int points;
 	private Ecurie ecurie;
-	private String jeu;
+	private Jeu jeu;
 	private List<Joueur> listeJoueurs;
 
 	//Il faudrait peut être changer le type de jeu
-	public Equipe(String nom, int points, Ecurie ecurie, String jeu) {
+	public Equipe(String nom, int points, Ecurie ecurie, Jeu jeu) {
 		this.nom = nom;
 		this.points = points;
 		this.ecurie = ecurie;
@@ -34,11 +34,11 @@ public class Equipe {
 		this.ecurie = ecurie;
 	}
 
-	public String getJeu() {
+	public Jeu getJeu() {
 		return jeu;
 	}
 
-	public void setJeu(String jeu) {
+	public void setJeu(Jeu jeu) {
 		this.jeu = jeu;
 	}
 

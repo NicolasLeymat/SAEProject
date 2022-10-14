@@ -45,8 +45,6 @@ public Joueur(String nom, String prénom, String pseudo, String datenaissance, N
     }
 
     public void setEquipe(Equipe equipe) {
-    	this.equipe.setNbJoueurs(this.equipe.getNbJoueurs()-1);
         this.equipe = equipe;
-        this.equipe.setNbJoueurs(this.equipe.getNbJoueurs()+1);
     }
 }

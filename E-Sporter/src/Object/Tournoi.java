@@ -1,11 +1,14 @@
 package Object;
 
+import java.util.ArrayList;
+
 public class Tournoi {
 
 	private String nom;
 	private String dateTournoi;
 	private int notoriete;
 	private Jeu jeu;
+	private ArrayList<Equipe> listeEquipe;
 
 	public Tournoi(String nom, String dateTournoi, int notoriete, Jeu jeu) throws Exception {
 		
@@ -18,6 +21,7 @@ public class Tournoi {
 		//this.championnat = championnat;
 		this.notoriete = notoriete;
 		this.jeu = jeu;
+		this.listeEquipe = new ArrayList<Equipe>();
 	}
 
 	public String getNom() {
@@ -42,6 +46,13 @@ public class Tournoi {
 
 	public void setNotoriete(int notoriete) {
 		this.notoriete = notoriete;
+	}
+	
+	public void addEquipe(Equipe equipe) throws Exception{
+		if (this.listeEquipe.size()>=16) {
+			throw new Exception("WTF");
+		}
+		this.listeEquipe.add(equipe);
 	}
 	
 }
