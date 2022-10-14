@@ -28,6 +28,10 @@ public class Tournoi {
 		return nom;
 	}
 
+	public Equipe getEquipe (int i) {
+		return listeEquipe.get(i);
+	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
