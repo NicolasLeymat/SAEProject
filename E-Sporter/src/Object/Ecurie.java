@@ -25,4 +25,8 @@ public class Ecurie {
 		this.listeEquipes.add(equipe);
 	}
 	
+	public Equipe getEquipe(int i) {
+		return this.listeEquipes.get(i);
+	}
+	
 }

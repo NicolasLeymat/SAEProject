@@ -63,4 +63,7 @@ public class Tournoi {
 		return jeu;
 	}
 	
+	public Equipe getEquipeTournoi(int i) {
+		return this.listeEquipe.get(i);
+	}
 }

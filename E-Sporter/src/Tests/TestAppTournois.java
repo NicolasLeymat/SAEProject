@@ -1,10 +1,13 @@
 package Tests;
 
-import org.junit.Before;
-import org.junit.Test;
-import Object.*;
+
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import Object.*;
 
 public class TestAppTournois {
     private Tournoi t;
@@ -32,7 +35,7 @@ public class TestAppTournois {
     public void testAjouterEquipe () throws Exception {
         Ecurie faze =  new Ecurie("Faze Clan");
         t.addEquipe(new Equipe("Faze RL",25,faze,j));
-        assertEquals(faze,t.getEquipe(0));
+        assertEquals(faze,t.getEquipeTournoi(0));
     }
 
     @Test (expected = Exception.class)
