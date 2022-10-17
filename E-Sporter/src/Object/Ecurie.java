@@ -8,6 +8,8 @@ public class Ecurie {
 	private String nom;
 	private List<Equipe> listeEquipes;
 	
+	
+	//Ajouter photo type : String
 	public Ecurie(String nom) {
 		this.nom = nom;
 		this.listeEquipes = new ArrayList<Equipe>();
