@@ -33,9 +33,19 @@ public class Ecurie {
 	public void addEquipe(Equipe equipe) {
 		this.listeEquipes.add(equipe);
 	}
+	
+	public void removeEquipe(Equipe equipe) {
+		this.listeEquipes.remove(equipe);
+	}
+	
+	public Equipe getEquipe(String nom) {
+		for (Equipe equipe: this.listeEquipes) {
+			if (equipe.getNom() == nom) {
+				return equipe;
+			}			
+		}
+		return null;		
 
-	public Equipe getEquipe(int i) {
-		return this.listeEquipes.get(i);
 	}
 
 	public int getId() throws Exception {
