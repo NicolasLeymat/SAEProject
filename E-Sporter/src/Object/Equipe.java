@@ -77,8 +77,7 @@ public class Equipe {
 		this.listeJoueurs.add(joueur);
 	}
 
-	public int enregistrerEquipe() throws Exception {
-		Connection connex = Application.Connexion.connexion();
+	public int enregistrerEquipe(Connection connex) throws Exception {
 		PreparedStatement pst;
 		int lastId = this.getLastId(connex);
 		try {

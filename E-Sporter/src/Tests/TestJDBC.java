@@ -35,7 +35,7 @@ public class TestJDBC {
 		}
 		assertEquals(1, OW.enregistrerJeu());
 		assertEquals(1, nom.enregistrerEcurie());
-		assertEquals(1, equipe.enregistrerEquipe());
+		assertEquals(1, equipe.enregistrerEquipe(connec));
 	}
 
 }
