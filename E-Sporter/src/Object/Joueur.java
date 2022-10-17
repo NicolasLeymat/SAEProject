@@ -23,8 +23,24 @@ public Joueur(String nom, String prenom, String pseudo, String datenaissance, Na
     public String getNom() {
         return nom;
     }
+     
+    public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public String getPrenom() {
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+	public void setNationalite(Nationalite nationalite) {
+		this.nationalite = nationalite;
+	}
+
+	public String getPrenom() {
         return prenom;
     }
 
