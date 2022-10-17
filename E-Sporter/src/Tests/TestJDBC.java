@@ -23,16 +23,19 @@ public class TestJDBC {
 	}
 
 	@Test
-	public void testInsererUneEquipe() {
-		Connexion connec = new Connexion();
-		Connection connect = (Connection) connec;
-		Equipe equipe = new Equipe("test",10, new Ecurie("nom"), new Jeu("overwatch"));
+	public void testInsererUneEquipe() throws  Exception{
+		Connection connec = Connexion.connexion();
+		Ecurie nom = new Ecurie("nom");
+		Jeu OW = new Jeu("overwatch");
+		Equipe equipe = new Equipe("test",10, nom, OW);
 		try {
-			connect.setAutoCommit(false);
+			connec.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		assertEquals(1, equipe.enregistrerEquipe(connect));
+		assertEquals(1, OW.enregistrerJeu());
+		assertEquals(1, nom.enregistrerEcurie());
+		assertEquals(1, equipe.enregistrerEquipe());
 	}
 
 }

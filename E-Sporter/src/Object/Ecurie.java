@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Application.Connexion;
-import sun.security.mscapi.CKeyPairGenerator.RSA;
+
 
 public class Ecurie {
 
@@ -38,16 +38,51 @@ public class Ecurie {
 		return this.listeEquipes.get(i);
 	}
 
-	public int getId() {
+	public int getId() throws Exception {
 		Connection co = Connexion.connexion();
 		java.sql.Statement st;
 		try {
 			st = co.createStatement();
-			ResultSet rs = st.executeQuery("select id_ecuries from ecurie where " + this.nom + "= ecurie.nom");
+			ResultSet rs = st.executeQuery("select id_ecuries from LMN3783A.sae_ecurie where " + this.nom + "= LMN3783A.sae_ecurie.nom");
+			if (!rs.next()) {
+			throw new IllegalArgumentException();}
 			return rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public int getLastId() {
+		Connection ct = Connexion.connexion();
+		java.sql.Statement st = null;
+		ResultSet rs;
+		int r = 0;
+		try {
+			st = ct.createStatement();
+			rs = st.executeQuery("Select id_ecuries as id from LMN3783A.sae_ecurie");
+			while (rs.next()) {
+				r = rs.getInt("id");
+			}
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return r;
+	}
+
+	public int enregistrerEcurie() {
+		Connection connex = Application.Connexion.connexion();
+		PreparedStatement pst;
+		int lastId = this.getLastId();
+		try {
+			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?,?)");
+			pst.setInt(1, lastId+1);
+			pst.setString(2, nom);
+			pst.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 }
