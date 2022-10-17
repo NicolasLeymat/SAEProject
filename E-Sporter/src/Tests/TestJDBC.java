@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import Application.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,15 +25,14 @@ public class TestJDBC {
 
 	@Test
 	public void testInsererUneEquipe() {
-		Connexion connec = new Connexion();
-		Connection connect = (Connection) connec;
+		Connection connec = Connexion.connexion();
 		Equipe equipe = new Equipe("test",10, new Ecurie("nom"), new Jeu("overwatch"));
 		try {
-			connect.setAutoCommit(false);
+			connec.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		assertEquals(1, equipe.enregistrerEquipe(connect));
+		assertEquals(1, equipe.enregistrerEquipe());
 	}
 
 }
