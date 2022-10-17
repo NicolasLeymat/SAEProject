@@ -63,7 +63,7 @@ public class Equipe {
 		int r = 0;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select id_equipes as id from equipe");
+			rs = st.executeQuery("Select id_equipes as id from LMN3783A.sae_equipe");
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
@@ -77,11 +77,12 @@ public class Equipe {
 		this.listeJoueurs.add(joueur);
 	}
 
-	public int enregistrerEquipe(Connection connex) {
+	public int enregistrerEquipe() throws Exception {
+		Connection connex = Application.Connexion.connexion();
 		PreparedStatement pst;
 		int lastId = this.getLastId(connex);
 		try {
-			pst = connex.prepareStatement("insert into equipe values(?,?,?,?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe values(?,?,?,?,?,?)");
 			pst.setInt(1, lastId+1);
 			pst.setString(2, nom);
 			pst.setInt(3, listeJoueurs.size());
@@ -93,7 +94,6 @@ public class Equipe {
 			e1.printStackTrace();
 			return -1;
 		}
-		return 0;
-
+		return 1;
 	}
 }
