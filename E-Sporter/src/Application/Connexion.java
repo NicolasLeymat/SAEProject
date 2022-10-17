@@ -6,20 +6,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
 public class Connexion {
-private static Connection connexion;
 
-    public static synchronized  Connection connexion () {
-        if (connexion == null) {
-            return creerconnexion();
-        }
-        else {
-            return connexion;
-        }
-    }
-
-    private static Connection creerconnexion() {
+    public static Connection connexion() {
     String fichierconfig = "E-Sporter/src/Application/config.properties";
     String url = null;
     String mdp = null;
@@ -40,8 +29,8 @@ private static Connection connexion;
     }
     try {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        connexion =DriverManager.getConnection(url,identifiant,mdp);
-        return connexion;
+        Connection connect =DriverManager.getConnection(url,identifiant,mdp);
+        return connect;
     }
     catch (SQLException e) {
         e.printStackTrace();
