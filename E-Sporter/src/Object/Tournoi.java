@@ -1,16 +1,19 @@
 package Object;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Tournoi {
 
 	private String nom;
-	private String dateTournoi;
+	private Date dateTournoi;
 	private int notoriete;
 	private Jeu jeu;
 	private ArrayList<Equipe> listeEquipe;
 
-	public Tournoi(String nom, String dateTournoi, int notoriete, Jeu jeu) throws Exception {
+	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu) throws Exception {
 		
 		if (notoriete > 3 || notoriete < 0) {
 			throw new Exception();
@@ -36,11 +39,11 @@ public class Tournoi {
 		this.nom = nom;
 	}
 
-	public String getDateTournoi() {
+	public Date getDateTournoi() {
 		return dateTournoi;
 	}
 
-	public void setDateTournoi(String dateTournoi) {
+	public void setDateTournoi(Date dateTournoi) {
 		this.dateTournoi = dateTournoi;
 	}
 
@@ -56,9 +59,23 @@ public class Tournoi {
 		if (this.listeEquipe.size()>=16) {
 			throw new Exception("WTF");
 		}
+		if (this.dateValide()==true) {
+			throw new Exception();
+		}
 		this.listeEquipe.add(equipe);
 	}
 	
+	private boolean dateValide() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+		LocalDateTime now = LocalDateTime.now();
+		String temp = dtf.format(now);
+		System.out.println(temp.toString());
+		Date today = Date.valueOf(temp);
+		boolean res = this.dateTournoi.before(today);
+		return res;
+		
+	}
+
 	public Jeu getJeu() {
 		return jeu;
 	}
