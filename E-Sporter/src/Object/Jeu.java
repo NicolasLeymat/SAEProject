@@ -29,6 +29,10 @@ public class Jeu {
 	public void addModeDeJeu(String mode, int nbJoueurs) {
 		this.modeDeJeu.put(mode, nbJoueurs);
 	}
+	
+	public int getNbJoueurs(String nomMode) {
+		return this.modeDeJeu.get(nomMode);
+	}
 
 	public int getId() {
 		Connection co = Connexion.connexion();

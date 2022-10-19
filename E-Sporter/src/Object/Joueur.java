@@ -1,21 +1,21 @@
 package Object;
 
 
-import java.text.DateFormat;
+import java.sql.Date;
 
 public class Joueur {
 private String nom;
 private String prenom;
 private String pseudo;
-private DateFormat datenaissance;
+private Date dateNaissance;
 private Nationalite nationalite;
 private Equipe equipe;
 
-public Joueur(String nom, String prenom, String pseudo, String datenaissance, Nationalite nationalite, Equipe equipe) throws Exception {
+public Joueur(String nom, String prenom, String pseudo, Date dateNaissance, Nationalite nationalite, Equipe equipe) throws Exception {
     this.nom = nom;
     this.prenom = prenom;
     this.pseudo = pseudo;
-    this.datenaissance.parse(datenaissance);
+    this.dateNaissance = dateNaissance;
     this.nationalite = nationalite;
     this.equipe = equipe;
 }
@@ -47,9 +47,8 @@ public Joueur(String nom, String prenom, String pseudo, String datenaissance, Na
     public String getPseudo() {
         return pseudo;
     }
-
-    public DateFormat getDatenaissance() {
-        return datenaissance;
+    public Date getDatenaissance() {
+        return dateNaissance;
     }
 
     public Nationalite getNationalite() {

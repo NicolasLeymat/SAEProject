@@ -16,7 +16,6 @@ public class Equipe {
 	private Jeu jeu;
 	private List<Joueur> listeJoueurs;
 
-	//Il faudrait peut être changer le type de jeu
 	public Equipe(String nom, int points, Ecurie ecurie, Jeu jeu) {
 		this.nom = nom;
 		this.points = points;

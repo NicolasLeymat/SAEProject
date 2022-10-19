@@ -26,9 +26,9 @@ public class TestAppTournois {
     @Test
     public void testCreerTournoi () throws Exception {
         Jeu LOL = new Jeu("League of Legends");
-        Tournoi t = new Tournoi("World Lol",Date.valueOf("2022-06-12"),1,LOL);
+        Tournoi t = new Tournoi("World Lol",Date.valueOf("2022-11-12"),1,LOL);
         assertEquals("World Lol",t.getNom());
-        assertEquals(Date.valueOf("2022-06-12"),t.getDateTournoi());
+        assertEquals(Date.valueOf("2022-11-12"),t.getDateTournoi());
         assertEquals(1,t.getNotoriete());
         assertEquals(LOL,t.getJeu());
     }
@@ -53,6 +53,20 @@ public class TestAppTournois {
     public void testAjouterEquipeTropTard () throws Exception {
         Tournoi t = new Tournoi("Vieux Tournoi",Date.valueOf("2015-12-12"),1,j);
         t.addEquipe(new Equipe("Equipe 1",25,e,j));
+    }
+    
+    @Test
+    public void testGetEquipe() throws Exception {
+    	Equipe equipe = new Equipe("Equipe Test",10,e,j);
+    	t.addEquipe(equipe);
+    	assertEquals(t.getEquipe("Equipe Test"), equipe);
+    }
+    
+    @Test
+    public void testGetEquipeFausse() throws Exception {
+    	Equipe equipe = new Equipe("Equipe Test",10,e,j);
+    	t.addEquipe(equipe);
+    	assertEquals(t.getEquipe("Equipe Fest"), null);
     }
 
 }
