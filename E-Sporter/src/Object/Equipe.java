@@ -14,11 +14,11 @@ public class Equipe {
 	private String nom;
 	private int points;
 	private int id_ecurie;
-	private Jeu jeu;
+	private int jeu;
 	private List<Joueur> listeJoueurs;
 
 
-	public Equipe(String nom, int points, int id_ecurie, Jeu jeu) {
+	public Equipe(String nom, int points, int id_ecurie, int jeu) {
 		this.nom = nom;
 		this.points = points;
 		this.id_ecurie = id_ecurie;
@@ -33,14 +33,19 @@ public class Equipe {
 	public void setIdEcurie(int id_ecurie) {
 		this.id_ecurie = id_ecurie;
 	}
-
-	//Fonction qui permet de retourner le jeu auquel une équipe joue
-	public Jeu getJeu() {
+	
+	private int getIdJeu() {
 		return jeu;
 	}
+	
+	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
+	public Jeu getJeu(Connection connex) {
+		return Jeu.getJeuFromId(connex, jeu);
+	}
+
 
 	//Fonction qui permet de changer le nom du jeu auquel une équipe joue
-	public void setJeu(Jeu jeu) {
+	public void setJeu(int jeu) {
 		this.jeu = jeu;
 	}
 	
@@ -97,7 +102,7 @@ public class Equipe {
 			pst.setInt(3, equipe.listeJoueurs.size());
 			pst.setInt(4, equipe.getPoints());
 			pst.setInt(5,equipe.id_ecurie);
-			pst.setInt(6,equipe.jeu.getId());
+			pst.setInt(6,equipe.getIdJeu());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -105,7 +110,7 @@ public class Equipe {
 		}
 		return 1;
 	}
-	
+
 	public static List<Equipe> getAllEquipes(Connection connex) {
 		List<Equipe> equipes = new ArrayList<Equipe>();
 		java.sql.Statement st = null;
@@ -115,7 +120,7 @@ public class Equipe {
 			st = connex.createStatement();
 			rs = st.executeQuery("Select * from LMN3783A.sae_equipe");
 			while (rs.next()) {
-				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2), Jeu.getJeuFromId(connex,rs.getInt(3)));
+				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2), rs.getInt(3));
 				equipes.add(e);
 				//System.out.println(e.toString());
 			}
@@ -136,7 +141,7 @@ public class Equipe {
 			pst.setInt(0, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2),Jeu.getJeuFromId(connex, rs.getInt(3)));
+				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2),rs.getInt(3));
 				r.add(e);
 			}
 		} catch (SQLException ee) {

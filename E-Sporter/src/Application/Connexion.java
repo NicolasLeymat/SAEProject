@@ -8,6 +8,10 @@ import java.util.Properties;
 
 public class Connexion {
     private static Connection connexion;
+    
+    private Connexion() {
+    	
+    }
 
     public static synchronized Connection connexion() {
         if (connexion == null) {
