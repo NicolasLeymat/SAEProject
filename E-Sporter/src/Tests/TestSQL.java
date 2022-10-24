@@ -24,6 +24,9 @@ public class TestSQL {
 		System.out.println(e);
 		
 		 //Ecurie.enregistrerEcurie(Connexion.connexion(), new Ecurie("Astralis"));
+		
+		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
+		System.out.println(id);
 	}
 
 }
