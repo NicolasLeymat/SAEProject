@@ -37,6 +37,10 @@ public class Ecurie {
 	}
 	
 	//Fonction qui permet de supprimer une équipe dans une écurie
+	private void addEquipes(List<Equipe> liste) {
+		this.listeEquipes = liste;
+	}
+	
 	public void removeEquipe(Equipe equipe) {
 		this.listeEquipes.remove(equipe);
 	}
@@ -102,4 +106,27 @@ public class Ecurie {
 		}
 		return 1;
 	}
+
+
+
+	public static Ecurie getEcurieFromId(Connection connex, int id) {
+		Connection ct = Connexion.connexion();
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Ecurie e = null;
+		int r = 0;
+		try {
+			pst = connex.prepareStatement("Select * from LMN3783A.sae_ecurie where id_ecuries = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Ecurie(rs.getString(1));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(connex,rs.getInt(0));
+			}
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return e;
+	}
+
 }

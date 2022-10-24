@@ -89,6 +89,24 @@ public class Jeu {
 		}
 		return 1;
 	}
+	
+	public static Jeu getJeuFromId(Connection connx, int id) {
+        Jeu jeu = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = connx.prepareStatement("SELECT nom as n FROM LMN3783A where id_jeu = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                jeu = new Jeu(rs.getString("n"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return jeu;
+    }
 
 
 }

@@ -74,7 +74,7 @@ public class Tournoi {
 	//Fonction qui permet d'ajouter une équipe à un tournoi
 	public void addEquipe(Equipe equipe) throws Exception{
 		if (this.listeEquipe.size()>=16) {
-			throw new Exception("");
+			throw new Exception();
 		}
 		if (dateInvalide(this.dateTournoi)==true) {
 			throw new Exception();
@@ -102,4 +102,6 @@ public class Tournoi {
 	public Equipe getEquipeTournoi(int i) {
 		return this.listeEquipe.get(i);
 	}
+	
+	//public int getEquipes() 
 }
