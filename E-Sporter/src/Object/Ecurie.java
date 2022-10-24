@@ -113,17 +113,24 @@ public class Ecurie {
 		ResultSet rs;
 		Ecurie e = null;
 		try {
-			pst = connex.prepareStatement("Select * from LMN3783A.sae_ecurie where id_ecurie = ?");
+			pst = connex.prepareStatement("Select id_ecurie, nom from LMN3783A.sae_ecurie where id_ecurie = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Ecurie(rs.getString(1));
-				e.listeEquipes = Equipe.getEquipesFromEcurie(connex,rs.getInt(0));
+				e = new Ecurie(rs.getString(2));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(connex,rs.getInt(1));
 			}
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
 		return e;
 	}
+
+	@Override
+	public String toString() {
+		return "Ecurie [nom=" + nom + ", listeEquipes=" + listeEquipes + "]";
+	}
+	
+	
 
 }

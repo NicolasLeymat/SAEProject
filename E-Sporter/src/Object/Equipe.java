@@ -76,7 +76,7 @@ public class Equipe {
 		int r = 0;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select id_equipes as id from LMN3783A.sae_equipe");
+			rs = st.executeQuery("Select id_equipe as id from LMN3783A.sae_equipe");
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
@@ -118,11 +118,10 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select * from LMN3783A.sae_equipe");
+			rs = st.executeQuery("Select nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe");
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2),rs.getInt(3),rs.getInt(4), rs.getInt(5));
+				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getInt(4));
 				equipes.add(e);
-				//System.out.println(e.toString());
 			}
 			return equipes;
 		} catch (SQLException ee) {
@@ -137,11 +136,11 @@ public class Equipe {
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select nom, points, id_ecuries, id_jeu as id from LMN3783A.sae_equipe as eq, LMN3783A.SAE_Ecuries as ec where eq.id_ecuries = ec.id_ecuries and eq.id_ecuries = ?");
-			pst.setInt(0, id);
+			pst = connex.prepareStatement("Select eq.nom, points, eq.id_ecurie, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.id_ecurie = ec.id_ecurie and eq.id_ecurie = ?");
+			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2),rs.getInt(3));
+				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getInt(4));
 				r.add(e);
 			}
 		} catch (SQLException ee) {
