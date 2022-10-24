@@ -9,7 +9,7 @@ import java.util.List;
 
 import Application.Connexion;
 
-
+//Classe qui défini les fonctions d'une écurie
 public class Ecurie {
 
 	private String nom;
@@ -20,23 +20,28 @@ public class Ecurie {
 		this.nom = nom;
 		this.listeEquipes = new ArrayList<Equipe>();
 	}
-
+	
+	//Fonction qui permet de retourner le nom d'une écurie
 	public String getNom() {
 		return nom;
 	}
-
+	
+	//Fonction qui permet de changer le nom d'une écurie
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	
+	//Fonction qui permet de rajouter une équipe à une écurie
 	public void addEquipe(Equipe equipe) {
 		this.listeEquipes.add(equipe);
 	}
 	
+	//Fonction qui permet de supprimer une équipe dans une écurie
 	public void removeEquipe(Equipe equipe) {
 		this.listeEquipes.remove(equipe);
 	}
 	
+	//Fonction qui permet de prendre les informations sur une équipe
 	public Equipe getEquipe(String nom) {
 		for (Equipe equipe: this.listeEquipes) {
 			if (equipe.getNom() == nom) {
@@ -46,7 +51,8 @@ public class Ecurie {
 		return null;		
 
 	}
-
+	
+	//Fonction qui permet de récuperer l'identifiant d'une écurie
 	public int getId() throws Exception {
 		Connection co = Connexion.connexion();
 		java.sql.Statement st;
@@ -62,6 +68,7 @@ public class Ecurie {
 		return 0;
 	}
 
+	//Fonction qui permet de récuperer le dernier identifiant de l'écurie
 	public int getLastId() {
 		Connection ct = Connexion.connexion();
 		java.sql.Statement st = null;
@@ -78,7 +85,8 @@ public class Ecurie {
 		}
 		return r;
 	}
-
+	
+	//Fonction qui permet d'enregistrer une écurie dans la base de données
 	public int enregistrerEcurie() {
 		Connection connex = Application.Connexion.connexion();
 		PreparedStatement pst;
