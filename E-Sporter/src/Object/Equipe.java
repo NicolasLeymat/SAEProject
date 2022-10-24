@@ -120,7 +120,7 @@ public class Equipe {
 			st = connex.createStatement();
 			rs = st.executeQuery("Select * from LMN3783A.sae_equipe");
 			while (rs.next()) {
-				e = new Equipe(rs.getString(0),rs.getInt(1),rs.getInt(2), rs.getInt(3));
+				e = new Equipe(rs.getString(2),rs.getInt(3),rs.getInt(4), rs.getInt(5));
 				equipes.add(e);
 				//System.out.println(e.toString());
 			}
@@ -149,4 +149,12 @@ public class Equipe {
 		}
 		return r;
 	}
+
+	@Override
+	public String toString() {
+		return "Equipe [nom=" + nom + ", points=" + points + ", id_ecurie=" + id_ecurie + ", jeu=" + jeu
+				+ ", listeJoueurs=" + listeJoueurs + "]";
+	}
+	
+	
 }

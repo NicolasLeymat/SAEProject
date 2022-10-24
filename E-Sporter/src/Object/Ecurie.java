@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,12 +57,15 @@ public class Ecurie {
 	
 	//Fonction qui permet de récuperer l'identifiant d'une écurie
 	public int getId(Connection connex) throws Exception {
-		java.sql.Statement st;
+		PreparedStatement pst;
+		ResultSet rs;
 		try {
-			st = connex.createStatement();
-			ResultSet rs = st.executeQuery("select id_ecuries from LMN3783A.sae_ecurie where " + this.nom + "= LMN3783A.sae_ecurie.nom");
+			pst =  connex.prepareStatement("select id_ecurie from LMN3783A.sae_ecurie where LMN3783A.sae_ecurie.nom = ?");
+			pst.setString(0, nom);
+			rs = pst.executeQuery();
 			if (!rs.next()) {
-			throw new IllegalArgumentException();}
+				throw new IllegalArgumentException();
+			}
 			return rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,12 +75,12 @@ public class Ecurie {
 
 	//Fonction qui permet de récuperer le dernier identifiant de l'écurie
 	public int getLastId(Connection connex) {
-		java.sql.Statement st = null;
+		Statement st = null;
 		ResultSet rs;
 		int r = 0;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select id_ecuries as id from LMN3783A.sae_ecurie");
+			rs = st.executeQuery("Select id_ecurie as id from LMN3783A.sae_ecurie");
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
@@ -109,7 +113,7 @@ public class Ecurie {
 		ResultSet rs;
 		Ecurie e = null;
 		try {
-			pst = connex.prepareStatement("Select * from LMN3783A.sae_ecurie where id_ecuries = ?");
+			pst = connex.prepareStatement("Select * from LMN3783A.sae_ecurie where id_ecurie = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
