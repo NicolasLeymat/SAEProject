@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Application.Connexion;
-
 //Classe qui définit les fonctions d'une écurie
 public class Ecurie {
 
@@ -37,7 +35,7 @@ public class Ecurie {
 	}
 	
 	//Fonction qui permet de supprimer une équipe dans une écurie
-	private void addEquipes(List<Equipe> liste) {
+	public void addEquipes(List<Equipe> liste) {
 		this.listeEquipes = liste;
 	}
 	
@@ -57,11 +55,10 @@ public class Ecurie {
 	}
 	
 	//Fonction qui permet de récuperer l'identifiant d'une écurie
-	public int getId() throws Exception {
-		Connection co = Connexion.connexion();
+	public int getId(Connection connex) throws Exception {
 		java.sql.Statement st;
 		try {
-			st = co.createStatement();
+			st = connex.createStatement();
 			ResultSet rs = st.executeQuery("select id_ecuries from LMN3783A.sae_ecurie where " + this.nom + "= LMN3783A.sae_ecurie.nom");
 			if (!rs.next()) {
 			throw new IllegalArgumentException();}
@@ -73,13 +70,12 @@ public class Ecurie {
 	}
 
 	//Fonction qui permet de récuperer le dernier identifiant de l'écurie
-	public int getLastId() {
-		Connection ct = Connexion.connexion();
+	public int getLastId(Connection connex) {
 		java.sql.Statement st = null;
 		ResultSet rs;
 		int r = 0;
 		try {
-			st = ct.createStatement();
+			st = connex.createStatement();
 			rs = st.executeQuery("Select id_ecuries as id from LMN3783A.sae_ecurie");
 			while (rs.next()) {
 				r = rs.getInt("id");
@@ -91,14 +87,13 @@ public class Ecurie {
 	}
 	
 	//Fonction qui permet d'enregistrer une écurie dans la base de données
-	public int enregistrerEcurie() {
-		Connection connex = Application.Connexion.connexion();
+	public static int enregistrerEcurie(Connection connex, Ecurie e) {
 		PreparedStatement pst;
-		int lastId = this.getLastId();
+		int lastId = e.getLastId(connex);
 		try {
 			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?,?)");
 			pst.setInt(1, lastId+1);
-			pst.setString(2, nom);
+			pst.setString(2, e.nom);
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -110,11 +105,9 @@ public class Ecurie {
 
 
 	public static Ecurie getEcurieFromId(Connection connex, int id) {
-		Connection ct = Connexion.connexion();
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Ecurie e = null;
-		int r = 0;
 		try {
 			pst = connex.prepareStatement("Select * from LMN3783A.sae_ecurie where id_ecuries = ?");
 			pst.setInt(1, id);
