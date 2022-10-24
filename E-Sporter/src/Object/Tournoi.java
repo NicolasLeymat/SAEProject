@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+//Classe qui définit les fonctions d'un tournoi
 public class Tournoi {
 
 	private String nom;
@@ -13,6 +14,7 @@ public class Tournoi {
 	private Jeu jeu;
 	private ArrayList<Equipe> listeEquipe;
 
+	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu) throws Exception {
 		
 		if (notoriete > 3 || notoriete < 1) {
@@ -30,10 +32,12 @@ public class Tournoi {
 		this.listeEquipe = new ArrayList<Equipe>();
 	}
 
+    //Fonction qui permet de récuperer le nom d'un tournoi
 	public String getNom() {
 		return nom;
 	}
-
+	
+	//Fonction qui permet de récuperer une équipe d'un tournoi
 	public Equipe getEquipe (String nom) {
 		for (Equipe e : this.listeEquipe) {
 			if (e.getNom() == nom) {
@@ -47,22 +51,27 @@ public class Tournoi {
 		this.nom = nom;
 	}
 
+	//Fonction qui permet de récuperer la date d'un tournoi
 	public Date getDateTournoi() {
 		return dateTournoi;
 	}
-
+	
+	//Fonction qui permet de changer la date d'un tournoi
 	public void setDateTournoi(Date dateTournoi) {
 		this.dateTournoi = dateTournoi;
 	}
 
+	//Fonction qui permet de récuperer la notoriété d'un tournoi
 	public int getNotoriete() {
 		return notoriete;
 	}
 
+	//Fonction qui permet de changer la notoriété
 	public void setNotoriete(int notoriete) {
 		this.notoriete = notoriete;
 	}
 	
+	//Fonction qui permet d'ajouter une équipe à un tournoi
 	public void addEquipe(Equipe equipe) throws Exception{
 		if (this.listeEquipe.size()>=16) {
 			throw new Exception("");
@@ -73,6 +82,7 @@ public class Tournoi {
 		this.listeEquipe.add(equipe);
 	}
 	
+	//Fonction qui permet de retourner une réponse positive ou négative si une date est invalide
 	private static boolean dateInvalide(Date date) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
 		LocalDateTime now = LocalDateTime.now();
@@ -83,10 +93,12 @@ public class Tournoi {
 		
 	}
 
+	//Fonction qui permet de récuperer le jeu du tournoi
 	public Jeu getJeu() {
 		return jeu;
 	}
 	
+	//Fonction qui permet de récuperer une équipe d'un tournoi
 	public Equipe getEquipeTournoi(int i) {
 		return this.listeEquipe.get(i);
 	}
