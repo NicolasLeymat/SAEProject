@@ -15,7 +15,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JButton;
 
 public class MainPage {
 
@@ -42,9 +46,9 @@ public class MainPage {
 		frame.getContentPane().add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{395, 395, 395, 0};
-		gbl_panel.rowHeights = new int[] {100, 500, 100};
+		gbl_panel.rowHeights = new int[] {100, 500, 100, 0};
 		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0};
 		panel.setLayout(gbl_panel);
 		
 		JLabel EquipesName = new JLabel("Equipes");
@@ -104,35 +108,51 @@ public class MainPage {
 		gbc_TournoisList.gridy = 1;
 		panel.add(TournoisList, gbc_TournoisList);
 		
-		Button button = new Button("Ajouter");
-		button.addActionListener(new ActionListener() {
+		Button AddEquipesButton = new Button("Ajouter");
+		AddEquipesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 0, 5);
-		gbc_button.gridx = 0;
-		gbc_button.gridy = 2;
-		panel.add(button, gbc_button);
+		AddEquipesButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		GridBagConstraints gbc_AddEquipesButton = new GridBagConstraints();
+		gbc_AddEquipesButton.insets = new Insets(0, 0, 5, 5);
+		gbc_AddEquipesButton.gridx = 0;
+		gbc_AddEquipesButton.gridy = 2;
+		panel.add(AddEquipesButton, gbc_AddEquipesButton);
 		
-		Button button_1 = new Button("Ajouter");
-		button_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.insets = new Insets(0, 0, 0, 5);
-		gbc_button_1.gridx = 1;
-		gbc_button_1.gridy = 2;
-		panel.add(button_1, gbc_button_1);
+		Button AddEcuriesButton = new Button("Ajouter");
+		AddEcuriesButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		GridBagConstraints gbc_AddEcuriesButton = new GridBagConstraints();
+		gbc_AddEcuriesButton.insets = new Insets(0, 0, 5, 5);
+		gbc_AddEcuriesButton.gridx = 1;
+		gbc_AddEcuriesButton.gridy = 2;
+		panel.add(AddEcuriesButton, gbc_AddEcuriesButton);
 		
-		Button button_2 = new Button("Ajouter");
-		button_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.gridx = 2;
-		gbc_button_2.gridy = 2;
-		panel.add(button_2, gbc_button_2);
+		Button AddTournoiButton = new Button("Ajouter");
+		AddTournoiButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		GridBagConstraints gbc_AddTournoiButton = new GridBagConstraints();
+		gbc_AddTournoiButton.insets = new Insets(0, 0, 5, 0);
+		gbc_AddTournoiButton.gridx = 2;
+		gbc_AddTournoiButton.gridy = 2;
+		panel.add(AddTournoiButton, gbc_AddTournoiButton);
 	}
 	
 	public JFrame getframe() {
 		return this.frame;
+	}
+	
+	public List<Object> fillScrollView(JScrollPane j, String type) {
+		List<Object> result = new LinkedList<>();
+		
+		switch(type) {
+			case "Eq" :
+				break;
+			case "Ec" :
+				break;
+			case "To" :
+				break;
+		}
+		
+		return null;
 	}
 }
