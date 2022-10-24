@@ -1,5 +1,6 @@
 package Tests;
 
+import static Object.Jeu.enregistrerJeu;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
@@ -33,7 +34,7 @@ public class TestJDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		assertEquals(1, OW.enregistrerJeu());
+		assertEquals(1, enregistrerJeu(OW));
 		assertEquals(1, nom.enregistrerEcurie());
 		assertEquals(1, equipe.enregistrerEquipe(connec));
 	}

@@ -17,7 +17,7 @@ public class Connexion {
     }
 
     public static Connection creerconnexion() {
-    String fichierconfig = "E-Sporter/src/Application/config.properties";
+    String fichierconfig = "src/Application/config.properties";
     String url = null;
     String mdp = null;
     String identifiant = null;

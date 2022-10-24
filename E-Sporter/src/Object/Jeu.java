@@ -65,14 +65,14 @@ public class Jeu {
 		return r;
 	}
 
-	public int enregistrerJeu() {
+	public static int enregistrerJeu(Jeu jeu) {
 		Connection connex = Application.Connexion.connexion();
 		PreparedStatement pst;
-		int lastId = this.getLastId();
+		int lastId = jeu.getLastId();
 		try {
 			pst = connex.prepareStatement("insert into LMN3783A.sae_jeu values(?,?)");
 			pst.setInt(1, lastId+1);
-			pst.setString(2, nomJeu);
+			pst.setString(2, jeu.nomJeu);
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

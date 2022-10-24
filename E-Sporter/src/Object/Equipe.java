@@ -1,5 +1,7 @@
 package Object;
 
+import Application.Connexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +57,8 @@ public class Equipe {
 	public void setPoints(int points) {
 		this.points = points;
 	}
+
+	public void addPoints (int points) {this.points+=points; }
 	
 	public int getLastId(Connection connex) {
 		java.sql.Statement st = null;
@@ -70,6 +74,21 @@ public class Equipe {
 			ee.printStackTrace();
 		}
 		return r;
+	}
+
+	public int getID() throws Exception {
+		Connection co = Connexion.connexion();
+		java.sql.Statement st;
+		try {
+			st = co.createStatement();
+			ResultSet rs = st.executeQuery("select id_equipes from LMN3783A.sae_equipe where " + this.nom + "= LMN3783A.sae_equipe.nom");
+			if (!rs.next()) {
+				throw new IllegalArgumentException();}
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	public void addJoueur(Joueur joueur) {
