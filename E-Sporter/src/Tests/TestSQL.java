@@ -25,8 +25,14 @@ public class TestSQL {
 		
 		 //Ecurie.enregistrerEcurie(Connexion.connexion(), new Ecurie("Astralis"));
 		
+<<<<<<< Updated upstream
 		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
 		System.out.println(id);
+=======
+		Ecurie e1 = Ecurie.getEcurieFromId(Connexion.connexion(), 4);
+		Ecurie.modifierEcurie(Connexion.connexion(), e1, "T3");
+>>>>>>> Stashed changes
 	}
+	
 
 }
