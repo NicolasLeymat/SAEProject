@@ -9,7 +9,7 @@ import java.util.List;
 
 import Application.Connexion;
 
-//Classe qui défini les fonctions d'une écurie
+//Classe qui définit les fonctions d'une écurie
 public class Ecurie {
 
 	private String nom;

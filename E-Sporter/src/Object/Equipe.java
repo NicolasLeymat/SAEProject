@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//Classe qui défini les fonctions d'une équipe
+//Classe qui définit les fonctions d'une équipe
 public class Equipe {
 
 

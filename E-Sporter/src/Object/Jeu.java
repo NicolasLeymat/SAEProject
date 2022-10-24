@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import Application.Connexion;
 
-//Classe qui défini les fonctions d'un jeu
+//Classe qui définit les fonctions d'un jeu
 public class Jeu {
 
 	private String nomJeu;
