@@ -97,7 +97,7 @@ public class Ecurie {
 		try {
 			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?,?)");
 			pst.setInt(1, lastId+1);
-			pst.setString(2, e.nom);
+			pst.setString(2, e.getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

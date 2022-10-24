@@ -18,10 +18,12 @@ public class TestSQL {
 			System.out.println(e.toString());
 		}
 		
-		Equipe.enregistrerEquipe(Connexion.connexion(), new Equipe("Vitality A", 0, 0, 1));
+		//Equipe.enregistrerEquipe(Connexion.connexion(), new Equipe("Vitality A", 0, 0, 1));
 		
 		Ecurie e = Ecurie.getEcurieFromId(Connexion.connexion(), 1);
 		System.out.println(e);
+		
+		 //Ecurie.enregistrerEcurie(Connexion.connexion(), new Ecurie("Astralis"));
 	}
 
 }
