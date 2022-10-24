@@ -1,5 +1,6 @@
 package Object;
 
+//Classe qui permet d'énumerer les nationalités
 public enum Nationalite {
     FRANCE, ROYAUME_UNI,ESPAGNE,ALLEMAGNE, ITALIE, ETATS_UNIS,CANADA,COREE_DU_SUD,JAPON,MEXIQUE,ISRAEL, CHINE, FINLANDE, DANEMARK,
     ROUMANIE, MOLDAVIE, RUSSIE, UKRAINE
