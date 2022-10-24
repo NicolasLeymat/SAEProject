@@ -14,15 +14,15 @@ public class Equipe {
 	private String nom;
 	private int points;
 	private int id_ecurie;
-	private int jeu;
+	private int id_jeu;
 	private List<Joueur> listeJoueurs;
 
 
-	public Equipe(String nom, int points, int id_ecurie, int jeu) {
+	public Equipe(String nom, int points, int id_ecurie, int id_jeu) {
 		this.nom = nom;
 		this.points = points;
 		this.id_ecurie = id_ecurie;
-		this.jeu = jeu;
+		this.id_jeu = id_jeu;
 		this.listeJoueurs = new ArrayList<Joueur>();
 	}
 	
@@ -35,18 +35,18 @@ public class Equipe {
 	}
 	
 	private int getIdJeu() {
-		return jeu;
+		return id_jeu;
 	}
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
 	public Jeu getJeu(Connection connex) {
-		return Jeu.getJeuFromId(connex, jeu);
+		return Jeu.getJeuFromId(connex, id_jeu);
 	}
 
 
 	//Fonction qui permet de changer le nom du jeu auquel une équipe joue
 	public void setJeu(int jeu) {
-		this.jeu = jeu;
+		this.id_jeu = jeu;
 	}
 	
 	//Fonction qui permet de récuperer le nom d'une équipe
@@ -151,7 +151,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return "Equipe [nom=" + nom + ", points=" + points + ", id_ecurie=" + id_ecurie + ", jeu=" + jeu
+		return "Equipe [nom=" + nom + ", points=" + points + ", id_ecurie=" + id_ecurie + ", jeu=" + id_jeu
 				+ ", listeJoueurs=" + listeJoueurs + "]";
 	}
 	
