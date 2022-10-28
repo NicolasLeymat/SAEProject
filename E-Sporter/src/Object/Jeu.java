@@ -53,12 +53,13 @@ public class Jeu {
 			return this.modeDeJeu.get(nomMode);
 	}
 		
-	public int getId() {
-			Connection co = Connexion.connexion();
-			java.sql.Statement st;
+	public static int getId(Connection connex, Jeu jeu) {
+			PreparedStatement pst;
+			ResultSet rs;
 			try {
-				st = co.createStatement();
-				ResultSet rs = st.executeQuery("select id_jeu from LMN3783A.sae_jeu where '" + this.nomJeu + "'= LMN3783A.sae_jeu.nom");
+				pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
+				pst.setString(1, jeu.getNomJeu());
+				rs = pst.executeQuery();
 				rs.next();
 				return rs.getInt(1);
 			} catch (SQLException e) {

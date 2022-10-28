@@ -8,6 +8,10 @@ import java.util.Properties;
 
 public class Connexion {
     private static Connection connexion;
+    
+    private Connexion() {
+    	
+    }
 
     public static synchronized Connection connexion() {
         if (connexion == null) {
@@ -17,7 +21,7 @@ public class Connexion {
     }
 
     public static Connection creerconnexion() {
-    String fichierconfig = "src/Application/config.properties";
+    String fichierconfig = "./src/Application/config.properties";
     String url = null;
     String mdp = null;
     String identifiant = null;
