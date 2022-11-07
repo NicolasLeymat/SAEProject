@@ -21,13 +21,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JButton;
 
-public class MainPage {
+public class VuePrincipale {
 
 	private JFrame frame;
 	/**
 	 * Create the application.
 	 */
-	public MainPage() {
+	public VuePrincipale() {
 		initialize();
 	}
 
@@ -108,11 +108,7 @@ public class MainPage {
 		gbc_TournoisList.gridy = 1;
 		panel.add(TournoisList, gbc_TournoisList);
 		
-		Button AddEquipesButton = new Button("Ajouter");
-		AddEquipesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		Button AddEquipesButton = new Button("Ajouter Equipe");
 		AddEquipesButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		GridBagConstraints gbc_AddEquipesButton = new GridBagConstraints();
 		gbc_AddEquipesButton.insets = new Insets(0, 0, 5, 5);
@@ -120,7 +116,7 @@ public class MainPage {
 		gbc_AddEquipesButton.gridy = 2;
 		panel.add(AddEquipesButton, gbc_AddEquipesButton);
 		
-		Button AddEcuriesButton = new Button("Ajouter");
+		Button AddEcuriesButton = new Button("Ajouter Ecurie");
 		AddEcuriesButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		GridBagConstraints gbc_AddEcuriesButton = new GridBagConstraints();
 		gbc_AddEcuriesButton.insets = new Insets(0, 0, 5, 5);
@@ -128,7 +124,7 @@ public class MainPage {
 		gbc_AddEcuriesButton.gridy = 2;
 		panel.add(AddEcuriesButton, gbc_AddEcuriesButton);
 		
-		Button AddTournoiButton = new Button("Ajouter");
+		Button AddTournoiButton = new Button("Ajouter Tournoi");
 		AddTournoiButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		GridBagConstraints gbc_AddTournoiButton = new GridBagConstraints();
 		gbc_AddTournoiButton.insets = new Insets(0, 0, 5, 0);
