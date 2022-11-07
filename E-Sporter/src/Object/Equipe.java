@@ -13,25 +13,29 @@ public class Equipe {
 
 	private String nom;
 	private int points;
-	private int id_ecurie;
+	private String nomEcurie;
 	private int id_jeu;
 	private List<Joueur> listeJoueurs;
 
 
-	public Equipe(String nom, int points, int id_ecurie, int id_jeu) {
+	public Equipe(String nom, int points, String nom_ecurie, int id_jeu) {
 		this.nom = nom;
 		this.points = points;
-		this.id_ecurie = id_ecurie;
+		this.nomEcurie = nom_ecurie;
 		this.id_jeu = id_jeu;
 		this.listeJoueurs = new ArrayList<Joueur>();
 	}
 	
 	public Ecurie getEcurie(Connection connex) {
-		return Ecurie.getEcurieFromId(connex, id_ecurie);
+		return Ecurie.getEcurieFromNom(connex, nomEcurie);
 	}
 
-	public void setIdEcurie(int id_ecurie) {
-		this.id_ecurie = id_ecurie;
+	public void setNomEcurie(String nom_ecurie) {
+		this.nomEcurie = nom_ecurie;
+	}
+	
+	public String getNomEcurie() {
+		return this.nomEcurie;
 	}
 	
 	private int getIdJeu() {
@@ -69,23 +73,6 @@ public class Equipe {
 		this.points = points;
 	}
 	
-	//Fonction qui permet de récuperer le dernier identifiant d'une équipe
-	public int getLastId(Connection connex) {
-		java.sql.Statement st = null;
-		ResultSet rs;
-		int r = 0;
-		try {
-			st = connex.createStatement();
-			rs = st.executeQuery("Select id_equipe as id from LMN3783A.sae_equipe");
-			while (rs.next()) {
-				r = rs.getInt("id");
-			}
-		} catch (SQLException ee) {
-			ee.printStackTrace();
-		}
-		return r;
-	}
-	
 	//Fonction qui permet d'ajouter un joueur à une équipe
 	public void addJoueur(Joueur joueur) {
 		this.listeJoueurs.add(joueur);
@@ -94,15 +81,13 @@ public class Equipe {
 	//Fonction qui permet d'enregistrer une équipe dans la base de données
 	public static int enregistrerEquipe(Connection connex, Equipe equipe) throws Exception {
 		PreparedStatement pst;
-		int lastId = equipe.getLastId(connex);
 		try {
-			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe values(?,?,?,?,?,?)");
-			pst.setInt(1, lastId+1);
-			pst.setString(2, equipe.getNom());
-			pst.setInt(3, equipe.listeJoueurs.size());
-			pst.setInt(4, equipe.getPoints());
-			pst.setInt(5,equipe.id_ecurie);
-			pst.setInt(6,equipe.getIdJeu());
+			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(nom, nombrejoueur, points, nom_1, id_jeu) values(?,?,?,?,?)");
+			pst.setString(1, equipe.getNom());
+			pst.setInt(2, equipe.listeJoueurs.size());
+			pst.setInt(3, equipe.getPoints());
+			pst.setString(4,equipe.getNomEcurie());
+			pst.setInt(5,equipe.getIdJeu());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -111,15 +96,15 @@ public class Equipe {
 		return 1;
 	}
 	
-	public static int modifierEquipe(Connection connex, Equipe e, String newName, int nbJoueur, int points, int idEcurie, int idJeu) {
+	public static int modifierEquipe(Connection connex, Equipe e, String newName, int nbJoueur, int points, String nomEcurie, int idJeu) {
 		PreparedStatement pst;
 		try {
 			pst = connex
-					.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, points = ?, id_ecurie = ?, id_jeu = ? where id_equipe = ?" );
+					.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, points = ?, nom_1 = ?, id_jeu = ? where nom = ?" );
 			pst.setString(1, newName);
 			pst.setInt(2, nbJoueur);
 			pst.setInt(3, points);
-			pst.setInt(4, idEcurie);
+			pst.setString(4, nomEcurie);
 			pst.setInt(5, idJeu);
 			pst.setInt(6, e.getIdJeu());
 			pst.executeUpdate();
@@ -136,9 +121,9 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("	");
+			rs = st.executeQuery("Select nom, points, nom_1, id_jeu from LMN3783A.sae_equipe");
 			while (rs.next()) {
-				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getInt(4));
+				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3), rs.getInt(4));
 				equipes.add(e);
 			}
 			return equipes;
@@ -148,17 +133,17 @@ public class Equipe {
 		return equipes;
 	}
 
-	public static List<Equipe> getEquipesFromEcurie(Connection connex, int id) {
+	public static List<Equipe> getEquipesFromEcurie(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select eq.nom, points, eq.id_ecurie, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.id_ecurie = ec.id_ecurie and eq.id_ecurie = ?");
-			pst.setInt(1, id);
+			pst = connex.prepareStatement("Select eq.nom, points, eq.id_ecurie, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.id_ecurie = ec.id_ecurie and eq.nom_1 = ?");
+			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getInt(4));
+				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getInt(4));
 				r.add(e);
 			}
 		} catch (SQLException ee) {
@@ -166,28 +151,10 @@ public class Equipe {
 		}
 		return r;
 	}
-	
-	public int getId(Connection connex) {
-		PreparedStatement pst;
-		ResultSet rs;
-		try {
-			pst = connex
-					.prepareStatement("select id_equipe from LMN3783A.sae_equipe where LMN3783A.sae_equipe.nom = ?");
-			pst.setString(0, nom);
-			rs = pst.executeQuery();
-			if (!rs.next()) {
-				throw new IllegalArgumentException();
-			}
-			return rs.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
 
 	@Override
 	public String toString() {
-		return "Equipe [nom=" + nom + ", points=" + points + ", id_ecurie=" + id_ecurie + ", jeu=" + id_jeu
+		return "Equipe [nom=" + nom + ", points=" + points + ", nomEcurie=" + nomEcurie + ", jeu=" + id_jeu
 				+ ", listeJoueurs=" + listeJoueurs + "]";
 	}
 	

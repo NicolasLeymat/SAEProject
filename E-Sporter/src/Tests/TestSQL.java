@@ -13,7 +13,7 @@ public class TestSQL {
 			System.out.println(e.toString());
 		}
 		
-		List<Equipe> liste2 = Equipe.getEquipesFromEcurie(Connexion.connexion(), 5);
+		List<Equipe> liste2 = Equipe.getEquipesFromEcurie(Connexion.connexion(), "test");
 		for (Equipe e : liste2) {
 			System.out.println(e.toString());
 		}
