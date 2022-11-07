@@ -108,7 +108,7 @@ public class Joueur {
 			pst.setString(4, joueur.getPseudo());
 			pst.setDate(5,joueur.getDatenaissance());
 			pst.setString(6,joueur.getNationalite());
-			pst.setInt(7,joueur.getEquipe().getId(connex));
+			pst.setString(7,joueur.getEquipe().getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -116,4 +116,6 @@ public class Joueur {
 		}
 		return 1;
     }
+    
+    
 }
