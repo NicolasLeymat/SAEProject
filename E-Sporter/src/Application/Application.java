@@ -3,7 +3,7 @@ package Application;
 import java.awt.EventQueue;
 
 
-import IHM.MainPage;
+import IHM.VuePrincipale;
 
 public class Application {
 
@@ -14,7 +14,7 @@ public class Application {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainPage window = new MainPage();
+					VuePrincipale window = new VuePrincipale();
 					window.getframe().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
