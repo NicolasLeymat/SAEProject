@@ -57,50 +57,14 @@ public class Ecurie {
 
 	}
 
-	// Fonction qui permet de récuperer l'identifiant d'une écurie
-	public int getId(Connection connex) throws Exception {
-		PreparedStatement pst;
-		ResultSet rs;
-		try {
-			pst = connex
-					.prepareStatement("select id_ecurie from LMN3783A.sae_ecurie where LMN3783A.sae_ecurie.nom = ?");
-			pst.setString(0, nom);
-			rs = pst.executeQuery();
-			if (!rs.next()) {
-				throw new IllegalArgumentException();
-			}
-			return rs.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	// Fonction qui permet de récuperer le dernier identifiant de l'écurie
-	public int getLastId(Connection connex) {
-		Statement st = null;
-		ResultSet rs;
-		int r = 0;
-		try {
-			st = connex.createStatement();
-			rs = st.executeQuery("Select id_ecurie as id from LMN3783A.sae_ecurie");
-			while (rs.next()) {
-				r = rs.getInt("id");
-			}
-		} catch (SQLException ee) {
-			ee.printStackTrace();
-		}
-		return r;
-	}
 
 	// Fonction qui permet d'enregistrer une écurie dans la base de données
 	public static int enregistrerEcurie(Connection connex, Ecurie e) {
 		PreparedStatement pst;
-		int lastId = e.getLastId(connex);
+		
 		try {
-			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?,?)");
-			pst.setInt(1, lastId + 1);
-			pst.setString(2, e.getNom());
+			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?)");
+			pst.setString(1, e.getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -123,17 +87,17 @@ public class Ecurie {
 		return 1;
 	}
 
-	public static Ecurie getEcurieFromId(Connection connex, int id) {
+	public static Ecurie getEcurieFromNom(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Ecurie e = null;
 		try {
-			pst = connex.prepareStatement("Select id_ecurie, nom from LMN3783A.sae_ecurie where id_ecurie = ?");
-			pst.setInt(1, id);
+			pst = connex.prepareStatement("Select nom from LMN3783A.sae_ecurie where nom = ?");
+			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Ecurie(rs.getString(2));
-				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getInt(1));
+				e = new Ecurie(rs.getString(1));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getString(1));
 			}
 		} catch (SQLException ee) {
 			ee.printStackTrace();
