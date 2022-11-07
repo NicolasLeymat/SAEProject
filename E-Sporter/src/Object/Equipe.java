@@ -166,6 +166,24 @@ public class Equipe {
 		}
 		return r;
 	}
+	
+	public int getId(Connection connex) {
+		PreparedStatement pst;
+		ResultSet rs;
+		try {
+			pst = connex
+					.prepareStatement("select id_equipe from LMN3783A.sae_equipe where LMN3783A.sae_equipe.nom = ?");
+			pst.setString(0, nom);
+			rs = pst.executeQuery();
+			if (!rs.next()) {
+				throw new IllegalArgumentException();
+			}
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	@Override
 	public String toString() {
