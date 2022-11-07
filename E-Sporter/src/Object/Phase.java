@@ -12,7 +12,7 @@ public class Phase {
 		this.tournoi = tournoi;
 	}
 
-    //Fonction qui permet de savoir si c'est une phase éliminatoire où pas 
+    //Fonction qui permet de savoir si c'est une phase éliminatoire ou pas 
 	public boolean isElim() {
 		return elim;
 	}
