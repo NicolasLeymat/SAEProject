@@ -110,6 +110,24 @@ public class Equipe {
 		}
 		return 1;
 	}
+	
+	public static int modifierEquipe(Connection connex, Equipe e, String newName, int nbJoueur, int points, int idEcurie, int idJeu) {
+		PreparedStatement pst;
+		try {
+			pst = connex
+					.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, points = ?, id_ecurie = ?, id_jeu = ? where id_equipe = ?" );
+			pst.setString(1, newName);
+			pst.setInt(2, nbJoueur);
+			pst.setInt(3, points);
+			pst.setInt(4, idEcurie);
+			pst.setInt(5, idJeu);
+			pst.setInt(6, e.getIdJeu());
+			pst.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return 1;
+	}
 
 	public static List<Equipe> getAllEquipes(Connection connex) {
 		List<Equipe> equipes = new ArrayList<Equipe>();
@@ -118,7 +136,7 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe");
+			rs = st.executeQuery("	");
 			while (rs.next()) {
 				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getInt(4));
 				equipes.add(e);
