@@ -97,6 +97,29 @@ public class Joueur {
 		return r;
 	}
     
+    public static int getId(Connection connex, Joueur j) throws Exception {
+		PreparedStatement pst;
+		ResultSet rs;
+		try {
+			pst = connex
+					.prepareStatement("select id_joueur from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ? and datedenaissance = ? and nationalites = ? and nom_1 = ?");
+			pst.setString(0, j.nom);
+			pst.setString(1, j.prenom);
+			pst.setString(2, j.pseudo);
+			pst.setDate(3, j.dateNaissance);
+			pst.setString(4, j.nationalite.toString());
+			pst.setString(6, j.equipe.getNom());
+			rs = pst.executeQuery();
+			if (!rs.next()) {
+				throw new IllegalArgumentException();
+			}
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+    
     public static int enregistrerJoueur(Connection connex, Joueur joueur) {
     	PreparedStatement pst;
 		int lastId = Joueur.getLastId(connex);
@@ -108,7 +131,7 @@ public class Joueur {
 			pst.setString(4, joueur.getPseudo());
 			pst.setDate(5,joueur.getDatenaissance());
 			pst.setString(6,joueur.getNationalite());
-			pst.setInt(7,joueur.getEquipe().getId(connex));
+			pst.setString(7,joueur.getEquipe().getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -116,4 +139,25 @@ public class Joueur {
 		}
 		return 1;
     }
+    
+    public static int modifierJoueur(Connection connex, Joueur j, String newPrenom, String newNom, String newPseudo, Date newDate, Nationalite newNat, String newNomEquipe) throws Exception {
+		PreparedStatement pst;
+		try {
+			pst = connex
+					.prepareStatement("update LMN3783A.sae_joueur set nom = ?, prenom = ?, pseudonyme = ?, datedenaissance = ?, nationalites = ?, nom_1 = ? where id_joueur = ?" );
+			pst.setString(1, newPrenom);
+			pst.setString(2, newNom);
+			pst.setString(3, newPseudo);
+			pst.setDate(4, newDate);
+			pst.setString(5, newNat.toString());
+			pst.setString(6, newNomEquipe);
+			pst.setInt(7, getId(connex,j));
+			pst.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return 1;
+	}
+    
+    
 }

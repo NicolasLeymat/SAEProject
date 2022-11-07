@@ -29,7 +29,6 @@ public class TestSQL {
 		System.out.println(id);
 		Ecurie e1 = Ecurie.getEcurieFromNom(Connexion.connexion(), "Astralis");
 		Ecurie.modifierEcurie(Connexion.connexion(), e1, "T3");
-		
 	}
 	
 

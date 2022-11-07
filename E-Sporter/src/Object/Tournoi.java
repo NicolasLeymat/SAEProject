@@ -103,5 +103,4 @@ public class Tournoi {
 		return this.listeEquipe.get(i);
 	}
 	
-	//public int getEquipes() 
 }
