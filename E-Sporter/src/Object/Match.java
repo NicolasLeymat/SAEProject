@@ -63,10 +63,10 @@ public class Match {
 			ps.setInt(3,match.phase.getId());
 			ps.executeUpdate();
 			PreparedStatement ps2 = ct.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
-			ps2.setInt(1,match.equipe1.getID());
+			ps2.setString(1,match.equipe1.getNom());
 			ps2.setInt(2,id);
 			ps2.executeUpdate();
-			ps2.setInt(1,match.equipe2.getID());
+			ps2.setString(1,match.equipe2.getNom());
 			ps2.executeUpdate();
 			match.id = id;
 			return 0;
