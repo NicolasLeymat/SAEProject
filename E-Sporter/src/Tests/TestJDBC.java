@@ -26,7 +26,7 @@ public class TestJDBC {
 	public void testInsererUneEquipe() throws  Exception{
 		Connection connec = Connexion.connexion();
 		Ecurie nom = new Ecurie("nom");
-		Equipe equipe = new Equipe("test",10, 2, 3);
+		Equipe equipe = new Equipe("test",10, "nom", 3);
 		try {
 			connec.setAutoCommit(false);
 		} catch (SQLException e) {
