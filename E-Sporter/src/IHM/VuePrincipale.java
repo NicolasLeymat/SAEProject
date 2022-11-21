@@ -3,20 +3,31 @@ package IHM;
 import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.BorderLayout;
 
 public class VuePrincipale extends JPanel{
 
+	private SearchPanel searchPanel;
+	
 	public VuePrincipale() {
-		this.setSize(1200, 725);
-		this.setLayout(null);
 		
-		SearchPanel searchPanel = new SearchPanel();
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{1177, 0};
+		gridBagLayout.rowHeights = new int[]{101, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		this.searchPanel = new SearchPanel();
+		GridBagConstraints gbc_searchPanel = new GridBagConstraints();
+		gbc_searchPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_searchPanel.fill = GridBagConstraints.BOTH;
+		gbc_searchPanel.gridx = 0;
+		gbc_searchPanel.gridy = 0;
 		
-		MainPanel mainPanel = new MainPanel();
-		mainPanel.setSize(1200, 625);
-		
-		this.add(searchPanel);
-		this.add(mainPanel);
+		this.add(searchPanel, gbc_searchPanel);
 	}
 
 //	private void initialize() {

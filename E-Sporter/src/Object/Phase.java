@@ -4,8 +4,6 @@ package Object;
 public class Phase {
 
 	private boolean elim;
-
-	private int id;
 	private Tournoi tournoi;
 
 	//Constructeur de la classe "Phase"
@@ -14,9 +12,6 @@ public class Phase {
 		this.tournoi = tournoi;
 	}
 
-	public int getId() {
-		return id;
-	}
 
     //Fonction qui permet de savoir si c'est une phase éliminatoire ou pas 
 	public boolean isElim() {

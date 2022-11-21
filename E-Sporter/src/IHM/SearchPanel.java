@@ -19,31 +19,47 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.BorderLayout;
 
 public class SearchPanel extends JPanel{
 	private JTextField searchField;
-
+	
 	public SearchPanel() {
 		ImageIcon icon = new ImageIcon("./src/IHM/search.png");
 		this.setVisible(true);
 		this.setSize(1200, 100);
-		setLayout(null);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{99, 1000, 101, 0};
+		gridBagLayout.rowHeights = new int[]{23, 50, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JLabel lblNewLabel = new JLabel("Recherche : ");
+		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 0;
+		add(lblNewLabel, gbc_lblNewLabel);
 		searchField = new JTextField();
-		searchField.setLocation(0, 25);
 		searchField.setBackground(new Color(255, 255, 255));
-		searchField.setSize(1050, 50);
 		searchField.setHorizontalAlignment(SwingConstants.LEFT);
 		searchField.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		searchField.setColumns(50);
-		searchField.setToolTipText("Entré le nom à rechercher");
-		this.add(searchField, BorderLayout.WEST);
-		
-		JButton searchBtn = new JButton("", icon);
-		searchBtn.setLocation(1050, 25);
-		searchBtn.setHorizontalAlignment(SwingConstants.LEFT);
-		searchBtn.setSize(82, 50);
-		searchBtn.setIconTextGap(0);
-		this.add(searchBtn, BorderLayout.CENTER);
+		searchField.setToolTipText("Rechercer");
+		GridBagConstraints gbc_searchField = new GridBagConstraints();
+		gbc_searchField.insets = new Insets(0, 0, 0, 5);
+		gbc_searchField.fill = GridBagConstraints.BOTH;
+		gbc_searchField.gridx = 1;
+		gbc_searchField.gridy = 1;
+		this.add(searchField, gbc_searchField);
+	}
+	
+	public void changeWitdth(int newWidth) {
+		this.searchField.setSize(newWidth, 50);
 	}
 }
