@@ -19,6 +19,10 @@ public class Match {
 		this.equipe2 = equipe2;
 		this.phase = phase;
 	}
+	
+	public Phase getPhase() {
+		return this.phase;
+	}
 
 	public Date getDate() {
 		return date;
@@ -60,7 +64,7 @@ public class Match {
 			PreparedStatement ps = ct.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
 			ps.setInt(1,id);
 			ps.setDate(2,match.date);
-			ps.setInt(3,match.phase.getId());
+			ps.setInt(3,Phase.getId(ct, match.getPhase()));
 			ps.executeUpdate();
 			PreparedStatement ps2 = ct.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
 			ps2.setString(1,match.equipe1.getNom());

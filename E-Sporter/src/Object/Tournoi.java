@@ -1,6 +1,10 @@
 package Object;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,6 +34,24 @@ public class Tournoi {
 		this.notoriete = notoriete;
 		this.jeu = jeu;
 		this.listeEquipe = new ArrayList<Equipe>();
+	}
+	
+	//Fonction qui permet de récuperer le nombre de joueurs d'un Tournoi
+	public static int getId(Connection connex, Tournoi tournoi) {
+		PreparedStatement pst;
+		ResultSet rs;
+		try {
+			pst = connex.prepareStatement("select id_tournoi from LMN3783A.sae_tournoi where LMN3783A.sae_tournoi.nom = ? and LMN3783A.sae_tournoi.datetournoi = ?");
+			pst.setString(1, tournoi.getNom());
+			pst.setDate(2, tournoi.getDateTournoi());
+			rs = pst.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
     //Fonction qui permet de récuperer le nom d'un tournoi
