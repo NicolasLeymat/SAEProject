@@ -35,7 +35,6 @@ public class TestAppTournois {
 
     @Test
     public void testAjouterEquipe () throws Exception {
-        Ecurie faze =  new Ecurie("Faze Clan");
         Equipe fazerl = new Equipe("fazerl",12,"Faze Clan",5);
         t.addEquipe(fazerl);
         assertEquals(fazerl,t.getEquipeTournoi(0));
@@ -69,5 +68,9 @@ public class TestAppTournois {
     	t.addEquipe(equipe);
     	assertEquals(t.getEquipe("Equipe Fest"), null);
     }
+
+	public Ecurie getEcurie() {
+		return e;
+	}
 
 }
