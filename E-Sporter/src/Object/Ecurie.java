@@ -62,7 +62,7 @@ public class Ecurie {
 		PreparedStatement pst;
 		
 		try {
-			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie values(?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie (nom) values(?)");
 			pst.setString(1, e.getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
@@ -72,19 +72,7 @@ public class Ecurie {
 		return 1;
 	}
 
-	public static int modifierEcurie(Connection connex, Ecurie e, String newName) {
-		PreparedStatement pst;
-		try {
-			pst = connex
-					.prepareStatement("update LMN3783A.sae_ecurie set nom = ? where nom = ?" );
-			pst.setString(1, newName);
-			pst.setString(2, e.getNom());
-			pst.executeUpdate();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		return 1;
-	}
+
 
 	public static Ecurie getEcurieFromNom(Connection connex, String nom) {
 		PreparedStatement pst = null;

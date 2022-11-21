@@ -1,5 +1,7 @@
 package Object;
 
+import Application.Connexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -133,13 +135,32 @@ public class Equipe {
 		return equipes;
 	}
 
+	public static List<Equipe> getClassementByGame(int id_jeu) {
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		Connection connex = Connexion.connexion();
+		Equipe e = null;
+		try {
+			PreparedStatement ps = connex.prepareStatement("Select nom, points, nom_ecurie,id_jeu from LMN3783A.sae_equipe where id_jeu = ? ORDER BY points");
+			ps.setInt(1,id_jeu);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3), rs.getInt(4));
+				equipes.add(e);
+			}
+			return equipes;
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return equipes;
+	}
+
 	public static List<Equipe> getEquipesFromEcurie(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select eq.nom, points, eq.nom, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.nom_ecurie = ec.nom and eq.nom_ecurie = ?");
+			pst = connex.prepareStatement("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe where nom_ecurie= ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {

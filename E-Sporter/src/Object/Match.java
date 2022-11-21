@@ -50,6 +50,7 @@ public class Match {
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
+			ct.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
@@ -64,7 +65,7 @@ public class Match {
 			PreparedStatement ps = ct.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
 			ps.setInt(1,id);
 			ps.setDate(2,match.date);
-			ps.setInt(3,Phase.getId(ct, match.getPhase()));
+			ps.setInt(3,match.phase.getId());
 			ps.executeUpdate();
 			PreparedStatement ps2 = ct.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
 			ps2.setString(1,match.equipe1.getNom());
