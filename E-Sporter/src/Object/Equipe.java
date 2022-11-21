@@ -144,6 +144,7 @@ public class Equipe {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getInt(4));
+				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, rs.getString(1));
 				r.add(e);
 			}
 		} catch (SQLException ee) {
