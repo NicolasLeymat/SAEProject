@@ -8,9 +8,7 @@ public class Match {
 	private Equipe equipe1;
 	private Equipe equipe2;
 	private Phase phase;
-	private int winner;
 	private int id;
-
 	private Date date;
 
 	public Match(Date date, Equipe equipe1, Equipe equipe2, Phase phase) {
@@ -19,7 +17,7 @@ public class Match {
 		this.equipe2 = equipe2;
 		this.phase = phase;
 	}
-	
+
 	public Phase getPhase() {
 		return this.phase;
 	}
@@ -33,10 +31,9 @@ public class Match {
 	}
 
 	public void setWinner(int num) throws IllegalArgumentException {
-		if (num <1 || num>2) {
+		if (num < 1 || num > 2) {
 			throw new IllegalArgumentException();
 		}
-		this.winner = num;
 	}
 
 	public int getLastId() {
@@ -56,26 +53,24 @@ public class Match {
 		return r;
 	}
 
-
 	public static int enregistrermatch(Match match) {
 		Connection ct = Connexion.connexion();
 		int id = match.getLastId();
 		try {
 			PreparedStatement ps = ct.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
-			ps.setInt(1,id);
-			ps.setDate(2,match.date);
-			ps.setInt(3,Phase.getId(ct, match.getPhase()));
+			ps.setInt(1, id);
+			ps.setDate(2, match.date);
+			ps.setInt(3, Phase.getId(ct, match.getPhase()));
 			ps.executeUpdate();
 			PreparedStatement ps2 = ct.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
-			ps2.setString(1,match.equipe1.getNom());
-			ps2.setInt(2,id);
+			ps2.setString(1, match.equipe1.getNom());
+			ps2.setInt(2, id);
 			ps2.executeUpdate();
-			ps2.setString(1,match.equipe2.getNom());
+			ps2.setString(1, match.equipe2.getNom());
 			ps2.executeUpdate();
 			match.id = id;
 			return 0;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		}
@@ -89,16 +84,13 @@ public class Match {
 		match.setWinner(winner);
 		try {
 			PreparedStatement ps = ct.prepareStatement("UPDATE SAE_MATCH SET WINNER = ? WHERE ID = ?");
-			ps.setInt(1,winner);
-			ps.setInt(2,match.id);
+			ps.setInt(1, winner);
+			ps.setInt(2, match.id);
 			return 0;
-		}
-		catch (Exception e ){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		}
 	}
-
-
 
 }
