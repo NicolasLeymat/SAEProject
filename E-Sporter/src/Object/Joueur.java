@@ -171,7 +171,7 @@ public class Joueur {
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Joueur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), Nationalite.valueOf(rs.getString(5)), rs.getString(6));
+				e = new Joueur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), Nationalite.valueOf(rs.getString(5).toUpperCase()), rs.getString(6));
 				r.add(e);
 			}
 		} catch (Exception ee) {
@@ -179,6 +179,16 @@ public class Joueur {
 		}
 		return r;
 	}
-    
-    
+
+	@Override
+	public String toString() {
+		return "Joueur [" +
+				"nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", pseudo='" + pseudo + '\'' +
+				", dateNaissance=" + dateNaissance +
+				", nationalite=" + nationalite +
+				", nomEquipe='" + nomEquipe + '\'' +
+				'}';
+	}
 }
