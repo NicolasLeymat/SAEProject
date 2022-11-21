@@ -48,6 +48,14 @@ public class Connexion {
         e.printStackTrace();
     }
 
+
+
     return null;
+    }
+
+    public static void closeConnexion() throws SQLException {
+        if (connexion != null) {
+            connexion.close();
+        }
     }
 }

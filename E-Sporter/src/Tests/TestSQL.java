@@ -13,22 +13,21 @@ public class TestSQL {
 			System.out.println(e.toString());
 		}
 		
-		List<Equipe> liste2 = Equipe.getEquipesFromEcurie(Connexion.connexion(), "test");
+		List<Equipe> liste2 = Equipe.getEquipesFromEcurie(Connexion.connexion(), "Faze Clan");
 		for (Equipe e : liste2) {
 			System.out.println(e.toString());
 		}
 		
 		//Equipe.enregistrerEquipe(Connexion.connexion(), new Equipe("Vitality A", 0, 0, 1));
 		
-		Ecurie e = Ecurie.getEcurieFromNom(Connexion.connexion(), "Vitality");
+		Ecurie e = Ecurie.getEcurieFromNom(Connexion.connexion(), "Faze Clan");
 		System.out.println(e);
 		
 		 //Ecurie.enregistrerEcurie(Connexion.connexion(), new Ecurie("Astralis"));
 		
 		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
 		System.out.println(id);
-		
-		
+		Ecurie e1 = Ecurie.getEcurieFromNom(Connexion.connexion(), "Faze Clan");
 	}
 	
 

@@ -43,28 +43,27 @@ public class TestAppTournois {
     @Test (expected = Exception.class)
     public void testAjouterEquipe17 () throws Exception {
         for (int i = 0; i < 16; i++) {
-            t.addEquipe(new Equipe("Equipe"+i,25,"faze",3));
+            t.addEquipe(new Equipe("Equipe"+i,25,"Cloud9",3));
         }
-        t.addEquipe(new Equipe("Equipe 16",25,"Faze RL",3));
+        t.addEquipe(new Equipe("Equipe 16",25,"15",3));
     }
 
     @Test (expected = Exception.class)
     public void testAjouterEquipeTropTard () throws Exception {
         Tournoi t = new Tournoi("Vieux Tournoi",Date.valueOf("2015-12-12"),1,j);
-        t.addEquipe(new Equipe("Equipe 1",25,"Faze RL",1));
+        t.addEquipe(new Equipe("Equipe 1",25,"Faze Clan",1));
     }
     
     @Test
     public void testGetEquipe() throws Exception {
-
-    	Equipe equipe = new Equipe("Equipe Test",10,"Faze RL",5);
+    	Equipe equipe = new Equipe("Equipe Test",10,"Cloud9",5);
     	t.addEquipe(equipe);
     	assertEquals(t.getEquipe("Equipe Test"), equipe);
     }
     
     @Test
     public void testGetEquipeFausse() throws Exception {
-    	Equipe equipe = new Equipe("Equipe Test",10,"Faze RL",3);
+    	Equipe equipe = new Equipe("Equipe Test",10,"Cloud9",3);
     	t.addEquipe(equipe);
     	assertEquals(t.getEquipe("Equipe Fest"), null);
     }
