@@ -167,7 +167,7 @@ public class Joueur {
 		Joueur e = null;
 		List<Joueur> r = new ArrayList<Joueur>();
 		try {
-			pst = connex.prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.nom_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where eq.nom_ecurie = e.nom = j.nom_equipe and e.nom = ?");
+			pst = connex.prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.nom_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where e.nom = j.nom_equipe and e.nom = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {

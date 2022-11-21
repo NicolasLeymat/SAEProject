@@ -28,6 +28,7 @@ public class TestSQL {
 		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
 		System.out.println(id);
 		Ecurie e1 = Ecurie.getEcurieFromNom(Connexion.connexion(), "Faze Clan");
+		System.out.println(Equipe.getEquipeFromNom(Connexion.connexion(),"Faze CSGO"));
 	}
 	
 
