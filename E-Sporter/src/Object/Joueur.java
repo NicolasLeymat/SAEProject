@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 //Classe qui définit les fonctions d'un joueur
 public class Joueur {
@@ -14,16 +16,16 @@ public class Joueur {
 	private String pseudo;
 	private Date dateNaissance;
 	private Nationalite nationalite;
-	private Equipe equipe;
+	private String nomEquipe;
 
 	//Contructeur de la classe "Joueur"
-	public Joueur(String nom, String prenom, String pseudo, Date dateNaissance, Nationalite nationalite, Equipe equipe) throws Exception {
+	public Joueur(String nom, String prenom, String pseudo, Date dateNaissance, Nationalite nationalite, String nomEquipe) throws Exception {
 	    this.nom = nom;
 	    this.prenom = prenom;
 	    this.pseudo = pseudo;
 	    this.dateNaissance = dateNaissance;
 	    this.nationalite = nationalite;
-	    this.equipe = equipe;
+	    this.nomEquipe = nomEquipe;
 	}
 	
 	//Fonction qui permet de récuperer le nom d'un joueur
@@ -72,13 +74,13 @@ public class Joueur {
     }
 
     //Fonction qui permet de récuperer l'équipe d'un joueur
-    public Equipe getEquipe() {
-        return equipe;
+    public String getNomEquipe() {
+        return nomEquipe;
     }
 
     //Fonction qui permet de changer l'équipe d'un joueur
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
+    public void setEquipe(String equipe) {
+        this.nomEquipe = equipe;
     }
     
     public static int getLastId(Connection connex) {
@@ -108,7 +110,7 @@ public class Joueur {
 			pst.setString(2, j.pseudo);
 			pst.setDate(3, j.dateNaissance);
 			pst.setString(4, j.nationalite.toString());
-			pst.setString(6, j.equipe.getNom());
+			pst.setString(6, j.nomEquipe);
 			rs = pst.executeQuery();
 			if (!rs.next()) {
 				throw new IllegalArgumentException();
@@ -131,7 +133,7 @@ public class Joueur {
 			pst.setString(4, joueur.getPseudo());
 			pst.setDate(5,joueur.getDatenaissance());
 			pst.setString(6,joueur.getNationalite());
-			pst.setString(7,joueur.getEquipe().getNom());
+			pst.setString(7,joueur.nomEquipe);
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -157,6 +159,25 @@ public class Joueur {
 			e1.printStackTrace();
 		}
 		return 1;
+	}
+    
+    public static List<Joueur> getJoueursFromEquipe(Connection connex, String nom) {
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Joueur e = null;
+		List<Joueur> r = new ArrayList<Joueur>();
+		try {
+			pst = connex.prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.nom_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where eq.nom_ecurie = e.nom = j.nom_equipe and e.nom = ?");
+			pst.setString(1, nom);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Joueur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), Nationalite.valueOf(rs.getString(5)), rs.getString(6));
+				r.add(e);
+			}
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
+		return r;
 	}
     
     

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Application.Connexion;
+
 
 //Classe qui définit les fonctions d'une écurie
 public class Ecurie {
