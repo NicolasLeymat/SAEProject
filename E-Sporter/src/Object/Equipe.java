@@ -151,6 +151,24 @@ public class Equipe {
 		}
 		return r;
 	}
+	
+	public static Equipe getEquipeFromNom(Connection connex, String nom) {
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Equipe e = null;
+		try {
+			pst = connex.prepareStatement("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
+			pst.setString(1, nom);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Equipe(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getInt(4));
+				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, nom);
+			}
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return e;
+	}
 
 	@Override
 	public String toString() {
