@@ -121,7 +121,7 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select nom, points, nom_1, id_jeu from LMN3783A.sae_equipe");
+			rs = st.executeQuery("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe");
 			while (rs.next()) {
 				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3), rs.getInt(4));
 				equipes.add(e);
@@ -139,7 +139,7 @@ public class Equipe {
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select eq.nom, points, eq.id_ecurie, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.id_ecurie = ec.id_ecurie and eq.nom_1 = ?");
+			pst = connex.prepareStatement("Select eq.nom, points, eq.nom, id_jeu from LMN3783A.sae_equipe eq, LMN3783A.SAE_Ecurie ec where eq.nom_ecurie = ec.nom and eq.nom_ecurie = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {

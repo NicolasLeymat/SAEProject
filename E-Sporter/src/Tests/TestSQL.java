@@ -28,7 +28,9 @@ public class TestSQL {
 		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
 		System.out.println(id);
 		Ecurie e1 = Ecurie.getEcurieFromNom(Connexion.connexion(), "Astralis");
-		Ecurie.modifierEcurie(Connexion.connexion(), e1, "T3");
+		//Ecurie.modifierEcurie(Connexion.connexion(), e1, "T3");
+		
+		
 	}
 	
 

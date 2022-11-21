@@ -36,7 +36,7 @@ public class TestAppTournois {
     @Test
     public void testAjouterEquipe () throws Exception {
         Ecurie faze =  new Ecurie("Faze Clan");
-        Equipe fazerl = new Equipe("fazerl",12, faze.getNom(),5);
+        Equipe fazerl = new Equipe("fazerl",12,"Faze Clan",5);
         t.addEquipe(fazerl);
         assertEquals(fazerl,t.getEquipeTournoi(0));
     }
@@ -46,25 +46,26 @@ public class TestAppTournois {
         for (int i = 0; i < 16; i++) {
             t.addEquipe(new Equipe("Equipe"+i,25,"faze",3));
         }
-        t.addEquipe(new Equipe("Equipe 16",25,"jeu",3));
+        t.addEquipe(new Equipe("Equipe 16",25,"Faze RL",3));
     }
 
     @Test (expected = Exception.class)
     public void testAjouterEquipeTropTard () throws Exception {
         Tournoi t = new Tournoi("Vieux Tournoi",Date.valueOf("2015-12-12"),1,j);
-        t.addEquipe(new Equipe("Equipe 1",25,"ferrari",1));
+        t.addEquipe(new Equipe("Equipe 1",25,"Faze RL",1));
     }
     
     @Test
     public void testGetEquipe() throws Exception {
-    	Equipe equipe = new Equipe("Equipe Test",10,"nba",5);
+
+    	Equipe equipe = new Equipe("Equipe Test",10,"Faze RL",5);
     	t.addEquipe(equipe);
     	assertEquals(t.getEquipe("Equipe Test"), equipe);
     }
     
     @Test
     public void testGetEquipeFausse() throws Exception {
-    	Equipe equipe = new Equipe("Equipe Test",10,"barca",3);
+    	Equipe equipe = new Equipe("Equipe Test",10,"Faze RL",3);
     	t.addEquipe(equipe);
     	assertEquals(t.getEquipe("Equipe Fest"), null);
     }
