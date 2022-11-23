@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -74,22 +75,24 @@ public class Ecurie {
 
 
 
-	public static Ecurie getEcurieFromNom(Connection connex, String nom) {
+	public static List<Ecurie> getEcurieFromNomAll(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
+		List<Ecurie> l = new LinkedList<>();
 		Ecurie e = null;
 		try {
-			pst = connex.prepareStatement("Select nom from LMN3783A.sae_ecurie where nom = ?");
-			pst.setString(1, nom);
+			pst = connex.prepareStatement("Select nom from LMN3783A.sae_ecurie where nom LIKE ?");
+			pst.setString(1, nom + "%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				e = new Ecurie(rs.getString(1));
 				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getString(1));
+				l.add(e);
 			}
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
-		return e;
+		return l;
 	}
 
 	@Override

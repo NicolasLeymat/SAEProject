@@ -15,10 +15,10 @@ public class MainPanel extends JPanel{
 		JScrollPane teamPanel = new JScrollPane();
 		add(teamPanel, BorderLayout.WEST);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, BorderLayout.EAST);
+		JScrollPane ecuriePanel = new JScrollPane();
+		add(ecuriePanel, BorderLayout.EAST);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		add(scrollPane_2, BorderLayout.CENTER);
+		JScrollPane tournamentPanel = new JScrollPane();
+		add(tournamentPanel, BorderLayout.CENTER);
 	}
 }

@@ -3,6 +3,9 @@ package IHM;
 import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
+
+import controleur.SearchControleur;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -13,7 +16,7 @@ public class VuePrincipale extends JPanel{
 	private SearchPanel searchPanel;
 	
 	public VuePrincipale() {
-		
+		SearchControleur controleurRecherche = new SearchControleur(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{1177, 0};
 		gridBagLayout.rowHeights = new int[]{101, 0, 0};
@@ -26,8 +29,9 @@ public class VuePrincipale extends JPanel{
 		gbc_searchPanel.fill = GridBagConstraints.BOTH;
 		gbc_searchPanel.gridx = 0;
 		gbc_searchPanel.gridy = 0;
-		
+		searchPanel.addListenerToSearchField(controleurRecherche);
 		this.add(searchPanel, gbc_searchPanel);
+		
 	}
 
 //	private void initialize() {

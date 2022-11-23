@@ -20,7 +20,7 @@ public class Connexion {
         return connexion;
     }
 
-    public static Connection creerconnexion() {
+    private static Connection creerconnexion() {
     String fichierconfig = "./src/Application/config.properties";
     String url = null;
     String mdp = null;

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 //Classe qui définit les fonctions d'une équipe
@@ -29,7 +30,7 @@ public class Equipe {
 	}
 	
 	public Ecurie getEcurie(Connection connex) {
-		return Ecurie.getEcurieFromNom(connex, nomEcurie);
+		return Ecurie.getEcurieFromNomAll(connex, nomEcurie).get(0);
 	}
 
 	public void setNomEcurie(String nom_ecurie) {
@@ -174,22 +175,26 @@ public class Equipe {
 		return r;
 	}
 	
-	public static Equipe getEquipeFromNom(Connection connex, String nom) {
+	public static List<Equipe> getEquipeFromNomAll(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
+		List<Equipe> l = new LinkedList<>();
 		Equipe e = null;
 		try {
-			pst = connex.prepareStatement("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
-			pst.setString(1, nom);
+			pst = connex.prepareStatement("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe where nom LIKE ?");
+			pst.setString(1, nom+"%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				e = new Equipe(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getInt(4));
+				//System.out.println("Equipe : " + e.toString());
 				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, nom);
+				l.add(e);
 			}
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
-		return e;
+		//System.out.println("l : " + l.toString());
+		return l;
 	}
 
 	@Override

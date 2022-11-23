@@ -3,7 +3,6 @@ package Application;
 import java.awt.EventQueue;
 
 import IHM.App;
-import IHM.VuePrincipale;
 
 public class Application {
 

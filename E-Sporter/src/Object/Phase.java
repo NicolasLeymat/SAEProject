@@ -22,5 +22,9 @@ public class Phase {
 	public Tournoi getTournoi() {
 		return tournoi;
 	}
+	
+	public int getId() {
+		return 0;
+	}
 
 }
