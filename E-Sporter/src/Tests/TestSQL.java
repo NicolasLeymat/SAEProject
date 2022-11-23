@@ -2,10 +2,8 @@ package Tests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.sql.Connection;
 import java.util.List;
 
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import Application.Connexion;
@@ -13,6 +11,8 @@ import Object.*;
 
 public class TestSQL {
 
+	/////////////////////////////////////////////////TEST ECURIE//////////////////////////////////////////////////////////
+	
 	// Enregistre une equipe dans l'application
 	@Test
 	public void testEnregistrerEquipe() throws Exception {
@@ -80,12 +80,12 @@ public class TestSQL {
 		assertEquals(liste.get(1).getNom(), "Faze Fortnite");
 	}
 	
-	//Recupere l'equipes a partir de son nom
-		@Test
-		public void testGetEquipesFromNom() throws Exception {
-			Equipe e = Equipe.getEquipeFromNom(Connexion.connexion(),"Cloud9 Fortnite");
-			assertEquals(e.getNom(), "Cloud9 Fortnite");
-		}
+	//Recupere l'equipe a partir de son nom
+	@Test
+	public void testGetEquipeFromNom() throws Exception {
+		Equipe e = Equipe.getEquipeFromNom(Connexion.connexion(),"Cloud9 Fortnite");
+		assertEquals(e.getNom(), "Cloud9 Fortnite");
+	}
 	
 	// Recupere toutes les equipes associees a une ecurie
 	@Test
@@ -96,6 +96,36 @@ public class TestSQL {
 		assertEquals(liste.get(2).getNom(), "Faze Fortnite");
 	}
 	
+	/////////////////////////////////////////////////TEST EQUIPE//////////////////////////////////////////////////////////
+
+	// Enregistre une ecurie dans l'application
+	@Test
+	public void testEnregistrerEcurie() throws Exception {
+		Ecurie e = new Ecurie("Fiouze Clan");
+		assertEquals(Ecurie.enregistrerEcurie(Connexion.connexion(), e),1);
+		Ecurie.supprimerEcurie(Connexion.connexion(), e);
+	}
+		
+	// Essaie d'enregistre une ecurie deja existante dans l'application
+	@Test
+	public void testEnregistrerEcurieDejaExistante() throws Exception {
+		Ecurie e = new Ecurie("Faze Clan");
+		assertEquals(Ecurie.enregistrerEcurie(Connexion.connexion(), e),-1);
+	}
 	
+	//Recupere l'ecurie a partir de son nom
+	@Test
+	public void testGetEcurieFromNom() throws Exception {
+		Ecurie e = Ecurie.getEcurieFromNom(Connexion.connexion(),"Faze Clan");
+		assertEquals(e.getNom(), "Faze Clan");
+	}
+	
+	//Recupere toutes les equipes dont le nom commence par la parametre
+	@Test
+	public void testGetEcuriesFromNomAll() throws Exception {
+		List<Ecurie> liste = Ecurie.getEcurieFromNomAll(Connexion.connexion(),"F");
+		assertEquals(liste.get(0).getNom(), "Faze Clan");
+		assertEquals(liste.get(1).getNom(), "Fnatic");
+	}
 	
 }

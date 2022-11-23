@@ -240,7 +240,6 @@ public class Equipe {
 	public static Equipe getEquipeFromNom(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
-		List<Equipe> l = new LinkedList<>();
 		Equipe e = null;
 		try {
 			pst = connex.prepareStatement("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
