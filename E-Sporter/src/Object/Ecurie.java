@@ -144,6 +144,25 @@ public class Ecurie {
 		}
 		return l;
 	}
+	
+	public static List<Ecurie> getAllEcuries(Connection connex) {
+		List<Ecurie> ecuries = new ArrayList<>();
+		java.sql.Statement st = null;
+		ResultSet rs;
+		Ecurie e = null;
+		try {
+			st = connex.createStatement();
+			rs = st.executeQuery("Select nom from LMN3783A.sae_ecurie");
+			while (rs.next()) {
+				e = new Ecurie(rs.getString(1));
+				ecuries.add(e);
+			}
+			return ecuries;
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return ecuries;
+	}
 
 	@Override
 	public String toString() {
