@@ -13,6 +13,7 @@ import javax.xml.transform.Templates;
 
 import Object.Ecurie;
 import Object.Equipe;
+import controleur.JListControler;
 import controleur.ModeleESporter;
 
 import java.awt.Color;
@@ -21,6 +22,8 @@ import java.awt.GridLayout;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainPanel extends JPanel{
 
@@ -33,11 +36,13 @@ public class MainPanel extends JPanel{
 	
 	public MainPanel() {
 		this.setMaximumSize(new Dimension(1200, 625));
+		JListControler controleurEquipe = new JListControler();
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
 		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		modelEquipe.addAll(ModeleESporter.getAllEquipe());
 		listEquipe.setModel(modelEquipe);
+		listEquipe.addMouseListener(controleurEquipe);
 		JScrollPane teamPanel = new JScrollPane(listEquipe);
 		teamPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		teamPanel.setSize(400, 625);
