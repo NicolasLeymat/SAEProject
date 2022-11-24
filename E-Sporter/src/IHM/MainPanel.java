@@ -14,6 +14,7 @@ import javax.xml.transform.Templates;
 import Object.Ecurie;
 import Object.Equipe;
 import controleur.JListControler;
+import controleur.JListControlerEcurie;
 import controleur.ModeleESporter;
 
 import java.awt.Color;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MainPanel extends JPanel{
 
@@ -37,6 +39,7 @@ public class MainPanel extends JPanel{
 	public MainPanel() {
 		this.setMaximumSize(new Dimension(1200, 625));
 		JListControler controleurEquipe = new JListControler();
+		JListControlerEcurie controleurEcurie = new JListControlerEcurie();
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
 		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
@@ -55,6 +58,7 @@ public class MainPanel extends JPanel{
 		listEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		modelEcurie.addAll(ModeleESporter.getAllEcurie());
 		listEcurie.setModel(modelEcurie);
+		listEcurie.addMouseListener(controleurEcurie);
 		JScrollPane ecuriePanel = new JScrollPane(listEcurie);
 		ecuriePanel.setSize(400, 625);
 		ecuriePanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
