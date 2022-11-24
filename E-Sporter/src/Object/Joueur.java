@@ -89,7 +89,7 @@ public class Joueur {
 		int r = 0;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select id_equipe as id from LMN3783A.sae_equipe");
+			rs = st.executeQuery("Select id_joueur as id from LMN3783A.sae_joueur");
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
@@ -104,12 +104,12 @@ public class Joueur {
 		ResultSet rs;
 		try {
 			pst = connex
-					.prepareStatement("select id_joueur from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ? and datedenaissance = ? and nationalites = ? and nom_1 = ?");
-			pst.setString(0, j.nom);
-			pst.setString(1, j.prenom);
-			pst.setString(2, j.pseudo);
-			pst.setDate(3, j.dateNaissance);
-			pst.setString(4, j.nationalite.toString());
+					.prepareStatement("select id_joueur from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ? and datedenaissance = ? and nationalites = ? and nom_equipe = ?");
+			pst.setString(1, j.nom);
+			pst.setString(2, j.prenom);
+			pst.setString(3, j.pseudo);
+			pst.setDate(4, j.dateNaissance);
+			pst.setString(5, j.nationalite.toString());
 			pst.setString(6, j.nomEquipe);
 			rs = pst.executeQuery();
 			if (!rs.next()) {
@@ -126,6 +126,17 @@ public class Joueur {
     	PreparedStatement pst;
 		int lastId = Joueur.getLastId(connex);
 		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+			pst.setString(1, joueur.getNom());
+			pst.setString(2, joueur.getPrenom());
+			pst.setString(3, joueur.getPseudo());
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 1) {
+				return -1;
+			}
+			
 			pst = connex.prepareStatement("insert into LMN3783A.sae_joueur values(?,?,?,?,?,?,?)");
 			pst.setInt(1, lastId+1);
 			pst.setString(2, joueur.getNom());
@@ -145,8 +156,19 @@ public class Joueur {
     public static int modifierJoueur(Connection connex, Joueur j, String newPrenom, String newNom, String newPseudo, Date newDate, Nationalite newNat, String newNomEquipe) throws Exception {
 		PreparedStatement pst;
 		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+			pst.setString(1, j.getNom());
+			pst.setString(2, j.getPrenom());
+			pst.setString(3, j.getPseudo());
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return -1;
+			}
+			
 			pst = connex
-					.prepareStatement("update LMN3783A.sae_joueur set nom = ?, prenom = ?, pseudonyme = ?, datedenaissance = ?, nationalites = ?, nom_1 = ? where id_joueur = ?" );
+					.prepareStatement("update LMN3783A.sae_joueur set prenom = ?, nom = ?, pseudonyme = ?, datedenaissance = ?, nationalites = ?, nom_equipe = ? where id_joueur = ?" );
 			pst.setString(1, newPrenom);
 			pst.setString(2, newNom);
 			pst.setString(3, newPseudo);
@@ -161,13 +183,39 @@ public class Joueur {
 		return 1;
 	}
     
+    public static int supprimerJoueur(Connection connex, Joueur j) {
+		PreparedStatement pst;
+		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+			pst.setString(1, j.getNom());
+			pst.setString(2, j.getPrenom());
+			pst.setString(3, j.getPseudo());
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return -1;
+			}
+			
+			pst = connex.prepareStatement("delete from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+			pst.setString(1, j.getNom());
+			pst.setString(2, j.getPrenom());
+			pst.setString(3, j.getPseudo());
+			pst.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return -1; 
+		}
+		return 1;
+	}
+    
     public static List<Joueur> getJoueursFromEquipe(Connection connex, String nom) {
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Joueur e = null;
 		List<Joueur> r = new ArrayList<Joueur>();
 		try {
-			pst = connex.prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.nom_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where e.nom = j.nom_equipe and e.nom = ?");
+			pst = connex.prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.nom_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where e.nom = j.nom_equipe and e.nom = ? order by 3");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {

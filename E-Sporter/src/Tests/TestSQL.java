@@ -2,6 +2,7 @@ package Tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class TestSQL {
 		Equipe e = new Equipe("Faz CSGO", 0, "Faze Clan", 6);
 		Equipe.enregistrerEquipe(Connexion.connexion(), e);
 		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, 5, 12, "Faze Clan", 6),1);
+		Equipe.supprimerEquipe(Connexion.connexion(), e);
 	}
 	
 	// Essaie de modifier une equipe qui n'existe pas dans l'application
@@ -140,5 +142,62 @@ public class TestSQL {
 		assertEquals(liste.get(6).getNom(), "Team Liquid");
 		assertEquals(liste.get(7).getNom(), "Vitality");
 	}
+	
+/////////////////////////////////////////////////TEST JOUEUR//////////////////////////////////////////////////////////
+	
+	// Enregistre un joueur dans l'application
+		@Test
+		public void testEnregistrerJoueur() throws Exception {
+			Joueur j = new Joueur("Veslin", "Lucas", "Saren", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
+			assertEquals(Joueur.enregistrerJoueur(Connexion.connexion(), j),1);
+			Joueur.supprimerJoueur(Connexion.connexion(), j);
+		}
+		
+		// Essaie d'enregistre un joueur deja present dans l'application
+		@Test
+		public void testEnregistrerJoueurDejaExistant() throws Exception {
+			Joueur j = new Joueur("Saukants", "Helvijs", "Broky", Date.valueOf("2002-02-20"), Nationalite.LV, "Faze CSGO");
+			assertEquals(Joueur.enregistrerJoueur(Connexion.connexion(), j),-1);
+		}
+		
+		// Modifie un joueur dans l'application
+		@Test
+		public void testModifierJoueur() throws Exception {
+			Joueur j = new Joueur("Veslin", "Lucas", "Saren", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
+			Joueur.enregistrerJoueur(Connexion.connexion(), j);
+			assertEquals(Joueur.modifierJoueur(Connexion.connexion(), j, "Pascal", "Fernandez", "xXxPasFerxXx", Date.valueOf("1987-12-12"),Nationalite.FR, "Faze CSGO"),1);
+			Joueur.supprimerJoueur(Connexion.connexion(), j);
+		}
+		
+		// Essaie de modifier un joueur qui n'existe pas dans l'application
+		@Test
+		public void testModifierJoueurNonExistant() throws Exception {
+			Joueur j = new Joueur("Pascal", "Fernandez", "xXxPasFerxXx", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
+			assertEquals(Joueur.modifierJoueur(Connexion.connexion(), j, "Pascal", "Fernandez", "xXxPasFerxXx", Date.valueOf("1987-12-12"),Nationalite.FR, "Faze CSGO"),-1);
+		}
+		
+		// Supprime un joueur de l'application
+		@Test
+		public void testSupprimerJoueur() throws Exception {
+			Joueur j = new Joueur("Veslin", "Lucas", "Saren", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
+			Joueur.enregistrerJoueur(Connexion.connexion(), j);
+			assertEquals(Joueur.supprimerJoueur(Connexion.connexion(), j),1);
+		}
+		
+		// Essaie de supprimer un joueur n'existant pas dans l'application
+		@Test
+		public void testSupprimerJoueurNonExistant() throws Exception {
+			Joueur j = new Joueur("Veslin", "Lucas", "Saren", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
+			assertEquals(Joueur.supprimerJoueur(Connexion.connexion(), j),-1);
+		}
+		
+		// Recupere tout les joueurs associees a une equipe
+		@Test
+		public void testGetJoueursFromEquipe() throws Exception {
+			List<Joueur> liste = Joueur.getJoueursFromEquipe(Connexion.connexion(),"Faze CSGO");
+			assertEquals(liste.get(0).getPseudo(), "Broky");
+			assertEquals(liste.get(1).getPseudo(), "FaZe Rain");
+			assertEquals(liste.get(2).getPseudo(), "FaZe Roban");
+		}
 	
 }
