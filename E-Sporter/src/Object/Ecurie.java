@@ -63,6 +63,17 @@ public class Ecurie {
 		PreparedStatement pst;
 		
 		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
+			pst.setString(1, e.getNom());
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) != 0) {
+				return -1;
+			}
+			
+			//Il faudra peut etre rajouter dans l'enregistrement les équipes associees a l'ecurie
+			
 			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie (nom) values(?)");
 			pst.setString(1, e.getNom());
 			pst.executeUpdate();
@@ -72,8 +83,47 @@ public class Ecurie {
 		}
 		return 1;
 	}
+	
+	public static int supprimerEcurie(Connection connex, Ecurie e) {
+		PreparedStatement pst;
+		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
+			pst.setString(1, e.getNom());
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return -1;
+			}
+			
+			
+			pst = connex.prepareStatement("delete from LMN3783A.sae_ecurie where nom = ?" );
+			pst.setString(1, e.getNom());
+			pst.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return -1; 
+		}
+		return 1;
+	}
 
-
+	public static Ecurie getEcurieFromNom(Connection connex, String nom) {
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Ecurie e = null;
+		try {
+			pst = connex.prepareStatement("Select nom from LMN3783A.sae_ecurie where nom = ?");
+			pst.setString(1, nom);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Ecurie(rs.getString(1));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getString(1));
+			}
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+		return e;
+	}
 
 	public static List<Ecurie> getEcurieFromNomAll(Connection connex, String nom) {
 		PreparedStatement pst = null;
