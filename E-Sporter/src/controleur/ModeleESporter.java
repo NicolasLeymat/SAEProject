@@ -33,7 +33,7 @@ public class ModeleESporter {
 	}
 	
 	public static List<Ecurie> getAllEcurie(){
-		return Ecurie.getEcurieFromNomAll(connx, "");
+		return Ecurie.getAllEcuries(connx);
 	}
 
 	public void setLastRecherche(List<Ecurie> lec, List<Equipe> leq) {

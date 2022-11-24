@@ -108,7 +108,7 @@ public class Equipe {
 		return 1;
 	}
 	
-	public static int modifierEquipe(Connection connex, Equipe e, String newName, int nbJoueur, int points, String nomEcurie, int idJeu) {
+	public static int modifierEquipe(Connection connex, Equipe e, int nbJoueur, int points, String nomEcurie, int idJeu) {
 		PreparedStatement pst;
 		try {
 			
@@ -121,13 +121,12 @@ public class Equipe {
 			}
 			
 			pst = connex
-					.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, points = ?, nom_ecurie = ?, id_jeu = ? where nom = ?" );
-			pst.setString(1, newName);
-			pst.setInt(2, nbJoueur);
-			pst.setInt(3, points);
-			pst.setString(4, nomEcurie);
-			pst.setInt(5, idJeu);
-			pst.setString(6, e.getNom());
+					.prepareStatement("update LMN3783A.sae_equipe set nombrejoueur = ?, points = ?, nom_ecurie = ?, id_jeu = ? where nom = ?" );
+			pst.setInt(1, nbJoueur);
+			pst.setInt(2, points);
+			pst.setString(3, nomEcurie);
+			pst.setInt(4, idJeu);
+			pst.setString(5, e.getNom());
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

@@ -33,14 +33,14 @@ public class TestSQL {
 	public void testModifierEquipe() throws Exception {
 		Equipe e = new Equipe("Faz CSGO", 0, "Faze Clan", 6);
 		Equipe.enregistrerEquipe(Connexion.connexion(), e);
-		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, "Faz CSGO", 5, 12, "Faze Clan", 6),1);
+		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, 5, 12, "Faze Clan", 6),1);
 	}
 	
 	// Essaie de modifier une equipe qui n'existe pas dans l'application
 	@Test
 	public void testModifierEquipeNonExistante() throws Exception {
 		Equipe e = new Equipe("Foune CSGO", 0, "Faze Clan", 6);
-		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, "Faz CSGO", 5, 12, "Faze Clan", 6),-1);
+		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, 5, 12, "Faze Clan", 6),-1);
 	}
 	
 	// Supprime une equipe de l'application
