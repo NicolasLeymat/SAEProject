@@ -14,13 +14,13 @@ import Object.*;
 public class TestAppTournois {
     private Tournoi t;
     private Jeu j;
-    private Ecurie e;
+    //private Ecurie e;
 
     @Before
     public void setUP () throws Exception {
         this.j = new Jeu ("Rocket League");
         this.t = new Tournoi("Mondial Rocket League 2023",Date.valueOf("2023-07-14"),3,j);
-        this.e = new Ecurie("Faze RL");
+        //this.e = new Ecurie("Faze RL");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestAppTournois {
 
     @Test
     public void testAjouterEquipe () throws Exception {
-        Ecurie faze =  new Ecurie("Faze Clan");
+        //Ecurie faze =  new Ecurie("Faze Clan");
         Equipe fazerl = new Equipe("fazerl",12,"",5);
         t.addEquipe(fazerl);
         assertEquals(fazerl,t.getEquipeTournoi(0));

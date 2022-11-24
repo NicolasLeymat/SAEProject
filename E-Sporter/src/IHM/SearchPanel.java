@@ -5,28 +5,16 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.event.CaretListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
-import java.awt.CardLayout;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
 
 public class SearchPanel extends JPanel{
 	private JTextField searchField;
 	
 	public SearchPanel() {
-		ImageIcon icon = new ImageIcon("./src/IHM/search.png");
 		this.setVisible(true);
 		this.setSize(1200, 100);
 		GridBagLayout gridBagLayout = new GridBagLayout();

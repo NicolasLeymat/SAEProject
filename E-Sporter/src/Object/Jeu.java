@@ -65,7 +65,6 @@ public class Jeu {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			// TODO Auto-generated method stub
 			return 0;
 		}
 	
@@ -97,7 +96,6 @@ public class Jeu {
                 jeu = new Jeu(rs.getString("n"));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return jeu;

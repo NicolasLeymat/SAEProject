@@ -20,15 +20,16 @@ public class TestSQL {
 		
 		//Equipe.enregistrerEquipe(Connexion.connexion(), new Equipe("Vitality A", 0, 0, 1));
 		
-		Ecurie e = Ecurie.getEcurieFromNom(Connexion.connexion(), "Faze Clan").get(0);
+		Ecurie e = Ecurie.getEcurieFromNomAll(Connexion.connexion(), "Faze Clan").get(0);
 		System.out.println(e);
 		
 		 //Ecurie.enregistrerEcurie(Connexion.connexion(), new Ecurie("Astralis"));
 		
 		int id = Jeu.getId(Connexion.connexion(), new Jeu("Valorant"));
 		System.out.println(id);
-		Ecurie e1 = Ecurie.getEcurieFromNom(Connexion.connexion(), "Faze Clan").get(0);
-		System.out.println(Equipe.getEquipeFromNom(Connexion.connexion(),"Faze CSGO"));
+		//Ecurie e1 = null;
+		//e1 = Ecurie.getEcurieFromNomAll(Connexion.connexion(), "Faze Clan").get(0);
+		System.out.println(Equipe.getEquipeFromNomAll(Connexion.connexion(),"Faze CSGO"));
 	}
 	
 

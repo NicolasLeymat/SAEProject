@@ -12,11 +12,11 @@ public class ModeleESporter {
 
 	public static List<Equipe> resultatRechercheEquipes;
 	public static List<Ecurie> resultatRechercheEcuries;
-	private Connection connx;
+	private static Connection connx;
 	
 	public ModeleESporter() {
-		this.resultatRechercheEcuries = new LinkedList<>();
-		this.resultatRechercheEquipes = new LinkedList<>();
+		resultatRechercheEcuries = new LinkedList<>();
+		resultatRechercheEquipes = new LinkedList<>();
 		connx = Connexion.connexion();
 	}
 	
@@ -28,8 +28,16 @@ public class ModeleESporter {
 		return Ecurie.getEcurieFromNomAll(connx, prompt);
 	}
 	
+	public static List<Equipe> getAllEquipe(){
+		return Equipe.getAllEquipes(connx);
+	}
+	
+	public static List<Ecurie> getAllEcurie(){
+		return Ecurie.getEcurieFromNomAll(connx, "");
+	}
+
 	public void setLastRecherche(List<Ecurie> lec, List<Equipe> leq) {
-		this.resultatRechercheEcuries = lec;
-		this.resultatRechercheEquipes=  leq;	
+		resultatRechercheEcuries = lec;
+		resultatRechercheEquipes=  leq;	
 	}
 }

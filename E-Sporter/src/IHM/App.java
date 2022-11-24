@@ -12,7 +12,10 @@ public class App extends JFrame{
 	public App() {
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-		this.add(new VuePrincipale());
+		getContentPane().setLayout(null);
+		VuePrincipale vuePrincipale = new VuePrincipale();
+		vuePrincipale.setBounds(0, 0, 1186, 588);
+		getContentPane().add(vuePrincipale);
 	}
 	
 }

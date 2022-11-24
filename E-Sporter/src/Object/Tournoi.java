@@ -50,7 +50,6 @@ public class Tournoi {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
