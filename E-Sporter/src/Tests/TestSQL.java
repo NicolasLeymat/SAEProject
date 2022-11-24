@@ -11,7 +11,7 @@ import Object.*;
 
 public class TestSQL {
 
-	/////////////////////////////////////////////////TEST ECURIE//////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////TEST EQUIPE//////////////////////////////////////////////////////////
 	
 	// Enregistre une equipe dans l'application
 	@Test
@@ -62,14 +62,14 @@ public class TestSQL {
 	@Test
 	public void testGetAllEquipes() throws Exception {
 		List<Equipe> liste = Equipe.getAllEquipes(Connexion.connexion());
-		assertEquals(liste.get(0).getNom(), "Cloud9 Fortnite");
-		assertEquals(liste.get(1).getNom(), "Team Liquid Apex Legends");
-		assertEquals(liste.get(2).getNom(), "SK Telecom League of Legends");
-		assertEquals(liste.get(3).getNom(), "Fnatic Counter-Strike: Global Offensive");
-		assertEquals(liste.get(4).getNom(), "Vitality Valorant");
-		assertEquals(liste.get(5).getNom(), "Faze CSGO");
-		assertEquals(liste.get(6).getNom(), "Atlanta Faze");
-		assertEquals(liste.get(7).getNom(), "Faze Fortnite");
+		assertEquals(liste.get(0).getNom(), "Atlanta Faze");
+		assertEquals(liste.get(1).getNom(), "Cloud9 Fortnite");
+		assertEquals(liste.get(2).getNom(), "Faze CSGO");
+		assertEquals(liste.get(3).getNom(), "Faze Fortnite");
+		assertEquals(liste.get(4).getNom(), "Fnatic Counter-Strike: Global Offensive");
+		assertEquals(liste.get(5).getNom(), "SK Telecom League of Legends");
+		assertEquals(liste.get(6).getNom(), "Team Liquid Apex Legends");
+		assertEquals(liste.get(7).getNom(), "Vitality Valorant");
 	}
 
 	//Recupere toutes les equipes dont le nom commence par la parametre
@@ -96,7 +96,7 @@ public class TestSQL {
 		assertEquals(liste.get(2).getNom(), "Faze Fortnite");
 	}
 	
-	/////////////////////////////////////////////////TEST EQUIPE//////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////TEST ECURIE//////////////////////////////////////////////////////////
 
 	// Enregistre une ecurie dans l'application
 	@Test
@@ -126,6 +126,19 @@ public class TestSQL {
 		List<Ecurie> liste = Ecurie.getEcurieFromNomAll(Connexion.connexion(),"F");
 		assertEquals(liste.get(0).getNom(), "Faze Clan");
 		assertEquals(liste.get(1).getNom(), "Fnatic");
+	}
+	
+	@Test
+	public void testGetAllEcuries() throws Exception {
+		List<Ecurie> liste = Ecurie.getAllEcuries(Connexion.connexion());
+		assertEquals(liste.get(0).getNom(), "Atlanta Reign");
+		assertEquals(liste.get(1).getNom(), "Cloud9");
+		assertEquals(liste.get(2).getNom(), "Faze Clan");
+		assertEquals(liste.get(3).getNom(), "Fnatic");
+		assertEquals(liste.get(4).getNom(), "Paris Eternal");
+		assertEquals(liste.get(5).getNom(), "SK Telecom");
+		assertEquals(liste.get(6).getNom(), "Team Liquid");
+		assertEquals(liste.get(7).getNom(), "Vitality");
 	}
 	
 }

@@ -26,6 +26,10 @@ public class Ecurie {
 	public String getNom() {
 		return nom;
 	}
+	
+	public List<Equipe> getEquipes(){
+		return this.listeEquipes;
+	}
 
 	// Fonction qui permet de changer le nom d'une écurie
 	public void setNom(String nom) {
@@ -152,9 +156,10 @@ public class Ecurie {
 		Ecurie e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select nom from LMN3783A.sae_ecurie");
+			rs = st.executeQuery("Select nom from LMN3783A.sae_ecurie order by nom");
 			while (rs.next()) {
 				e = new Ecurie(rs.getString(1));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, e.getNom());
 				ecuries.add(e);
 			}
 			return ecuries;

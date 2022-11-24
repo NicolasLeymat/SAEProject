@@ -49,6 +49,10 @@ public class Equipe {
 	public Jeu getJeu(Connection connex) {
 		return Jeu.getJeuFromId(connex, id_jeu);
 	}
+	
+	public List<Joueur> getJoueurs(){
+		return this.listeJoueurs;
+	}
 
 
 	//Fonction qui permet de changer le nom du jeu auquel une équipe joue
@@ -164,9 +168,10 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe");
+			rs = st.executeQuery("Select nom, points, nom_ecurie, id_jeu from LMN3783A.sae_equipe order by nom");
 			while (rs.next()) {
 				e = new Equipe(rs.getString(1),rs.getInt(2),rs.getString(3), rs.getInt(4));
+				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, e.getNom());
 				equipes.add(e);
 			}
 			return equipes;
