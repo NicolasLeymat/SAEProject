@@ -97,6 +97,8 @@ public class Joueur {
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
+			rs.close();
+			st.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
@@ -119,6 +121,8 @@ public class Joueur {
 			if (!rs.next()) {
 				throw new IllegalArgumentException();
 			}
+			rs.close();
+			pst.close();
 			return rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,6 +154,8 @@ public class Joueur {
 			pst.setString(6,joueur.getNationalite());
 			pst.setString(7,joueur.nomEquipe);
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			return -1;
@@ -187,6 +193,8 @@ public class Joueur {
 			j.setDateDeNaissance(newDate);
 			j.setNationalite(newNat);
 			j.setEquipe(newNomEquipe);
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -212,6 +220,8 @@ public class Joueur {
 			pst.setString(2, j.getPrenom());
 			pst.setString(3, j.getPseudo());
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			return -1; 
@@ -232,6 +242,8 @@ public class Joueur {
 				e = new Joueur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), Nationalite.valueOf(rs.getString(5).toUpperCase()), rs.getString(6));
 				r.add(e);
 			}
+			rs.close();
+			pst.close();
 		} catch (Exception ee) {
 			ee.printStackTrace();
 		}

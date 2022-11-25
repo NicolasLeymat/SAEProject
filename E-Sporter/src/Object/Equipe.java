@@ -105,6 +105,8 @@ public class Equipe {
 			pst.setString(4,equipe.getNomEcurie());
 			pst.setInt(5,equipe.getIdJeu());
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			return -1;
@@ -132,6 +134,8 @@ public class Equipe {
 			pst.setInt(4, idJeu);
 			pst.setString(5, e.getNom());
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -154,6 +158,8 @@ public class Equipe {
 			pst = connex.prepareStatement("delete from LMN3783A.sae_equipe where nom = ?" );
 			pst.setString(1, e.getNom());
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			return -1; 
@@ -174,6 +180,8 @@ public class Equipe {
 				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, e.getNom());
 				equipes.add(e);
 			}
+			rs.close();
+			st.close();
 			return equipes;
 		} catch (SQLException ee) {
 			ee.printStackTrace();
@@ -214,6 +222,8 @@ public class Equipe {
 				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, e.getNom());
 				r.add(e);
 			}
+			rs.close();
+			pst.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
@@ -234,6 +244,8 @@ public class Equipe {
 				e.listeJoueurs = Joueur.getJoueursFromEquipe(connex, e.getNom());
 				l.add(e);
 			}
+			rs.close();
+			pst.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}

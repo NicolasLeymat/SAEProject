@@ -104,6 +104,8 @@ public class Ecurie {
 			pst = connex.prepareStatement("delete from LMN3783A.sae_ecurie where nom = ?" );
 			pst.setString(1, e.getNom());
 			pst.executeUpdate();
+			rs.close();
+			pst.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			return -1; 
@@ -123,6 +125,8 @@ public class Ecurie {
 				e = new Ecurie(rs.getString(1));
 				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getString(1));
 			}
+			rs.close();
+			pst.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
@@ -143,6 +147,8 @@ public class Ecurie {
 				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, rs.getString(1));
 				l.add(e);
 			}
+			rs.close();
+			pst.close();
 		} catch (SQLException ee) {
 			ee.printStackTrace();
 		}
@@ -162,6 +168,8 @@ public class Ecurie {
 				e.listeEquipes = Equipe.getEquipesFromEcurie(connex, e.getNom());
 				ecuries.add(e);
 			}
+			rs.close();
+			st.close();
 			return ecuries;
 		} catch (SQLException ee) {
 			ee.printStackTrace();
