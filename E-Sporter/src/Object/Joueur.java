@@ -52,6 +52,10 @@ public class Joueur {
 	public void setNationalite(Nationalite nationalite) {
 		this.nationalite = nationalite;
 	}
+	
+	public void setDateDeNaissance(Date d) {
+		this.dateNaissance = d;
+	}
 
 	//Fonction qui permet de récuperer le prénom d'un joueur
 	public String getPrenom() {
@@ -177,6 +181,12 @@ public class Joueur {
 			pst.setString(6, newNomEquipe);
 			pst.setInt(7, getId(connex,j));
 			pst.executeUpdate();
+			j.setPrenom(newPrenom);
+			j.setNom(newNom);
+			j.setPseudo(newPseudo);
+			j.setDateDeNaissance(newDate);
+			j.setNationalite(newNat);
+			j.setEquipe(newNomEquipe);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

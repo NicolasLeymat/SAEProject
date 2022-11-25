@@ -166,7 +166,7 @@ public class TestSQL {
 			Joueur j = new Joueur("Veslin", "Lucas", "Saren", Date.valueOf("2003-07-21"), Nationalite.FR, "Faze CSGO");
 			Joueur.enregistrerJoueur(Connexion.connexion(), j);
 			assertEquals(Joueur.modifierJoueur(Connexion.connexion(), j, "Pascal", "Fernandez", "xXxPasFerxXx", Date.valueOf("1987-12-12"),Nationalite.FR, "Faze CSGO"),1);
-			Joueur.supprimerJoueur(Connexion.connexion(), j);
+			assertEquals(Joueur.supprimerJoueur(Connexion.connexion(), j),1);
 		}
 		
 		// Essaie de modifier un joueur qui n'existe pas dans l'application
