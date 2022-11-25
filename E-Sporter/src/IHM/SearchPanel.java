@@ -38,7 +38,7 @@ public class SearchPanel extends JPanel{
 		searchField.setHorizontalAlignment(SwingConstants.LEFT);
 		searchField.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		searchField.setColumns(50);
-		searchField.setToolTipText("Rechercer");
+		searchField.setToolTipText("Rechercher");
 		GridBagConstraints gbc_searchField = new GridBagConstraints();
 		gbc_searchField.insets = new Insets(0, 0, 0, 5);
 		gbc_searchField.fill = GridBagConstraints.BOTH;
