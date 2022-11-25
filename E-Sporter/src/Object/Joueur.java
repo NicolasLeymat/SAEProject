@@ -121,9 +121,10 @@ public class Joueur {
 			if (!rs.next()) {
 				throw new IllegalArgumentException();
 			}
+			int res = rs.getInt(1);
 			rs.close();
 			pst.close();
-			return rs.getInt(1);
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
