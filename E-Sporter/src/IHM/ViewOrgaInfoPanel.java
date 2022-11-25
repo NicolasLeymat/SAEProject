@@ -53,7 +53,7 @@ public class ViewOrgaInfoPanel extends JPanel{
 		lblNewLabel_1.setBounds(0, 10, 145, 17);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel nomEcurie = new JLabel("");
+		JLabel nomEcurie = new JLabel(e.getNom());
 		nomEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		nomEcurie.setBounds(0, 35, 145, 13);
 		panel_1.add(nomEcurie);
