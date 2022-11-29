@@ -114,7 +114,7 @@ public class Equipe {
 		return 1;
 	}
 	
-	public static int modifierEquipe(Connection connex, Equipe e, int nbJoueur, int points, String nomEcurie, int idJeu) {
+	public static int modifierEquipe(Connection connex, Equipe e, Equipe eNew) {
 		PreparedStatement pst;
 		try {
 			
@@ -126,13 +126,13 @@ public class Equipe {
 				return -1;
 			}
 			
-			pst = connex
-					.prepareStatement("update LMN3783A.sae_equipe set nombrejoueur = ?, points = ?, nom_ecurie = ?, id_jeu = ? where nom = ?" );
-			pst.setInt(1, nbJoueur);
-			pst.setInt(2, points);
-			pst.setString(3, nomEcurie);
-			pst.setInt(4, idJeu);
-			pst.setString(5, e.getNom());
+			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ? nombrejoueur = ?, points = ?, nom_ecurie = ?, id_jeu = ? where nom = ?" );
+			pst.setString(1, eNew.getNom());
+			pst.setInt(2, eNew.getJoueurs().size());
+			pst.setInt(3, eNew.points);
+			pst.setString(4, eNew.nomEcurie);
+			pst.setInt(5, eNew.getIdJeu());
+			pst.setString(6, e.getNom());
 			pst.executeUpdate();
 			rs.close();
 			pst.close();
