@@ -18,6 +18,8 @@ public class Phase {
 	public Phase(boolean elim, Tournoi tournoi) {
 		this.elim = elim;
 		this.tournoi = tournoi;
+		this.matchs = new ArrayList<>();
+		this.poules = new ArrayList<>();
 	}
 
 	public void genererPoules() throws Exception {

@@ -107,7 +107,6 @@ public class Match {
 				"equipe1=" + equipe1 +
 				", equipe2=" + equipe2 +
 				", winner=" + winner +
-				", phase=" + phase +
 				", id=" + id +
 				", date=" + date +
 				'}';
