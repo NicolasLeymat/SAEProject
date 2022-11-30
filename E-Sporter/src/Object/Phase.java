@@ -18,8 +18,6 @@ public class Phase {
 	public Phase(boolean elim, Tournoi tournoi) {
 		this.elim = elim;
 		this.tournoi = tournoi;
-		this.matchs = new ArrayList<>();
-		this.poules = new ArrayList<List<Equipe>>();
 	}
 
 	public void genererPoules() throws Exception {
@@ -59,7 +57,7 @@ public class Phase {
 			for (int j = 0; j < 4; j++) {
 				Equipe equipe1 = poules.get(j).get(paires.get(j).get(i)[0]);
 				Equipe equipe2 = poules.get(j).get(paires.get(j).get(i)[1]);
-				Match match = new Match((Date) calendar.getTime(),equipe1,equipe2,this);
+				Match match = new Match(new Date(calendar.getTime().getTime()),equipe1,equipe2,this);
 				matchs.add(match);
 			}
 		}
