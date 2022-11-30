@@ -28,7 +28,7 @@ public class Phase {
 		Collections.shuffle(tournoi.getListeEquipe());
 		for (int i = 0; i < 4; i++) {
 			poules.add(new ArrayList<Equipe>());
-			for (int j =0; j<4;j++) {
+			for (int j =0;  j<4;j++) {
 				poules.get(i).add(listEquipe.get(i*4+j));
 			}
 		}
