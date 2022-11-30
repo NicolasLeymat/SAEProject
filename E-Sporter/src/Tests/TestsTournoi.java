@@ -30,6 +30,6 @@ public class TestsTournoi {
     @Test
     public void testGenererMatchsPhaseGroupe () throws Exception {
         tournoi.getPhasePoule().genererPoules();
-        tournoi.getPhasePoule().toString();
+		System.out.println( tournoi.getPhasePoule().toString());
     }
 }

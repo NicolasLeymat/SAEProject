@@ -104,11 +104,11 @@ public class Match {
 	@Override
 	public String toString() {
 		return "Match{" +
-				"equipe1=" + equipe1 +
-				", equipe2=" + equipe2 +
+				"equipe1=" + equipe1.getNom() +
+				", equipe2=" + equipe2.getNom() +
 				", winner=" + winner +
 				", id=" + id +
 				", date=" + date +
-				'}';
+				"}\n";
 	}
 }
