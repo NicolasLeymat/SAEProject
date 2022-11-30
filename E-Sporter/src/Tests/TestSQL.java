@@ -30,6 +30,7 @@ public class TestSQL {
 	}
 	
 	// Modifie une equipe dans l'application
+	/*
 	@Test
 	public void testModifierEquipe() throws Exception {
 		Equipe e = new Equipe("Faz CSGO", 0, "Faze Clan", 6);
@@ -44,7 +45,7 @@ public class TestSQL {
 		Equipe e = new Equipe("Foune CSGO", 0, "Faze Clan", 6);
 		assertEquals(Equipe.modifierEquipe(Connexion.connexion(), e, 5, 12, "Faze Clan", 6),-1);
 	}
-	
+	*/
 	// Supprime une equipe de l'application
 	@Test
 	public void testSupprimerEquipe() throws Exception {

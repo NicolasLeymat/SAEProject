@@ -73,6 +73,10 @@ public class Tournoi {
 		return null;
 	}
 
+	public Phase getPhasePoule() {
+		return phasePoule;
+	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
@@ -132,5 +136,17 @@ public class Tournoi {
 	public Equipe getEquipeTournoi(int i) {
 		return this.listeEquipe.get(i);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Tournoi{" +
+				"nom='" + nom + '\'' +
+				", dateTournoi=" + dateTournoi +
+				", notoriete=" + notoriete +
+				", jeu=" + jeu +
+				", listeEquipe=" + listeEquipe +
+				", phasePoule=" + phasePoule +
+				", phaseElim=" + phaseElim +
+				'}';
+	}
 }

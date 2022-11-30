@@ -1,6 +1,8 @@
 package Object;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Phase {
 		this.tournoi = tournoi;
 	}
 
-	private void genererPoules() throws Exception {
+	public void genererPoules() throws Exception {
 		List<Equipe> listEquipe = tournoi.getListeEquipe();
 		if(isElim() && listEquipe.size()< 16) {
 			throw  new Exception("Pas assez d'equipes");
@@ -30,10 +32,35 @@ public class Phase {
 				poules.get(i).add(listEquipe.get(i*4+j));
 			}
 		}
+		this.genererMatchs();
 	}
 
-	public void genererMatchs() {
-		
+	private void genererMatchs() {
+		Calendar calendar = Calendar.getInstance();
+		tournoi.getDateTournoi();
+		calendar.setTime(tournoi.getDateTournoi());
+		calendar.add(Calendar.DATE,-1);
+		List<List<Integer[]>> paires = new ArrayList<List<Integer[]>>();
+		for (int i = 0; i < 4; i++) {
+			Collections.shuffle(poules.get(i));
+			List<Integer[]>paire = new ArrayList<Integer[]>();
+			paires.add(paire);
+			for (int j = 0; j < 3; j++) {
+				for (int k = j+1; k <4 ; k++) {
+					paire.add(new Integer[] {j,k} );
+				}
+			}
+			Collections.shuffle(paire);
+		}
+		for (int i = 0; i <6; i++) {
+			calendar.add(Calendar.DATE,1);
+			for (int j = 0; j < 4; j++) {
+				Equipe equipe1 = poules.get(j).get(paires.get(j).get(i)[0]);
+				Equipe equipe2 = poules.get(j).get(paires.get(j).get(i)[1]);
+				Match match = new Match((Date) calendar.getTime(),equipe1,equipe2,this);
+				matchs.add(match);
+			}
+		}
 	}
 
 
@@ -51,4 +78,12 @@ public class Phase {
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "Phase{" +
+				"elim=" + elim +
+				", matchs=" + matchs +
+				", poules=" + poules +
+				'}';
+	}
 }

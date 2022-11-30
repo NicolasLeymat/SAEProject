@@ -7,6 +7,7 @@ import java.sql.*;
 public class Match {
 	private Equipe equipe1;
 	private Equipe equipe2;
+	private Equipe winner;
 	private Phase phase;
 	private int id;
 	private Date date;
@@ -16,6 +17,7 @@ public class Match {
 		this.equipe1 = equipe1;
 		this.equipe2 = equipe2;
 		this.phase = phase;
+		this.winner = null;
 	}
 
 	public Phase getPhase() {
@@ -33,6 +35,12 @@ public class Match {
 	public void setWinner(int num) throws IllegalArgumentException {
 		if (num < 1 || num > 2) {
 			throw new IllegalArgumentException();
+		}
+		if (num == 1 ) {
+			winner = equipe1;
+		}
+		else {
+			winner = equipe2;
 		}
 	}
 
@@ -93,4 +101,15 @@ public class Match {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Match{" +
+				"equipe1=" + equipe1 +
+				", equipe2=" + equipe2 +
+				", winner=" + winner +
+				", phase=" + phase +
+				", id=" + id +
+				", date=" + date +
+				'}';
+	}
 }
