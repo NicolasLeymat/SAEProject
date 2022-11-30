@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 //Classe qui définit les fonctions d'un tournoi
 public class Tournoi {
@@ -16,7 +17,9 @@ public class Tournoi {
 	private Date dateTournoi;
 	private int notoriete;
 	private Jeu jeu;
-	private ArrayList<Equipe> listeEquipe;
+	private List<Equipe> listeEquipe;
+	private Phase phasePoule;
+	private Phase phaseElim;
 
 	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu) throws Exception {
@@ -24,9 +27,9 @@ public class Tournoi {
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
 		}
-		/**if (dateInvalide(dateTournoi)) {
+		if (dateInvalide(dateTournoi)) {
 			throw new Exception();
-		}*/
+		}
 		
 		this.nom = nom;
 		this.dateTournoi = dateTournoi;
@@ -34,6 +37,8 @@ public class Tournoi {
 		this.notoriete = notoriete;
 		this.jeu = jeu;
 		this.listeEquipe = new ArrayList<Equipe>();
+		this.phaseElim = new Phase(true,this);
+		this.phasePoule = new Phase(false, this);
 	}
 	
 	//Fonction qui permet de récuperer le nombre de joueurs d'un Tournoi
@@ -112,6 +117,10 @@ public class Tournoi {
 		boolean res = date.before(today);
 		return res;
 		
+	}
+
+	public List<Equipe> getListeEquipe() {
+		return listeEquipe;
 	}
 
 	//Fonction qui permet de récuperer le jeu du tournoi
