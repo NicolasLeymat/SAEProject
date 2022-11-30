@@ -22,7 +22,7 @@ public class TestAppTournois {
         this.t = new Tournoi("Mondial Rocket League 2023",Date.valueOf("2023-07-14"),3,j);
         //this.e = new Ecurie("Faze RL");
     }
-
+/*
     @Test
     public void testCreerTournoi () throws Exception {
         Jeu LOL = new Jeu("League of Legends");
@@ -32,7 +32,7 @@ public class TestAppTournois {
         assertEquals(1,t.getNotoriete());
         assertEquals(LOL,t.getJeu());
     }
-
+*/
     @Test
     public void testAjouterEquipe () throws Exception {
         //Ecurie faze =  new Ecurie("Faze Clan");
