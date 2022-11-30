@@ -182,4 +182,9 @@ public class Ecurie {
 		return "Ecurie [nom=" + nom + ", listeEquipes=" + listeEquipes + "]";
 	}
 
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

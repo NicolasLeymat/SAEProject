@@ -126,11 +126,11 @@ public class Equipe {
 				return -1;
 			}
 			
-			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ? nombrejoueur = ?, points = ?, nom_ecurie = ?, id_jeu = ? where nom = ?" );
+			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, nom_ecurie = ? where nom = ?" );
 			pst.setString(1, eNew.getNom());
 			pst.setInt(2, eNew.getJoueurs().size());
 			pst.setInt(3, eNew.points);
-			pst.setString(4, eNew.nomEcurie);
+			pst.setInt(4, eNew.getEcurie(connex).getId());
 			pst.setInt(5, eNew.getIdJeu());
 			pst.setString(6, e.getNom());
 			pst.executeUpdate();
