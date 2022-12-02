@@ -19,8 +19,8 @@ public class Tournoi {
 	private Jeu jeu;
 	private int id_Mode;
 	private List<Equipe> listeEquipe;
-	private Phase phasePoule;
-	private Phase phaseElim;
+	private PhaseDePoule phasePoule;
+	private PhaseDePoule phaseElim;
 
 	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu, int id_Mode) throws Exception {
@@ -38,8 +38,8 @@ public class Tournoi {
 		this.notoriete = notoriete;
 		this.jeu = jeu;
 		this.listeEquipe = new ArrayList<Equipe>();
-		this.phaseElim = new Phase(true,this);
-		this.phasePoule = new Phase(false, this);
+		this.phaseElim = new PhaseDePoule(true,this);
+		this.phasePoule = new PhaseDePoule(false, this);
 		this.id_Mode = id_Mode;
 	}
 	
@@ -75,7 +75,7 @@ public class Tournoi {
 		return null;
 	}
 
-	public Phase getPhasePoule() {
+	public PhaseDePoule getPhasePoule() {
 		return phasePoule;
 	}
 

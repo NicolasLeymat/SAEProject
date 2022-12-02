@@ -19,7 +19,7 @@ public class TestAppTournois {
     @Before
     public void setUP () throws Exception {
         this.j = new Jeu ("Rocket League");
-        this.t = new Tournoi("Mondial Rocket League 2023",Date.valueOf("2023-07-14"),3,j);
+        //this.t = new Tournoi("Mondial Rocket League 2023",Date.valueOf("2023-07-14"),3,j);
         //this.e = new Ecurie("Faze RL");
     }
 /*
@@ -51,7 +51,7 @@ public class TestAppTournois {
 
     @Test (expected = Exception.class)
     public void testAjouterEquipeTropTard () throws Exception {
-        Tournoi t = new Tournoi("Vieux Tournoi",Date.valueOf("2015-12-12"),1,j);
+        //Tournoi t = new Tournoi("Vieux Tournoi",Date.valueOf("2015-12-12"),1,j);
         t.addEquipe(new Equipe("Equipe 1",25,"",1));
     }
     

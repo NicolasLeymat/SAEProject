@@ -8,11 +8,11 @@ public class Match {
 	private Equipe equipe1;
 	private Equipe equipe2;
 	private Equipe winner;
-	private Phase phase;
+	private PhaseDePoule phase;
 	private int id;
 	private Date date;
 
-	public Match(Date date, Equipe equipe1, Equipe equipe2, Phase phase) {
+	public Match(Date date, Equipe equipe1, Equipe equipe2, PhaseDePoule phase) {
 		this.setDate(date);
 		this.equipe1 = equipe1;
 		this.equipe2 = equipe2;
@@ -20,7 +20,7 @@ public class Match {
 		this.winner = null;
 	}
 
-	public Phase getPhase() {
+	public PhaseDePoule getPhase() {
 		return this.phase;
 	}
 
@@ -42,6 +42,10 @@ public class Match {
 		else {
 			winner = equipe2;
 		}
+	}
+
+	public Equipe getWinner() {
+		return winner;
 	}
 
 	public int getLastId() {
