@@ -17,12 +17,13 @@ public class Tournoi {
 	private Date dateTournoi;
 	private int notoriete;
 	private Jeu jeu;
+	private int id_Mode;
 	private List<Equipe> listeEquipe;
 	private Phase phasePoule;
 	private Phase phaseElim;
 
 	//Constructeur de la classe "Tournoi"
-	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu) throws Exception {
+	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu, int id_Mode) throws Exception {
 		
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
@@ -39,6 +40,7 @@ public class Tournoi {
 		this.listeEquipe = new ArrayList<Equipe>();
 		this.phaseElim = new Phase(true,this);
 		this.phasePoule = new Phase(false, this);
+		this.id_Mode = id_Mode;
 	}
 	
 	//Fonction qui permet de récuperer le nombre de joueurs d'un Tournoi

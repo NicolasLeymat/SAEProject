@@ -4,6 +4,9 @@ import org.junit.Before;
 import Object.*;
 import org.junit.Test;
 
+import Application.Connexion;
+
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,9 @@ public class TestsTournoi {
     @Before
     public void setUp() throws Exception {
         jeu = new Jeu("CSGO");
-        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,jeu);
+        Connection connx = Connexion.connexion();
+        int id_mode = ModeDeJeu.getModeDeJeu(connx, 0).getId_Mode();
+        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,jeu, 0);
 
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);
