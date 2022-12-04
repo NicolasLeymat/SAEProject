@@ -179,12 +179,17 @@ public class Ecurie {
 
 	@Override
 	public String toString() {
-		return "Ecurie [nom=" + nom + ", listeEquipes=" + listeEquipes + "]";
+		return nom + ", Nombre d'équipes posseder : " + this.listeEquipes.size();
 	}
 
 	public int getId() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public static void modifierEcurie(Connection connx, Ecurie ec) {
+		
+		
 	}
 
 }
