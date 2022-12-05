@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Application.Connexion;
+
 public class ModeDeJeu {
 	
 	private int id_Mode;
@@ -20,7 +22,8 @@ public class ModeDeJeu {
 	}
 	
 	
-	public static ModeDeJeu getModeDeJeu(Connection connx, int id) {
+	public static ModeDeJeu getModeDeJeu(int id) {
+		Connection connx = Connexion.connexion();
 		ModeDeJeu res = null;
 		PreparedStatement pst;
 		try {

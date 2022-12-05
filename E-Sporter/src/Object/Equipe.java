@@ -97,7 +97,7 @@ public class Equipe {
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
 	public Jeu getJeu(Connection connex) {
-		return Jeu.getJeuFromId(connex, idJeu);
+		return Jeu.getJeuFromId(idJeu);
 	}
 	
 	//Fonction qui permet d'ajouter un joueur à une équipe
@@ -328,32 +328,6 @@ public class Equipe {
 		return l;
 	}
 	
-	public static Equipe getEquipeFromNom(String nom) {
-		Connection connex = Connexion.connexion();
-
-		PreparedStatement pst = null;
-		ResultSet rs;
-		Equipe e = null;
-		
-		try {
-			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
-			pst.setString(1, nom);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
-				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return e;
-	}
-	
 	public static Equipe getEquipeFromId(int id) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -391,6 +365,32 @@ public class Equipe {
 		return e;
 	}
 	
+	public static Equipe getEquipeFromNom(String nom) {
+		Connection connex = Connexion.connexion();
+
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Equipe e = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
+			pst.setString(1, nom);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Equipe(rs.getString(2));
+				e.setId(rs.getInt(1));
+				e.setPoints(rs.getInt(3));
+				e.setIdEcurie(rs.getInt(4));
+				e.setIdJeu(rs.getInt(5));
+				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return e;
+	}
+	
 	public static int getLastId() {
 		Connection connex = Connexion.connexion();
 		Statement st;
@@ -408,7 +408,7 @@ public class Equipe {
 			st.close();
 			
 		} catch (Exception ee) {
-			ee.printStackTrace();
+			ee.printStackTrace(); 
 		}
 		return r;
 	}
@@ -446,7 +446,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom + ", points : " + points + ", Jeu=" + idJeu + ", ModeDeJeu=" + idModeDeJeu + ", listeJoueurs=" + listeJoueurs + "]";
+		return nom + ", points : " + points + ", Jeu : " + Jeu.getJeuFromId(this.idJeu).getNomJeu() + ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom();
 	}
 	
 }
