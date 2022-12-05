@@ -4,6 +4,7 @@ package Object;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,12 +105,7 @@ public class Joueur {
 
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
-			pst.setString(1, joueur.getNom());
-			pst.setString(2, joueur.getPrenom());
-			pst.setString(3, joueur.getPseudo());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceJoueur(connex, joueur);
 			if (rs.getInt(1) == 1) {
 				return -1;
 			}
@@ -180,12 +176,7 @@ public class Joueur {
 		ResultSet rs;
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
-			pst.setString(1, j.getNom());
-			pst.setString(2, j.getPrenom());
-			pst.setString(3, j.getPseudo());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceJoueur(connex, j);
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
@@ -264,10 +255,7 @@ public class Joueur {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceJoueurId(connex, id);
 			if (rs.getInt(1) == 0) {
 				return s;
 			}
@@ -285,6 +273,28 @@ public class Joueur {
 			ex.printStackTrace();
 		}
 		return s;
+	}
+    
+    private static ResultSet verifierPresenceJoueur(Connection connex, Joueur joueur) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+		pst.setString(1, joueur.getNom());
+		pst.setString(2, joueur.getPrenom());
+		pst.setString(3, joueur.getPseudo());
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
+	}
+    
+    private static ResultSet verifierPresenceJoueurId(Connection connex, int id) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
+		pst.setInt(1, id);
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
 	}
 
 	@Override

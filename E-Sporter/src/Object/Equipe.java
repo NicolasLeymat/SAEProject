@@ -24,7 +24,6 @@ public class Equipe {
 	private String nom;
 	private int points;
 	private int idEcurie;
-	private int idJeu;
 	private int idModeDeJeu;
 	private List<Joueur> listeJoueurs;
 
@@ -71,14 +70,6 @@ public class Equipe {
 		this.idEcurie = id;
 	}
 	
-	public int getIdJeu() {
-		return this.idJeu;
-	}
-	
-	public void setIdJeu(int id) {
-		this.idJeu = id;
-	}
-	
 	public int getIdModeDeJeu() {
 		return idModeDeJeu;
 	}
@@ -96,8 +87,8 @@ public class Equipe {
 	}
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
-	public Jeu getJeu() {
-		return Jeu.getJeuFromId( idJeu);
+	public ModeDeJeu getModeDeJeu() {
+		return ModeDeJeu.getModeDeJeu( idModeDeJeu);
 	}
 	
 	//Fonction qui permet d'ajouter un joueur à une équipe
@@ -122,13 +113,13 @@ public class Equipe {
 				equipe.setId(Equipe.getLastId()+1);
 			}
 			
-			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, nombrejoueur, points, id_ecurie, id_jeu) values(?,?,?,?,?,?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, nombrejoueur, points, id_ecurie, id_mode) values(?,?,?,?,?,?)");
 			pst.setInt(1, equipe.getId());
 			pst.setString(2, equipe.getNom());
 			pst.setInt(3, equipe.listeJoueurs.size());
 			pst.setInt(4, equipe.getPoints());
 			pst.setInt(5,equipe.getIdEcurie());
-			pst.setInt(6,equipe.getIdJeu());
+			pst.setInt(6,equipe.getIdModeDeJeu());
 			pst.executeUpdate();
 			
 			for (Joueur j : equipe.getJoueurs()) {
@@ -152,19 +143,16 @@ public class Equipe {
 		ResultSet rs;
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
-			pst.setInt(1, e.getId());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEquipeId(connex, e.getId());
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
 			
-			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, id_ecurie = ?, id_jeu = ? where id_equipe = ?" );
+			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, id_ecurie = ?, id_mode = ? where id_equipe = ?" );
 			pst.setString(1, e.getNom());
 			pst.setInt(2, e.getJoueurs().size());
 			pst.setInt(3, e.getIdEcurie());
-			pst.setInt(4, e.getIdJeu());
+			pst.setInt(4, e.getIdModeDeJeu());
 			pst.setInt(5, e.getId());
 			pst.executeUpdate();
 			
@@ -218,12 +206,7 @@ public class Equipe {
 			st = connex.createStatement();
 			rs = st.executeQuery("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe order by nom");
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
-				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+				e = createEquipeFromRs(rs);
 				equipes.add(e);
 			}
 			
@@ -245,7 +228,7 @@ public class Equipe {
 		
 		try {
 			
-			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_jeu from LMN3783A.sae_equipe where id_jeu = ? ORDER BY points");
+			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_jeu from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
 			ps.setInt(1,id_jeu);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -253,7 +236,7 @@ public class Equipe {
 				e.setId(rs.getInt(1));
 				e.setPoints(rs.getInt(3));
 				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
+				e.setIdModeDeJeu(rs.getInt(5));
 				equipes.add(e);
 			}
 		} catch (Exception ex) {
@@ -273,12 +256,7 @@ public class Equipe {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
-				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+				e = createEquipeFromRs(rs);
 				r.add(e);
 			}
 			
@@ -304,12 +282,7 @@ public class Equipe {
 			pst.setString(1, nom+"%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
-				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+				e = createEquipeFromRs(rs);
 				l.add(e);
 			}
 			
@@ -330,25 +303,16 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEquipeId(connex, id);
 			if (rs.getInt(1) == 0) {
 				return e;
 			}
 			
-			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_ecurie where id = ?");
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_ecurie where id_equipe = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			rs.next();
-			e = new Equipe(rs.getString(2));
-			e.setId(rs.getInt(1));
-			e.setNom(rs.getString(2));
-			e.setPoints(rs.getInt(3));
-			e.setIdEcurie(rs.getInt(4));
-			e.setIdJeu(rs.getInt(5));
-			e.listeJoueurs = Joueur.getJoueursFromEquipe(rs.getInt(1));
+			e = createEquipeFromRs(rs);
 			
 			rs.close();
 			pst.close();
@@ -372,12 +336,7 @@ public class Equipe {
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdJeu(rs.getInt(5));
-				e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+				e = createEquipeFromRs(rs);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -415,10 +374,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEquipeId(connex, id);
 			if (rs.getInt(1) == 0) {
 				return s;
 			}
@@ -447,10 +403,31 @@ public class Equipe {
 		rs.next();
 		return rs;
 	}
+	
+	private static ResultSet verifierPresenceEquipeId(Connection connex, int id) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
+		pst.setInt(1, id);
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
+	}
+	
+	private static Equipe createEquipeFromRs(ResultSet rs) throws SQLException {
+		Equipe e;
+		e = new Equipe(rs.getString(2));
+		e.setId(rs.getInt(1));
+		e.setPoints(rs.getInt(3));
+		e.setIdEcurie(rs.getInt(4));
+		e.setIdModeDeJeu(rs.getInt(5));
+		e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
+		return e;
+	}
 
 	@Override
 	public String toString() {
-		return nom + ", points : " + points + ", Jeu : " + Jeu.getJeuFromId(this.idJeu).getNomJeu() + ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom();
+		return nom + ", points : " + points + ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom();
 	}
 	
 }
