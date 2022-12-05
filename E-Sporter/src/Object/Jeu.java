@@ -91,7 +91,7 @@ public class Jeu {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = connx.prepareStatement("SELECT nom as n FROM LMN3783A where id_jeu = ?");
+            st = connx.prepareStatement("SELECT nom as n FROM LMN3783A.sae_Jeu where id_jeu = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             while (rs.next()) {

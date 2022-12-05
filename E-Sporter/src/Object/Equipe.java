@@ -204,7 +204,7 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe order by nom");
+			rs = st.executeQuery("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe order by nom");
 			while (rs.next()) {
 				e = createEquipeFromRs(rs);
 				equipes.add(e);
@@ -219,7 +219,7 @@ public class Equipe {
 		return equipes;
 	}
 
-	public static List<Equipe> getClassementByGame(int id_jeu) {
+	public static List<Equipe> getClassementByGame(int id_mode) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement ps;
 		ResultSet rs;
@@ -228,8 +228,8 @@ public class Equipe {
 		
 		try {
 			
-			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_jeu from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
-			ps.setInt(1,id_jeu);
+			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_mode from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
+			ps.setInt(1,id_mode);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				e = new Equipe(rs.getString(2));
@@ -252,7 +252,7 @@ public class Equipe {
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe where id_ecurie= ?");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_ecurie= ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -278,7 +278,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe where nom LIKE ?");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where nom LIKE ?");
 			pst.setString(1, nom+"%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -308,7 +308,7 @@ public class Equipe {
 				return e;
 			}
 			
-			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_ecurie where id_equipe = ?");
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_ecurie where id_equipe = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			rs.next();
@@ -332,7 +332,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_equipe where nom = ?");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where nom = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -427,7 +427,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom + ", points : " + points /*+ ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom()*/;
+		return nom + ", points : " + points + ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom();
 	}
 	
 }

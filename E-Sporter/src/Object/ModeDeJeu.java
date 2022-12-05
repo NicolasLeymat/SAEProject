@@ -27,11 +27,13 @@ public class ModeDeJeu {
 		ModeDeJeu res = null;
 		PreparedStatement pst;
 		try {
-			pst = connx.prepareStatement("Select * from SAE_MODE_DE_JEU where id_Mode = ?");
-			pst.setInt(0, id);
+			System.out.println("Coucou");
+			pst = connx.prepareStatement("Select id_mode, nom, nb_joueur, id_jeu from LMN3783A.SAE_MODE_DE_JEU where id_Mode = ?");
+			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
-				res = new ModeDeJeu(rs.getInt(0), rs.getString(1), rs.getInt(2),Jeu.getJeuFromId(rs.getInt(3)));
+				res = new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4)));
+				
 			}
 		}catch (SQLException e) {
 			e.getStackTrace();
@@ -79,6 +81,14 @@ public class ModeDeJeu {
 	public void setJeu(Jeu jeu) {
 		this.jeu = jeu;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ModeDeJeu [id_Mode=" + id_Mode + ", nom=" + nom + ", nbMinJoueur=" + nbMinJoueur + ", jeu=" + jeu + "]";
+	}
+	
+	
 	
 	
 }
