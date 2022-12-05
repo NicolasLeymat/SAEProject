@@ -13,8 +13,8 @@ public class PhaseFinale extends Phase{
     private boolean finale;
 
 
-    public PhaseFinale(PhaseDePoule phaseDePoule) {
-        super();
+    public PhaseFinale(Tournoi tournoi,PhaseDePoule phaseDePoule) {
+        super(tournoi);
         datephasefinale = Calendar.getInstance();
         datephasefinale.setTime(getTournoi().getDateTournoi());
         datephasefinale.add(Calendar.DATE,6);
@@ -31,18 +31,19 @@ public class PhaseFinale extends Phase{
             for (int i = 0; i < 2; i++) {
                 datephasefinale.add(Calendar.DATE,1);
                 for (int j = 0; j < 2; j++) {
-                    matchsAJouer.add(new Match(new Date(datephasefinale.getTime().getTime()),phaseDePoule.getPremier(j+2*i),phaseDePoule.getDeuxième(4-j-2*i),this));
+                    matchsAJouer.add(new Match(new Date(datephasefinale.getTime().getTime()),phaseDePoule.getPremier(j+2*i),phaseDePoule.getDeuxième(3-j-2*i),this));
                 }
             }
             getMatchs().addAll(matchsAJouer);
         }
         else {
             if (matchsFinis() && !finale) {
-                getMatchs().addAll(matchsAJouer);
                 List<Match> nouveauxMatchs = new ArrayList<>();
                 int size = matchsAJouer.size();
+                System.out.println("match a jouer "+size);
                 // si il reste deux matchs génère la petite finale
                 if (size ==2) {
+                    System.out.println("pf");
                     datephasefinale.add(Calendar.DATE,1);
                     nouveauxMatchs.add(new Match(new Date (datephasefinale.getTime().getTime()),matchsAJouer.get(0).getLoser(),matchsAJouer.get(1).getLoser(),this));
                     finale = true;
@@ -54,6 +55,10 @@ public class PhaseFinale extends Phase{
                 }
                 matchsAJouer.clear();
                 matchsAJouer.addAll(nouveauxMatchs);
+                getMatchs().addAll(matchsAJouer);
+            }
+            else {
+                System.out.println(""+matchsFinis()+finale);
             }
         }
     }
@@ -66,6 +71,10 @@ public class PhaseFinale extends Phase{
             }
         }
         return true;
+    }
+
+    public List<Match> getMatchsAJouer() {
+        return matchsAJouer;
     }
 
     @Override

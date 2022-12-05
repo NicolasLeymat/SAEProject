@@ -21,7 +21,6 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		e.setIdJeu(7);
 		
 		assertEquals(Equipe.enregistrerEquipe(e),1);
 		Equipe.supprimerEquipe(e);
@@ -34,7 +33,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(0);
 		e.setPoints(0);
-		e.setIdJeu(0);
+		//e.setIdJeu(0);
 		assertEquals(Equipe.enregistrerEquipe(e),-1);
 	}
 	
@@ -45,7 +44,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		e.setIdJeu(7);
+		//e.setIdJeu(7);
 		Equipe.enregistrerEquipe(e);
 		e.setNom("Foune CSGO");
 		e.setPoints(12);
@@ -60,7 +59,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		e.setIdJeu(7);
+		//e.setIdJeu(7);
 		assertEquals(Equipe.modifierEquipe(e),-1);
 	}
 	// Supprime une equipe de l'application
@@ -70,7 +69,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		e.setIdJeu(7);
+		//e.setIdJeu(7);
 		
 		Equipe.enregistrerEquipe(e);
 		assertEquals(Equipe.supprimerEquipe(e),1);
@@ -83,7 +82,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		e.setIdJeu(7);
+		//e.setIdJeu(7);
 		
 		assertEquals(Equipe.supprimerEquipe(e),-1);
 	}

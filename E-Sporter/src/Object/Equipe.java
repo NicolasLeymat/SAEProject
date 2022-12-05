@@ -427,7 +427,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom + ", points : " + points + ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom();
+		return nom + ", points : " + points /*+ ", ModeDeJeu : " + ModeDeJeu.getModeDeJeu(idModeDeJeu).getNom()*/;
 	}
 	
 }

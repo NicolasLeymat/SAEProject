@@ -20,9 +20,9 @@ public class TestsTournoi {
 
     @Before
     public void setUp() throws Exception {
-        jeu = new Jeu("CSGO");
+        jeu = new Jeu("Fortnite");
         Connection connx = Connexion.connexion();
-        //int id_mode = ModeDeJeu.getModeDeJeu(connx, 0).getId_Mode();
+        int id_mode = /*ModeDeJeu.getModeDeJeu(0).getId_Mode();*/ 3;
         tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,jeu, 0);
 
         for (int i = 0; i < 16; i++) {
@@ -47,6 +47,28 @@ public class TestsTournoi {
         Equipe gagnant =  phaseDePoule.getMatch(0).getWinner();
         System.out.println(tournoi.getPhasePoule().toString());
         assertEquals(gagnant, phaseDePoule.getPremier(0));
+    }
+
+    @Test
+    public void testPhaseFinale() throws Exception {
+        PhaseDePoule phaseDePoule = tournoi.getPhasePoule();
+        PhaseFinale phaseE = tournoi.getPhaseElim();
+        phaseDePoule.genererPoules();
+        int i = 0;
+        for (Match m:
+             phaseDePoule.getMatchs()) {
+            phaseDePoule.enregistrerGagnant(i,m,1);
+            i=(i+1)%4;
+        }
+        tournoi.genererPhaseFinale();
+        for (int j = 0; j < 3; j++) {
+            for (Match m:
+                 phaseE.getMatchsAJouer()) {
+                m.setWinner(1);
+            }
+            phaseE.genererMatchs();
+        }
+        System.out.println(tournoi.toString());
     }
 
 

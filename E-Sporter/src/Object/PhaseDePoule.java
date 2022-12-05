@@ -10,7 +10,7 @@ public class PhaseDePoule extends Phase {
 
 	//Constructeur de la classe "Phase"
 	public PhaseDePoule( Tournoi tournoi) {
-		super();
+		super(tournoi);
 		this.poules = new ArrayList<>();
 	}
 
@@ -116,6 +116,9 @@ public class PhaseDePoule extends Phase {
 
 	@Override
 	public boolean matchsFinis() {
+		if (poules.isEmpty()) {
+			return false;
+		}
 		for (Match m :
 				getMatchs()) {
 			if (m.getWinner() == null)  {
@@ -134,9 +137,7 @@ public class PhaseDePoule extends Phase {
 
 	@Override
 	public String toString() {
-		return "Phase{" +
-				"elim=" + isElim() +
-				", matchs=\n" + getMatchs() +
+		return super.toString()+
 				", \n" + toStringPoule() +
 				'}';
 	}

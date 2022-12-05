@@ -20,7 +20,7 @@ public class Tournoi {
 	private int id_Mode;
 	private List<Equipe> listeEquipe;
 	private PhaseDePoule phasePoule;
-	private PhaseDePoule phaseElim;
+	private PhaseFinale phaseElim;
 
 	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int notoriete, Jeu jeu, int id_Mode) throws Exception {
@@ -38,8 +38,8 @@ public class Tournoi {
 		this.notoriete = notoriete;
 		this.jeu = jeu;
 		this.listeEquipe = new ArrayList<Equipe>();
-		this.phaseElim = new PhaseDePoule(this);
 		this.phasePoule = new PhaseDePoule(this);
+		this.phaseElim = new PhaseFinale(this,phasePoule);
 		this.id_Mode = id_Mode;
 	}
 	
@@ -126,7 +126,9 @@ public class Tournoi {
 	}
 
 	public void genererPhaseFinale() {
-		if !(phasePoule.ge)
+		if (phasePoule.matchsFinis()) {
+			phaseElim.genererMatchs();
+		}
 	}
 
 	public List<Equipe> getListeEquipe() {
@@ -141,6 +143,10 @@ public class Tournoi {
 	//Fonction qui permet de récuperer une équipe d'un tournoi
 	public Equipe getEquipeTournoi(int i) {
 		return this.listeEquipe.get(i);
+	}
+
+	public PhaseFinale getPhaseElim() {
+		return phaseElim;
 	}
 
 	@Override
