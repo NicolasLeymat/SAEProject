@@ -113,10 +113,7 @@ public class Equipe {
 		ResultSet rs;
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where nom = ?" );
-			pst.setString(1, equipe.getNom());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEquipe(connex, equipe);
 			if (rs.getInt(1) != 0) {
 				return -1;
 			}
@@ -188,10 +185,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where nom = ?" );
-			pst.setString(1, e.getNom());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEquipe(connex,e);
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
@@ -442,6 +436,16 @@ public class Equipe {
 			ex.printStackTrace();
 		}
 		return s;
+	}
+	
+	private static ResultSet verifierPresenceEquipe(Connection connex, Equipe equipe) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where nom = ?" );
+		pst.setString(1, equipe.getNom());
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
 	}
 
 	@Override
