@@ -53,23 +53,24 @@ public class Jeu {
 			return this.modeDeJeu.get(nomMode);
 	}
 		
-	public static int getId(Connection connex, Jeu jeu) {
-			PreparedStatement pst;
-			ResultSet rs;
-			try {
-				pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
-				pst.setString(1, jeu.getNomJeu());
-				rs = pst.executeQuery();
-				rs.next();
-				return rs.getInt(1);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return 0;
+	public static int getId(Jeu jeu) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		try {
+			pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
+			pst.setString(1, jeu.getNomJeu());
+			rs = pst.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 		}
 	
 	public int enregistrerJeu() {
-		Connection connex = Application.Connexion.connexion();
+		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		int lastId = this.getLastId();
 		try {
@@ -84,8 +85,9 @@ public class Jeu {
 		return 1;
 	}
 	
-	public static Jeu getJeuFromId(Connection connx, int id) {
-        Jeu jeu = null;
+	public static Jeu getJeuFromId(int id) {
+        Connection connx = Connexion.connexion();
+		Jeu jeu = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {

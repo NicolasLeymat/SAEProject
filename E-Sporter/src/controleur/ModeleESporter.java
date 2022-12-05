@@ -24,8 +24,8 @@ public class ModeleESporter {
 	}
 	
 	public static void getAll() {
-		allEcurie = Ecurie.getAllEcuries(connx);
-		allEquipe = Equipe.getAllEquipes(connx);
+		allEcurie = Ecurie.getAllEcuries();
+		allEquipe = Equipe.getAllEquipes();
 		try {
 			connx.close();
 		} catch (SQLException e) {
@@ -42,19 +42,19 @@ public class ModeleESporter {
 	}
 	
 	public List<Equipe> getRecherche(String prompt){
-		return Equipe.getEquipeFromNomAll(connx, prompt);
+		return Equipe.getEquipeFromNomAll(prompt);
 	}
 	
 	public List<Ecurie> getRechercheEcurie(String prompt){
-		return Ecurie.getEcurieFromNomAll(connx, prompt);
+		return Ecurie.getEcurieFromNomAll(prompt);
 	}
 	
 	public static List<Equipe> getAllEquipe(){
-		return Equipe.getAllEquipes(connx);
+		return Equipe.getAllEquipes();
 	}
 	
 	public static List<Ecurie> getAllEcurie(){
-		return Ecurie.getAllEcuries(connx);
+		return Ecurie.getAllEcuries();
 	}
 
 	public void setLastRecherche(List<Ecurie> lec, List<Equipe> leq) {

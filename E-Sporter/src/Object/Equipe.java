@@ -214,8 +214,9 @@ public class Equipe {
 		return 1;
 	}
 
-	public static List<Equipe> getAllEquipes(Connection connex) {
+	public static List<Equipe> getAllEquipes() {
 		List<Equipe> equipes = new ArrayList<Equipe>();
+		Connection connex = Connexion.connexion();
 		java.sql.Statement st = null;
 		ResultSet rs;
 		Equipe e = null;
@@ -377,8 +378,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return "Equipe [id=" + id + ", nom=" + nom + ", points=" + points + ", idEcurie=" + idEcurie + ", idJeu="
-				+ idJeu + ", idModeDeJeu=" + idModeDeJeu + ", listeJoueurs=" + listeJoueurs + "]";
+		return nom + ", points : " + points + ", Jeu=" + idJeu + ", ModeDeJeu=" + idModeDeJeu + ", listeJoueurs=" + listeJoueurs + "]";
 	}
 	
 }
