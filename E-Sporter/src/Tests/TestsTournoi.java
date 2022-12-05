@@ -45,7 +45,8 @@ public class TestsTournoi {
         phaseDePoule.genererPoules();
        phaseDePoule.enregistrerGagnant(0, phaseDePoule.getMatch(0),1);
         Equipe gagnant =  phaseDePoule.getMatch(0).getWinner();
-        assertEquals(gagnant, phaseDePoule.getClassement(0).get(0));
+        System.out.println(tournoi.getPhasePoule().toString());
+        assertEquals(gagnant, phaseDePoule.getPremier(0));
     }
 
 

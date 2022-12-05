@@ -38,8 +38,8 @@ public class Tournoi {
 		this.notoriete = notoriete;
 		this.jeu = jeu;
 		this.listeEquipe = new ArrayList<Equipe>();
-		this.phaseElim = new PhaseDePoule(true,this);
-		this.phasePoule = new PhaseDePoule(false, this);
+		this.phaseElim = new PhaseDePoule(this);
+		this.phasePoule = new PhaseDePoule(this);
 		this.id_Mode = id_Mode;
 	}
 	
@@ -123,6 +123,10 @@ public class Tournoi {
 		boolean res = date.before(today);
 		return res;
 		
+	}
+
+	public void genererPhaseFinale() {
+		if !(phasePoule.ge)
 	}
 
 	public List<Equipe> getListeEquipe() {

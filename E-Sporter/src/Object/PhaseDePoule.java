@@ -4,18 +4,13 @@ import java.sql.Date;
 import java.util.*;
 
 //Classe qui définit les fonctions d'une phase
-public class PhaseDePoule {
+public class PhaseDePoule extends Phase {
 
-	private boolean elim;
-	private Tournoi tournoi;
-	private List<Match> matchs;
 	private List<Map<Equipe,Integer>> poules;
 
 	//Constructeur de la classe "Phase"
-	public PhaseDePoule(boolean elim, Tournoi tournoi) {
-		this.elim = elim;
-		this.tournoi = tournoi;
-		this.matchs = new ArrayList<>();
+	public PhaseDePoule( Tournoi tournoi) {
+		super();
 		this.poules = new ArrayList<>();
 	}
 
@@ -23,27 +18,35 @@ public class PhaseDePoule {
 		return poules;
 	}
 
-	public List<Equipe> getClassement(int poule) {
+	private List<Equipe> getClassement(int poule) {
 		List<Equipe> res = new ArrayList<Equipe>();
 		res.addAll(poules.get(poule).keySet());
 
-		Collections.sort(res,new Comparator<Equipe> (){
-			public int compare(Equipe a, Equipe b) {
-			if (poules.get(poule).get(a) >= poules.get(poule).get(b)) {
+		Collections.sort(res, (x,y) ->
+			 {
+			if (poules.get(poule).get(x) >= poules.get(poule).get(y)) {
 				return -1;
 			} else {
 				return 1;
 			}
-		}});
+		});
 				return res;
 	}
 
+	public Equipe getPremier(int poule) {
+		return this.getClassement(poule).get(0);
+	}
+
+	public Equipe getDeuxième(int poule) {
+		return this.getClassement(poule).get(1);
+	}
+
 	public void genererPoules() throws Exception {
-		List<Equipe> listEquipe = tournoi.getListeEquipe();
+		List<Equipe> listEquipe = getTournoi().getListeEquipe();
 		if(isElim() && listEquipe.size()< 16) {
 			throw  new Exception("Pas assez d'equipes");
 		}
-		Collections.shuffle(tournoi.getListeEquipe());
+		Collections.shuffle(getTournoi().getListeEquipe());
 		for (int i = 0; i < 4; i++) {
 			poules.add(new HashMap<Equipe, Integer>());
 			for (int j =0;  j<4;j++) {
@@ -53,9 +56,9 @@ public class PhaseDePoule {
 		this.genererMatchs();
 	}
 
-	private void genererMatchs() {
+	public void genererMatchs() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(tournoi.getDateTournoi());
+		calendar.setTime(getTournoi().getDateTournoi());
 		calendar.add(Calendar.DATE,-1);
 		List<List<Equipe[]>> paires = new ArrayList<List<Equipe[]>>();
 		for (int i = 0; i < 4; i++) {
@@ -76,7 +79,7 @@ public class PhaseDePoule {
 				Equipe equipe1 = paires.get(j).get(i)[0];
 				Equipe equipe2 = paires.get(j).get(i)[1];
 				Match match = new Match(new Date(calendar.getTime().getTime()),equipe1,equipe2,this);
-				matchs.add(match);
+				getMatchs().add(match);
 			}
 		}
 	}
@@ -98,7 +101,7 @@ public class PhaseDePoule {
 	}
 
 	public void enregistrerGagnant(int poule, Match m,int gagnant) {
-		if (matchs.contains(m)) {
+		if (getMatchs().contains(m)) {
 			m.setWinner(gagnant);
 			Equipe egagnante = m.getWinner();
 			poules.get(poule).put(egagnante,poules.get(poule).get(egagnante)+1);
@@ -108,27 +111,32 @@ public class PhaseDePoule {
 
     //Fonction qui permet de savoir si c'est une phase éliminatoire ou pas 
 	public boolean isElim() {
-		return elim;
+		return false;
 	}
 
-    //Fonction qui permet de récuperer le tournoi d'une phase
-	public Tournoi getTournoi() {
-		return tournoi;
+	@Override
+	public boolean matchsFinis() {
+		for (Match m :
+				getMatchs()) {
+			if (m.getWinner() == null)  {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public Match getMatch(int i) {
-		return matchs.get(i);
-	}
+	//Fonction qui permet de récuperer le tournoi d'une phase
 
-	public int getId() {
-		return 0;
-	}
+
+
+
+
 
 	@Override
 	public String toString() {
 		return "Phase{" +
-				"elim=" + elim +
-				", matchs=\n" + matchs +
+				"elim=" + isElim() +
+				", matchs=\n" + getMatchs() +
 				", \n" + toStringPoule() +
 				'}';
 	}
