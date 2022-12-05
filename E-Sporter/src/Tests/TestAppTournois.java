@@ -1,7 +1,7 @@
 package Tests;
 
 
-
+/*
 import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
@@ -32,7 +32,7 @@ public class TestAppTournois {
         assertEquals(1,t.getNotoriete());
         assertEquals(LOL,t.getJeu());
     }
-*/
+
     @Test
     public void testAjouterEquipe () throws Exception {
         //Ecurie faze =  new Ecurie("Faze Clan");
@@ -70,3 +70,4 @@ public class TestAppTournois {
     }
 
 }
+*/
