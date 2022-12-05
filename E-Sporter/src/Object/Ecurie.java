@@ -156,10 +156,7 @@ public class Ecurie {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
-			pst.setString(1, e.getNom());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEcurie(connex, e);
 			if (rs.getInt(1) != 0) {
 				return -1;
 			}
@@ -233,10 +230,7 @@ public class Ecurie {
 		ResultSet rs;
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
-			pst.setString(1, e.getNom());
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEcurie(connex, e);
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
@@ -268,23 +262,19 @@ public class Ecurie {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
-		Ecurie e = null;
+		Ecurie e = new Ecurie(nom);
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
-			pst.setString(1, nom);
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEcurie(connex, e);
 			if (rs.getInt(1) == 0) {
 				return e;
 			}
 			
-			pst = connex.prepareStatement("select id_ecurie, nom from LMN3783A.sae_ecurie where nom = ?");
+			pst = connex.prepareStatement("select id_ecurie from LMN3783A.sae_ecurie where nom = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			rs.next();
-			e = new Ecurie(rs.getString(2));
 			e.setId(rs.getInt(1));
 			e.listeEquipes = Equipe.getEquipesFromEcurie(rs.getInt(1));
 			
@@ -310,10 +300,7 @@ public class Ecurie {
 		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
+			rs = verifierPresenceEcurieId(connex, id);
 			if (rs.getInt(1) == 0) {
 				return e;
 			}
@@ -334,6 +321,35 @@ public class Ecurie {
 		}
 		return e;
 	}
+	
+	public static String getNomEcurieFromId(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		String s = null;
+		
+		try {
+			
+			rs = verifierPresenceEcurieId(connex, id);
+			if (rs.getInt(1) == 0) {
+				return s;
+			}
+			
+			pst = connex.prepareStatement("select nom from LMN3783A.sae_ecurie where id_ecurie = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			s = rs.getString(1);
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return s;
+	}
+	
 	/**
 	 * retourne toutes les ecuries dont le nom commence par le parametre nom
 	 * @param nom 
@@ -421,38 +437,25 @@ public class Ecurie {
 		return r;
 	}
 	
-	public static String getNomEcurieFromId(int id) {
-		Connection connex = Connexion.connexion();
+	private static ResultSet verifierPresenceEcurie(Connection connex, Ecurie e) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
-		String s = null;
-		
-		try {
-			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
-			if (rs.getInt(1) == 0) {
-				return s;
-			}
-			
-			pst = connex.prepareStatement("select nom from LMN3783A.sae_ecurie where id_ecurie = ?");
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			rs.next();
-			s = rs.getString(1);
-			
-			rs.close();
-			pst.close();
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return s;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
+		pst.setString(1, e.getNom());
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
 	}
 	
-	
+	private static ResultSet verifierPresenceEcurieId(Connection connex, int id) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
+		pst.setInt(1, id);
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
+	}
 
 	@Override
 	public String toString() {
