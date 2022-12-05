@@ -91,7 +91,7 @@ public class TestSQL {
 	// Recupere toutes les equipes de l'application
 	@Test
 	public void testGetAllEquipes() throws Exception {
-		List<Equipe> liste = Equipe.getAllEquipes(Connexion.connexion());
+		List<Equipe> liste = Equipe.getAllEquipes();
 		assertEquals(liste.get(0).getNom(), "Cloud9 Fortnite");
 		assertEquals(liste.get(1).getNom(), "Evil Geniuses Fortnite");
 		assertEquals(liste.get(2).getNom(), "Faze Fortnite");

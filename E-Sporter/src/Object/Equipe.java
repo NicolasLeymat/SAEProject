@@ -96,8 +96,8 @@ public class Equipe {
 	}
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
-	public Jeu getJeu(Connection connex) {
-		return Jeu.getJeuFromId(connex, idJeu);
+	public Jeu getJeu() {
+		return Jeu.getJeuFromId( idJeu);
 	}
 	
 	//Fonction qui permet d'ajouter un joueur à une équipe

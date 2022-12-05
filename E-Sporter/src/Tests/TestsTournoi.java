@@ -27,7 +27,7 @@ public class TestsTournoi {
 
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);
-            Equipe equipeadd = new Equipe("Equipe "+i,0,"Ecurie "+i,1);
+            Equipe equipeadd = new Equipe("Equipe "+i);
             ecurieadd.addEquipe(equipeadd);
             tournoi.addEquipe(equipeadd);
         }
