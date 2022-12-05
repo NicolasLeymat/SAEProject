@@ -354,6 +354,43 @@ public class Equipe {
 		return e;
 	}
 	
+	public static Equipe getEquipeFromId(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		Equipe e = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return e;
+			}
+			
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_jeu from LMN3783A.sae_ecurie where id = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			e = new Equipe(rs.getString(2));
+			e.setId(rs.getInt(1));
+			e.setNom(rs.getString(2));
+			e.setPoints(rs.getInt(3));
+			e.setIdEcurie(rs.getInt(4));
+			e.setIdJeu(rs.getInt(5));
+			e.listeJoueurs = Joueur.getJoueursFromEquipe(rs.getInt(1));
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return e;
+	}
+	
 	public static int getLastId() {
 		Connection connex = Connexion.connexion();
 		Statement st;
@@ -374,6 +411,37 @@ public class Equipe {
 			ee.printStackTrace();
 		}
 		return r;
+	}
+	
+	public static String getNomEquipeFromId(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		String s = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_equipe where id_equipe = ?" );
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return s;
+			}
+			
+			pst = connex.prepareStatement("select nom from LMN3783A.sae_equipe where id_equipe = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			s = rs.getString(1);
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return s;
 	}
 
 	@Override

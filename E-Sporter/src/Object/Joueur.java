@@ -255,6 +255,37 @@ public class Joueur {
 		}
 		return r;
 	}
+    
+    public static String getNomJoueurFromId(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		String s = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				return s;
+			}
+			
+			pst = connex.prepareStatement("select nom from LMN3783A.sae_joueur where id_joueur = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			s = rs.getString(1);
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return s;
+	}
 
 	@Override
 	public String toString() {
