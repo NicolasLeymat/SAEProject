@@ -42,7 +42,7 @@ public class ViewTeamInfoPanel extends JPanel{
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
 
-		JLabel ecurieLabel = new JLabel(e.getNomEcurie());
+		JLabel ecurieLabel = new JLabel(e.getNom());
 		ecurieLabel.setBounds(0, 21, 159, 22);
 		panel.add(ecurieLabel);
 		ecurieLabel.setVerticalAlignment(SwingConstants.TOP);
