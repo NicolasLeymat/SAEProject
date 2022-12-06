@@ -459,7 +459,7 @@ public class Ecurie {
 
 	@Override
 	public String toString() {
-		return nom + ", Nombre d'équipes posseder : " + this.listeEquipes.size();
+		return nom;
 	}
 
 }

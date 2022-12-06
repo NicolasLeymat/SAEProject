@@ -299,8 +299,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", pseudo=" + pseudo + ", dateNaissance="
-				+ dateNaissance + ", nationalite=" + nationalite + ", idEquipe=" + idEquipe + "]";
+		return nom + " " + prenom;
 	}
 
 	
