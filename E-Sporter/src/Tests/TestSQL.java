@@ -2,12 +2,10 @@ package Tests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.junit.Test;
 
-import Application.Connexion;
 import Object.*;
 
 public class TestSQL {
@@ -21,6 +19,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
+		e.setIdModeDeJeu(0);
 		
 		assertEquals(Equipe.enregistrerEquipe(e),1);
 		Equipe.supprimerEquipe(e);
@@ -33,7 +32,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(0);
 		e.setPoints(0);
-		//e.setIdJeu(0);
+		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.enregistrerEquipe(e),-1);
 	}
 	
@@ -44,7 +43,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		//e.setIdJeu(7);
+		e.setIdModeDeJeu(0);
 		Equipe.enregistrerEquipe(e);
 		e.setNom("Foune CSGO");
 		e.setPoints(12);
@@ -59,7 +58,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		//e.setIdJeu(7);
+		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.modifierEquipe(e),-1);
 	}
 	// Supprime une equipe de l'application
@@ -69,8 +68,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		//e.setIdJeu(7);
-		
+		e.setIdModeDeJeu(0);
 		Equipe.enregistrerEquipe(e);
 		assertEquals(Equipe.supprimerEquipe(e),1);
 	}
@@ -82,8 +80,7 @@ public class TestSQL {
 		e.setId(100);
 		e.setIdEcurie(1);
 		e.setPoints(0);
-		//e.setIdJeu(7);
-		
+		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.supprimerEquipe(e),-1);
 	}
 	
