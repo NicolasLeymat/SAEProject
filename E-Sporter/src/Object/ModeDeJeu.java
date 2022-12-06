@@ -27,7 +27,6 @@ public class ModeDeJeu {
 		ModeDeJeu res = null;
 		PreparedStatement pst;
 		try {
-			System.out.println("Coucou");
 			pst = connx.prepareStatement("Select id_mode, nom, nb_joueur, id_jeu from LMN3783A.SAE_MODE_DE_JEU where id_Mode = ?");
 			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();

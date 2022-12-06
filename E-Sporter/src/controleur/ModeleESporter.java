@@ -8,6 +8,7 @@ import java.util.List;
 import Application.Connexion;
 import Object.Ecurie;
 import Object.Equipe;
+import Object.Jeu;
 
 public class ModeleESporter {
 
@@ -60,5 +61,54 @@ public class ModeleESporter {
 	public void setLastRecherche(List<Ecurie> lec, List<Equipe> leq) {
 		resultatRechercheEcuries = lec;
 		resultatRechercheEquipes=  leq;	
+	}
+	
+	public void modifierEquipe(Equipe eq) {
+		Equipe.modifierEquipe(eq);
+	}
+	
+	public boolean estNomEquipeDispo(String nom) {
+		List<Equipe> l = getAllEquipe();
+		List<String> l2 = new LinkedList<>();
+		int nbOccurence = 0;
+		for(Equipe e : l) {
+			l2.add(e.getNom());
+		}
+		
+		for(String s : l2) {
+			if(s.equals(nom)) {
+				nbOccurence += 1;
+			}
+		}
+		if(nbOccurence == 0) {
+			return true;
+		}else {			
+			return false;
+		}
+	}
+
+	public boolean estNomeEcurieDispo(String nom) {
+		List<Ecurie> l = getAllEcurie();
+		List<String> l2 = new LinkedList<>();
+		int nbOccurence = 0;
+		for(Ecurie e : l) {
+			l2.add(e.getNom());
+		}
+		
+		for(String s : l2) {
+			if(s.equals(nom)) {
+				nbOccurence += 1;
+			}
+		}
+		if(nbOccurence == 0) {
+			return true;
+		}else {			
+			return false;
+		}
+	}
+	
+	public void modifierEcurie(Ecurie ec) {
+		Ecurie.modifierEcurie(ec);
+		
 	}
 }

@@ -6,8 +6,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JList;
 
-import IHM.SeeOrganisationInfoFrame;
-import IHM.SeeTeamInfoFrame;
+import IHM.SeeInfoFrame;
 import Object.Ecurie;
 import Object.Equipe;
 
@@ -18,8 +17,8 @@ public class JListControlerEcurie implements MouseListener{
 		JList<Ecurie> list = (JList<Ecurie>) e.getSource();
 		int index = list.locationToIndex(e.getPoint());
 		System.out.println(list.getModel().getElementAt(index).toString());
-		SeeOrganisationInfoFrame window = new SeeOrganisationInfoFrame(list.getModel().getElementAt(index));
-		window.setVisible(true);
+		SeeInfoFrame window = new SeeInfoFrame(list.getModel().getElementAt(index));
+		window.setVisible(true); 
 		
 	}
 

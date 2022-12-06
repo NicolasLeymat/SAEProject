@@ -1,15 +1,12 @@
 package IHM;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.xml.transform.Templates;
 
 import Object.Ecurie;
 import Object.Equipe;
@@ -18,14 +15,9 @@ import controleur.JListControlerEcurie;
 import controleur.ModeleESporter;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.LinkedList;
 import java.util.List;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class MainPanel extends JPanel{
 
