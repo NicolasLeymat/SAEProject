@@ -97,6 +97,10 @@ public class Jeu {
             while (rs.next()) {
                 jeu = new Jeu(rs.getString("n"));
             }
+            
+            rs.close();
+            st.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
