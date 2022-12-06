@@ -338,6 +338,8 @@ public class Equipe {
 			while (rs.next()) {
 				e = createEquipeFromRs(rs);
 			}
+			rs.close();
+			pst.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

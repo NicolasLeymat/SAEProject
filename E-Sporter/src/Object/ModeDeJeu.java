@@ -34,6 +34,10 @@ public class ModeDeJeu {
 				res = new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4)));
 				
 			}
+			
+			rs.close();
+			pst.close();
+			
 		}catch (SQLException e) {
 			e.getStackTrace();
 		}
