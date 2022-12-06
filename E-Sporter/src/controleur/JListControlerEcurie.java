@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,7 +7,6 @@ import javax.swing.JList;
 
 import IHM.SeeInfoFrame;
 import Object.Ecurie;
-import Object.Equipe;
 
 public class JListControlerEcurie implements MouseListener{
 

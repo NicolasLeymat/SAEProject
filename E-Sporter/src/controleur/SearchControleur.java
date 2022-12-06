@@ -14,7 +14,7 @@ import Object.Ecurie;
 import Object.Equipe;
 
 public class SearchControleur implements CaretListener{
-
+	
 	private VuePrincipale vue;
 	private ModeleESporter modele;
 	public static List<Ecurie> rechercheEcurie = new LinkedList<>();
@@ -38,7 +38,6 @@ public class SearchControleur implements CaretListener{
 		this.modele.setLastRecherche(this.modele.getRechercheEcurie(prompt), this.modele.getRecherche(prompt));
 		rechercheEcurie.addAll(ModeleESporter.resultatRechercheEcuries);
 		rechercheEquipe.addAll(ModeleESporter.resultatRechercheEquipes);
-		//System.out.println(ModeleESporter.resultatRechercheEcuries.toString() + ModeleESporter.resultatRechercheEquipes.toString());
 		MainPanel.changeModelElementEquipe(rechercheEquipe);
 		MainPanel.changeModelElementEcurie(rechercheEcurie);
 	}

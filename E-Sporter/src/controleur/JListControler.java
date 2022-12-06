@@ -10,7 +10,7 @@ import IHM.SeeInfoFrame;
 import Object.Equipe;
 
 public class JListControler implements MouseListener{
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JList<Equipe> list = (JList<Equipe>) e.getSource();

@@ -68,7 +68,7 @@ public class ModeleESporter {
 	}
 	
 	public boolean estNomEquipeDispo(String nom) {
-		List<Equipe> l = getAllEquipe();
+		List<Equipe> l = allEquipe;
 		List<String> l2 = new LinkedList<>();
 		int nbOccurence = 0;
 		for(Equipe e : l) {
@@ -88,7 +88,7 @@ public class ModeleESporter {
 	}
 
 	public boolean estNomeEcurieDispo(String nom) {
-		List<Ecurie> l = getAllEcurie();
+		List<Ecurie> l = allEcurie;
 		List<String> l2 = new LinkedList<>();
 		int nbOccurence = 0;
 		for(Ecurie e : l) {
@@ -109,6 +109,5 @@ public class ModeleESporter {
 	
 	public void modifierEcurie(Ecurie ec) {
 		Ecurie.modifierEcurie(ec);
-		
 	}
 }

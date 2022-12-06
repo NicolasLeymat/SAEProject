@@ -7,20 +7,31 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import IHM.ViewModifFrame;
+import Object.Ecurie;
 import Object.Equipe;
 
-public class ControleurModifEquipe implements ActionListener{
+public class ControleurModif implements ActionListener{
 
 	private JPanel vue;
 	private Equipe eq;
+	private Ecurie ec;
 	private ModeleESporter modele;
 	private ViewModifFrame v;
+	private boolean Equipe;
 	
-	public ControleurModifEquipe(Equipe eq,JPanel vue) {
+	public ControleurModif(Equipe eq,JPanel vue) {
 		this.eq = eq;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
-		v = new ViewModifFrame(eq);
+		this.Equipe = true;
+		
+	}
+	
+	public ControleurModif(Ecurie eq,JPanel vue) {
+		this.ec = eq;
+		this.vue = vue;
+		this.modele = new ModeleESporter();
+		this.Equipe = false;
 	}
 	
 	@Override
@@ -32,8 +43,13 @@ public class ControleurModifEquipe implements ActionListener{
 		}
 		if(b.getText().equals("confirmer")) {
 			vue.setVisible(false);
-			Equipe eqNew = new Equipe(null);
-			this.modele.modifierEquipe(eq);
+			if(this.Equipe){
+				Equipe eqNew = new Equipe(null);
+				this.modele.modifierEquipe(eqNew);
+			}else{
+				Ecurie eqNew = new Ecurie(null);
+				this.modele.modifierEcurie(eqNew);
+			}
 		}
 		if(b.getText().equals("Annuler")) {
 			this.v.setVisible(false);

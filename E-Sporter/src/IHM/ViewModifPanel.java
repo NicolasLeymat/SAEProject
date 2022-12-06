@@ -6,7 +6,8 @@ import javax.swing.JPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
-import controleur.ControleurModifEquipe;
+import controleur.ControleurModif;
+import controleur.ValidateNameControleur;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -31,9 +32,13 @@ public class ViewModifPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTextField NameTF;
 	private JTextField textField;
+	private Equipe e;
+	private Ecurie ec;
 
 	public ViewModifPanel(Equipe e) {
-		ControleurModifEquipe c = new ControleurModifEquipe(e, this);
+		this.e = e;
+		ControleurModif c = new ControleurModif(e, this); 
+		ValidateNameControleur vc = new ValidateNameControleur(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 100, 0};
@@ -53,8 +58,10 @@ public class ViewModifPanel extends JPanel{
 		NameTF = new JTextField();
 		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		NameTF.setBounds(10, 36, 430, 28);
-		PrincPanel.add(NameTF);
 		NameTF.setColumns(10);
+		NameTF.addCaretListener(vc);
+		PrincPanel.add(NameTF);
+		
 		
 		JLabel lblNewLabel = new JLabel("Nom");
 		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
@@ -110,6 +117,8 @@ public class ViewModifPanel extends JPanel{
 	}
 	
 	public ViewModifPanel(Ecurie ec) {
+		this.ec = ec;
+		ValidateNameControleur vc = new ValidateNameControleur(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 100, 0};
@@ -129,8 +138,9 @@ public class ViewModifPanel extends JPanel{
 		NameTF = new JTextField();
 		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		NameTF.setBounds(10, 36, 430, 28);
-		PrincPanel.add(NameTF);
 		NameTF.setColumns(10);
+		NameTF.addCaretListener(vc);
+		PrincPanel.add(NameTF);
 		
 		JLabel lblNewLabel = new JLabel("Nom");
 		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
@@ -155,6 +165,13 @@ public class ViewModifPanel extends JPanel{
 		btnAnnuler.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnAnnuler.setBounds(10, 25, 100, 50);
 		panel.add(btnAnnuler);
+	}
+	
+	public Equipe getAllInfo() {
+		Equipe res = this.e;
+		res.setNom(this.NameTF.getText());
+		res.setIdEcurie(Ecurie.getEcurieFromNom(this.textField.getText()).getId());
+		return res;
 	}
 }
 

@@ -34,7 +34,7 @@ public class MainPanel extends JPanel{
 		JListControlerEcurie controleurEcurie = new JListControlerEcurie();
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
-		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		modelEquipe.addAll(ModeleESporter.getAllEquipe());
 		listEquipe.setModel(modelEquipe);
 		listEquipe.addMouseListener(controleurEquipe);
@@ -47,7 +47,7 @@ public class MainPanel extends JPanel{
 		
 		
 		listEcurie.setBorder(null);
-		listEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		listEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		modelEcurie.addAll(ModeleESporter.getAllEcurie());
 		listEcurie.setModel(modelEcurie);
 		listEcurie.addMouseListener(controleurEcurie);
