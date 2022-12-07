@@ -98,7 +98,6 @@ public class Match {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		PreparedStatement pst2;
-		PreparedStatement pst3;
 		
 		try {
 			if (m.getId() == -1) {
@@ -113,14 +112,18 @@ public class Match {
 			pst2.setInt(1, m.getEquipe1().getId());
 			pst2.setInt(2, m.getId());
 			pst2.executeUpdate();
-			pst3 = connex.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
-			pst3.setInt(1, m.getEquipe2().getId());
-			pst3.setInt(2, m.getId());
-			return 0;
+			pst2.setInt(1, m.getEquipe2().getId());
+			pst2.setInt(2, m.getId());
+			pst2.executeUpdate();
+			
+			pst.close();
+			pst2.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		}
+		return 1;
 	}
 	
 	public static int validerVainqueur(Match match, int winner) {
