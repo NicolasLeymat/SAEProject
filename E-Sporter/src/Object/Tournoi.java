@@ -177,6 +177,16 @@ public class Tournoi {
 		return rs;
 	}
 	
+	private static ResultSet verifierPresenceTournoiId(Connection connex, int id) throws SQLException {
+		PreparedStatement pst;
+		ResultSet rs;
+		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_tournoi where id_tournoi = ?" );
+		pst.setInt(1, id);
+		rs = pst.executeQuery();
+		rs.next();
+		return rs;
+	}
+	
 	
 	public static int getLastId() {
 		Connection connex = Connexion.connexion();
@@ -209,7 +219,7 @@ public class Tournoi {
 				rs = verifierPresenceTournoi(connex, tournoi);
 				if (rs.getInt(1) != 0) {
 					return -1;
-				}	
+				}
 				
 				if (tournoi.getId() == -1) {
 					tournoi.setId(Tournoi.getLastId()+1);
@@ -224,13 +234,68 @@ public class Tournoi {
 				pst.setInt(6,tournoi.getId_Organisateur());
 				pst.setInt(7, tournoi.getId_Mode());
 				pst.executeUpdate();
-								
 				rs.close();
 				pst.close();
 				
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 				return -1;
+			}
+			return 1;
+		}
+		
+		public static int modifierTournoi(Tournoi t) {
+			Connection connex = Connexion.connexion();
+			PreparedStatement pst;
+			ResultSet rs;
+			try {
+				
+				rs = verifierPresenceTournoiId(connex, t.getId());
+				if (rs.getInt(1) == 0) {
+					return -1;
+				}
+				
+				pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ? where id_equipe = ?" );
+				pst.setString(1, t.getNom());
+				pst.setDate(2, t.getDateTournoi());
+				pst.setInt(3, t.getChampionnat());
+				pst.setInt(4,t.getNotoriete());
+				pst.setInt(5,t.getId_Organisateur());
+				pst.setInt(6, t.getId_Mode());
+				pst.executeUpdate();
+				
+				rs.close();
+				pst.close();
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				return -1;
+			}
+			return 1;
+		}
+		
+		public static int supprimerTournoi(Tournoi t) {
+			Connection connex = Connexion.connexion();
+			PreparedStatement pst;
+			ResultSet rs;
+			
+			try {
+				
+				rs = verifierPresenceTournoi(connex,t);
+				if (rs.getInt(1) == 0) {
+					return -1;
+				}
+				
+				pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where nom = ? and datetournoi= ?" );
+				pst.setString(1, t.getNom());
+				pst.setDate(2, t.getDateTournoi());
+				pst.executeUpdate();
+				rs.close();
+				pst.close();
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				return -1; 
 			}
 			return 1;
 		}

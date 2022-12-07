@@ -18,8 +18,17 @@ public class Match {
 		this.equipe2 = equipe2;
 		this.phase = phase;
 		this.winner = null;
+		this.id = -1;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public Phase getPhase() {
 		return this.phase;
 	}
@@ -62,12 +71,12 @@ public class Match {
 
 	public int getLastId() {
 		Connection ct = Connexion.connexion();
-		java.sql.Statement st = null;
+		Statement st;
 		ResultSet rs;
 		int r = 0;
 		try {
 			st = ct.createStatement();
-			rs = st.executeQuery("Select id_matchs as id from LMN3783A.sae_matchs");
+			rs = st.executeQuery("Select max(id_match) as id from LMN3783A.sae_match");
 			while (rs.next()) {
 				r = rs.getInt("id");
 			}
@@ -77,29 +86,29 @@ public class Match {
 		return r;
 	}
 
-	public static int enregistrermatch(Match match) {
-		Connection ct = Connexion.connexion();
-		int id = match.getLastId();
+	public static int enregistrermatch(Match m) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		PreparedStatement pst2;
+		
 		try {
-			PreparedStatement ps = ct.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
-			ps.setInt(1, id);
-			ps.setDate(2, match.date);
-			ps.setInt(3, match.phase.getId());
-			ps.executeUpdate();
-			PreparedStatement ps2 = ct.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
-			ps2.setString(1, match.equipe1.getNom());
-			ps2.setInt(2, id);
-			ps2.executeUpdate();
-			ps2.setString(1, match.equipe2.getNom());
-			ps2.executeUpdate();
-			match.id = id;
+			if (m.getId() == -1) {
+				m.setId(Tournoi.getLastId()+1);
+			}
+			pst= connex.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
+			pst.setInt(1, m.getId());
+			pst.setDate(2, m.date);
+			pst.setInt(3, m.phase.getId());
+			pst.executeUpdate();
+			pst2 = connex.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
+			pst2.executeUpdate();
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		}
 	}
-
+	
 	public static int validerVainqueur(Match match, int winner) {
 		Connection ct = Connexion.connexion();
 		if (match.id == 0) {
