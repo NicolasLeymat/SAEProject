@@ -38,9 +38,9 @@ public class Jeu {
 		int r = 0;
 		try {
 			st = ct.createStatement();
-			rs = st.executeQuery("Select id_jeu as id from LMN3783A.sae_jeu");
-			while (rs.next()) {
-				r = rs.getInt("id");
+			rs = st.executeQuery("Select max(id_jeu) as id from LMN3783A.sae_jeu");
+			if (rs.next()) {
+				r = rs.getInt("id")+1;
 			}
 		} catch (SQLException ee) {
 			ee.printStackTrace();

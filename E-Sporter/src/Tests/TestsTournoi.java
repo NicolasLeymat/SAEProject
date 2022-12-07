@@ -69,6 +69,7 @@ public class TestsTournoi {
             phaseE.genererMatchs();
         }
         System.out.println(tournoi.toString());
+        tournoi.ajouterPoints();
 
         System.out.println(tournoi.getListeEquipe());
     }

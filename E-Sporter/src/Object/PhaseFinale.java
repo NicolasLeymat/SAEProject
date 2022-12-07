@@ -89,7 +89,7 @@ public class PhaseFinale extends Phase{
         res[0] = getMatch(7).getWinner();
         res[1] = getMatch(7).getLoser();
         res[2] = getMatch(6).getWinner();
-        res[3] = getMatch(6).getWinner();
+        res[3] = getMatch(6).getLoser();
         return res;
     }
 
