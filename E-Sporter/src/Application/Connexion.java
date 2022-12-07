@@ -56,6 +56,7 @@ public class Connexion {
     public static void closeConnexion() throws SQLException {
         if (connexion != null) {
             connexion.close();
+            connexion = null;
         }
     }
 }

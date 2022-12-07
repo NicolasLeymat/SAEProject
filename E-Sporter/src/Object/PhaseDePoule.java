@@ -1,5 +1,8 @@
 package Object;
 
+import Application.Connexion;
+
+import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
@@ -13,6 +16,9 @@ public class PhaseDePoule extends Phase {
 		super(tournoi);
 		this.poules = new ArrayList<>();
 	}
+
+
+
 
 	public List<Map<Equipe, Integer>> getPoules() {
 		return poules;
