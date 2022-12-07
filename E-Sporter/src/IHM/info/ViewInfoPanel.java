@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
 
 public class ViewInfoPanel extends JPanel{
 
@@ -25,13 +26,16 @@ public class ViewInfoPanel extends JPanel{
 	DefaultListModel<Joueur> modeleJoueur = new DefaultListModel<>();
 	
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public ViewInfoPanel(Equipe e) {
-		this.setSize(600, 300);
+		this.setSize(600, 400);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
-		gridBagLayout.rowHeights = new int[]{300, 0, 0};
+		gridBagLayout.rowHeights = new int[]{300, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		String nom = "Nom Equipe : " + e.getNom();
@@ -40,7 +44,7 @@ public class ViewInfoPanel extends JPanel{
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
@@ -60,7 +64,7 @@ public class ViewInfoPanel extends JPanel{
 		panel_1.setLayout(null);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_1.gridx = 1;
 		gbc_panel_1.gridy = 0;
 		add(panel_1, gbc_panel_1);
@@ -78,7 +82,6 @@ public class ViewInfoPanel extends JPanel{
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 2;
 		gbc_panel_2.gridy = 0;
@@ -93,11 +96,21 @@ public class ViewInfoPanel extends JPanel{
 		lblNewLabel_3.setBounds(0, 0, 272, 35);
 		panel_2.add(lblNewLabel_3);
 		
+		JButton AddPlayer = new JButton("Ajouter un joueur");
+		AddPlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		AddPlayer.setBounds(49, 311, 160, 25);
+		panel_2.add(AddPlayer);
+		
+		JButton DeletePlayer = new JButton("Supprimer un joueur");
+		DeletePlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		DeletePlayer.setBounds(49, 350, 160, 25);
+		panel_2.add(DeletePlayer);
+		
 		modeleJoueur.addAll(e.getJoueurs());
 	}
 	
 	public ViewInfoPanel(Ecurie e) {
-		this.setSize(600, 300);
+		this.setSize(600, 400);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -156,5 +169,4 @@ public class ViewInfoPanel extends JPanel{
 		lblNewLabel.setBounds(0, 0, 200, 51);
 		panel_2.add(lblNewLabel);
 	}
-	
 }
