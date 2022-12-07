@@ -9,6 +9,7 @@ import Application.Connexion;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Jeu;
+import Object.Nationalite;
 
 public class ModeleESporter {
 
@@ -22,6 +23,11 @@ public class ModeleESporter {
 		resultatRechercheEcuries = new LinkedList<>();
 		resultatRechercheEquipes = new LinkedList<>();
 		connx = Connexion.connexion();
+	}
+	
+	public static Nationalite[] getAllNat(){
+		Nationalite[] n = Nationalite.values();
+		return n;
 	}
 	
 	public static void getAll() {
