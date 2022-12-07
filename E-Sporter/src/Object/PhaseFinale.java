@@ -9,7 +9,6 @@ public class PhaseFinale extends Phase{
     private Calendar datephasefinale;
     private PhaseDePoule phaseDePoule;
     private List<Match> matchsAJouer;
-    private List<Match> matchsTermines;
     private boolean finale;
 
 
