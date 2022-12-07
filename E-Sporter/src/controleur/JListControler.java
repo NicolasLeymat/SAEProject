@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JList;
 
-import IHM.SeeInfoFrame;
+import IHM.info.SeeInfoFrame;
 import Object.Equipe;
 
 public class JListControler implements MouseListener{

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import IHM.ViewModifFrame;
+import IHM.modif.ViewModifFrame;
 import Object.Ecurie;
 import Object.Equipe;
 

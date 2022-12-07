@@ -1,4 +1,4 @@
-package IHM;
+package IHM.modif;
 
 import java.awt.Dimension;
 

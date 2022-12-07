@@ -1,4 +1,4 @@
-package IHM;
+package IHM.info;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;

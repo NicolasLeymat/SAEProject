@@ -1,4 +1,4 @@
-package IHM;
+package IHM.modif;
 
 
 import javax.swing.JPanel;

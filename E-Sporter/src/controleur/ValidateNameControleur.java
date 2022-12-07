@@ -7,7 +7,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
-import IHM.ViewModifPanel;
+import IHM.modif.ViewModifPanel;
 
 public class ValidateNameControleur implements CaretListener {
 
