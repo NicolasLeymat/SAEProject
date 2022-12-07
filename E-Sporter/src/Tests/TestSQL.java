@@ -18,7 +18,6 @@ public class TestSQL {
 		Equipe e = new Equipe("Faze CSGO");
 		e.setId(100);
 		e.setIdEcurie(1);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		
 		assertEquals(Equipe.enregistrerEquipe(e),1);
@@ -31,7 +30,6 @@ public class TestSQL {
 		Equipe e = new Equipe("Vitality Fortnite");
 		e.setId(100);
 		e.setIdEcurie(0);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.enregistrerEquipe(e),-1);
 	}
@@ -42,11 +40,10 @@ public class TestSQL {
 		Equipe e = new Equipe("Faze CSGO");
 		e.setId(100);
 		e.setIdEcurie(1);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		Equipe.enregistrerEquipe(e);
 		e.setNom("Foune CSGO");
-		e.setPoints(12);
+		e.addPoints(12);
 		assertEquals(Equipe.modifierEquipe(e),1);
 		Equipe.supprimerEquipe(e);
 	}
@@ -57,7 +54,6 @@ public class TestSQL {
 		Equipe e = new Equipe("Faze CSGO");
 		e.setId(100);
 		e.setIdEcurie(1);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.modifierEquipe(e),-1);
 	}
@@ -67,7 +63,6 @@ public class TestSQL {
 		Equipe e = new Equipe("Faze CSGO");
 		e.setId(100);
 		e.setIdEcurie(1);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		Equipe.enregistrerEquipe(e);
 		assertEquals(Equipe.supprimerEquipe(e),1);
@@ -79,7 +74,6 @@ public class TestSQL {
 		Equipe e = new Equipe("Faze CSGO");
 		e.setId(100);
 		e.setIdEcurie(1);
-		e.setPoints(0);
 		e.setIdModeDeJeu(0);
 		assertEquals(Equipe.supprimerEquipe(e),-1);
 	}

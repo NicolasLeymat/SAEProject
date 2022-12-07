@@ -23,7 +23,7 @@ public class TestsTournoi {
         jeu = new Jeu("Fortnite");
         Connection connx = Connexion.connexion();
         int id_mode = /*ModeDeJeu.getModeDeJeu(0).getId_Mode();*/ 3;
-        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,jeu, 0);
+        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,1,0, 0);
 
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);
@@ -69,6 +69,8 @@ public class TestsTournoi {
             phaseE.genererMatchs();
         }
         System.out.println(tournoi.toString());
+
+        System.out.println(tournoi.getListeEquipe());
     }
 
 

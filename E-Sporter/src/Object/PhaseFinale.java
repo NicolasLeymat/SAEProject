@@ -72,8 +72,25 @@ public class PhaseFinale extends Phase{
         return true;
     }
 
+    public boolean estFinie () {
+        return finale && matchsFinis();
+    }
+
+
     public List<Match> getMatchsAJouer() {
         return matchsAJouer;
+    }
+
+    public Equipe[] getClassement() throws Exception {
+        if (!estFinie()) {
+            throw new Exception("le tournoi n'est pas fini");
+        }
+        Equipe[] res = new Equipe[4];
+        res[0] = getMatch(7).getWinner();
+        res[1] = getMatch(7).getLoser();
+        res[2] = getMatch(6).getWinner();
+        res[3] = getMatch(6).getWinner();
+        return res;
     }
 
     @Override

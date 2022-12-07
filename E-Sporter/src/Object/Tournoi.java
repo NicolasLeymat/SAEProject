@@ -27,6 +27,16 @@ public class Tournoi {
 	private PhaseDePoule phasePoule;
 	private PhaseFinale phaseElim;
 
+	private enum PointsClassement {
+		PREMIER(100),DEUXIEME(60),TROISIEME(30),QUATRIEME(10);
+
+		private int points;
+
+		PointsClassement(int nb) {
+			this.points = nb;
+		}
+	}
+
 	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, int id_Mode) throws Exception {
 		
@@ -229,11 +239,30 @@ public class Tournoi {
 	public String toString() {
 		return "Tournoi{" +
 				"nom='" + nom + '\'' +
-				", dateTournoi=" + dateTournoi +
+				", date=" + dateTournoi +
 				", notoriete=" + notoriete +
 				", listeEquipe=" + listeEquipe +
 				", phasePoule=" + phasePoule +
 				", phaseElim=" + phaseElim +
 				'}';
+	}
+
+	public void ajouterPoints () throws  Exception {
+		if (!phaseElim.estFinie()) {
+			throw new Exception("le tournoi n'est pas fini");
+		}
+		Equipe[] classement = phaseElim.getClassement();
+		classement[0].addPoints(PointsClassement.PREMIER.points*notoriete);
+		classement[1].addPoints(PointsClassement.DEUXIEME.points*notoriete);
+		classement[2].addPoints(PointsClassement.TROISIEME.points*notoriete);
+		classement[3].addPoints(PointsClassement.QUATRIEME.points*notoriete);
+		for (Match m :
+				phaseElim.getMatchs()) {
+			m.getWinner().addPoints(5);
+		}
+		for (Match m :
+		phasePoule.getMatchs()) {
+			m.getWinner().addPoints(1);
+		}
 	}
 }

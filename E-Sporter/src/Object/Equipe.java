@@ -58,8 +58,13 @@ public class Equipe {
 	}
 
 	//Fonction qui permet de changer les points d'une équipe
-	public void setPoints(int points) {
+	private void setPoints(int points) {
 		this.points = points;
+	}
+
+	public void addPoints(int points) throws Exception {
+		if (points <0) {throw new IllegalArgumentException("nombre de points a jouter doit etre positif");}
+		this.setPoints(this.points+points);
 	}
 	
 	public int getIdEcurie() {
@@ -429,7 +434,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom;
+		return ""+nom+" " + points;
 	}
 	
 }
