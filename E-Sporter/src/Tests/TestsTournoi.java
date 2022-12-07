@@ -16,21 +16,25 @@ public class TestsTournoi {
     private List<Ecurie> ecurieList;
     private List<Equipe> equipeList;
     private Tournoi tournoi;
-    private  Jeu jeu;
+    private  Connection connx;
 
     @Before
     public void setUp() throws Exception {
-        jeu = new Jeu("Fortnite");
-        Connection connx = Connexion.connexion();
         int id_mode = /*ModeDeJeu.getModeDeJeu(0).getId_Mode();*/ 3;
-        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,1,0, 0);
-
+        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"),1,0, 0);
+        this.connx = Connexion.connexion();
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);
             Equipe equipeadd = new Equipe("Equipe "+i);
             ecurieadd.addEquipe(equipeadd);
             tournoi.addEquipe(equipeadd);
         }
+    }
+    
+    @Test
+    public void testEnregisterTournoi() throws Exception {
+    	this.connx.setAutoCommit(false);
+    	
     }
 
     @Test
@@ -69,9 +73,6 @@ public class TestsTournoi {
             phaseE.genererMatchs();
         }
         System.out.println(tournoi.toString());
-        tournoi.ajouterPoints();
-
-        System.out.println(tournoi.getListeEquipe());
     }
 
 
