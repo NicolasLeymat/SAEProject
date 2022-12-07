@@ -29,6 +29,14 @@ public class Match {
 		this.id = id;
 	}
 	
+	public Equipe getEquipe1() {
+		return equipe1;
+	}
+
+	public Equipe getEquipe2() {
+		return equipe2;
+	}
+
 	public Phase getPhase() {
 		return this.phase;
 	}
@@ -90,6 +98,7 @@ public class Match {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		PreparedStatement pst2;
+		PreparedStatement pst3;
 		
 		try {
 			if (m.getId() == -1) {
@@ -101,7 +110,12 @@ public class Match {
 			pst.setInt(3, m.phase.getId());
 			pst.executeUpdate();
 			pst2 = connex.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
+			pst2.setInt(1, m.getEquipe1().getId());
+			pst2.setInt(2, m.getId());
 			pst2.executeUpdate();
+			pst3 = connex.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
+			pst3.setInt(1, m.getEquipe2().getId());
+			pst3.setInt(2, m.getId());
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
