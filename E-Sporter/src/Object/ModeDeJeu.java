@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import Application.Connexion;
 
 public class ModeDeJeu {
+	
+	/**
+	 * Travail restant : 
+	 * - Ajouter des methodes utiles
+	 */
 	
 	private int id_Mode;
 	private String nom;
@@ -33,6 +40,27 @@ public class ModeDeJeu {
 			while(rs.next()) {
 				res = new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4)));
 				
+			}
+			rs.close();
+			pst.close();
+		}catch (SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public static List<ModeDeJeu> getAllModeDeJeu() {
+		Connection connx = Connexion.connexion();
+		ModeDeJeu m = null;
+		List<ModeDeJeu> res = new LinkedList<>();
+		PreparedStatement pst;
+		try {
+			pst = connx.prepareStatement("Select id_mode, nom, nb_joueur, id_jeu from LMN3783A.SAE_MODE_DE_JEU");
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				m = new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4)));
+				res.add(m);
 			}
 			
 			rs.close();

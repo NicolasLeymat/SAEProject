@@ -10,7 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import Object.Ecurie;
+import Object.Equipe;
+import Object.Joueur;
 import Object.Nationalite;
+import controleur.ControleurAdd;
+import controleur.ControleurAjout;
 import controleur.ModeleESporter;
 
 import java.awt.Font;
@@ -19,20 +24,35 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
 
 public class AddPanel extends JPanel {
 
+	//Class Variable
 	private final int WIDTH = 600;
 	private final int HEIGHT = 500;
+	private String mode;
+	
+	//OverAll Field
 	private JTextField NameTF;
+	
+	//Player Field
 	private JTextField firstNameTF;
 	private JTextField pseudoTF;
+	private JFormattedTextField brithDateTF;
+	private JComboBox<Nationalite> natChoice;
+	private Object obj;
 	
-	public AddPanel(String type) {
+	
+	public AddPanel(String type, Object obj) {
+		ControleurAjout c = new ControleurAjout(this);
+		this.obj = obj;
+		System.out.println(obj);
+		this.setMode(type);
 		this.setSize(WIDTH, HEIGHT);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 100, 0};
+		gridBagLayout.rowHeights = new int[]{0, 50, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -46,9 +66,9 @@ public class AddPanel extends JPanel {
 		gbc_MainPanel.gridy = 0;
 		add(MainPanel, gbc_MainPanel);
 		
-		JLabel Title = new JLabel("Ajout d'un");
+		JLabel Title = new JLabel("");
 		Title.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		Title.setBounds(250, 0, 100, 25);
+		Title.setBounds(200, 0, 200, 25);
 		MainPanel.add(Title);
 		
 		JLabel nameLabel = new JLabel("Nom  :");
@@ -85,11 +105,18 @@ public class AddPanel extends JPanel {
 		
 		
 		JPanel BtnPanel = new JPanel();
+		BtnPanel.setLayout(null);
 		GridBagConstraints gbc_BtnPanel = new GridBagConstraints();
 		gbc_BtnPanel.fill = GridBagConstraints.BOTH;
 		gbc_BtnPanel.gridx = 0;
 		gbc_BtnPanel.gridy = 1;
 		add(BtnPanel, gbc_BtnPanel);
+		
+		JButton confirmBtn = new JButton("Confirmer");
+		confirmBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		confirmBtn.setBounds(360, 0, 200, 50);
+		confirmBtn.addActionListener(c);
+		BtnPanel.add(confirmBtn);
 		
 		
 		JLabel lblNat = new JLabel("Nationalités : ");
@@ -97,7 +124,7 @@ public class AddPanel extends JPanel {
 		lblNat.setBounds(10, 138, 91, 20);
 		
 		DefaultComboBoxModel<Nationalite> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat());
-		JComboBox<Nationalite> natChoice = new JComboBox<>();
+		natChoice = new JComboBox<>();
 		natChoice.setModel(modelNat);
 		natChoice.setBounds(140, 140, 150, 22);
 		
@@ -105,7 +132,7 @@ public class AddPanel extends JPanel {
 		lblDate.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		lblDate.setBounds(12, 168, 125, 22);
 		
-		JFormattedTextField brithDateTF = new JFormattedTextField();
+		brithDateTF = new JFormattedTextField();
 		try {
 			MaskFormatter formatter = new MaskFormatter("##/##/####");
 			formatter.setPlaceholderCharacter('#');
@@ -121,11 +148,21 @@ public class AddPanel extends JPanel {
 		MainPanel.add(nameLabel);
 		MainPanel.add(NameTF);
 		
+		JLabel lblMode = new JLabel("Mode de jeu :");
+		lblMode.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblMode.setBounds(10, 85, 90, 20);
+		
+		DefaultComboBoxModel<String> modeModel = new DefaultComboBoxModel<>(ModeleESporter.getAllModeName());
+		JComboBox<String> comboBox = new JComboBox<>(modeModel);
+		comboBox.setBounds(140, 85, 150, 25);
+		
+		
+		
+
+		
 		switch(type) {
 			case "Player":{
 				Title.setText("Ajout d'un joueur");
-				MainPanel.add(nameLabel);
-				MainPanel.add(NameTF);
 				MainPanel.add(lblPrenom);
 				MainPanel.add(firstNameTF);
 				MainPanel.add(lblPseudonyme);
@@ -137,11 +174,53 @@ public class AddPanel extends JPanel {
 				break;
 			}
 			case "Team":{
+				Title.setText("Ajout d'une équipe");
+				MainPanel.add(lblMode);
+				MainPanel.add(comboBox);
 				break;
 			}
 			case "Orga":{
+				Title.setText("Ajout d'une écurie");
+				break;
+			}
+			case "Tournament":{
 				break;
 			}
 		}
 	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
+	public Object getInfoToObject() {
+		
+		switch (this.mode) {
+			case "Player": {
+				Equipe teamToAdd = (Equipe) this.obj;
+				Joueur j = new Joueur(this.NameTF.getText(), 
+						this.firstNameTF.getText(), 
+						this.pseudoTF.getText(), 
+						this.brithDateTF.getText(), 
+						(Nationalite) this.natChoice.getSelectedItem());
+				j.setIdEquipe(teamToAdd.getId());
+				return j;
+			}
+			case "Team":{
+				Ecurie ecurieToAdd = (Ecurie) this.obj;
+				Equipe e = new Equipe(this.NameTF.getText());
+				e.setIdEcurie(ecurieToAdd.getId());
+			}
+			case "Orga":{
+				Ecurie e = new Ecurie(this.NameTF.getText());
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + this.mode);
+		}
+	}
+
 }

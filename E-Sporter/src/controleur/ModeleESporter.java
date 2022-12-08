@@ -5,11 +5,17 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import Application.Connexion;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Jeu;
+import Object.Joueur;
+import Object.ModeDeJeu;
 import Object.Nationalite;
+import Object.Tournoi;
 
 public class ModeleESporter {
 
@@ -25,9 +31,49 @@ public class ModeleESporter {
 		connx = Connexion.connexion();
 	}
 	
+	public JFrame getPanelFrame(JPanel vue) {
+		return (JFrame) vue.getParent().getParent().getParent();
+	}
+	
+	public void addPlayer(Joueur j) {
+		Joueur.enregistrerJoueur(j);
+	}
+	
+	public void addTeam(Equipe e) {
+		try {
+			Equipe.enregistrerEquipe(e);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	public void addOrga(Ecurie e) {
+		Ecurie.enregistrerEcurie(e);
+	}
+	
+	public void addTournament(Tournoi t) {
+		try {
+			Tournoi.enregistrerTournoi(t);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static Nationalite[] getAllNat(){
 		Nationalite[] n = Nationalite.values();
 		return n;
+	}
+	
+	public static String[] getAllModeName(){
+		List<ModeDeJeu> l = ModeDeJeu.getAllModeDeJeu();
+		int size = ModeDeJeu.getAllModeDeJeu().size();
+		String[] res = new String[size];
+		for(int i = 0; i< size; i++) {
+			res[i] = l.get(i).getNom();
+		}
+		return res;
 	}
 	
 	public static void getAll() {

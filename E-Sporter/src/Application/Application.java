@@ -2,6 +2,8 @@ package Application;
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+
 import IHM.App;
 
 public class Application {
@@ -11,6 +13,7 @@ public class Application {
 			public void run() {
 				try {
 					App window = new App();
+					window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
