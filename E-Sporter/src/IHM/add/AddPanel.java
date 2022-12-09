@@ -214,9 +214,14 @@ public class AddPanel extends JPanel {
 				Ecurie ecurieToAdd = (Ecurie) this.obj;
 				Equipe e = new Equipe(this.NameTF.getText());
 				e.setIdEcurie(ecurieToAdd.getId());
+				return e;
 			}
 			case "Orga":{
-				Ecurie e = new Ecurie(this.NameTF.getText());
+				Ecurie ec = new Ecurie(this.NameTF.getText());
+				return ec;
+			}
+			case "Tournament":{
+				return null;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + this.mode);
