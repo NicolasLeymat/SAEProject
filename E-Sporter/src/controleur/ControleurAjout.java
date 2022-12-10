@@ -33,7 +33,7 @@ public class ControleurAjout implements ActionListener{
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
-				//this.modele.addPlayer(obj);
+				this.modele.addPlayer(obj);
 				break;
 			}
 			case "Team":{
@@ -41,7 +41,7 @@ public class ControleurAjout implements ActionListener{
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
-				//this.modele.addTeam(obj);
+				this.modele.addTeam(obj);
 				break;
 			}
 			case "Orga":{
@@ -49,7 +49,7 @@ public class ControleurAjout implements ActionListener{
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
-				//this.modele.addOrga(obj);
+				this.modele.addOrga(obj);
 				break;
 			}
 			case "Tournament":{
@@ -57,7 +57,7 @@ public class ControleurAjout implements ActionListener{
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
-				//this.modele.addTournament(obj);
+				this.modele.addTournament(obj);
 				break;
 			}
 	}

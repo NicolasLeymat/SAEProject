@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.sql.Date;
 import java.text.ParseException;
 
 import javax.swing.JLabel;
@@ -14,6 +15,9 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
 import Object.Nationalite;
+import Object.Notoriete;
+import Object.Organisateur;
+import Object.Tournoi;
 import controleur.ControleurAdd;
 import controleur.ControleurAjout;
 import controleur.ModeleESporter;
@@ -42,6 +46,11 @@ public class AddPanel extends JPanel {
 	private JFormattedTextField brithDateTF;
 	private JComboBox<Nationalite> natChoice;
 	private Object obj;
+	
+	//Tournament
+	private JComboBox<String> comboChamp;
+	private JComboBox<Notoriete> comboNotoriete;
+	private JTextField orgaTf;
 	
 	
 	public AddPanel(String type, Object obj) {
@@ -156,9 +165,37 @@ public class AddPanel extends JPanel {
 		JComboBox<String> comboBox = new JComboBox<>(modeModel);
 		comboBox.setBounds(140, 85, 150, 25);
 		
+		DefaultComboBoxModel<Notoriete> notorieteModel = new DefaultComboBoxModel<>(Notoriete.values());
+		comboNotoriete = new JComboBox<>(notorieteModel);
+		comboNotoriete.setBounds(140, 152, 150, 25);
 		
+		JLabel lblNotorit = new JLabel("Notoriété : ");
+		lblNotorit.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNotorit.setBounds(12, 152, 125, 20);
+		
+		String[] value = new String[2];
+		value[1] = "Oui";
+		value[0] = "Non";
+		DefaultComboBoxModel<String> champModel = new DefaultComboBoxModel<>(value);
+		comboChamp = new JComboBox<String>(champModel);
+		comboChamp.setBounds(140, 192, 150, 25);
+		
+		JLabel lblChampionnat = new JLabel("Championnat : ");
+		lblChampionnat.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblChampionnat.setBounds(12, 192, 125, 20);
+		
+		orgaTf = new JTextField();
+		orgaTf.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		orgaTf.setColumns(10);
+		orgaTf.setBounds(140, 229, 150, 20);
+		
+		JLabel lblNomOrganisateur = new JLabel("Organisateur  :");
+		lblNomOrganisateur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNomOrganisateur.setBounds(10, 229, 125, 20);
 		
 
+		
+		
 		
 		switch(type) {
 			case "Player":{
@@ -184,6 +221,20 @@ public class AddPanel extends JPanel {
 				break;
 			}
 			case "Tournament":{
+				Title.setText("Ajout d'un tournoi");
+				MainPanel.add(orgaTf);
+				MainPanel.add(lblNomOrganisateur);
+				MainPanel.add(comboNotoriete);
+				MainPanel.add(lblNotorit);
+				MainPanel.add(comboChamp);
+				MainPanel.add(lblChampionnat);
+				MainPanel.add(lblMode);
+				MainPanel.add(comboBox);
+				lblDate.setBounds(12, 120, 125, 20);
+				lblDate.setText("Date de début : ");
+				MainPanel.add(lblDate);
+				brithDateTF.setBounds(140, 120, 150, 20);
+				MainPanel.add(brithDateTF);
 				break;
 			}
 		}
@@ -221,11 +272,33 @@ public class AddPanel extends JPanel {
 				return ec;
 			}
 			case "Tournament":{
+				
+				int champ = 0;
+				if(this.comboChamp.getSelectedItem().equals("Oui")) {
+					champ = 1;
+				}
+				Notoriete not  = (Notoriete) this.comboNotoriete.getSelectedItem();
+				try {
+					Tournoi t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, 0);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return null;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + this.mode);
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	private Date formattingText() {
+		String textToFormat = this.brithDateTF.getText();
+		String[] values = textToFormat.split("/");
+		int year = Integer.parseInt(values[2]);
+		int month = Integer.parseInt(values[1]);
+		int day = Integer.parseInt(values[0]);
+		return new Date(year, month, day);
 	}
 
 }

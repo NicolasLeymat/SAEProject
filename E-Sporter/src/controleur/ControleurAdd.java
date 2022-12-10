@@ -43,7 +43,7 @@ public class ControleurAdd implements ActionListener{
 				this.frame.setVisible(true);
 				break;
 			}
-			case "Ajouter un tounoi":{
+			case "Ajouter un tournoi":{
 				this.frame = new AddFrame("Tournament", null);
 				this.frame.setVisible(true);
 				break;
