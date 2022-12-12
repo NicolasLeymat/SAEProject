@@ -14,8 +14,6 @@ import Application.Connexion;
  * Travail restant :
  * - ajouter le logo
  * - refactorer
- * - ajouter l'id de l'ecurie a une equipe quand on l'ajoute a une ecurie
- * - rajouter plus de constructeurs pour simplifier certains cas
  */
 
 //Classe qui definit les fonctions d'une ecurie
@@ -99,6 +97,7 @@ public class Ecurie {
 	 * @param equipe
 	 */
 	public void addEquipe(Equipe equipe) {
+		equipe.setIdEcurie(this.id);
 		this.listeEquipes.add(equipe);
 	}
 	/**
@@ -156,7 +155,7 @@ public class Ecurie {
 		
 		try {
 			
-			rs = verifierPresenceEcurie(connex, e);
+			rs = verifierPresenceEcurieNom(connex, e);
 			if (rs.getInt(1) != 0) {
 				return -1;
 			}
@@ -230,7 +229,7 @@ public class Ecurie {
 		ResultSet rs;
 		try {
 			
-			rs = verifierPresenceEcurie(connex, e);
+			rs = verifierPresenceEcurieNom(connex, e);
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
@@ -266,7 +265,7 @@ public class Ecurie {
 		
 		try {
 			
-			rs = verifierPresenceEcurie(connex, e);
+			rs = verifierPresenceEcurieNom(connex, e);
 			if (rs.getInt(1) == 0) {
 				return e;
 			}
@@ -321,7 +320,12 @@ public class Ecurie {
 		}
 		return e;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * 		id de l'ecurie
+	 * @return le nom de l'ecurie ou null si elle n'existe pas
+	 */
 	public static String getNomEcurieFromId(int id) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -349,7 +353,6 @@ public class Ecurie {
 		}
 		return s;
 	}
-	
 	/**
 	 * retourne toutes les ecuries dont le nom commence par le parametre nom
 	 * @param nom 
@@ -437,7 +440,7 @@ public class Ecurie {
 		return r;
 	}
 	
-	private static ResultSet verifierPresenceEcurie(Connection connex, Ecurie e) throws SQLException {
+	private static ResultSet verifierPresenceEcurieNom(Connection connex, Ecurie e) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
 		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );

@@ -4,18 +4,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import Application.Connexion;
 
 public class Jeu {
 
+	private int id;
 	private String nomJeu;
-	private HashMap<String, Integer> modeDeJeu;
+	private List<ModeDeJeu> modesDeJeu;
 	
-	public Jeu(String nomJeu) {
-		this.modeDeJeu = new HashMap<String,Integer>();
+	public Jeu(int id, String nomJeu) {
+		this.id = id;
 		this.nomJeu = nomJeu;
+		this.modesDeJeu = new ArrayList<ModeDeJeu>();
+	}
+	
+	public int getIdJeu() {
+		return this.id;
+	}
+	
+	public void setIdJeu(int id) {
+		this.id = id;
 	}
 	
 	public String getNomJeu() {
@@ -27,8 +39,12 @@ public class Jeu {
 		this.nomJeu = nomJeu;
 	}
 	
-	public void addModeDeJeu(String mode, int nbJoueurs) {
-		this.modeDeJeu.put(mode, nbJoueurs);
+	public List<ModeDeJeu> getModesDeJeu(){
+		return this.modesDeJeu;
+	}
+	
+	public void setModeDeJeu(List<ModeDeJeu> l) {
+		this.modesDeJeu = l;
 	}
 	
 	public int getLastId() {
@@ -46,11 +62,6 @@ public class Jeu {
 			ee.printStackTrace();
 		}
 		return r;
-	}
-	
-	//Fonction qui permet de récuperer le nombre de joueurs d'un jeu
-		public int getNbJoueurs(String nomMode) {
-			return this.modeDeJeu.get(nomMode);
 	}
 		
 	public static int getId(Jeu jeu) {
@@ -95,7 +106,8 @@ public class Jeu {
             st.setInt(1, id);
             rs = st.executeQuery();
             while (rs.next()) {
-                jeu = new Jeu(rs.getString("n"));
+                jeu = new Jeu(id, rs.getString("n"));
+                jeu.setModeDeJeu(ModeDeJeu.getModesDeJeuFromIdJeu(jeu));
             }
             
             rs.close();
@@ -106,6 +118,30 @@ public class Jeu {
         }
         return jeu;
     }
+	
+	public static List<Jeu> getAllJeux() {
+		Connection connx = Connexion.connexion();
+		Jeu j = null;
+		List<Jeu> res = new LinkedList<>();
+		PreparedStatement pst;
+		try {
+			pst = connx.prepareStatement("Select id_jeu, nom from LMN3783A.SAE_JEU order by nom");
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				j = new Jeu(rs.getInt(1), rs.getString(2));
+				j.setModeDeJeu(ModeDeJeu.getModesDeJeuFromIdJeu(j));
+				res.add(j);
+			}
+			
+			rs.close();
+			pst.close();
+			
+		}catch (SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return res;
+	}
 
 
 }

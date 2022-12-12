@@ -93,7 +93,7 @@ public class Equipe {
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
 	public ModeDeJeu getModeDeJeu() {
-		return ModeDeJeu.getModeDeJeu( idModeDeJeu);
+		return ModeDeJeu.getModeDeJeuFromId( idModeDeJeu);
 	}
 	
 	//Fonction qui permet d'ajouter un joueur à une équipe
@@ -118,13 +118,12 @@ public class Equipe {
 				equipe.setId(Equipe.getLastId()+1);
 			}
 			
-			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, nombrejoueur, points, id_ecurie, id_mode) values(?,?,?,?,?,?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, points, id_ecurie, id_mode) values(?,?,?,?,?)");
 			pst.setInt(1, equipe.getId());
 			pst.setString(2, equipe.getNom());
-			pst.setInt(3, equipe.listeJoueurs.size());
-			pst.setInt(4, equipe.getPoints());
-			pst.setInt(5,equipe.getIdEcurie());
-			pst.setInt(6,equipe.getIdModeDeJeu());
+			pst.setInt(3, equipe.getPoints());
+			pst.setInt(4,equipe.getIdEcurie());
+			pst.setInt(5,equipe.getIdModeDeJeu());
 			pst.executeUpdate();
 			
 			for (Joueur j : equipe.getJoueurs()) {
@@ -153,12 +152,11 @@ public class Equipe {
 				return -1;
 			}
 			
-			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, nombrejoueur = ?, id_ecurie = ?, id_mode = ? where id_equipe = ?" );
+			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, id_ecurie = ?, id_mode = ? where id_equipe = ?" );
 			pst.setString(1, e.getNom());
-			pst.setInt(2, e.getJoueurs().size());
-			pst.setInt(3, e.getIdEcurie());
-			pst.setInt(4, e.getIdModeDeJeu());
-			pst.setInt(5, e.getId());
+			pst.setInt(2, e.getIdEcurie());
+			pst.setInt(3, e.getIdModeDeJeu());
+			pst.setInt(4, e.getId());
 			pst.executeUpdate();
 			
 			rs.close();
