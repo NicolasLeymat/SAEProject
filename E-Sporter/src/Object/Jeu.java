@@ -13,12 +13,12 @@ import Application.Connexion;
 public class Jeu {
 
 	private int id;
-	private String nomJeu;
+	private String nom;
 	private List<ModeDeJeu> modesDeJeu;
 	
 	public Jeu(int id, String nomJeu) {
 		this.id = id;
-		this.nomJeu = nomJeu;
+		this.nom = nomJeu;
 		this.modesDeJeu = new ArrayList<ModeDeJeu>();
 	}
 	
@@ -30,13 +30,13 @@ public class Jeu {
 		this.id = id;
 	}
 	
-	public String getNomJeu() {
-		return this.nomJeu;
+	public String getNom() {
+		return this.nom;
 	}
 
 	
-	public void setNomJeu(String nomJeu) {
-		this.nomJeu = nomJeu;
+	public void setNom(String nomJeu) {
+		this.nom = nomJeu;
 	}
 	
 	public List<ModeDeJeu> getModesDeJeu(){
@@ -70,7 +70,7 @@ public class Jeu {
 		ResultSet rs;
 		try {
 			pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
-			pst.setString(1, jeu.getNomJeu());
+			pst.setString(1, jeu.getNom());
 			rs = pst.executeQuery();
 			rs.next();
 			return rs.getInt(1);
@@ -87,7 +87,7 @@ public class Jeu {
 		try {
 			pst = connex.prepareStatement("insert into LMN3783A.sae_jeu values(?,?)");
 			pst.setInt(1, lastId+1);
-			pst.setString(2, nomJeu);
+			pst.setString(2, nom);
 			pst.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

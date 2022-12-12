@@ -11,11 +11,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * Travail restant :
- * - regler le probleme sur l'utilite de mode de jeu
- * - ajouter constructeur
- */
 
 //Classe qui définit les fonctions d'une équipe
 public class Equipe {
@@ -28,10 +23,10 @@ public class Equipe {
 	private List<Joueur> listeJoueurs;
 
 
-	public Equipe(String nom) {
-		this.nom = nom;
-		this.listeJoueurs = new ArrayList<Joueur>();
+	public Equipe(String n) {
 		this.id = -1;
+		this.nom = n;
+		this.listeJoueurs = new ArrayList<>();
 	}
 	
 	public int getId() {
@@ -93,7 +88,7 @@ public class Equipe {
 	
 	//Fonction qui permet de retourner le jeu auquel une équipe joue à partir de son id
 	public ModeDeJeu getModeDeJeu() {
-		return ModeDeJeu.getModeDeJeuFromId( idModeDeJeu);
+		return ModeDeJeu.getModeDeJeuFromId(this.idModeDeJeu);
 	}
 	
 	//Fonction qui permet d'ajouter un joueur à une équipe
@@ -109,6 +104,7 @@ public class Equipe {
 		ResultSet rs;
 		try {
 			
+			// A remplacer par un trigger
 			rs = verifierPresenceEquipe(connex, equipe);
 			if (rs.getInt(1) != 0) {
 				return -1;
@@ -222,7 +218,7 @@ public class Equipe {
 		return equipes;
 	}
 
-	public static List<Equipe> getClassementByGame(int id_mode) {
+	public static List<Equipe> getClassementByGame(int idMode) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement ps;
 		ResultSet rs;
@@ -232,7 +228,7 @@ public class Equipe {
 		try {
 			
 			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_mode from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
-			ps.setInt(1,id_mode);
+			ps.setInt(1,idMode);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				e = new Equipe(rs.getString(2));

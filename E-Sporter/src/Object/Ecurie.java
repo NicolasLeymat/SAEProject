@@ -65,7 +65,7 @@ public class Ecurie {
 	 * @return nom
 	 */
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 	/**
 	 * change le nom d'une ecurie
@@ -80,7 +80,7 @@ public class Ecurie {
 	 * @return adresse logo
 	 */
 	public String getLogo() {
-		return logo;
+		return this.logo;
 	}
 	/**
 	 * ajoute ou modifie l'adresse du logo d'une ecurie
@@ -144,33 +144,33 @@ public class Ecurie {
 	 * enregistre une ecurie dans la base de donnees
 	 * si elle n'existe pas deja
 	 * ainsi que toutes les equipes et les joueurs associes
-	 * @param e 
+	 * @param ecurie 
 	 * 		ecurie
 	 * @return 1 si la fonction a réussi ou -1 si la fonction a echoue
 	 */
-	public static int enregistrerEcurie(Ecurie e) {
+	public static int enregistrerEcurie(Ecurie ecurie) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
 		
 		try {
 			
-			rs = verifierPresenceEcurieNom(connex, e);
+			rs = verifierPresenceEcurieNom(connex, ecurie);
 			if (rs.getInt(1) != 0) {
 				return -1;
 			}
 						
-			if (e.getId() == -1) {
-				e.setId(Ecurie.getLastId()+1);
+			if (ecurie.getId() == -1) {
+				ecurie.setId(Ecurie.getLastId()+1);
 			}
 			
 			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie(id_ecurie, nom) values(?,?)");
-			pst.setInt(1, e.getId());
-			pst.setString(2, e.getNom());
+			pst.setInt(1, ecurie.getId());
+			pst.setString(2, ecurie.getNom());
 			pst.executeUpdate();
 			
-			for (Equipe eq : e.getEquipes()) {
-				eq.setIdEcurie(e.getId());
+			for (Equipe eq : ecurie.getEquipes()) {
+				eq.setIdEcurie(ecurie.getId());
 				Equipe.enregistrerEquipe(eq);
 			}
 			
@@ -186,18 +186,18 @@ public class Ecurie {
 	/**
 	 * modifie une equipe dans la base de donnees a partir de son id
 	 * si l'id n'existe pas dans la base de donnees, il n'y a pas de modifications
-	 * @param e
+	 * @param ecurie
 	 * 		ecurie a modifier
 	 * @return 1 si la modification a eu lieu, -1 sinon 
 	 */
-	public static int modifierEcurie(Ecurie e) {
+	public static int modifierEcurie(Ecurie ecurie) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
 		try {
 			
 			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
-			pst.setInt(1, e.getId());
+			pst.setInt(1, ecurie.getId());
 			rs = pst.executeQuery();
 			rs.next();
 			if (rs.getInt(1) == 0) {
@@ -205,13 +205,13 @@ public class Ecurie {
 			}
 			
 			pst = connex.prepareStatement("update LMN3783A.sae_ecurie set nom = ?" );
-			pst.setString(1, e.getNom());
+			pst.setString(1, ecurie.getNom());
 			pst.executeUpdate();
 			
 			rs.close();
 			pst.close();
 			
-		} catch (SQLException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return -1;
 		}
@@ -219,28 +219,28 @@ public class Ecurie {
 	}
 	/**
 	 * supprimer une ecurie de la base de donnees si elle existe
-	 * @param e 
+	 * @param ecurie 
 	 * 		ecurie
 	 * @return 1 si la fonction a réussi ou -1 si la fonction a echoue
 	 */
-	public static int supprimerEcurie(Ecurie e) {
+	public static int supprimerEcurie(Ecurie ecurie) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
 		try {
 			
-			rs = verifierPresenceEcurieNom(connex, e);
+			rs = verifierPresenceEcurieNom(connex, ecurie);
 			if (rs.getInt(1) == 0) {
 				return -1;
 			}
 			
-			pst = connex.prepareStatement("delete from LMN3783A.sae_ecurie where nom = ?" );
-			pst.setString(1, e.getNom());
-			pst.executeUpdate();
-			
-			for (Equipe eq : e.getEquipes()) {
+			for (Equipe eq : ecurie.getEquipes()) {
 				Equipe.supprimerEquipe(eq);
 			}
+			
+			pst = connex.prepareStatement("delete from LMN3783A.sae_ecurie where nom = ?" );
+			pst.setString(1, ecurie.getNom());
+			pst.executeUpdate();
 			
 			rs.close();
 			pst.close();
@@ -434,27 +434,27 @@ public class Ecurie {
 			rs.close();
 			st.close();
 			
-		} catch (Exception ee) {
-			ee.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		return r;
 	}
 	
-	private static ResultSet verifierPresenceEcurieNom(Connection connex, Ecurie e) throws SQLException {
+	private static ResultSet verifierPresenceEcurieNom(Connection c, Ecurie ec) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
-		pst.setString(1, e.getNom());
+		pst = c.prepareStatement("select count(1) from LMN3783A.sae_ecurie where nom = ?" );
+		pst.setString(1, ec.getNom());
 		rs = pst.executeQuery();
 		rs.next();
 		return rs;
 	}
 	
-	private static ResultSet verifierPresenceEcurieId(Connection connex, int id) throws SQLException {
+	private static ResultSet verifierPresenceEcurieId(Connection c, int i) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
-		pst.setInt(1, id);
+		pst = c.prepareStatement("select count(1) from LMN3783A.sae_ecurie where id_ecurie = ?" );
+		pst.setInt(1, i);
 		rs = pst.executeQuery();
 		rs.next();
 		return rs;
@@ -462,7 +462,7 @@ public class Ecurie {
 
 	@Override
 	public String toString() {
-		return nom;
+		return this.nom;
 	}
 
 }
