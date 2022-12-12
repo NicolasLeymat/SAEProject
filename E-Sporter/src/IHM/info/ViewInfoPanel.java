@@ -88,8 +88,10 @@ public class ViewInfoPanel extends JPanel{
 		gbc_panel_2.gridx = 2;
 		gbc_panel_2.gridy = 0;
 		add(panel_2, gbc_panel_2);
+		modeleJoueur.addAll(e.getJoueurs());
+		System.out.println("--------------------------------------------------\n"+e.getJoueurs());
 		listJ.setModel(modeleJoueur);
-		JScrollPane scrollPane = new JScrollPane(list);
+		JScrollPane scrollPane = new JScrollPane(listJ);
 		scrollPane.setBounds(0, 36, 272, 264);
 		panel_2.add(scrollPane);
 		
@@ -129,7 +131,7 @@ public class ViewInfoPanel extends JPanel{
 		add_To_Tournament.setBounds(10, 0, 200, 50);
 		panel_3.add(add_To_Tournament);
 		
-		modeleJoueur.addAll(e.getJoueurs());
+		
 	}
 
 	/**

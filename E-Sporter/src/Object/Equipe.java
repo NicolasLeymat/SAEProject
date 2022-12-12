@@ -434,7 +434,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom+", Points : " + points;
+		return nom+", Points : " + points + listeJoueurs;
 	}
 	
 }
