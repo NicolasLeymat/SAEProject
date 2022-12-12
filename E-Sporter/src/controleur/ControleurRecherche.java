@@ -13,7 +13,7 @@ import IHM.VuePrincipale;
 import Object.Ecurie;
 import Object.Equipe;
 
-public class SearchControleur implements CaretListener{
+public class ControleurRecherche implements CaretListener{
 	
 	private VuePrincipale vue;
 	private ModeleESporter modele;
@@ -21,7 +21,7 @@ public class SearchControleur implements CaretListener{
 	public static List<Equipe> rechercheEquipe = new LinkedList<>();
 
 	
-	public SearchControleur(VuePrincipale vue) {
+	public ControleurRecherche(VuePrincipale vue) {
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 	}

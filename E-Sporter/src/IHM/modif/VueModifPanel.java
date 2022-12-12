@@ -7,7 +7,6 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
 import controleur.ControleurModif;
-import controleur.ValidateNameControleur;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -24,7 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class ViewModifPanel extends JPanel{
+public class VueModifPanel extends JPanel{
 
 	/**
 	 * 
@@ -35,10 +34,9 @@ public class ViewModifPanel extends JPanel{
 	private Equipe e;
 	private Ecurie ec;
 
-	public ViewModifPanel(Equipe e) {
+	public VueModifPanel(Equipe e) {
 		this.e = e;
 		ControleurModif c = new ControleurModif(e, this); 
-		ValidateNameControleur vc = new ValidateNameControleur(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 100, 0};
@@ -59,7 +57,6 @@ public class ViewModifPanel extends JPanel{
 		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		NameTF.setBounds(10, 36, 430, 28);
 		NameTF.setColumns(10);
-		NameTF.addCaretListener(vc);
 		PrincPanel.add(NameTF);
 		
 		
@@ -116,9 +113,8 @@ public class ViewModifPanel extends JPanel{
 		panel.add(btnAnnuler);
 	}
 	
-	public ViewModifPanel(Ecurie ec) {
+	public VueModifPanel(Ecurie ec) {
 		this.ec = ec;
-		ValidateNameControleur vc = new ValidateNameControleur(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 100, 0};
@@ -139,7 +135,6 @@ public class ViewModifPanel extends JPanel{
 		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		NameTF.setBounds(10, 36, 430, 28);
 		NameTF.setColumns(10);
-		NameTF.addCaretListener(vc);
 		PrincPanel.add(NameTF);
 		
 		JLabel lblNewLabel = new JLabel("Nom");

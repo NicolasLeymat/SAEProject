@@ -8,7 +8,7 @@ import javax.swing.JList;
 import IHM.info.SeeInfoFrame;
 import Object.Equipe;
 
-public class JListControler implements MouseListener{
+public class ControleurJList implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

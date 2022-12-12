@@ -10,8 +10,8 @@ import javax.swing.border.LineBorder;
 
 import Object.Ecurie;
 import Object.Equipe;
-import controleur.JListControler;
-import controleur.JListControlerEcurie;
+import controleur.ControleurJList;
+import controleur.ControleurEcurieJList;
 import controleur.ModeleESporter;
 
 import java.awt.Color;
@@ -30,8 +30,8 @@ public class MainPanel extends JPanel{
 	
 	public MainPanel() {
 		this.setMaximumSize(new Dimension(1200, 625));
-		JListControler controleurEquipe = new JListControler();
-		JListControlerEcurie controleurEcurie = new JListControlerEcurie();
+		ControleurJList controleurEquipe = new ControleurJList();
+		ControleurEcurieJList controleurEcurie = new ControleurEcurieJList();
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
 		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));

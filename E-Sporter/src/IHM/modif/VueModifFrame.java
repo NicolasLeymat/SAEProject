@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import Object.Ecurie;
 import Object.Equipe;
 
-public class ViewModifFrame extends JFrame{
+public class VueModifFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private ViewModifPanel vue;
+	private VueModifPanel vue;
 
-	public ViewModifFrame(Equipe e) {
-		vue = new ViewModifPanel(e);
+	public VueModifFrame(Equipe e) {
+		vue = new VueModifPanel(e);
 		vue.setBounds(0, 0, 600, 400);
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(600, 500));
@@ -21,8 +21,8 @@ public class ViewModifFrame extends JFrame{
 		getContentPane().add(vue);
 	}
 
-	public ViewModifFrame(Ecurie eq) {
-		vue = new ViewModifPanel(eq);
+	public VueModifFrame(Ecurie eq) {
+		vue = new VueModifPanel(eq);
 		vue.setBounds(0, 0, 600, 400);
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(600, 500));

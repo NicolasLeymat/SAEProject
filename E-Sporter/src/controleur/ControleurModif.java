@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import IHM.modif.ViewModifFrame;
+import IHM.modif.VueModifFrame;
 import Object.Ecurie;
 import Object.Equipe;
 
@@ -16,7 +16,7 @@ public class ControleurModif implements ActionListener{
 	private Equipe eq;
 	private Ecurie ec;
 	private ModeleESporter modele;
-	private ViewModifFrame v;
+	private VueModifFrame v;
 	private boolean Equipe;
 	
 	public ControleurModif(Equipe eq,JPanel vue) {
@@ -38,7 +38,7 @@ public class ControleurModif implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
 		if(b.getText().equals("Modifier")) {
-			this.v = new ViewModifFrame(eq);
+			this.v = new VueModifFrame(eq);
 			this.v.setVisible(true);
 		}
 		if(b.getText().equals("confirmer")) {

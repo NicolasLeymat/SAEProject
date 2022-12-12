@@ -8,7 +8,7 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
 import controleur.ControleurAdd;
-import controleur.JListControler;
+import controleur.ControleurJList;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
-public class ViewInfoPanel extends JPanel{
+public class VueInfoPanel extends JPanel{
 
 	JList<Equipe> list = new JList<>();
 	DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
@@ -28,8 +28,10 @@ public class ViewInfoPanel extends JPanel{
 	
 	
 
-
-	public ViewInfoPanel(Equipe e) {
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public VueInfoPanel(Equipe e) {
 		ControleurAdd c = new ControleurAdd(this, e);
 		this.setSize(600, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -80,36 +82,36 @@ public class ViewInfoPanel extends JPanel{
 		lblNewLabel_2.setBounds(0, 0, 158, 13);
 		panel_1.add(lblNewLabel_2);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_2.gridx = 2;
-		gbc_panel_2.gridy = 0;
-		add(panel_2, gbc_panel_2);
+		JPanel panelJoueur = new JPanel();
+		panelJoueur.setLayout(null);
+		GridBagConstraints gbc_panelJoueur = new GridBagConstraints();
+		gbc_panelJoueur.insets = new Insets(0, 0, 5, 0);
+		gbc_panelJoueur.fill = GridBagConstraints.BOTH;
+		gbc_panelJoueur.gridx = 2;
+		gbc_panelJoueur.gridy = 0;
+		add(panelJoueur, gbc_panelJoueur);
 		modeleJoueur.addAll(e.getJoueurs());
 		System.out.println("--------------------------------------------------\n"+e.getJoueurs());
 		listJ.setModel(modeleJoueur);
 		JScrollPane scrollPane = new JScrollPane(listJ);
 		scrollPane.setBounds(0, 36, 272, 264);
-		panel_2.add(scrollPane);
+		panelJoueur.add(scrollPane);
 		
 		JLabel lblNewLabel_3 = new JLabel("Liste des joueurs : ");
 		lblNewLabel_3.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		lblNewLabel_3.setBounds(0, 0, 272, 35);
-		panel_2.add(lblNewLabel_3);
+		panelJoueur.add(lblNewLabel_3);
 		
 		JButton addPlayer = new JButton("Ajouter un joueur");
 		addPlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		addPlayer.setBounds(35, 311, 200, 25);
 		addPlayer.addActionListener(c);
-		panel_2.add(addPlayer);
+		panelJoueur.add(addPlayer);
 		
 		JButton deletePlayer = new JButton("Supprimer un joueur");
 		deletePlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		deletePlayer.setBounds(35, 347, 200, 25);
-		panel_2.add(deletePlayer);
+		panelJoueur.add(deletePlayer);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -134,10 +136,8 @@ public class ViewInfoPanel extends JPanel{
 		
 	}
 
-	/**
-	 * @wbp.parser.constructor
-	 */
-	public ViewInfoPanel(Ecurie e) {
+
+	public VueInfoPanel(Ecurie e) {
 		this.setSize(600, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -184,7 +184,7 @@ public class ViewInfoPanel extends JPanel{
 		gbc_panel_2.gridy = 0;
 		add(panel_2, gbc_panel_2);
 		
-		JListControler controleur = new JListControler();
+		ControleurJList controleur = new ControleurJList();
 		modeleEquipe.addAll(e.getEquipes());
 		list.setModel(modeleEquipe);
 		list.addMouseListener(controleur);

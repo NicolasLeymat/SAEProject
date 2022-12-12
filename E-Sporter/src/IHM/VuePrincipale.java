@@ -3,7 +3,7 @@ package IHM;
 
 import javax.swing.JPanel;
 
-import controleur.SearchControleur;
+import controleur.ControleurRecherche;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -20,7 +20,7 @@ public class VuePrincipale extends JPanel{
 	
 	public VuePrincipale() {
 		this.setSize(new Dimension(1200, 625));
-		SearchControleur controleurRecherche = new SearchControleur(this);
+		ControleurRecherche controleurRecherche = new ControleurRecherche(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{1200, 0};
 		gridBagLayout.rowHeights = new int[]{100, 100, 225, 0};

@@ -10,7 +10,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public void run() { 
 				try {
 					App window = new App();
 					window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
