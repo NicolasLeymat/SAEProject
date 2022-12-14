@@ -9,6 +9,7 @@ import Object.Equipe;
 import Object.Joueur;
 import controleur.ControleurAdd;
 import controleur.ControleurJList;
+import controleur.ControleurModif;
 import controleur.ModeleESporter;
 
 import java.awt.GridBagLayout;
@@ -42,6 +43,7 @@ public class VueInfoPanel extends JPanel{
 		this.e = null;
 		this.e = e; 
 		ControleurAdd c = new ControleurAdd(this, e);
+		ControleurModif cm = new ControleurModif(e, this);
 		this.setSize(600, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
@@ -165,6 +167,7 @@ public class VueInfoPanel extends JPanel{
 		JButton modfier = new JButton("Modifier");
 		modfier.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		modfier.setBounds(390, 0, 200, 50);
+		modfier.addActionListener(cm);
 		panelBtn.add(modfier);
 		
 		JButton add_To_Tournament = new JButton("Ajouter à un tournoi");
@@ -182,6 +185,7 @@ public class VueInfoPanel extends JPanel{
 		this.ec = e;
 		this.setSize(600, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
+		ControleurModif cm = new ControleurModif(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 50, 0};
@@ -265,6 +269,7 @@ public class VueInfoPanel extends JPanel{
 		JButton modfier = new JButton("Modifier");
 		modfier.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		modfier.setBounds(390, 0, 200, 50);
+		modfier.addActionListener(cm);
 		panel_3.add(modfier);
 	}
 
