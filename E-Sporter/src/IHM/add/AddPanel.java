@@ -14,6 +14,7 @@ import javax.swing.text.MaskFormatter;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
+import Object.ModeDeJeu;
 import Object.Nationalite;
 import Object.Notoriete;
 import Object.Organisateur;
@@ -51,6 +52,7 @@ public class AddPanel extends JPanel {
 	private JComboBox<String> comboChamp;
 	private JComboBox<Notoriete> comboNotoriete;
 	private JTextField orgaTf;
+	private JComboBox comboBox;
 	
 	
 	public AddPanel(String type, Object obj) {
@@ -162,7 +164,7 @@ public class AddPanel extends JPanel {
 		lblMode.setBounds(10, 85, 90, 20);
 		
 		DefaultComboBoxModel<String> modeModel = new DefaultComboBoxModel<>(ModeleESporter.getAllModeName());
-		JComboBox<String> comboBox = new JComboBox<>(modeModel);
+		comboBox = new JComboBox<>(modeModel);
 		comboBox.setBounds(140, 85, 150, 25);
 		
 		DefaultComboBoxModel<Notoriete> notorieteModel = new DefaultComboBoxModel<>(Notoriete.values());
@@ -265,6 +267,7 @@ public class AddPanel extends JPanel {
 				Ecurie ecurieToAdd = (Ecurie) this.obj;
 				Equipe e = new Equipe(this.NameTF.getText());
 				e.setIdEcurie(ecurieToAdd.getId());
+				e.setIdModeDeJeu(ModeDeJeu.getModeDeJeuFromNom((String)comboBox.getSelectedItem()).getIdMode());
 				return e;
 			}
 			case "Orga":{
@@ -278,13 +281,15 @@ public class AddPanel extends JPanel {
 					champ = 1;
 				}
 				Notoriete not  = (Notoriete) this.comboNotoriete.getSelectedItem();
+				Tournoi t = null;
 				try {
-					Tournoi t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, 0);
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, 0);
+					System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				return null;
+				return t;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + this.mode);

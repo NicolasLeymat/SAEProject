@@ -29,7 +29,6 @@ public class MainPanel extends JPanel{
 	private static DefaultListModel<Ecurie> modelEcurie = new DefaultListModel<>();
 	
 	public MainPanel() {
-		this.setMaximumSize(new Dimension(1200, 625));
 		ControleurJList controleurEquipe = new ControleurJList();
 		ControleurEcurieJList controleurEcurie = new ControleurEcurieJList();
 		setLayout(new GridLayout(0, 3, 0, 0));

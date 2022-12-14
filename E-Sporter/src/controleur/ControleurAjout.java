@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import IHM.add.AddPanel;
+import IHM.info.VueInfoPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
@@ -34,6 +35,7 @@ public class ControleurAjout implements ActionListener{
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
 				this.modele.addPlayer(obj);
+				VueInfoPanel.updateListJoueur();;
 				break;
 			}
 			case "Team":{
@@ -42,6 +44,7 @@ public class ControleurAjout implements ActionListener{
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
 				this.modele.addTeam(obj);
+				VueInfoPanel.updateListEquipe();
 				break;
 			}
 			case "Orga":{

@@ -227,7 +227,7 @@ public class Equipe {
 		
 		try {
 			
-			ps = connex.prepareStatement("select id, nom, points, id_ecurie,id_mode from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
+			ps = connex.prepareStatement("select id_equipe, nom, points, id_ecurie,id_mode from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
 			ps.setInt(1,idMode);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -307,7 +307,7 @@ public class Equipe {
 				return e;
 			}
 			
-			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_ecurie where id_equipe = ?");
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_equipe = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			rs.next();
@@ -428,7 +428,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return nom+", Points : " + points + listeJoueurs;
+		return nom+", Points : " + points;
 	}
 	
 }

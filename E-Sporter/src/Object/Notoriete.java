@@ -2,7 +2,7 @@ package Object;
 
 public enum Notoriete {
 
-	DEPARTEMENTAL(1) ,REGIONAL(2), NATIONAL(3);
+	LOCAL(1) ,NATIONAL(2), INTERNATIONAL(3);
 
 	private int value;
 
