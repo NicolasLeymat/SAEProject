@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import IHM.MainPanel;
+import IHM.VuePrincipale;
+import IHM.info.VueInfoPanel;
 import IHM.modif.VueModifFrame;
+import IHM.modif.VueModifPanel;
 import Object.Ecurie;
 import Object.Equipe;
 
@@ -41,19 +45,21 @@ public class ControleurModif implements ActionListener{
 			this.v = new VueModifFrame(eq);
 			this.v.setVisible(true);
 		}
-		if(b.getText().equals("confirmer")) {
-			vue.setVisible(false);
+		if(b.getText().equals("Confirmer")) {
+			this.modele.getPanelFrame(vue).dispose();
 			if(this.Equipe){
-				Equipe eqNew = new Equipe(null);
+				VueInfoPanel.updateInfoEquipe();
+				Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
 				this.modele.modifierEquipe(eqNew);
 			}else{
-				Ecurie eqNew = new Ecurie(null);
-				this.modele.modifierEcurie(eqNew);
+				VueInfoPanel.updateInfoEcurie();
+				Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
+				this.modele.modifierEcurie(ecNew);
 			}
 		}
 		if(b.getText().equals("Annuler")) {
-			this.v.setVisible(false);
-		}	
+			this.modele.getPanelFrame(vue).dispose();
+			}	
 	}
 
 	

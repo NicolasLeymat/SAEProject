@@ -1,5 +1,6 @@
 package controleur;
 
+import java.awt.Window;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Application.Connexion;
 import Object.Ecurie;
@@ -32,7 +34,8 @@ public class ModeleESporter {
 	}
 	
 	public JFrame getPanelFrame(JPanel vue) {
-		return (JFrame) vue.getParent().getParent().getParent();
+		JFrame f2 = (JFrame) SwingUtilities.getWindowAncestor(vue);
+		return f2;
 	}
 	
 	public void addPlayer(Joueur j) {

@@ -31,17 +31,18 @@ public class VueInfoPanel extends JPanel{
 	private static DefaultListModel<Joueur> modeleJoueur = new DefaultListModel<>();
 	private static Equipe e;
 	private static Ecurie ec;
+	private static JLabel nameLbl;
 	private int classementCurrentEquipe;
+	private static JLabel nomEcurie;
 	
 	
 
-	/**
-	 * @wbp.parser.constructor
-	 */
 	public VueInfoPanel(Equipe e) {
+		System.out.println("----------------------------------------");
+		System.out.println(e);
 		modeleJoueur.clear();
-		this.e = null;
-		this.e = e; 
+		VueInfoPanel.e = null;
+		VueInfoPanel.e = e;
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
 		this.setSize(600, 450);
@@ -63,16 +64,17 @@ public class VueInfoPanel extends JPanel{
 		gbc_panelInfo0.gridy = 0;
 		add(panelInfo0, gbc_panelInfo0);
 
+		JLabel lblNewLabel_1 = new JLabel("Nom Ecurie : ");
+		lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(0, 0, 159, 13);
+		panelInfo0.add(lblNewLabel_1);
+		
 		JLabel ecurieLabel = new JLabel(e.getNom());
 		ecurieLabel.setBounds(0, 21, 159, 22);
 		panelInfo0.add(ecurieLabel);
 		ecurieLabel.setVerticalAlignment(SwingConstants.TOP);
 		ecurieLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		
-		JLabel lblNewLabel_1 = new JLabel("Nom Ecurie : ");
-		lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(0, 0, 159, 13);
-		panelInfo0.add(lblNewLabel_1);
 		
 		JPanel panelInfo1 = new JPanel();
 		panelInfo1.setLayout(null);
@@ -82,11 +84,12 @@ public class VueInfoPanel extends JPanel{
 		gbc_panelInfo1.gridx = 1;
 		gbc_panelInfo1.gridy = 0;
 		add(panelInfo1, gbc_panelInfo1);
-		JLabel lblNewLabel = new JLabel(e.getNom());
-		lblNewLabel.setBounds(0, 20, 158, 17);
-		panelInfo1.add(lblNewLabel);
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		nameLbl = new JLabel(e.getNom());
+		nameLbl.setBounds(0, 20, 158, 17);
+		panelInfo1.add(nameLbl);
+		nameLbl.setVerticalAlignment(SwingConstants.TOP);
+		nameLbl.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		
 		JLabel lblNewLabel_2 = new JLabel("Nom Equipe : ");
 		lblNewLabel_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
@@ -181,8 +184,8 @@ public class VueInfoPanel extends JPanel{
 
 	public VueInfoPanel(Ecurie e) {
 		modeleEquipe.clear();
-		this.ec = null;
-		this.ec = e;
+		VueInfoPanel.ec = null;
+		VueInfoPanel.ec = e;
 		this.setSize(600, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
@@ -216,7 +219,7 @@ public class VueInfoPanel extends JPanel{
 		lblNewLabel_1.setBounds(0, 10, 145, 17);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel nomEcurie = new JLabel(e.getNom());
+		nomEcurie = new JLabel(e.getNom());
 		nomEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		nomEcurie.setBounds(0, 35, 145, 13);
 		panel_1.add(nomEcurie);
@@ -285,5 +288,19 @@ public class VueInfoPanel extends JPanel{
 		ec = Ecurie.getEcurieFromId(ec.getId());
 		modeleEquipe.addAll(ec.getEquipes());
 		listJ.setModel(modeleJoueur);
+	}
+	
+	public static void updateInfoEquipe() {
+		int idOld = e.getId();
+		System.out.println("---------------------------");
+		System.out.println(Equipe.getNomEquipeFromId(idOld));
+		nameLbl.setText(Equipe.getNomEquipeFromId(idOld));
+	}
+	
+	public static void updateInfoEcurie() {
+		int idOld = ec.getId();
+		System.out.println("---------------------------");
+		System.out.println(Ecurie.getNomEcurieFromId(idOld));
+		nomEcurie.setText(Ecurie.getNomEcurieFromId(idOld));
 	}
 }
