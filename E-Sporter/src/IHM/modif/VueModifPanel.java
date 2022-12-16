@@ -30,19 +30,15 @@ public class VueModifPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField NameTF;
-	private JTextField textField;
 	private Equipe e;
 	private Ecurie ec;
 
-	/**
-	 * @wbp.parser.constructor
-	 */
 	public VueModifPanel(Equipe e) {
 		this.e = e;
 		ControleurModif c = new ControleurModif(e, this); 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 100, 0};
+		gridBagLayout.rowHeights = new int[]{100, 100, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -67,18 +63,6 @@ public class VueModifPanel extends JPanel{
 		NameTF.setBounds(10, 36, 430, 28);
 		NameTF.setColumns(10);
 		PrincPanel.add(NameTF);
-		
-		
-		textField = new JTextField(e.getEcurie().getNom());
-		textField.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		textField.setColumns(10);
-		textField.setBounds(10, 106, 430, 28);
-		PrincPanel.add(textField);
-		
-		JLabel EcurieNameTF = new JLabel("Nom de l'écurie :");
-		EcurieNameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		EcurieNameTF.setBounds(10, 72, 129, 27);
-		PrincPanel.add(EcurieNameTF);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -157,7 +141,6 @@ public class VueModifPanel extends JPanel{
 	public Equipe getAllInfoEquipe() {
 		Equipe res = this.e;
 		res.setNom(this.NameTF.getText());
-		res.setIdEcurie(Ecurie.getEcurieFromNom(this.textField.getText()).getId());
 		return res;
 	}
 	

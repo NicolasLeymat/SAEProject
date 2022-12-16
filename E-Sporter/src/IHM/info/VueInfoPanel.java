@@ -37,6 +37,7 @@ public class VueInfoPanel extends JPanel{
 	
 	
 
+
 	public VueInfoPanel(Equipe e) {
 		System.out.println("----------------------------------------");
 		System.out.println(e);
@@ -48,7 +49,7 @@ public class VueInfoPanel extends JPanel{
 		this.setSize(600, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
-		gridBagLayout.rowHeights = new int[]{300, 50, 0};
+		gridBagLayout.rowHeights = new int[]{381, 70, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -69,7 +70,7 @@ public class VueInfoPanel extends JPanel{
 		lblNewLabel_1.setBounds(0, 0, 159, 13);
 		panelInfo0.add(lblNewLabel_1);
 		
-		JLabel ecurieLabel = new JLabel(e.getNom());
+		JLabel ecurieLabel = new JLabel(e.getEcurie().getNom());
 		ecurieLabel.setBounds(0, 21, 159, 22);
 		panelInfo0.add(ecurieLabel);
 		ecurieLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -160,57 +161,59 @@ public class VueInfoPanel extends JPanel{
 		JPanel panelBtn = new JPanel();
 		panelBtn.setLayout(null);
 		GridBagConstraints gbc_panelBtn = new GridBagConstraints();
-		gbc_panelBtn.gridwidth = 3;
+		gbc_panelBtn.gridwidth = 2;
 		gbc_panelBtn.insets = new Insets(0, 0, 0, 5);
 		gbc_panelBtn.fill = GridBagConstraints.BOTH;
 		gbc_panelBtn.gridx = 0;
 		gbc_panelBtn.gridy = 1;
 		add(panelBtn, gbc_panelBtn);
 		
-		JButton modfier = new JButton("Modifier");
-		modfier.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		modfier.setBounds(390, 0, 200, 50);
-		modfier.addActionListener(cm);
-		panelBtn.add(modfier);
-		
 		JButton add_To_Tournament = new JButton("Ajouter à un tournoi");
 		add_To_Tournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		add_To_Tournament.setBounds(10, 0, 200, 50);
+		add_To_Tournament.setBounds(10, 10, 200, 50);
 		panelBtn.add(add_To_Tournament);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 2;
+		gbc_panel.gridy = 1;
+		add(panel, gbc_panel);
+		
+		JButton modfier_1 = new JButton("Modifier");
+		modfier_1.setBounds(62, 10, 200, 50);
+		modfier_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		modfier_1.addActionListener(cm);
+		panel.add(modfier_1);
 		
 		
 	}
 
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public VueInfoPanel(Ecurie e) {
 		modeleEquipe.clear();
 		VueInfoPanel.ec = null;
 		VueInfoPanel.ec = e;
-		this.setSize(600, 400);
+		this.setSize(500, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
-		gridBagLayout.rowHeights = new int[]{0, 50, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{150, 258, 0};
+		gridBagLayout.rowHeights = new int[]{0, 70, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		add(panel, gbc_panel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 1;
+		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 0;
 		add(panel_1, gbc_panel_1);
 		
@@ -229,7 +232,7 @@ public class VueInfoPanel extends JPanel{
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_2.gridx = 2;
+		gbc_panel_2.gridx = 1;
 		gbc_panel_2.gridy = 0;
 		add(panel_2, gbc_panel_2);
 		
@@ -259,21 +262,19 @@ public class VueInfoPanel extends JPanel{
 		deleteTeam.setBounds(35, 297, 200, 25);
 		panel_2.add(deleteTeam);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
-		gbc_panel_3.gridwidth = 3;
-		gbc_panel_3.insets = new Insets(0, 0, 0, 5);
-		gbc_panel_3.fill = GridBagConstraints.BOTH;
-		gbc_panel_3.gridx = 0;
-		gbc_panel_3.gridy = 1;
-		add(panel_3, gbc_panel_3);
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 1;
+		add(panel, gbc_panel);
 		
 		JButton modfier = new JButton("Modifier");
 		modfier.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		modfier.setBounds(390, 0, 200, 50);
+		modfier.setBounds(62, 10, 200, 50);
 		modfier.addActionListener(cm);
-		panel_3.add(modfier);
+		panel.add(modfier);
 	}
 
 	public static void updateListJoueur() {
@@ -290,17 +291,11 @@ public class VueInfoPanel extends JPanel{
 		listJ.setModel(modeleJoueur);
 	}
 	
-	public static void updateInfoEquipe() {
-		int idOld = e.getId();
-		System.out.println("---------------------------");
-		System.out.println(Equipe.getNomEquipeFromId(idOld));
-		nameLbl.setText(Equipe.getNomEquipeFromId(idOld));
+	public static void updateInfoEquipe(String nom) {
+		nameLbl.setText(nom);
 	}
 	
-	public static void updateInfoEcurie() {
-		int idOld = ec.getId();
-		System.out.println("---------------------------");
-		System.out.println(Ecurie.getNomEcurieFromId(idOld));
-		nomEcurie.setText(Ecurie.getNomEcurieFromId(idOld));
+	public static void updateInfoEcurie(String nom) {
+		nomEcurie.setText(nom);
 	}
 }

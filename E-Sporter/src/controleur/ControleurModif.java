@@ -42,18 +42,23 @@ public class ControleurModif implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
 		if(b.getText().equals("Modifier")) {
-			this.v = new VueModifFrame(eq);
-			this.v.setVisible(true);
+			if(this.Equipe){
+				this.v = new VueModifFrame(eq);
+				this.v.setVisible(true);
+			}else {
+				this.v = new VueModifFrame(ec);
+				this.v.setVisible(true);
+			}
 		}
 		if(b.getText().equals("Confirmer")) {
 			this.modele.getPanelFrame(vue).dispose();
 			if(this.Equipe){
-				VueInfoPanel.updateInfoEquipe();
 				Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
+				VueInfoPanel.updateInfoEquipe(eqNew.getNom());
 				this.modele.modifierEquipe(eqNew);
 			}else{
-				VueInfoPanel.updateInfoEcurie();
 				Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
+				VueInfoPanel.updateInfoEcurie(ec.getNom());
 				this.modele.modifierEcurie(ecNew);
 			}
 		}

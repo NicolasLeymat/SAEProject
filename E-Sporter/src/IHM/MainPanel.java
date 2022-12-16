@@ -22,11 +22,14 @@ import java.awt.Font;
 public class MainPanel extends JPanel{
 
 
-	private JList<Equipe> listEquipe = new JList<>();
+	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modelEquipe = new DefaultListModel<>();
 	
-	private JList<Ecurie> listEcurie = new JList<>();
+	private static JList<Ecurie> listEcurie = new JList<>();
 	private static DefaultListModel<Ecurie> modelEcurie = new DefaultListModel<>();
+	
+	private static List<Equipe> e = null;
+	private static List<Ecurie> ec = null;
 	
 	public MainPanel() {
 		ControleurJList controleurEquipe = new ControleurJList();
@@ -74,5 +77,19 @@ public class MainPanel extends JPanel{
 	public static void changeModelElementEcurie(List<Ecurie> l) {
 		modelEcurie.clear();
 		modelEcurie.addAll(l);
+	}
+	
+	public static void updateListEquipe() {
+		modelEquipe.clear();
+		e = Equipe.getAllEquipes();
+		modelEquipe.addAll(e);
+		listEquipe.setModel(modelEquipe);
+	}
+	
+	public static void updateListEcuries() {
+		modelEcurie.clear();
+		ec = Ecurie.getAllEcuries();
+		modelEcurie.addAll(ec);
+		listEcurie.setModel(modelEcurie);
 	}
 }
