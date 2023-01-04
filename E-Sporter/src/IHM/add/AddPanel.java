@@ -9,6 +9,7 @@ import java.text.ParseException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
 import Object.Ecurie;
@@ -23,6 +24,7 @@ import controleur.ControleurAdd;
 import controleur.ControleurAjout;
 import controleur.ModeleESporter;
 
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.ComboBoxModel;
@@ -34,8 +36,9 @@ import javax.swing.JButton;
 public class AddPanel extends JPanel {
 
 	//Class Variable
-	private final int WIDTH = 600;
+	private final int WIDTH = 450;
 	private final int HEIGHT = 500;
+	private final int MAIN_FONT_SIZE = 17;
 	private String mode;
 	
 	//OverAll Field
@@ -53,6 +56,7 @@ public class AddPanel extends JPanel {
 	private JComboBox<Notoriete> comboNotoriete;
 	private JTextField orgaTf;
 	private JComboBox comboBox;
+	private JButton confirmBtn;
 	
 	
 	public AddPanel(String type, Object obj) {
@@ -63,8 +67,8 @@ public class AddPanel extends JPanel {
 		this.setSize(WIDTH, HEIGHT);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 50, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[]{430, 75, 0};
+		gridBagLayout.columnWeights = new double[]{2.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -79,37 +83,37 @@ public class AddPanel extends JPanel {
 		
 		JLabel Title = new JLabel("");
 		Title.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		Title.setBounds(200, 0, 200, 25);
+		Title.setBounds(125, 0, 200, 25);
 		MainPanel.add(Title);
 		
 		JLabel nameLabel = new JLabel("Nom  :");
-		nameLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nameLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		nameLabel.setBounds(10, 53, 80, 20);
 		
 		
 		NameTF = new JTextField();
-		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		NameTF.setBounds(140, 53, 150, 20);
 		NameTF.setColumns(10);
 		
 		JLabel lblPrenom = new JLabel("Prenom  :");
-		lblPrenom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblPrenom.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblPrenom.setBounds(10, 78, 80, 20);
 		
 		
 		firstNameTF = new JTextField();
-		firstNameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		firstNameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		firstNameTF.setColumns(10);
 		firstNameTF.setBounds(140, 81, 150, 20);
 		
 		
 		JLabel lblPseudonyme = new JLabel("Pseudonyme  :");
-		lblPseudonyme.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblPseudonyme.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblPseudonyme.setBounds(10, 108, 91, 20);
 		
 		
 		pseudoTF = new JTextField();
-		pseudoTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		pseudoTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		pseudoTF.setColumns(10);
 		pseudoTF.setBounds(140, 109, 150, 20);
 		
@@ -118,29 +122,30 @@ public class AddPanel extends JPanel {
 		JPanel BtnPanel = new JPanel();
 		BtnPanel.setLayout(null);
 		GridBagConstraints gbc_BtnPanel = new GridBagConstraints();
+		gbc_BtnPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_BtnPanel.fill = GridBagConstraints.BOTH;
 		gbc_BtnPanel.gridx = 0;
 		gbc_BtnPanel.gridy = 1;
 		add(BtnPanel, gbc_BtnPanel);
 		
-		JButton confirmBtn = new JButton("Confirmer");
-		confirmBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		confirmBtn.setBounds(360, 0, 200, 50);
+		confirmBtn = new JButton("Confirmer");
+		confirmBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
+		confirmBtn.setBounds(230, 10, 200, 50);
 		confirmBtn.addActionListener(c);
 		BtnPanel.add(confirmBtn);
 		
 		
 		JLabel lblNat = new JLabel("Nationalités : ");
-		lblNat.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNat.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblNat.setBounds(10, 138, 91, 20);
 		
-		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat());
+		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat()); 
 		natChoice = new JComboBox<>();
 		natChoice.setModel(modelNat);
 		natChoice.setBounds(140, 140, 150, 22);
 		
 		JLabel lblDate = new JLabel("Date de Naissance : ");
-		lblDate.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblDate.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblDate.setBounds(12, 168, 125, 22);
 		
 		brithDateTF = new JFormattedTextField();
@@ -153,14 +158,14 @@ public class AddPanel extends JPanel {
 			e.printStackTrace();
 		}
 		brithDateTF.setToolTipText("##/##/####");
-		brithDateTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		brithDateTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		brithDateTF.setBounds(140, 171, 150, 22);
 		
 		MainPanel.add(nameLabel);
 		MainPanel.add(NameTF);
 		
 		JLabel lblMode = new JLabel("Mode de jeu :");
-		lblMode.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblMode.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblMode.setBounds(10, 85, 90, 20);
 		
 		DefaultComboBoxModel<String> modeModel = new DefaultComboBoxModel<>(ModeleESporter.getAllModeName());
@@ -172,7 +177,7 @@ public class AddPanel extends JPanel {
 		comboNotoriete.setBounds(140, 152, 150, 25);
 		
 		JLabel lblNotorit = new JLabel("Notoriété : ");
-		lblNotorit.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNotorit.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblNotorit.setBounds(12, 152, 125, 20);
 		
 		String[] value = new String[2];
@@ -183,7 +188,7 @@ public class AddPanel extends JPanel {
 		comboChamp.setBounds(140, 192, 150, 25);
 		
 		JLabel lblChampionnat = new JLabel("Championnat : ");
-		lblChampionnat.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblChampionnat.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblChampionnat.setBounds(12, 192, 125, 20);
 		
 		orgaTf = new JTextField();
@@ -192,7 +197,7 @@ public class AddPanel extends JPanel {
 		orgaTf.setBounds(140, 229, 150, 20);
 		
 		JLabel lblNomOrganisateur = new JLabel("Organisateur  :");
-		lblNomOrganisateur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNomOrganisateur.setFont(new Font("Berlin Sans FB", Font.PLAIN, MAIN_FONT_SIZE));
 		lblNomOrganisateur.setBounds(10, 229, 125, 20);
 		
 
@@ -220,6 +225,9 @@ public class AddPanel extends JPanel {
 			}
 			case "Orga":{
 				Title.setText("Ajout d'une écurie");
+				nameLabel.setBounds(10, 70, 80, 30);
+				NameTF.setBounds(140, 70, 200, 30);
+				confirmBtn.setBounds(250, 10, 150, 50);
 				break;
 			}
 			case "Tournament":{

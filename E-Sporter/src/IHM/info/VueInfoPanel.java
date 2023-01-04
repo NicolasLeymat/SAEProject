@@ -193,10 +193,13 @@ public class VueInfoPanel extends JPanel{
 		
 	}
 
-
 	/**
 	 * @wbp.parser.constructor
 	 */
+	public VueInfoPanel(Joueur j) {
+		
+	}
+	
 	public VueInfoPanel(Ecurie e) {
 		modeleEquipe.clear();
 		VueInfoPanel.ec = null;

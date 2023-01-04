@@ -39,6 +39,11 @@ public class ModeleESporter {
 		return f2;
 	}
 	
+	public static JFrame getPanelFrameStatic(JPanel vue) {
+		JFrame f2 = (JFrame) SwingUtilities.getWindowAncestor(vue);
+		return f2;
+	}
+	
 	public void addPlayer(Joueur j) {
 		Joueur.enregistrerJoueur(j);
 	}

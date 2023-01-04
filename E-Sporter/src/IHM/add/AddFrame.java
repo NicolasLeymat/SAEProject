@@ -1,14 +1,16 @@
 package IHM.add;
 
-import java.awt.EventQueue;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 
 public class AddFrame extends JFrame {
 
-	private final int WIDTH = 600;
+
+	private final int WIDTH = 450;
 	private final int HEIGHT = 500;
 	private AddPanel contentPane;
 	private String mode;
@@ -20,10 +22,37 @@ public class AddFrame extends JFrame {
 	public AddFrame(String type, Object obj) {
 		this.obj = obj;
 		this.setMode(type);
-		setBounds(100, 100, WIDTH, HEIGHT);
-		contentPane = new AddPanel(type, this.obj);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		this.setResizable(false);
+		switch(type) {
+			case "Player":{
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-135));
+				break;
+			}
+			case "Team":{
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-200));
+				break;
+			}
+			case "Orga":{
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
+				break;
+			}
+			case "Tournament":{
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-100));
+				break;
+			}
+		}
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0};
+		gridBagLayout.rowHeights = new int[]{0};
+		gridBagLayout.columnWeights = new double[]{1.0};
+		gridBagLayout.rowWeights = new double[]{1.0};
+		getContentPane().setLayout(gridBagLayout);
+		contentPane = new AddPanel(type, obj);
+		GridBagConstraints gbc_contentPane = new GridBagConstraints();
+		gbc_contentPane.gridy = 0;
+		gbc_contentPane.gridx = 0;
+		gbc_contentPane.fill = GridBagConstraints.BOTH;
+		getContentPane().add(contentPane, gbc_contentPane);		
 	}
 
 

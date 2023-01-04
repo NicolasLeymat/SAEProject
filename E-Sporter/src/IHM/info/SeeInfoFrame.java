@@ -18,11 +18,14 @@ public class SeeInfoFrame extends JFrame{
 	private VueInfoPanel vue;
 	
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public SeeInfoFrame(Ecurie ec) {
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{600, 0};
+		gridBagLayout.columnWidths = new int[]{500, 0};
 		gridBagLayout.rowHeights = new int[]{450, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
