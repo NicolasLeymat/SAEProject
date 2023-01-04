@@ -9,7 +9,7 @@ import org.junit.Test;
 import Object.Jeu;
 
 public class TestJeu {
-
+	
 	@Test
 	public void testGetJeuFromId() {
 		Jeu j = Jeu.getJeuFromId(0);

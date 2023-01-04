@@ -16,6 +16,11 @@ public class Jeu {
 	private String nom;
 	private List<ModeDeJeu> modesDeJeu;
 	
+	/**
+	 * construit un jeu a partir d'une id et d'un nom
+	 * @param id
+	 * @param nomJeu
+	 */
 	public Jeu(int id, String nomJeu) {
 		this.id = id;
 		this.nom = nomJeu;

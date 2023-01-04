@@ -4,7 +4,6 @@ package Object;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +79,8 @@ public class Joueur {
 	}
 	
 	//Fonction qui permet de récuperer la nationalité d'un joueur
-	public String getNationalite() {
-		return nationalite.toString();
+	public Nationalite getNationalite() {
+		return nationalite;
 	}
 	
 	//Fonction qui permet de changer la nationalité d'un joueur
@@ -101,12 +100,12 @@ public class Joueur {
     public static int enregistrerJoueur(Joueur joueur) {
     	Connection connex = Connexion.connexion();
     	PreparedStatement pst;
-    	ResultSet rs;
+    	int existe;
 
 		try {
 			
-			rs = verifierPresenceJoueur(connex, joueur);
-			if (rs.getInt(1) == 1) {
+			existe = verifierPresenceJoueur(joueur, 1);
+			if (existe == 1) {
 				return -1;
 			}
 			
@@ -121,11 +120,10 @@ public class Joueur {
 			pst.setString(3, joueur.getPrenom());
 			pst.setString(4, joueur.getPseudo());
 			pst.setString(5,joueur.getDateNaissance());
-			pst.setString(6,joueur.getNationalite());
+			pst.setString(6,joueur.getNationalite().getCode());
 			pst.setInt(7,joueur.getIdEquipe());
 			pst.executeUpdate();
 			
-			rs.close();
 			pst.close();
 			
 		} catch (Exception ex) {
@@ -138,14 +136,12 @@ public class Joueur {
     public static int modifierJoueur(Joueur j) throws Exception {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
-		ResultSet rs;
+		int existe;
+		
 		try {
 			
-			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
-			pst.setInt(1, j.getId());
-			rs = pst.executeQuery();
-			rs.next();
-			if (rs.getInt(1) == 0) {
+			existe = verifierPresenceJoueur(j, 0);
+			if (existe == 0) {
 				return -1;
 			}
 			
@@ -155,12 +151,11 @@ public class Joueur {
 			pst.setString(2, j.getNom());
 			pst.setString(3, j.getPseudo());
 			pst.setString(4, j.getDateNaissance());
-			pst.setString(5, j.getNationalite());
+			pst.setString(5, j.getNationalite().getCode());
 			pst.setInt(6, j.getIdEquipe());
 			pst.setInt(7, j.getId());
 			pst.executeUpdate();
 
-			rs.close();
 			pst.close();
 			
 		} catch (Exception ex) {
@@ -173,11 +168,12 @@ public class Joueur {
     public static int supprimerJoueur(Joueur j) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
-		ResultSet rs;
+		int existe;
+		
 		try {
 			
-			rs = verifierPresenceJoueur(connex, j);
-			if (rs.getInt(1) == 0) {
+			existe = verifierPresenceJoueur(j,1);
+			if (existe == 0) {
 				return -1;
 			}
 			
@@ -187,7 +183,6 @@ public class Joueur {
 			pst.setString(3, j.getPseudo());
 			pst.executeUpdate();
 			
-			rs.close();
 			pst.close();
 			
 		} catch (Exception ex) {
@@ -255,16 +250,12 @@ public class Joueur {
 		
 		try {
 			
-			rs = verifierPresenceJoueurId(connex, id);
-			if (rs.getInt(1) == 0) {
-				return s;
-			}
-			
 			pst = connex.prepareStatement("select nom from LMN3783A.sae_joueur where id_joueur = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
-			rs.next();
-			s = rs.getString(1);
+			while (rs.next()) {
+				s = rs.getString(1);
+			}
 			
 			rs.close();
 			pst.close();
@@ -275,26 +266,34 @@ public class Joueur {
 		return s;
 	}
     
-    private static ResultSet verifierPresenceJoueur(Connection connex, Joueur joueur) throws SQLException {
+    private static int verifierPresenceJoueur(Joueur j, int v) {
+    	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
-		pst.setString(1, joueur.getNom());
-		pst.setString(2, joueur.getPrenom());
-		pst.setString(3, joueur.getPseudo());
-		rs = pst.executeQuery();
-		rs.next();
-		return rs;
-	}
-    
-    private static ResultSet verifierPresenceJoueurId(Connection connex, int id) throws SQLException {
-		PreparedStatement pst;
-		ResultSet rs;
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
-		pst.setInt(1, id);
-		rs = pst.executeQuery();
-		rs.next();
-		return rs;
+		int res = 0;
+		
+		try {
+			if (v == 0) {
+				pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where id_joueur = ?" );
+				pst.setInt(1, j.getId());
+			}
+			else {
+				pst = connex.prepareStatement("select count(1) from LMN3783A.sae_joueur where nom = ? and prenom = ? and pseudonyme = ?" );
+				pst.setString(1, j.getNom());
+				pst.setString(2, j.getPrenom());
+				pst.setString(3, j.getPseudo());
+			}
+			
+			rs = pst.executeQuery();
+			rs.next();
+			res = rs.getInt(1);
+			rs.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
