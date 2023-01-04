@@ -13,12 +13,14 @@ import IHM.modif.VueModifFrame;
 import IHM.modif.VueModifPanel;
 import Object.Ecurie;
 import Object.Equipe;
+import Object.Tournoi;
 
 public class ControleurModif implements ActionListener{
 
 	private JPanel vue;
 	private Equipe eq;
 	private Ecurie ec;
+	private Tournoi t;
 	private ModeleESporter modele;
 	private VueModifFrame v;
 	private boolean Equipe;
@@ -36,6 +38,14 @@ public class ControleurModif implements ActionListener{
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 		this.Equipe = false;
+	}
+	
+	public ControleurModif(Tournoi t,JPanel vue) {
+		this.t = t;
+		this.vue = vue;
+		this.modele = new ModeleESporter();
+		this.Equipe = false;
+		
 	}
 	
 	@Override

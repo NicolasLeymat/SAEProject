@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
+import Object.Tournoi;
 import controleur.ControleurAdd;
 import controleur.ControleurJList;
 import controleur.ControleurModif;
+import controleur.ControleurTournoiJList;
 import controleur.ModeleESporter;
 
 import java.awt.GridBagLayout;
@@ -31,10 +33,11 @@ public class VueInfoPanel extends JPanel{
 	private static DefaultListModel<Joueur> modeleJoueur = new DefaultListModel<>();
 	private static Equipe e;
 	private static Ecurie ec;
+	private static Tournoi t;
 	private static JLabel nameLbl;
 	private int classementCurrentEquipe;
 	private static JLabel nomEcurie;
-	
+	private static JLabel nomTournoi;
 	
 
 
@@ -275,6 +278,53 @@ public class VueInfoPanel extends JPanel{
 		modfier.setBounds(62, 10, 200, 50);
 		modfier.addActionListener(cm);
 		panel.add(modfier);
+	}
+	
+	public VueInfoPanel(Tournoi t) {
+		modeleEquipe.clear();
+		VueInfoPanel.t = null;
+		VueInfoPanel.t = t;
+		this.setSize(500, 400);
+		ControleurAdd c = new ControleurAdd(this, t);
+		ControleurModif cm = new ControleurModif(t, this);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{150, 258, 0};
+		gridBagLayout.rowHeights = new int[]{0, 70, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		add(panel_1, gbc_panel_1);
+		
+		JLabel lblNom = new JLabel("Nom Tournoi : ");
+		lblNom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNom.setBounds(0, 10, 145, 17);
+		panel_1.add(lblNom);
+		
+		nomTournoi = new JLabel(t.getNom());
+		nomTournoi.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nomTournoi.setBounds(0, 35, 145, 13);
+		panel_1.add(nomTournoi);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 0;
+		add(panel_2, gbc_panel_2);
+		
+		
+		
+		
 	}
 
 	public static void updateListJoueur() {

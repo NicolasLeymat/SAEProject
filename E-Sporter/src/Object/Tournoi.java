@@ -330,4 +330,30 @@ public class Tournoi {
 			m.getWinner().addPoints(1);
 		}
 	}
+	
+	public static List<Tournoi> getAllTournois() {
+		Connection connex = Connexion.connexion();
+		Statement st;
+		ResultSet rs;
+		List<Tournoi> tournois = new ArrayList<>();
+		Tournoi t = null;
+		
+		try {
+			
+			st = connex.createStatement();
+			rs = st.executeQuery("select id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
+			while (rs.next()) {
+				t = new Tournoi(rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
+				tournois.add(t);
+			}
+			
+			rs.close();
+			st.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return tournois;
+	}
+	
 }

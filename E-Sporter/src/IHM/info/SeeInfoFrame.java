@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 import Object.Ecurie;
 import Object.Equipe;
+import Object.Tournoi;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -43,6 +45,23 @@ public class SeeInfoFrame extends JFrame{
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		vue = new VueInfoPanel(eq);
+		GridBagConstraints gbc_vue = new GridBagConstraints();
+		gbc_vue.fill = GridBagConstraints.BOTH;
+		gbc_vue.gridx = 0;
+		gbc_vue.gridy = 0;
+		getContentPane().add(vue, gbc_vue);
+	}
+	
+	public SeeInfoFrame(Tournoi t) {
+		this.setVisible(true);
+		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{600, 0};
+		gridBagLayout.rowHeights = new int[]{450, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		getContentPane().setLayout(gridBagLayout);
+		vue = new VueInfoPanel(t);
 		GridBagConstraints gbc_vue = new GridBagConstraints();
 		gbc_vue.fill = GridBagConstraints.BOTH;
 		gbc_vue.gridx = 0;

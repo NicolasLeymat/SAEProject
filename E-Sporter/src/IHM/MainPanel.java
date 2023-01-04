@@ -10,7 +10,9 @@ import javax.swing.border.LineBorder;
 
 import Object.Ecurie;
 import Object.Equipe;
+import Object.Tournoi;
 import controleur.ControleurJList;
+import controleur.ControleurTournoiJList;
 import controleur.ControleurEcurieJList;
 import controleur.ModeleESporter;
 
@@ -28,12 +30,18 @@ public class MainPanel extends JPanel{
 	private static JList<Ecurie> listEcurie = new JList<>();
 	private static DefaultListModel<Ecurie> modelEcurie = new DefaultListModel<>();
 	
+	private static JList<Tournoi> listTournoi = new JList<>();
+	private static DefaultListModel<Tournoi> modelTournoi = new DefaultListModel<>();
+	
 	private static List<Equipe> e = null;
 	private static List<Ecurie> ec = null;
+	private static List<Tournoi> t = null;
 	
 	public MainPanel() {
 		ControleurJList controleurEquipe = new ControleurJList();
 		ControleurEcurieJList controleurEcurie = new ControleurEcurieJList();
+		ControleurTournoiJList controleurTournoi = new ControleurTournoiJList();
+		
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
 		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
@@ -60,13 +68,19 @@ public class MainPanel extends JPanel{
 		ecuriePanel.setMinimumSize(new Dimension(400, 625));
 		add(ecuriePanel);
 		
-		JScrollPane tournamentPanel = new JScrollPane();
-		tournamentPanel.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		tournamentPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		tournamentPanel.setSize(400, 625);
-		tournamentPanel.setMaximumSize(new Dimension(400, 625));
-		tournamentPanel.setMinimumSize(new Dimension(400, 625));
-		add(tournamentPanel);
+		
+		listTournoi.setBorder(null);
+		listTournoi.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		modelTournoi.addAll(ModeleESporter.getAllTournoi());
+		listTournoi.setModel(modelTournoi);
+		listTournoi.addMouseListener(controleurTournoi);
+		JScrollPane tournoiPanel = new JScrollPane(listTournoi);
+		tournoiPanel.setSize(400, 625);
+		tournoiPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		tournoiPanel.setMaximumSize(new Dimension(400, 625));
+		tournoiPanel.setMinimumSize(new Dimension(400, 625));
+		add(tournoiPanel);
+
 	}
 	
 	public static void changeModelElementEquipe(List<Equipe> l) {

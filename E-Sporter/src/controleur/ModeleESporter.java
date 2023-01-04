@@ -25,6 +25,7 @@ public class ModeleESporter {
 	public static List<Ecurie> resultatRechercheEcuries;
 	public static List<Equipe> allEquipe;
 	public static List<Ecurie> allEcurie;
+	public static List<Tournoi> allTournoi;
 	private static Connection connx;
 	
 	public ModeleESporter() {
@@ -82,6 +83,7 @@ public class ModeleESporter {
 	public static void getAll() {
 		allEcurie = Ecurie.getAllEcuries();
 		allEquipe = Equipe.getAllEquipes();
+		allTournoi = Tournoi.getAllTournois();
 		try {
 			connx.close();
 		} catch (SQLException e) {
@@ -111,6 +113,10 @@ public class ModeleESporter {
 	
 	public static List<Ecurie> getAllEcurie(){
 		return Ecurie.getAllEcuries();
+	}
+	
+	public static List<Tournoi> getAllTournoi(){
+		return Tournoi.getAllTournois();
 	}
 
 	public void setLastRecherche(List<Ecurie> lec, List<Equipe> leq) {
