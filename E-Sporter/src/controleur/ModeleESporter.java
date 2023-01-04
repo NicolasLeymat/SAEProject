@@ -64,8 +64,8 @@ public class ModeleESporter {
 		}
 	}
 	
-	public static Nationalite[] getAllNat(){
-		Nationalite[] n = Nationalite.values();
+	public static String[] getAllNat(){
+		String[] n = Nationalite.getAllNationalites();
 		return n;
 	}
 	

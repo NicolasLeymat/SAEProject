@@ -45,7 +45,7 @@ public class AddPanel extends JPanel {
 	private JTextField firstNameTF;
 	private JTextField pseudoTF;
 	private JFormattedTextField brithDateTF;
-	private JComboBox<Nationalite> natChoice;
+	private JComboBox<String> natChoice;
 	private Object obj;
 	
 	//Tournament
@@ -134,7 +134,7 @@ public class AddPanel extends JPanel {
 		lblNat.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		lblNat.setBounds(10, 138, 91, 20);
 		
-		DefaultComboBoxModel<Nationalite> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat());
+		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat());
 		natChoice = new JComboBox<>();
 		natChoice.setModel(modelNat);
 		natChoice.setBounds(140, 140, 150, 22);
@@ -259,7 +259,8 @@ public class AddPanel extends JPanel {
 						this.firstNameTF.getText(), 
 						this.pseudoTF.getText(), 
 						this.brithDateTF.getText(), 
-						(Nationalite) this.natChoice.getSelectedItem());
+						Nationalite.getByNom((String) this.natChoice.getSelectedItem()));
+				System.out.println((String) this.natChoice.getSelectedItem());
 				j.setIdEquipe(teamToAdd.getId());
 				return j;
 			}

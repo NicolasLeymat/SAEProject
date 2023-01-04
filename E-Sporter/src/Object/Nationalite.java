@@ -1,6 +1,9 @@
 package Object;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //Classe qui permet d'énumerer les nationalités
@@ -298,6 +301,19 @@ public enum Nationalite {
 	 */
 	public static Nationalite getByNom(String nom) {
 		return nomMap.get(nom);
+	}
+	
+	public static String[] getAllNationalites() {
+		List<String> tempRes = new ArrayList<String>();
+		for (Nationalite n : Nationalite.values()) {
+			tempRes.add(n.getNom());
+		}
+		Collections.sort(tempRes);
+		String[] res = new String[tempRes.size()];
+		for (int i=0; i<tempRes.size(); i++) {
+			res[i] = tempRes.get(i);
+		}
+		return res;
 	}
 	
 }
