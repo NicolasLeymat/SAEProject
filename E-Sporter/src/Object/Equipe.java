@@ -171,7 +171,7 @@ public class Equipe {
 	 * @return 1 si l'equipe a ete enregistree, -1 sinon
 	 * @throws Exception
 	 */
-	public static int enregistrerEquipe(Equipe equipe) throws Exception {
+	public static int enregistrerEquipe(Equipe equipe) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		int existe;
@@ -181,7 +181,7 @@ public class Equipe {
 			// A remplacer par un trigger
 			existe = verifierPresenceEquipe(equipe,1);
 			if (existe != 0) {
-				return -1;
+				return modifierEquipe(equipe);
 			}
 			
 			if (equipe.getId() == -1) {
@@ -379,8 +379,8 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where nom LIKE ?");
-			pst.setString(1, nom+"%");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where lower(nom) LIKE lower(?)");
+			pst.setString(1, "%"+nom+"%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				e = createEquipeFromRs(rs);

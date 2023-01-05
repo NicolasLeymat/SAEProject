@@ -292,7 +292,7 @@ public class AddPanel extends JPanel {
 				Notoriete not  = (Notoriete) this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, 0);
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0));
 					System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

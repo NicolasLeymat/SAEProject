@@ -11,7 +11,7 @@ public class App extends JFrame{
 	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 625;
 	
-	public App() {
+	public App() throws Exception {
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		GridBagLayout gridBagLayout = new GridBagLayout();

@@ -18,7 +18,7 @@ public class VuePrincipale extends JPanel{
 	private MainPanel mainPanel;
 	private ButtonPanel buttonPanel;
 	
-	public VuePrincipale() {
+	public VuePrincipale() throws Exception {
 		this.setSize(new Dimension(1200, 625));
 		ControleurRecherche controleurRecherche = new ControleurRecherche(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();

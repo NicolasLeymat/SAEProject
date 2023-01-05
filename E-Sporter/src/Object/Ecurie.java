@@ -194,7 +194,7 @@ public class Ecurie {
 			
 			existe = verifierPresenceEcurie(ecurie,0);
 			if (existe == 0) {
-				return -1;
+				return modifierEcurie(ecurie);
 			}
 			
 			pst = connex.prepareStatement("update LMN3783A.sae_ecurie set nom = ? where id_ecurie = ?" );

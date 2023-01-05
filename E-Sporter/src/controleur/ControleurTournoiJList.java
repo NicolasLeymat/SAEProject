@@ -3,9 +3,11 @@ package controleur;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JList;
+import javax.swing.*;
 
 import IHM.info.SeeInfoFrame;
+import IHM.info.VueInfoTournoisFrame;
+import IHM.info.VueInfoTournoisPanel;
 import Object.Ecurie;
 import Object.Tournoi;
 
@@ -16,8 +18,8 @@ public class ControleurTournoiJList implements MouseListener{
 		JList<Tournoi> list = (JList<Tournoi>) e.getSource();
 		int index = list.locationToIndex(e.getPoint());
 		System.out.println(list.getModel().getElementAt(index).toString());
-		SeeInfoFrame window = new SeeInfoFrame(list.getModel().getElementAt(index));
-		window.setVisible(true); 
+		VueInfoTournoisFrame window = new VueInfoTournoisFrame(list.getModel().getElementAt(index));
+		window.setVisible(true);
 		
 	}
 

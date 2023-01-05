@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+import IHM.info.VueInfoTournoisPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Tournoi;
@@ -37,7 +38,7 @@ public class MainPanel extends JPanel{
 	private static List<Ecurie> ec = null;
 	private static List<Tournoi> t = null;
 	
-	public MainPanel() {
+	public MainPanel() throws Exception {
 		ControleurJList controleurEquipe = new ControleurJList();
 		ControleurEcurieJList controleurEcurie = new ControleurEcurieJList();
 		ControleurTournoiJList controleurTournoi = new ControleurTournoiJList();
@@ -76,7 +77,6 @@ public class MainPanel extends JPanel{
 		listTournoi.addMouseListener(controleurTournoi);
 		JScrollPane tournoiPanel = new JScrollPane(listTournoi);
 		tournoiPanel.setSize(400, 625);
-		tournoiPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		tournoiPanel.setMaximumSize(new Dimension(400, 625));
 		tournoiPanel.setMinimumSize(new Dimension(400, 625));
 		add(tournoiPanel);

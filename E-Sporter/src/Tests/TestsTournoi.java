@@ -20,8 +20,7 @@ public class TestsTournoi {
 
     @Before
     public void setUp() throws Exception {
-        int id_mode = /*ModeDeJeu.getModeDeJeu(0).getId_Mode();*/ 3;
-        tournoi = new Tournoi("Tournoi test", Date.valueOf("2022-12-12"), 1,1,1, 1);
+        tournoi = new Tournoi("Tournoi test", Date.valueOf("2023-12-12"), 1,1,1, ModeDeJeu.getModeDeJeuFromId(1));
         this.connx = Connexion.connexion();
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);
@@ -72,7 +71,9 @@ public class TestsTournoi {
             }
             phaseE.genererMatchs();
         }
+        tournoi.ajouterPoints();
         System.out.println(tournoi.toString());
+        assertEquals(115,phaseE.getMatch(0).getEquipe1().getPoints());
     }
 
 

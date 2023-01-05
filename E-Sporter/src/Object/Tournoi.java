@@ -22,24 +22,24 @@ public class Tournoi {
 	private int championnat;
 	private int notoriete;
 	private int id_organisateur;
-	private int id_Mode;
+	private ModeDeJeu id_Mode;
 	private List<Equipe> listeEquipe;
 	private PhaseDePoule phasePoule;
 	private PhaseFinale phaseElim;
 
+	//Definit les points gagnés selon la place finale
 	private enum PointsClassement {
 		PREMIER(100),DEUXIEME(60),TROISIEME(30),QUATRIEME(10);
-
 		private int points;
-
 		PointsClassement(int nb) {
 			this.points = nb;
 		}
 	}
 
 	//Constructeur de la classe "Tournoi"
-	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, int id_Mode) throws Exception {
-		
+	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode) throws Exception {
+
+
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
 		}
@@ -121,17 +121,17 @@ public class Tournoi {
 	}
 
 	//Fonction qui permet de récuperer l'identifiant du mode de jeu d'un tournoi
-	public int getId_Mode() {
+	public ModeDeJeu getId_Mode() {
 		return id_Mode;
 	}
 
 	//Fonction qui permet d'ajouter une équipe à un tournoi
 	public void addEquipe(Equipe equipe) throws Exception{
 		if (this.listeEquipe.size()>=16) {
-			throw new Exception();
+			throw new Exception("Tournoi plein");
 		}
 		if (dateInvalide(this.dateTournoi)==true) {
-			throw new Exception();
+			throw new Exception("le tournoi est déjà fini");
 		}
 		this.listeEquipe.add(equipe);
 	}
@@ -166,25 +166,29 @@ public class Tournoi {
 		return phaseElim;
 	}
 	
-	private static ResultSet verifierPresenceTournoi(Connection connex, Tournoi tournoi) throws SQLException {
+	private static boolean verifierPresenceTournoi( Tournoi tournoi) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
+		Connection connex = Connexion.connexion();
 		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_Tournoi where nom = ? and datetournoi= ?" );
 		pst.setString(1, tournoi.getNom());
 		pst.setDate(2, tournoi.getDateTournoi());
 		rs = pst.executeQuery();
 		rs.next();
-		return rs;
+		return rs.getInt(1) >=1;
 	}
 	
-	private static ResultSet verifierPresenceTournoiId(Connection connex, int id) throws SQLException {
+	private static boolean verifierPresenceTournoi( int id) throws SQLException {
 		PreparedStatement pst;
 		ResultSet rs;
+		Connection connex = Connexion.connexion();
 		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_tournoi where id_tournoi = ?" );
 		pst.setInt(1, id);
 		rs = pst.executeQuery();
 		rs.next();
-		return rs;
+		boolean res = rs.getInt(1) >= 1;
+		rs.close();
+		return res;
 	}
 	
 	
@@ -213,45 +217,38 @@ public class Tournoi {
 		public static int enregistrerTournoi(Tournoi tournoi) throws Exception {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
-			ResultSet rs;
 			try {
-				
-				rs = verifierPresenceTournoi(connex, tournoi);
-				if (rs.getInt(1) != 0) {
-					return -1;
-				}
-				
+
+
 				if (tournoi.getId() == -1) {
-					tournoi.setId(Tournoi.getLastId()+1);
+					tournoi.setId(Tournoi.getLastId() + 1);
 				}
-				
+
 				pst = connex.prepareStatement("insert into LMN3783A.sae_tournoi(id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur,id_mode) values(?,?,?,?,?,?,?)");
 				pst.setInt(1, tournoi.getId());
 				pst.setString(2, tournoi.getNom());
 				pst.setDate(3, tournoi.getDateTournoi());
 				pst.setInt(4, tournoi.getChampionnat());
-				pst.setInt(5,tournoi.getNotoriete());
-				pst.setInt(6,tournoi.getId_Organisateur());
-				pst.setInt(7, tournoi.getId_Mode());
+				pst.setInt(5, tournoi.getNotoriete());
+				pst.setInt(6, tournoi.getId_Organisateur());
+				pst.setInt(7, tournoi.getId_Mode().getIdMode());
 				pst.executeUpdate();
-				rs.close();
 				pst.close();
-				
+
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 				return -1;
 			}
 			return 1;
 		}
-		
+
 		public static int modifierTournoi(Tournoi t) {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
-			ResultSet rs;
 			try {
-				
-				rs = verifierPresenceTournoiId(connex, t.getId());
-				if (rs.getInt(1) == 0) {
+
+
+				if (!verifierPresenceTournoi(t)) {
 					return -1;
 				}
 				
@@ -261,10 +258,9 @@ public class Tournoi {
 				pst.setInt(3, t.getChampionnat());
 				pst.setInt(4,t.getNotoriete());
 				pst.setInt(5,t.getId_Organisateur());
-				pst.setInt(6, t.getId_Mode());
+				pst.setInt(6, t.getId_Mode().getIdMode());
 				pst.executeUpdate();
-				
-				rs.close();
+
 				pst.close();
 				
 			} catch (SQLException ex) {
@@ -280,9 +276,8 @@ public class Tournoi {
 			ResultSet rs;
 			
 			try {
-				
-				rs = verifierPresenceTournoi(connex,t);
-				if (rs.getInt(1) == 0) {
+
+				if (verifierPresenceTournoi(t)) {
 					return -1;
 				}
 				
@@ -290,7 +285,6 @@ public class Tournoi {
 				pst.setString(1, t.getNom());
 				pst.setDate(2, t.getDateTournoi());
 				pst.executeUpdate();
-				rs.close();
 				pst.close();
 				
 			} catch (SQLException ex) {
@@ -312,6 +306,7 @@ public class Tournoi {
 				'}';
 	}
 
+	//Ajoute les points à la fin d'un tournoi
 	public void ajouterPoints () throws  Exception {
 		if (!phaseElim.estFinie()) {
 			throw new Exception("le tournoi n'est pas fini");
@@ -324,10 +319,6 @@ public class Tournoi {
 		for (Match m :
 				phaseElim.getMatchs()) {
 			m.getWinner().addPoints(5);
-		}
-		for (Match m :
-		phasePoule.getMatchs()) {
-			m.getWinner().addPoints(1);
 		}
 	}
 	
@@ -343,7 +334,7 @@ public class Tournoi {
 			st = connex.createStatement();
 			rs = st.executeQuery("select id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
 			while (rs.next()) {
-				t = new Tournoi(rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
+				t = new Tournoi(rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), ModeDeJeu.getModeDeJeuFromId(rs.getInt(7)));
 				tournois.add(t);
 			}
 			
