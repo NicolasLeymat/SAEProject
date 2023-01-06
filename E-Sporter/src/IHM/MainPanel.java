@@ -11,6 +11,8 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Tournoi;
 import controleur.ControleurJList;
+import controleur.ControleurTournoiJList;
+import controleur.ControleurEcurieJList;
 import controleur.ControleurFilter;
 import controleur.ModeleESporter;
 
