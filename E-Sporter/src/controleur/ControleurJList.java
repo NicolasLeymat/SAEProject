@@ -41,7 +41,7 @@ public class ControleurJList implements MouseListener {
 			windowTournoi.setVisible(true);
 			break;
 		case "class Object.Joueur":
-			System.out.println(list.getModel().getElementAt(index).toString());
+			System.out.println(list.getModel().getElementAt(index).getClass().toString());
 			SeeInfoFrame windowJoueur = new SeeInfoFrame((Joueur) list.getModel().getElementAt(index));
 			windowJoueur.setVisible(true);
 			break;
