@@ -10,7 +10,6 @@ import Object.Joueur;
 import Object.Tournoi;
 import controleur.ControleurAdd;
 import controleur.ControleurJList;
-import controleur.ControleurJoueurJList;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
 
@@ -138,7 +137,7 @@ public class VueInfoPanel extends JPanel{
 		gbc_panelJoueur.gridy = 0;
 		add(panelJoueur, gbc_panelJoueur);
 		
-		ControleurJoueurJList controleur = new ControleurJoueurJList();
+		ControleurJList controleur = new ControleurJList();
 		modeleJoueur.addAll(e.getJoueurs());
 		System.out.println("--------------------------------------------------\n"+e.getJoueurs());
 		//Solution pour ne pas dupliquer les listeners
