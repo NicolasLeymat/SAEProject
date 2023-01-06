@@ -10,6 +10,7 @@ import Object.Joueur;
 import Object.Tournoi;
 import controleur.ControleurAdd;
 import controleur.ControleurJList;
+import controleur.ControleurJoueurJList;
 import controleur.ControleurModif;
 import controleur.ControleurTournoiJList;
 import controleur.ModeleESporter;
@@ -34,10 +35,12 @@ public class VueInfoPanel extends JPanel{
 	private static Equipe e;
 	private static Ecurie ec;
 	private static Tournoi t;
+	private static Joueur j;
 	private static JLabel nameLbl;
 	private int classementCurrentEquipe;
 	private static JLabel nomEcurie;
 	private static JLabel nomTournoi;
+	private static JLabel nomJoueur;
 	
 
 
@@ -136,12 +139,18 @@ public class VueInfoPanel extends JPanel{
 		gbc_panelJoueur.gridy = 0;
 		add(panelJoueur, gbc_panelJoueur);
 		
-		
+		ControleurJoueurJList controleur = new ControleurJoueurJList();
 		modeleJoueur.addAll(e.getJoueurs());
 		System.out.println("--------------------------------------------------\n"+e.getJoueurs());
+		//Solution pour ne pas dupliquer les listeners
+		listJ = new JList<>();
+		//
 		listJ.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		listJ.setModel(modeleJoueur);
 		JScrollPane scrollPane = new JScrollPane(listJ);
+
+		listJ.addMouseListener(controleur);
+		
 		scrollPane.setBounds(0, 36, 272, 264);
 		panelJoueur.add(scrollPane);
 		
@@ -192,13 +201,6 @@ public class VueInfoPanel extends JPanel{
 		
 		
 	}
-
-	/**
-	 * @wbp.parser.constructor
-	 */
-	public VueInfoPanel(Joueur j) {
-		
-	}
 	
 	public VueInfoPanel(Ecurie e) {
 		modeleEquipe.clear();
@@ -244,6 +246,9 @@ public class VueInfoPanel extends JPanel{
 		
 		ControleurJList controleur = new ControleurJList();
 		modeleEquipe.addAll(e.getEquipes());
+		//
+		list = new JList<>();
+		//
 		list.setModel(modeleEquipe);
 		list.addMouseListener(controleur);
 		JScrollPane scrollPane = new JScrollPane(list);
@@ -329,6 +334,106 @@ public class VueInfoPanel extends JPanel{
 		
 		
 	}
+	
+	public VueInfoPanel(Joueur j) {
+		VueInfoPanel.j = null;
+		VueInfoPanel.j = j;
+		this.setSize(500, 400);
+		ControleurAdd c = new ControleurAdd(this, j);
+		ControleurModif cm = new ControleurModif(j, this);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{150, 258, 0};
+		gridBagLayout.rowHeights = new int[]{0, 70, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		add(panel_1, gbc_panel_1);
+		
+		JLabel lblNom = new JLabel("Nom Joueur : ");
+		lblNom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNom.setBounds(0, 10, 145, 17);
+		panel_1.add(lblNom);
+		
+		nomJoueur = new JLabel(j.getNom());
+		nomJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nomJoueur.setBounds(0, 35, 145, 13);
+		panel_1.add(nomJoueur);
+	
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 0;
+		add(panel_2, gbc_panel_2);
+		
+		JLabel prenomJoueurLabel = new JLabel("Prénom Joueur : ");
+		prenomJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		prenomJoueurLabel.setBounds(0, 10, 145, 20);
+		panel_2.add(prenomJoueurLabel);
+		
+		JLabel prenomJoueur = new JLabel(j.getPrenom());
+		prenomJoueur.setBounds(0, 35, 145, 20);
+		panel_2.add(prenomJoueur);
+		prenomJoueur.setVerticalAlignment(SwingConstants.TOP);
+		prenomJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		
+		JLabel pseudoJoueurLabel= new JLabel("Pseudonyme Joueur : ");
+		pseudoJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		pseudoJoueurLabel.setBounds(0, 60, 145, 20);
+		panel_1.add(pseudoJoueurLabel);
+		
+		JLabel pseudoJoueur = new JLabel(j.getPseudo());
+		pseudoJoueur.setBounds(0, 85, 145, 20);
+		panel_1.add(pseudoJoueur);
+		pseudoJoueur.setVerticalAlignment(SwingConstants.TOP);
+		pseudoJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		JLabel dateJoueurLabel= new JLabel("Date de naissance Joueur : ");
+		dateJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		dateJoueurLabel.setBounds(0, 60, 200, 20);
+		panel_2.add(dateJoueurLabel);
+		
+		JLabel dateJoueur = new JLabel(j.getDateNaissance());
+		dateJoueur.setBounds(0, 85, 145, 20);
+		panel_2.add(dateJoueur);
+		dateJoueur.setVerticalAlignment(SwingConstants.TOP);
+		dateJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		JLabel nationaliteJoueurLabel= new JLabel("Pays de Naissance Joueur : ");
+		nationaliteJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nationaliteJoueurLabel.setBounds(0, 110, 200, 20);
+		panel_1.add(nationaliteJoueurLabel);
+		
+		JLabel nationaliteJoueur = new JLabel(j.getNationalite().getNom());
+		nationaliteJoueur.setBounds(0, 135, 145, 20);
+		panel_1.add(nationaliteJoueur);
+		nationaliteJoueur.setVerticalAlignment(SwingConstants.TOP);
+		nationaliteJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		JLabel equipeJoueurLabel= new JLabel("Equipe Joueur : ");
+		equipeJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		equipeJoueurLabel.setBounds(0, 110, 200, 20);
+		panel_2.add(equipeJoueurLabel);
+		
+		JLabel equipeJoueur = new JLabel(Equipe.getNomEquipeFromId(j.getIdEquipe()));
+		equipeJoueur.setBounds(0, 135, 200, 20);
+		panel_2.add(equipeJoueur);
+		equipeJoueur.setVerticalAlignment(SwingConstants.TOP);
+		equipeJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+	}
+	
 
 	public static void updateListJoueur() {
 		modeleJoueur.clear();
@@ -341,7 +446,7 @@ public class VueInfoPanel extends JPanel{
 		modeleEquipe.clear();
 		ec = Ecurie.getEcurieFromId(ec.getId());
 		modeleEquipe.addAll(ec.getEquipes());
-		listJ.setModel(modeleJoueur);
+		list.setModel(modeleEquipe);
 	}
 	
 	public static void updateInfoEquipe(String nom) {
