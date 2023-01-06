@@ -82,20 +82,20 @@ public class MainPanel extends JPanel{
 		JPanel filterTeamPanel = new JPanel();
 		teamPanel.setColumnHeaderView(filterTeamPanel);
 		
-		//ControleurFilter<String> controleurTeam = new ControleurFilter<>("Equipe",this);
+		ControleurFilter<String> controleurTeam = new ControleurFilter<>("Equipe",this);
 		filterTeam = new JComboBox<>();
 		filterTeam.addItem("Sans filtre");
 		for(String s : ModeleESporter.getAllModeName()){
 			filterTeam.addItem(s);
 		}
 		filterTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
-		//filterTeam.addActionListener(controleurTeam);
+		filterTeam.addActionListener(controleurTeam);
 		filterTeamPanel.add(filterTeam);
 		
 		
 		JPanel filterOrgaPanel = new JPanel();
 		ecuriePanel.setColumnHeaderView(filterOrgaPanel);
-		
+		ControleurFilter<String> controleurOrga = new ControleurFilter<>("Ecurie", this);
 		filterOrga = new JComboBox<>();
 		filterOrga.addItem("Sans filtre");
 		String[] listNat = ModeleESporter.getAllNat();
@@ -103,6 +103,7 @@ public class MainPanel extends JPanel{
 			filterOrga.addItem(s);
 		}
 		filterOrga.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterOrga.addActionListener(controleurOrga);
 		filterOrgaPanel.add(filterOrga);
 		
 		JPanel filterTournamentPanel = new JPanel();

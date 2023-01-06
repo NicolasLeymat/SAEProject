@@ -510,6 +510,33 @@ public class Equipe {
 		return s;
 	}
 	
+	public static List<Equipe> getEquipeFromMode(int id){
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		Equipe e = null;
+		String s = null;
+		List<Equipe> l = new LinkedList<>();
+		
+		try {
+			
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_mode = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = createEquipeFromRs(rs);
+				l.add(e);
+			}
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return l;
+	}
+	
 	
 	private static int verifierPresenceEquipe(Equipe e, int v) {
 		Connection connex = Connexion.connexion();

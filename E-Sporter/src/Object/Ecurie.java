@@ -33,6 +33,10 @@ public class Ecurie {
 	 */
 	private String logo;
 	/**
+	 * Nationalité de l'écurie
+	 */
+	private Nationalite nat;
+	/**
 	 * construit une ecurie a partir d'un nom
 	 * @param nom
 	 * 		nom d'une ecurie
@@ -461,9 +465,50 @@ public class Ecurie {
 		return res;
 	}
 
+	public static List<Ecurie> getEcurieFromNat(Nationalite nat){
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		List<Ecurie> l = new ArrayList<>();
+		Ecurie e = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("select id_ecurie, nom, nat from LMN3783A.sae_ecurie where nat LIKE ? order by nom");
+			pst.setString(1, nat.getCode());
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = new Ecurie(rs.getString(2));
+				e.setId(rs.getInt(1));
+				e.setNat(Nationalite.getByCode(rs.getString(3)));
+				e.listeEquipes = Equipe.getEquipesFromEcurie(rs.getInt(1));
+				l.add(e);
+			}
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return l;
+		
+	}
+	
+	
 	@Override
 	public String toString() {
 		return this.nom;
+	}
+
+
+	public Nationalite getNat() {
+		return nat;
+	}
+
+
+	public void setNat(Nationalite nat) {
+		this.nat = nat;
 	}
 
 }

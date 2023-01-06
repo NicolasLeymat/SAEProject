@@ -8,3 +8,4 @@ E-Sporter/.classpath
 E-Sporter/codemr/*
 E-Sporter/.settings/org.eclipse.jdt.core.prefs
 *.prefs
+.vscode/launch.json
