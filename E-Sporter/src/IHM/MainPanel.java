@@ -6,21 +6,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
 
-import IHM.info.VueInfoTournoisPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Tournoi;
 import controleur.ControleurJList;
 import controleur.ControleurTournoiJList;
 import controleur.ControleurEcurieJList;
+import controleur.ControleurFilter;
 import controleur.ModeleESporter;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.List;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class MainPanel extends JPanel{
 
@@ -33,15 +32,18 @@ public class MainPanel extends JPanel{
 	
 	private static JList<Tournoi> listTournoi = new JList<>();
 	private static DefaultListModel<Tournoi> modelTournoi = new DefaultListModel<>();
-	
+
 	private static List<Equipe> e = null;
 	private static List<Ecurie> ec = null;
 	private static List<Tournoi> t = null;
+	private JComboBox<String> filterTournament;
+	private JComboBox<String> filterOrga;
+	private JComboBox<String> filterTeam;
 	
 	public MainPanel() throws Exception {
 		ControleurJList controleurEquipe = new ControleurJList();
-		ControleurEcurieJList controleurEcurie = new ControleurEcurieJList();
-		ControleurTournoiJList controleurTournoi = new ControleurTournoiJList();
+		ControleurJList controleurEcurie = new ControleurJList();
+		ControleurJList controleurTournoi = new ControleurJList();
 		
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
@@ -56,7 +58,6 @@ public class MainPanel extends JPanel{
 		teamPanel.setMinimumSize(new Dimension(400, 625));
 		add(teamPanel);
 		
-		
 		listEcurie.setBorder(null);
 		listEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		modelEcurie.addAll(ModeleESporter.getAllEcurie());
@@ -69,7 +70,6 @@ public class MainPanel extends JPanel{
 		ecuriePanel.setMinimumSize(new Dimension(400, 625));
 		add(ecuriePanel);
 		
-		
 		listTournoi.setBorder(null);
 		listTournoi.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		modelTournoi.addAll(ModeleESporter.getAllTournoi());
@@ -80,6 +80,43 @@ public class MainPanel extends JPanel{
 		tournoiPanel.setMaximumSize(new Dimension(400, 625));
 		tournoiPanel.setMinimumSize(new Dimension(400, 625));
 		add(tournoiPanel);
+		
+		JPanel filterTeamPanel = new JPanel();
+		teamPanel.setColumnHeaderView(filterTeamPanel);
+		
+		//ControleurFilter<String> controleurTeam = new ControleurFilter<>("Equipe",this);
+		filterTeam = new JComboBox<>();
+		filterTeam.addItem("Sans filtre");
+		for(String s : ModeleESporter.getAllModeName()){
+			filterTeam.addItem(s);
+		}
+		filterTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		//filterTeam.addActionListener(controleurTeam);
+		filterTeamPanel.add(filterTeam);
+		
+		
+		JPanel filterOrgaPanel = new JPanel();
+		ecuriePanel.setColumnHeaderView(filterOrgaPanel);
+		
+		filterOrga = new JComboBox<>();
+		filterOrga.addItem("Sans filtre");
+		String[] listNat = ModeleESporter.getAllNat();
+		for(String s : listNat) {
+			filterOrga.addItem(s);
+		}
+		filterOrga.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterOrgaPanel.add(filterOrga);
+		
+		JPanel filterTournamentPanel = new JPanel();
+		tournoiPanel.setColumnHeaderView(filterTournamentPanel);
+		
+		filterTournament = new JComboBox<>();
+		filterTournament.addItem("Sans filtre");
+		filterTournament.addItem("Phase d'inscription");
+		filterTournament.addItem("En cours");
+		filterTournament.addItem("Terminés");
+		filterTournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterTournamentPanel.add(filterTournament);
 
 	}
 	
