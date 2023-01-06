@@ -9,6 +9,7 @@ import IHM.info.SeeInfoFrame;
 import IHM.info.VueInfoTournoisFrame;
 import Object.Ecurie;
 import Object.Equipe;
+import Object.Joueur;
 import Object.Tournoi;
 
 public class ControleurJList implements MouseListener {
@@ -38,6 +39,11 @@ public class ControleurJList implements MouseListener {
 			}
 			VueInfoTournoisFrame windowTournoi = new VueInfoTournoisFrame(tournoiSelected);
 			windowTournoi.setVisible(true);
+			break;
+		case "class Object.Joueur":
+			System.out.println(list.getModel().getElementAt(index).toString());
+			SeeInfoFrame windowJoueur = new SeeInfoFrame((Joueur) list.getModel().getElementAt(index));
+			windowJoueur.setVisible(true);
 			break;
 		}
 
