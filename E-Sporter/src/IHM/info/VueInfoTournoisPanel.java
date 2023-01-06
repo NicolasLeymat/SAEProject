@@ -11,10 +11,17 @@ public class VueInfoTournoisPanel extends JPanel {
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-
-
+        TableauMatch tableModel1;
         // Création des modèles de tableau
-        TableauMatch tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
+        if (tournoi.getPhasePoule().matchsFinis()) {
+             tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
+        }
+        else {
+             tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
+
+        }
+
+
 
         // Création des tableaux
         JTable table1 = new JTable(tableModel1);

@@ -303,6 +303,7 @@ public class Tournoi {
 				", listeEquipe=" + listeEquipe +
 				", phasePoule=" + phasePoule +
 				", phaseElim=" + phaseElim +
+				",id=" + id +
 				'}';
 	}
 
@@ -335,6 +336,7 @@ public class Tournoi {
 			rs = st.executeQuery("select id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
 			while (rs.next()) {
 				t = new Tournoi(rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), ModeDeJeu.getModeDeJeuFromId(rs.getInt(7)));
+				t.setId(rs.getInt(1));
 				tournois.add(t);
 			}
 			
@@ -345,6 +347,36 @@ public class Tournoi {
 			ex.printStackTrace();
 		}
 		return tournois;
+	}
+
+	public void getPhasesfromID() throws Exception {
+
+		Connection connex = Connexion.connexion();
+		PreparedStatement st;
+		ResultSet rs;
+
+		if (id <0) {
+			throw new Exception("Objet non relié");
+		}
+
+		try {
+			st = connex.prepareStatement("SELECT id_phase,elim from lmn3783a.sae_phase where id_tournoi = ? and elim = ?");
+			st.setInt(1,this.id);
+			st.setInt(2,0);
+			rs = st.executeQuery();
+			if (rs.next()) {
+				this.phasePoule = new PhaseDePoule(this);
+			}
+			st.setInt(2,1);
+			if ( this.phasePoule != null && rs.next() ) {
+				this.phaseElim = new PhaseFinale(this,this.phasePoule);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 }

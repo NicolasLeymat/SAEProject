@@ -12,7 +12,6 @@ import controleur.ControleurAdd;
 import controleur.ControleurJList;
 import controleur.ControleurJoueurJList;
 import controleur.ControleurModif;
-import controleur.ControleurTournoiJList;
 import controleur.ModeleESporter;
 
 import java.awt.GridBagLayout;

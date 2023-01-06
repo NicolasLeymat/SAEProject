@@ -97,6 +97,7 @@ public abstract class Phase {
         return "Phase{" +
                 "elim=" + isElim() +
                 ", matchs=\n" + getMatchs() +
+                ", id =\n" +id +
                 '}';
     }
 }

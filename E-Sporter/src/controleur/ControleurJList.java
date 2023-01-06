@@ -30,7 +30,13 @@ public class ControleurJList implements MouseListener {
 			break;
 		case "class Object.Tournoi":
 			System.out.println(list.getModel().getElementAt(index).getClass().toString());
-			VueInfoTournoisFrame windowTournoi = new VueInfoTournoisFrame((Tournoi) list.getModel().getElementAt(index));
+			Tournoi tournoiSelected = (Tournoi) list.getModel().getElementAt(index);
+			try {
+				tournoiSelected.getPhasesfromID();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex);
+			}
+			VueInfoTournoisFrame windowTournoi = new VueInfoTournoisFrame(tournoiSelected);
 			windowTournoi.setVisible(true);
 			break;
 		}
