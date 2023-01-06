@@ -510,6 +510,7 @@ public class Equipe {
 		return s;
 	}
 	
+	
 	private static int verifierPresenceEquipe(Equipe e, int v) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
