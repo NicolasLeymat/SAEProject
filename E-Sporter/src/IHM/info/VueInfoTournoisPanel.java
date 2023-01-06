@@ -18,7 +18,6 @@ public class VueInfoTournoisPanel extends JPanel {
         }
         else {
              tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
-
         }
 
 
@@ -29,6 +28,9 @@ public class VueInfoTournoisPanel extends JPanel {
         // Création de la barre de défilement pour les tableaux
         JScrollPane scrollPane1 = new JScrollPane(table1);
 
+        JLabel titre = new JLabel("A arbitrer");
+        titre.setAlignmentX(0.5f);
+        this.add(titre);
         this.add(scrollPane1);
 
 

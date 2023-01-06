@@ -17,7 +17,6 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.ModeDeJeu;
 import Object.Nationalite;
-import Object.Notoriete;
 import Object.Organisateur;
 import Object.Tournoi;
 import controleur.ControleurAdd;
@@ -53,7 +52,7 @@ public class AddPanel extends JPanel {
 	
 	//Tournament
 	private JComboBox<String> comboChamp;
-	private JComboBox<Notoriete> comboNotoriete;
+	private JComboBox<Tournoi.Notoriete> comboNotoriete;
 	private JTextField orgaTf;
 	private JComboBox comboBox;
 	private JButton confirmBtn;
@@ -172,7 +171,7 @@ public class AddPanel extends JPanel {
 		comboBox = new JComboBox<>(modeModel);
 		comboBox.setBounds(140, 85, 150, 25);
 		
-		DefaultComboBoxModel<Notoriete> notorieteModel = new DefaultComboBoxModel<>(Notoriete.values());
+		DefaultComboBoxModel<Tournoi.Notoriete> notorieteModel = new DefaultComboBoxModel<>(Tournoi.Notoriete.values());
 		comboNotoriete = new JComboBox<>(notorieteModel);
 		comboNotoriete.setBounds(140, 152, 150, 25);
 		
@@ -289,10 +288,10 @@ public class AddPanel extends JPanel {
 				if(this.comboChamp.getSelectedItem().equals("Oui")) {
 					champ = 1;
 				}
-				Notoriete not  = (Notoriete) this.comboNotoriete.getSelectedItem();
+				Tournoi.Notoriete not  = (Tournoi.Notoriete)  this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0));
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), Tournoi.ETAT.INSC);
 					System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

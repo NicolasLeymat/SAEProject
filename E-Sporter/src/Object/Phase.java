@@ -92,6 +92,38 @@ public abstract class Phase {
     //Verifie que tous les matchs à jouer ont un gagnant
     public abstract boolean matchsFinis() ;
 
+    public void getMatchsFromID () throws  Exception {
+        if (this.id < 0) {
+            throw  new Exception("Objet non relié");
+        }
+
+
+        Connection connex = Connexion.connexion();
+        PreparedStatement pst = connex.prepareStatement("SELECT ID_MATCH, DATEMATCH, ID_EQUIPE1, ID_EQUIPE2, ID_GAGNANT FROM lmn3783a.sae_match where id_phase = ?");
+        pst.setInt(1,id);
+
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            Match matchSelect = new Match(
+                    rs.getDate("DATEMATCH"),
+                    Equipe.getEquipeFromId(rs.getInt("id_equipe1")),
+                    Equipe.getEquipeFromId(rs.getInt("id_equipe2")),
+                    null);
+            matchSelect.setId(rs.getInt(1));
+            this.matchs.add(matchSelect);
+            if (rs.getObject("id_gagnant") == null) {
+               continue;
+            }
+            if (rs.getInt("id_gagnant")  == matchSelect.getEquipe1().getId()) {
+                matchSelect.setWinner(1);
+            }
+            else {
+                matchSelect.setWinner(2);
+            }
+        }
+
+    }
+
     @Override
     public String toString() {
         return "Phase{" +

@@ -27,6 +27,30 @@ public class Tournoi {
 	private PhaseDePoule phasePoule;
 	private PhaseFinale phaseElim;
 
+	 public enum Notoriete {
+		LOCAL(1) ,NATIONAL(2), INTERNATIONAL(3);
+		private int value;
+		Notoriete(int i) {
+			this.value = i;
+		}
+
+		public int getValue() {
+			return this.value;
+		}
+	}
+
+	private ETAT etat;
+
+	public enum ETAT {
+		EN_COURS("ENC"),
+		FINI("FINI"),
+		INSC("INSC");
+		private String value;
+		ETAT(String s ) {
+			this.value = s;
+		}
+	}
+
 	//Definit les points gagnés selon la place finale
 	private enum PointsClassement {
 		PREMIER(100),DEUXIEME(60),TROISIEME(30),QUATRIEME(10);
@@ -37,13 +61,13 @@ public class Tournoi {
 	}
 
 	//Constructeur de la classe "Tournoi"
-	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode) throws Exception {
-
+	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode, ETAT etat) throws Exception {
+		this.etat = etat;
 
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
 		}
-		if (dateInvalide(dateTournoi)) {
+		if (etat == ETAT.INSC && dateInvalide(dateTournoi)) {
 			throw new Exception();
 		}
 		
@@ -333,9 +357,10 @@ public class Tournoi {
 		try {
 			
 			st = connex.createStatement();
-			rs = st.executeQuery("select id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
+			rs = st.executeQuery("select id_tournoi,etat, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
 			while (rs.next()) {
-				t = new Tournoi(rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), ModeDeJeu.getModeDeJeuFromId(rs.getInt(7)));
+				ETAT etat = ETAT.valueOf(rs.getString("etat"));
+				t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")),etat);
 				t.setId(rs.getInt(1));
 				tournois.add(t);
 			}
@@ -365,7 +390,10 @@ public class Tournoi {
 			st.setInt(2,0);
 			rs = st.executeQuery();
 			if (rs.next()) {
-				this.phasePoule = new PhaseDePoule(this);
+				PhaseDePoule phaseDePoule = new PhaseDePoule(this);
+				phaseDePoule.setId(rs.getInt(1));
+				this.phasePoule =  phaseDePoule;
+				phaseDePoule.getMatchsFromID();
 			}
 			st.setInt(2,1);
 			if ( this.phasePoule != null && rs.next() ) {

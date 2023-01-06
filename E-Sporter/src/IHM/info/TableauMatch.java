@@ -29,11 +29,21 @@ public class TableauMatch extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Match match = matchs.get(rowIndex);
+        String stringJ1="";
+        String stringJ2="";
+        if (match.getWinner() == match.getEquipe1()) {
+            stringJ1 +="👑 ";
+        }
+        if (match.getWinner() == match.getEquipe2()) {
+            stringJ2 +="👑 ";
+        }
+        stringJ1 += match.getEquipe1().getNom();
+        stringJ2 += match.getEquipe2().getNom();
         switch (columnIndex) {
             case 0:
-                return match.getEquipe1();
+                return stringJ1;
             case 1:
-                return match.getEquipe2();
+                return stringJ2;
             default:
                 return null;
         }
