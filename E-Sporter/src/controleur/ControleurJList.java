@@ -20,7 +20,7 @@ public class ControleurJList implements MouseListener {
 		int index = list.locationToIndex(e.getPoint());
 		switch (list.getModel().getElementAt(index).getClass().toString()) {
 		case "class Object.Equipe":
-			System.out.println(list.getModel().getElementAt(index).toString());
+			System.out.println(list.getModel().getElementAt(index).getClass().toString());
 			SeeInfoFrame window = new SeeInfoFrame((Equipe) (list.getModel().getElementAt(index)));
 			window.setVisible(true);
 			break;
