@@ -5,6 +5,7 @@ package Object;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +135,7 @@ public class Joueur {
 		return 1;
     }
     
-    public static int modifierJoueur(Joueur j) throws Exception {
+    public static int modifierJoueur(Joueur j) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		int existe;
@@ -159,7 +160,7 @@ public class Joueur {
 
 			pst.close();
 			
-		} catch (Exception ex) {
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return -1;
 		}

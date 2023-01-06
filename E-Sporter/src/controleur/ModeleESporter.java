@@ -192,4 +192,8 @@ public class ModeleESporter {
 	public void modifierEcurie(Ecurie ec) {
 		Ecurie.modifierEcurie(ec);
 	}
+
+	public void modifierJoueur(Joueur jNew) {
+		Joueur.modifierJoueur(jNew);
+	}
 }

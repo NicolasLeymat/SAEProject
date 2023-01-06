@@ -32,6 +32,7 @@ public class VueModifPanel extends JPanel{
 	private JTextField NameTF;
 	private Equipe e;
 	private Ecurie ec;
+	private Joueur j;
 
 	public VueModifPanel(Equipe e) {
 		this.e = e;
@@ -138,6 +139,59 @@ public class VueModifPanel extends JPanel{
 		panel.add(btnAnnuler);
 	}
 	
+	public VueModifPanel(Joueur j) {
+		this.j = j;
+		ControleurModif c = new ControleurModif(j, this); 
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 0};
+		gridBagLayout.rowHeights = new int[]{100, 100, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JPanel PrincPanel = new JPanel();
+		PrincPanel.setLayout(null);
+		GridBagConstraints gbc_PrincPanel = new GridBagConstraints();
+		gbc_PrincPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_PrincPanel.fill = GridBagConstraints.BOTH;
+		gbc_PrincPanel.gridx = 0;
+		gbc_PrincPanel.gridy = 0;
+		add(PrincPanel, gbc_PrincPanel);
+		
+		
+		JLabel lblNomJoueur = new JLabel("Nom");
+		lblNomJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNomJoueur.setBounds(10, 10, 92, 27);
+		PrincPanel.add(lblNomJoueur);
+		
+		NameTF = new JTextField(j.getNom());
+		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		NameTF.setBounds(10, 36, 430, 28);
+		NameTF.setColumns(10);
+		PrincPanel.add(NameTF);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		add(panel, gbc_panel);
+		
+		JButton btnNewButton = new JButton("Confirmer");
+		btnNewButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		btnNewButton.setBounds(240, 25, 200, 50);
+		btnNewButton.addActionListener(c);
+		panel.add(btnNewButton);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.addActionListener(c);
+		btnAnnuler.setForeground(new Color(255, 0, 0));
+		btnAnnuler.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		btnAnnuler.setBounds(10, 25, 100, 50);
+		panel.add(btnAnnuler);
+	}
+	
 	public Equipe getAllInfoEquipe() {
 		Equipe res = this.e;
 		res.setNom(this.NameTF.getText());
@@ -146,6 +200,12 @@ public class VueModifPanel extends JPanel{
 	
 	public Ecurie getAllInfoEcurie() {
 		Ecurie res = this.ec;
+		res.setNom(this.NameTF.getText());
+		return res;
+	}
+
+	public Joueur getAllInfoJoueur() {
+		Joueur res = this.j;
 		res.setNom(this.NameTF.getText());
 		return res;
 	}

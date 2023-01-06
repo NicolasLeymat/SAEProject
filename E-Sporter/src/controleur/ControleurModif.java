@@ -25,13 +25,13 @@ public class ControleurModif implements ActionListener{
 	private Joueur j;
 	private ModeleESporter modele;
 	private VueModifFrame v;
-	private boolean Equipe;
+	private String nature;
 	
 	public ControleurModif(Equipe eq,JPanel vue) {
 		this.eq = eq;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
-		this.Equipe = true;
+		this.nature = "Equipe";
 		
 	}
 	
@@ -39,14 +39,14 @@ public class ControleurModif implements ActionListener{
 		this.ec = eq;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
-		this.Equipe = false;
+		this.nature = "Ecurie";
 	}
 	
 	public ControleurModif(Tournoi t,JPanel vue) {
 		this.t = t;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
-		this.Equipe = false;
+		this.nature = "Tournoi";
 		
 	}
 	
@@ -54,7 +54,7 @@ public class ControleurModif implements ActionListener{
 		this.j = j;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
-		this.Equipe = false;
+		this.nature = "Joueur";
 		
 	}
 	
@@ -62,24 +62,32 @@ public class ControleurModif implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
 		if(b.getText().equals("Modifier")) {
-			if(this.Equipe){
+			if(this.nature == "Equipe"){
 				this.v = new VueModifFrame(eq);
 				this.v.setVisible(true);
-			}else {
+			}else if (this.nature == "Ecurie"){
 				this.v = new VueModifFrame(ec);
+				this.v.setVisible(true);
+			}
+			else {
+				this.v = new VueModifFrame(j);
 				this.v.setVisible(true);
 			}
 		}
 		if(b.getText().equals("Confirmer")) {
 			this.modele.getPanelFrame(vue).dispose();
-			if(this.Equipe){
+			if(this.nature == "Equipe"){
 				Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
 				VueInfoPanel.updateInfoEquipe(eqNew.getNom());
 				this.modele.modifierEquipe(eqNew);
-			}else{
+			}else if (this.nature == "Ecurie"){
 				Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
 				VueInfoPanel.updateInfoEcurie(ec.getNom());
 				this.modele.modifierEcurie(ecNew);
+			}else{
+				Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
+				VueInfoPanel.updateInfoJoueur(j.getNom());
+				this.modele.modifierJoueur(jNew);
 			}
 		}
 		if(b.getText().equals("Annuler")) {

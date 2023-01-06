@@ -20,7 +20,10 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JButton;
 
@@ -291,8 +294,6 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.t = null;
 		VueInfoPanel.t = t;
 		this.setSize(500, 400);
-		ControleurAdd c = new ControleurAdd(this, t);
-		ControleurModif cm = new ControleurModif(t, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 70, 0};
@@ -337,7 +338,6 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.j = null;
 		VueInfoPanel.j = j;
 		this.setSize(500, 400);
-		ControleurAdd c = new ControleurAdd(this, j);
 		ControleurModif cm = new ControleurModif(j, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
@@ -430,8 +430,39 @@ public class VueInfoPanel extends JPanel{
 		panel_2.add(equipeJoueur);
 		equipeJoueur.setVerticalAlignment(SwingConstants.TOP);
 		equipeJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		add(panel, gbc_panel);
+		
+		JPanel panelBtnSupprimer = new JPanel();
+		panel.setLayout(null);
+		GridBagConstraints gbc_panelBtnSupprimer = new GridBagConstraints();
+		gbc_panelBtnSupprimer.fill = GridBagConstraints.BOTH;
+		gbc_panelBtnSupprimer.gridx = 1;
+		gbc_panelBtnSupprimer.gridy = 1;
+		add(panelBtnSupprimer, gbc_panelBtnSupprimer);
+		
+		JButton modfier_1 = new JButton("Modifier");
+		modfier_1.setBounds(10, 10, 200, 50);
+		modfier_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		modfier_1.addActionListener(cm);
+		panel.add(modfier_1);
+		
+		JButton supprimer = new JButton("Supprimer");
+		supprimer.setBounds(10, 10, 200, 50);
+		supprimer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		//supprimer.addActionListener(cm);
+		panelBtnSupprimer.add(supprimer);
+		
+		///
+		
+		///
 	}
-	
 
 	public static void updateListJoueur() {
 		modeleJoueur.clear();
@@ -453,5 +484,10 @@ public class VueInfoPanel extends JPanel{
 	
 	public static void updateInfoEcurie(String nom) {
 		nomEcurie.setText(nom);
+	}
+
+	public static void updateInfoJoueur(String nom) {
+		nomJoueur.setText(nom);
+		
 	}
 }
