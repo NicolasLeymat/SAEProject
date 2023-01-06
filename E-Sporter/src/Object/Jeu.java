@@ -52,6 +52,10 @@ public class Jeu {
 		this.modesDeJeu = l;
 	}
 	
+	/**
+	 * Retourne un id jeu non utilise
+	 * @return dernier id de la base +1
+	 */
 	public int getLastId() {
 		Connection ct = Connexion.connexion();
 		java.sql.Statement st = null;
@@ -68,7 +72,12 @@ public class Jeu {
 		}
 		return r;
 	}
-		
+	
+	/**
+	 * retourne l'id du jeu passé en paramètre
+	 * @param jeu
+	 * @return idJeu
+	 */
 	public static int getId(Jeu jeu) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -85,6 +94,10 @@ public class Jeu {
 		return 0;
 		}
 	
+	/**
+	 * Enregistre un jeu dans la basede donnée
+	 * @return 1 si le jeu est enregistré dans la base et -1 si erreur
+	 */
 	public int enregistrerJeu() {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -124,6 +137,10 @@ public class Jeu {
         return jeu;
     }
 	
+	/**
+	 * Retourne une liste contenant tous les jeux présent dans la base de données
+	 * @return List<Jeu>
+	 */
 	public static List<Jeu> getAllJeux() {
 		Connection connx = Connexion.connexion();
 		Jeu j = null;
