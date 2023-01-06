@@ -1,5 +1,6 @@
 package controleur;
 
+import java.awt.Font;
 import java.awt.Window;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,6 +22,21 @@ import Object.Tournoi;
 
 public class ModeleESporter {
 
+	//Taille de la police de 10
+	public static final int FONT_SIZE_SMALL = 10;
+	//Taille de la police de 15
+	public static final int FONT_SIZE_MEDIUM = 15;
+	//Taille de la police de 20
+	public static final int FONT_SIZE_LARGE = 20;
+	
+	//Font Large
+	public static final Font FONT_LARGE = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_LARGE);
+	//Font Medium
+	public static final Font FONT_MEDIUM = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_MEDIUM);
+	//Font Small
+	public static final Font FONT_SMALL = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_SMALL);
+	
+	//Parametre utile à la classe
 	public static List<Equipe> resultatRechercheEquipes;
 	public static List<Ecurie> resultatRechercheEcuries;
 	public static List<Equipe> allEquipe;
