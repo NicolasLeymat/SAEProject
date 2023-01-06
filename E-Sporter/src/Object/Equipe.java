@@ -181,7 +181,7 @@ public class Equipe {
 			// A remplacer par un trigger
 			existe = verifierPresenceEquipe(equipe,1);
 			if (existe != 0) {
-				return modifierEquipe(equipe);
+				return -1;
 			}
 			
 			if (equipe.getId() == -1) {
