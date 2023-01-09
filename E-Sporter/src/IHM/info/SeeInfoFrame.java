@@ -14,7 +14,7 @@ import java.awt.GridBagConstraints;
 
 public class SeeInfoFrame extends JFrame{
 
-	private final int WIDTH = 500;
+	private final int WIDTH = 600;
 	private final int HEIGHT = 450;
 	private VueInfoPanel vue;
 	
