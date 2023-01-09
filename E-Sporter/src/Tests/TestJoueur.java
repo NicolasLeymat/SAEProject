@@ -32,7 +32,7 @@ public class TestJoueur {
 		// Modifie un joueur dans l'application
 		@Test
 		public void testModifierJoueur() throws Exception {
-			Joueur j = new Joueur("Veslin", "Lucas", "Saren", "21/07/2003", Nationalite.FR);
+			Joueur j = new Joueur("Veslin", "Baptiste", "JB", "21/07/1961", Nationalite.FR);
 			j.setIdEquipe(4);
 			j.setId(100);
 			Joueur.enregistrerJoueur(j);
