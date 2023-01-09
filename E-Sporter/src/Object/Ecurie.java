@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 /*
  * Travail restant :
  * - ajouter le logo
@@ -31,7 +33,7 @@ public class Ecurie {
 	/**
 	 * logo d'une ecurie
 	 */
-	private String logo;
+	private ImageIcon logo;
 	/**
 	 * Nationalité de l'écurie
 	 */
@@ -80,7 +82,7 @@ public class Ecurie {
 	 * retourne l'adresse du logo d'une ecurie
 	 * @return adresse logo
 	 */
-	public String getLogo() {
+	public ImageIcon getLogo() {
 		return this.logo;
 	}
 	/**
@@ -88,7 +90,7 @@ public class Ecurie {
 	 * @param logo
 	 * 		adresse du logo d'une ecurie
 	 */
-	public void setLogo(String logo) {
+	public void setLogo(ImageIcon logo) {
 		this.logo = logo;
 	}
 	
@@ -263,12 +265,13 @@ public class Ecurie {
 		
 		try {
 			
-			pst = connex.prepareStatement("select id_ecurie from LMN3783A.sae_ecurie where nom = ?");
+			pst = connex.prepareStatement("select id_ecurie, logo from LMN3783A.sae_ecurie where nom = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				e = new Ecurie(nom);
 				e.setId(rs.getInt(1));
+				e.setLogo(new ImageIcon(Ecurie.class.getResource("/Images/"+rs.getString(2))));
 				e.listeEquipes = Equipe.getEquipesFromEcurie(rs.getInt(1));
 			}
 			
@@ -300,7 +303,7 @@ public class Ecurie {
 			while (rs.next()) {
 				e = new Ecurie(rs.getString(1));
 				e.setId(id);
-				e.listeEquipes = Equipe.getEquipesFromEcurie(id);
+				//e.listeEquipes = Equipe.getEquipesFromEcurie(id);
 			}
 			
 			rs.close();

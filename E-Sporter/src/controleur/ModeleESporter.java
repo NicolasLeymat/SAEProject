@@ -26,6 +26,8 @@ public class ModeleESporter {
 	public static final int FONT_SIZE_SMALL = 10;
 	//Taille de la police de 15
 	public static final int FONT_SIZE_MEDIUM = 15;
+	//Taille de la police de 17
+	private static final int FONT_SIZE_MEDIUM_LARGE = 17;
 	//Taille de la police de 20
 	public static final int FONT_SIZE_LARGE = 20;
 	
@@ -33,6 +35,8 @@ public class ModeleESporter {
 	public static final Font FONT_LARGE = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_LARGE);
 	//Font Medium
 	public static final Font FONT_MEDIUM = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_MEDIUM);
+	//Font Medium-Large
+	public static final Font FONT_MEDIUM_LARGE = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_MEDIUM_LARGE);
 	//Font Small
 	public static final Font FONT_SMALL = new Font("Berlin Sans FB", Font.PLAIN, FONT_SIZE_SMALL);
 	
@@ -195,5 +199,21 @@ public class ModeleESporter {
 
 	public void modifierJoueur(Joueur jNew) {
 		Joueur.modifierJoueur(jNew);
+	}
+	
+	public void supprimerEquipe(Equipe e) {
+		Equipe.supprimerEquipe(e);
+	}
+	
+	public void supprimerEcurie(Ecurie e) {
+		Ecurie.supprimerEcurie(e);
+	}
+	
+	public void supprimerJoueur(Joueur j) {
+		Joueur.supprimerJoueur(j);
+	}
+	
+	public void supprimerTournoi(Tournoi t) {
+		Tournoi.supprimerTournoi(t);
 	}
 }

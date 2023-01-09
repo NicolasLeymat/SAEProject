@@ -45,7 +45,7 @@ public class MainPanel extends JPanel{
 		
 		setLayout(new GridLayout(0, 3, 0, 0));
 		listEquipe.setBorder(null);
-		listEquipe.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		listEquipe.setFont(ModeleESporter.FONT_LARGE);
 		modelEquipe.addAll(ModeleESporter.getAllEquipe());
 		listEquipe.setModel(modelEquipe);
 		listEquipe.addMouseListener(controleurEquipe);
@@ -57,7 +57,7 @@ public class MainPanel extends JPanel{
 		add(teamPanel);
 		
 		listEcurie.setBorder(null);
-		listEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		listEcurie.setFont(ModeleESporter.FONT_LARGE);
 		modelEcurie.addAll(ModeleESporter.getAllEcurie());
 		listEcurie.setModel(modelEcurie);
 		listEcurie.addMouseListener(controleurEcurie);
@@ -69,7 +69,7 @@ public class MainPanel extends JPanel{
 		add(ecuriePanel);
 		
 		listTournoi.setBorder(null);
-		listTournoi.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		listTournoi.setFont(ModeleESporter.FONT_LARGE);
 		modelTournoi.addAll(ModeleESporter.getAllTournoi());
 		listTournoi.setModel(modelTournoi);
 		listTournoi.addMouseListener(controleurTournoi);
@@ -89,7 +89,7 @@ public class MainPanel extends JPanel{
 		for(String s : ModeleESporter.getAllModeName()){
 			filterTeam.addItem(s);
 		}
-		filterTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterTeam.setFont(ModeleESporter.FONT_MEDIUM);
 		filterTeam.addActionListener(controleurTeam);
 		filterTeamPanel.add(filterTeam);
 		
@@ -103,7 +103,7 @@ public class MainPanel extends JPanel{
 		for(String s : listNat) {
 			filterOrga.addItem(s);
 		}
-		filterOrga.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterOrga.setFont(ModeleESporter.FONT_MEDIUM);
 		filterOrga.addActionListener(controleurOrga);
 		filterOrgaPanel.add(filterOrga);
 		
@@ -116,7 +116,7 @@ public class MainPanel extends JPanel{
 		filterTournament.addItem("Phase d'inscription");
 		filterTournament.addItem("En cours");
 		filterTournament.addItem("Terminés");
-		filterTournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterTournament.setFont(ModeleESporter.FONT_MEDIUM);
 		filterTournament.addActionListener(filterTournoi);
 		filterTournamentPanel.add(filterTournament);
 

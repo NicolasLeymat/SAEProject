@@ -5,6 +5,9 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.event.CaretListener;
+
+import controleur.ModeleESporter;
+
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -25,7 +28,7 @@ public class SearchPanel extends JPanel{
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Recherche : ");
-		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		lblNewLabel.setFont(ModeleESporter.FONT_LARGE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
@@ -36,7 +39,7 @@ public class SearchPanel extends JPanel{
 		searchField = new JTextField();
 		searchField.setBackground(new Color(255, 255, 255));
 		searchField.setHorizontalAlignment(SwingConstants.LEFT);
-		searchField.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		searchField.setFont(ModeleESporter.FONT_LARGE);
 		searchField.setColumns(50);
 		searchField.setToolTipText("Rechercher");
 		GridBagConstraints gbc_searchField = new GridBagConstraints();

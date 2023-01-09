@@ -49,19 +49,15 @@ public class VueInfoPanel extends JPanel{
 	
 
 
-	/**
-	 * @wbp.parser.constructor
-	 */
 	public VueInfoPanel(Equipe e) {
 		System.out.println("----------------------------------------");
-		System.out.println(e);
 		System.out.println(e);
 		modeleJoueur.clear();
 		VueInfoPanel.e = null;
 		VueInfoPanel.e = e;
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
-		this.setSize(775, 450);
+		this.setSize(750, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{258, 200, 258, 0};
 		gridBagLayout.rowHeights = new int[]{381, 70, 0};
@@ -81,7 +77,7 @@ public class VueInfoPanel extends JPanel{
 		add(panelInfo0, gbc_panelInfo0);
 
 		JLabel lblNewLabel_1 = new JLabel("Nom Ecurie : ");
-		lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_1.setBounds(10, 0, 159, 13);
 		panelInfo0.add(lblNewLabel_1);
 		
@@ -89,11 +85,11 @@ public class VueInfoPanel extends JPanel{
 		ecurieLabel.setBounds(10, 23, 159, 22);
 		panelInfo0.add(ecurieLabel);
 		ecurieLabel.setVerticalAlignment(SwingConstants.TOP);
-		ecurieLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		ecurieLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_8.setIcon(new ImageIcon(VueInfoPanel.class.getResource("/Images/test.png")));
+		lblNewLabel_8.setIcon(e.getLogo());
 		lblNewLabel_8.setBounds(10, 73, 258, 258);
 		panelInfo0.add(lblNewLabel_8);
 		
@@ -111,15 +107,15 @@ public class VueInfoPanel extends JPanel{
 		nameLbl.setBounds(10, 20, 158, 17);
 		panelInfo1.add(nameLbl);
 		nameLbl.setVerticalAlignment(SwingConstants.TOP);
-		nameLbl.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nameLbl.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nom Equipe : ");
-		lblNewLabel_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_2.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_2.setBounds(10, 0, 158, 13);
 		panelInfo1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_4 = new JLabel("Classement : ");
-		lblNewLabel_4.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_4.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_4.setBounds(10, 47, 160, 13);
 		panelInfo1.add(lblNewLabel_4);
 		
@@ -131,17 +127,17 @@ public class VueInfoPanel extends JPanel{
 			}
 		}
 		JLabel lblNewLabel_5 = new JLabel(""+classementCurrentEquipe + "/" + classement.size());
-		lblNewLabel_5.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_5.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_5.setBounds(10, 70, 160, 13);
 		panelInfo1.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Points :");
-		lblNewLabel_6.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_6.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_6.setBounds(10, 93, 160, 13);
 		panelInfo1.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel(e.getPoints()+"");
-		lblNewLabel_7.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_7.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_7.setBounds(10, 113, 158, 13);
 		panelInfo1.add(lblNewLabel_7);
 		
@@ -160,7 +156,7 @@ public class VueInfoPanel extends JPanel{
 		//Solution pour ne pas dupliquer les listeners
 		listJ = new JList<>();
 		//
-		listJ.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		listJ.setFont(ModeleESporter.FONT_MEDIUM);
 		listJ.setModel(modeleJoueur);
 		JScrollPane scrollPane = new JScrollPane(listJ);
 
@@ -170,18 +166,18 @@ public class VueInfoPanel extends JPanel{
 		panelJoueur.add(scrollPane);
 		
 		JLabel lblNewLabel_3 = new JLabel("Liste des joueurs : ");
-		lblNewLabel_3.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_3.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_3.setBounds(0, 0, 272, 35);
 		panelJoueur.add(lblNewLabel_3);
 		
 		JButton addPlayer = new JButton("Ajouter un joueur");
-		addPlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		addPlayer.setFont(ModeleESporter.FONT_MEDIUM);
 		addPlayer.setBounds(35, 311, 200, 25);
 		addPlayer.addActionListener(c);
 		panelJoueur.add(addPlayer);
 		
 		JButton deletePlayer = new JButton("Supprimer un joueur");
-		deletePlayer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		deletePlayer.setFont(ModeleESporter.FONT_MEDIUM);
 		deletePlayer.setBounds(35, 347, 200, 25);
 		panelJoueur.add(deletePlayer);
 		
@@ -230,11 +226,15 @@ public class VueInfoPanel extends JPanel{
 		
 	}
 	
+
+	/**
+	 * @wbp.parser.constructor
+	 */	
 	public VueInfoPanel(Ecurie e) {
 		modeleEquipe.clear();
 		VueInfoPanel.ec = null;
 		VueInfoPanel.ec = e;
-		this.setSize(750, 400);
+		this.setSize(500, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -254,12 +254,12 @@ public class VueInfoPanel extends JPanel{
 		add(panel_1, gbc_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nom Ecurie : ");
-		lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel_1.setBounds(0, 10, 145, 17);
 		panel_1.add(lblNewLabel_1);
 		
 		nomEcurie = new JLabel(e.getNom());
-		nomEcurie.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nomEcurie.setFont(ModeleESporter.FONT_MEDIUM);
 		nomEcurie.setBounds(0, 35, 145, 13);
 		panel_1.add(nomEcurie);
 		
@@ -286,20 +286,35 @@ public class VueInfoPanel extends JPanel{
 		panel_2.add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel("Listes des équipes :");
-		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNewLabel.setBounds(0, 0, 200, 51);
 		panel_2.add(lblNewLabel);
 		
 		JButton addTeam = new JButton("Ajouter une équipe");
-		addTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		addTeam.setFont(ModeleESporter.FONT_MEDIUM);
 		addTeam.setBounds(35, 261, 200, 25);
 		addTeam.addActionListener(c);
 		panel_2.add(addTeam);
 		
 		JButton deleteTeam = new JButton("Supprimer une équipe");
-		deleteTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		deleteTeam.setFont(ModeleESporter.FONT_MEDIUM);
 		deleteTeam.setBounds(35, 297, 200, 25);
 		panel_2.add(deleteTeam);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+		gbc_panel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_3.fill = GridBagConstraints.BOTH;
+		gbc_panel_3.gridx = 0;
+		gbc_panel_3.gridy = 1;
+		add(panel_3, gbc_panel_3);
+		
+		JButton delete = new JButton("Supprimer");
+		delete.setBounds(20, 10, 150, 50);
+		delete.setFont(ModeleESporter.FONT_MEDIUM);
+		delete.addActionListener(null);
+		panel_3.add(delete);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -310,7 +325,7 @@ public class VueInfoPanel extends JPanel{
 		add(panel, gbc_panel);
 		
 		JButton modfier = new JButton("Modifier");
-		modfier.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		modfier.setFont(ModeleESporter.FONT_MEDIUM);
 		modfier.setBounds(62, 10, 200, 50);
 		modfier.addActionListener(cm);
 		panel.add(modfier);
@@ -338,12 +353,12 @@ public class VueInfoPanel extends JPanel{
 		add(panel_1, gbc_panel_1);
 		
 		JLabel lblNom = new JLabel("Nom Tournoi : ");
-		lblNom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNom.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNom.setBounds(0, 10, 145, 17);
 		panel_1.add(lblNom);
 		
 		nomTournoi = new JLabel(t.getNom());
-		nomTournoi.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nomTournoi.setFont(ModeleESporter.FONT_MEDIUM);
 		nomTournoi.setBounds(0, 35, 145, 13);
 		panel_1.add(nomTournoi);
 		
@@ -383,12 +398,12 @@ public class VueInfoPanel extends JPanel{
 		add(panel_1, gbc_panel_1);
 		
 		JLabel lblNom = new JLabel("Nom Joueur : ");
-		lblNom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNom.setFont(ModeleESporter.FONT_MEDIUM);
 		lblNom.setBounds(0, 10, 145, 17);
 		panel_1.add(lblNom);
 		
 		nomJoueur = new JLabel(j.getNom());
-		nomJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nomJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		nomJoueur.setBounds(0, 35, 145, 13);
 		panel_1.add(nomJoueur);
 	
@@ -403,7 +418,7 @@ public class VueInfoPanel extends JPanel{
 		add(panel_2, gbc_panel_2);
 		
 		JLabel prenomJoueurLabel = new JLabel("Prénom Joueur : ");
-		prenomJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		prenomJoueurLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		prenomJoueurLabel.setBounds(0, 10, 145, 20);
 		panel_2.add(prenomJoueurLabel);
 		
@@ -411,11 +426,11 @@ public class VueInfoPanel extends JPanel{
 		prenomJoueur.setBounds(0, 35, 145, 20);
 		panel_2.add(prenomJoueur);
 		prenomJoueur.setVerticalAlignment(SwingConstants.TOP);
-		prenomJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		prenomJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		
 		JLabel pseudoJoueurLabel= new JLabel("Pseudonyme Joueur : ");
-		pseudoJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		pseudoJoueurLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		pseudoJoueurLabel.setBounds(0, 60, 145, 20);
 		panel_1.add(pseudoJoueurLabel);
 		
@@ -423,10 +438,10 @@ public class VueInfoPanel extends JPanel{
 		pseudoJoueur.setBounds(0, 85, 145, 20);
 		panel_1.add(pseudoJoueur);
 		pseudoJoueur.setVerticalAlignment(SwingConstants.TOP);
-		pseudoJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		pseudoJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JLabel dateJoueurLabel= new JLabel("Date de naissance Joueur : ");
-		dateJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		dateJoueurLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		dateJoueurLabel.setBounds(0, 60, 200, 20);
 		panel_2.add(dateJoueurLabel);
 		
@@ -434,10 +449,10 @@ public class VueInfoPanel extends JPanel{
 		dateJoueur.setBounds(0, 85, 145, 20);
 		panel_2.add(dateJoueur);
 		dateJoueur.setVerticalAlignment(SwingConstants.TOP);
-		dateJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		dateJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JLabel nationaliteJoueurLabel= new JLabel("Pays de Naissance Joueur : ");
-		nationaliteJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nationaliteJoueurLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		nationaliteJoueurLabel.setBounds(0, 110, 200, 20);
 		panel_1.add(nationaliteJoueurLabel);
 		
@@ -445,10 +460,10 @@ public class VueInfoPanel extends JPanel{
 		nationaliteJoueur.setBounds(0, 135, 145, 20);
 		panel_1.add(nationaliteJoueur);
 		nationaliteJoueur.setVerticalAlignment(SwingConstants.TOP);
-		nationaliteJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		nationaliteJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JLabel equipeJoueurLabel= new JLabel("Equipe Joueur : ");
-		equipeJoueurLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		equipeJoueurLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		equipeJoueurLabel.setBounds(0, 110, 200, 20);
 		panel_2.add(equipeJoueurLabel);
 		
@@ -456,7 +471,7 @@ public class VueInfoPanel extends JPanel{
 		equipeJoueur.setBounds(0, 135, 200, 20);
 		panel_2.add(equipeJoueur);
 		equipeJoueur.setVerticalAlignment(SwingConstants.TOP);
-		equipeJoueur.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		equipeJoueur.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -470,14 +485,14 @@ public class VueInfoPanel extends JPanel{
 		
 		JButton modfier_1 = new JButton("Modifier");
 		modfier_1.setBounds(10, 10, 200, 50);
-		modfier_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		modfier_1.setFont(ModeleESporter.FONT_MEDIUM);
 		modfier_1.addActionListener(cm);
 		panel.add(modfier_1);
 		
 		JButton supprimer = new JButton("Supprimer");
 		panel.add(supprimer);
 		supprimer.setBounds(290, 10, 200, 50);
-		supprimer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		supprimer.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		///
 		

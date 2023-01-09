@@ -36,7 +36,8 @@ public class ControleurAjout implements ActionListener{
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
 				this.modele.addPlayer(obj);
-				VueInfoPanel.updateListJoueur();;
+				VueInfoPanel.updateListJoueur();
+				MainPanel.updateListEquipe();
 				break;
 			}
 			case "Team":{
@@ -47,6 +48,7 @@ public class ControleurAjout implements ActionListener{
 				this.modele.addTeam(obj);
 				VueInfoPanel.updateListEquipe();
 				MainPanel.updateListEquipe();
+				MainPanel.updateListEcuries();
 				break;
 			}
 			case "Orga":{
