@@ -24,7 +24,7 @@ public class SeeInfoFrame extends JFrame{
 	 */
 	public SeeInfoFrame(Ecurie ec) {
 		this.setVisible(true);
-		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		this.setMinimumSize(new Dimension(WIDTH - 250, HEIGHT));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{500, 0};
 		gridBagLayout.rowHeights = new int[]{450, 0};

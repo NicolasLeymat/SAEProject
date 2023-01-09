@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class VueInfoPanel extends JPanel{
 
@@ -48,6 +49,9 @@ public class VueInfoPanel extends JPanel{
 	
 
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public VueInfoPanel(Equipe e) {
 		System.out.println("----------------------------------------");
 		System.out.println(e);
@@ -57,12 +61,12 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.e = e;
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
-		this.setSize(600, 450);
+		this.setSize(775, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{150, 150, 258, 0};
+		gridBagLayout.columnWidths = new int[]{258, 200, 258, 0};
 		gridBagLayout.rowHeights = new int[]{381, 70, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		String nom = "Nom Equipe : " + e.getNom();
@@ -78,14 +82,20 @@ public class VueInfoPanel extends JPanel{
 
 		JLabel lblNewLabel_1 = new JLabel("Nom Ecurie : ");
 		lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(0, 0, 159, 13);
+		lblNewLabel_1.setBounds(10, 0, 159, 13);
 		panelInfo0.add(lblNewLabel_1);
 		
 		JLabel ecurieLabel = new JLabel(e.getEcurie().getNom());
-		ecurieLabel.setBounds(0, 21, 159, 22);
+		ecurieLabel.setBounds(10, 23, 159, 22);
 		panelInfo0.add(ecurieLabel);
 		ecurieLabel.setVerticalAlignment(SwingConstants.TOP);
 		ecurieLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_8.setIcon(new ImageIcon(VueInfoPanel.class.getResource("/Images/test.png")));
+		lblNewLabel_8.setBounds(10, 73, 258, 258);
+		panelInfo0.add(lblNewLabel_8);
 		
 		
 		JPanel panelInfo1 = new JPanel();
@@ -98,19 +108,19 @@ public class VueInfoPanel extends JPanel{
 		add(panelInfo1, gbc_panelInfo1);
 		
 		nameLbl = new JLabel(e.getNom());
-		nameLbl.setBounds(0, 20, 158, 17);
+		nameLbl.setBounds(10, 20, 158, 17);
 		panelInfo1.add(nameLbl);
 		nameLbl.setVerticalAlignment(SwingConstants.TOP);
 		nameLbl.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		
 		JLabel lblNewLabel_2 = new JLabel("Nom Equipe : ");
 		lblNewLabel_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(0, 0, 158, 13);
+		lblNewLabel_2.setBounds(10, 0, 158, 13);
 		panelInfo1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_4 = new JLabel("Classement : ");
 		lblNewLabel_4.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_4.setBounds(0, 47, 160, 13);
+		lblNewLabel_4.setBounds(10, 47, 160, 13);
 		panelInfo1.add(lblNewLabel_4);
 		
 		
@@ -122,17 +132,17 @@ public class VueInfoPanel extends JPanel{
 		}
 		JLabel lblNewLabel_5 = new JLabel(""+classementCurrentEquipe + "/" + classement.size());
 		lblNewLabel_5.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(0, 70, 160, 13);
+		lblNewLabel_5.setBounds(10, 70, 160, 13);
 		panelInfo1.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Points :");
 		lblNewLabel_6.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_6.setBounds(0, 93, 160, 13);
+		lblNewLabel_6.setBounds(10, 93, 160, 13);
 		panelInfo1.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel(e.getPoints()+"");
 		lblNewLabel_7.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel_7.setBounds(0, 113, 158, 13);
+		lblNewLabel_7.setBounds(10, 113, 158, 13);
 		panelInfo1.add(lblNewLabel_7);
 		
 		JPanel panelJoueur = new JPanel();
@@ -175,34 +185,47 @@ public class VueInfoPanel extends JPanel{
 		deletePlayer.setBounds(35, 347, 200, 25);
 		panelJoueur.add(deletePlayer);
 		
-		JPanel panelBtn = new JPanel();
-		panelBtn.setLayout(null);
-		GridBagConstraints gbc_panelBtn = new GridBagConstraints();
-		gbc_panelBtn.gridwidth = 2;
-		gbc_panelBtn.insets = new Insets(0, 0, 0, 5);
-		gbc_panelBtn.fill = GridBagConstraints.BOTH;
-		gbc_panelBtn.gridx = 0;
-		gbc_panelBtn.gridy = 1;
-		add(panelBtn, gbc_panelBtn);
-		
-		JButton add_To_Tournament = new JButton("Ajouter à un tournoi");
-		add_To_Tournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		add_To_Tournament.setBounds(10, 10, 200, 50);
-		panelBtn.add(add_To_Tournament);
-		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 2;
+		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		add(panel, gbc_panel);
 		
 		JButton modfier_1 = new JButton("Modifier");
-		modfier_1.setBounds(62, 10, 200, 50);
-		modfier_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		modfier_1.setBounds(52, 10, 175, 50);
+		modfier_1.setFont(ModeleESporter.FONT_MEDIUM);
 		modfier_1.addActionListener(cm);
 		panel.add(modfier_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 1;
+		add(panel_2, gbc_panel_2);
+		
+		JButton add_To_Tournament = new JButton("Ajouter à un tournoi");
+		add_To_Tournament.setBounds(20, 10, 175, 50);
+		panel_2.add(add_To_Tournament);
+		add_To_Tournament.setFont(ModeleESporter.FONT_MEDIUM);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 2;
+		gbc_panel_1.gridy = 1;
+		add(panel_1, gbc_panel_1);
+		
+		JButton delete = new JButton("Supprimer");
+		delete.setBounds(52, 10, 175, 50);
+		panel_1.add(delete);
+		delete.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		
 	}
@@ -211,7 +234,7 @@ public class VueInfoPanel extends JPanel{
 		modeleEquipe.clear();
 		VueInfoPanel.ec = null;
 		VueInfoPanel.ec = e;
-		this.setSize(500, 400);
+		this.setSize(750, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -297,7 +320,7 @@ public class VueInfoPanel extends JPanel{
 		modeleEquipe.clear();
 		VueInfoPanel.t = null;
 		VueInfoPanel.t = t;
-		this.setSize(500, 400);
+		this.setSize(750, 400);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 70, 0};
@@ -338,13 +361,10 @@ public class VueInfoPanel extends JPanel{
 		
 	}
 	
-	/**
-	 * @wbp.parser.constructor
-	 */
 	public VueInfoPanel(Joueur j) {
 		VueInfoPanel.j = null;
 		VueInfoPanel.j = j;
-		this.setSize(500, 400);
+		this.setSize(750, 400);
 		ControleurModif cm = new ControleurModif(j, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
