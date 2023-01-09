@@ -42,6 +42,9 @@ public class VueInfoPanel extends JPanel{
 	private static JLabel nomEcurie;
 	private static JLabel nomTournoi;
 	private static JLabel nomJoueur;
+	private static JLabel prenomJoueur;
+	private static JLabel pseudoJoueur;
+	private static JLabel nationaliteJoueur;
 	
 
 
@@ -335,6 +338,9 @@ public class VueInfoPanel extends JPanel{
 		
 	}
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public VueInfoPanel(Joueur j) {
 		VueInfoPanel.j = null;
 		VueInfoPanel.j = j;
@@ -381,7 +387,7 @@ public class VueInfoPanel extends JPanel{
 		prenomJoueurLabel.setBounds(0, 10, 145, 20);
 		panel_2.add(prenomJoueurLabel);
 		
-		JLabel prenomJoueur = new JLabel(j.getPrenom());
+		prenomJoueur = new JLabel(j.getPrenom());
 		prenomJoueur.setBounds(0, 35, 145, 20);
 		panel_2.add(prenomJoueur);
 		prenomJoueur.setVerticalAlignment(SwingConstants.TOP);
@@ -393,7 +399,7 @@ public class VueInfoPanel extends JPanel{
 		pseudoJoueurLabel.setBounds(0, 60, 145, 20);
 		panel_1.add(pseudoJoueurLabel);
 		
-		JLabel pseudoJoueur = new JLabel(j.getPseudo());
+		pseudoJoueur = new JLabel(j.getPseudo());
 		pseudoJoueur.setBounds(0, 85, 145, 20);
 		panel_1.add(pseudoJoueur);
 		pseudoJoueur.setVerticalAlignment(SwingConstants.TOP);
@@ -415,7 +421,7 @@ public class VueInfoPanel extends JPanel{
 		nationaliteJoueurLabel.setBounds(0, 110, 200, 20);
 		panel_1.add(nationaliteJoueurLabel);
 		
-		JLabel nationaliteJoueur = new JLabel(j.getNationalite().getNom());
+		nationaliteJoueur = new JLabel(j.getNationalite().getNom());
 		nationaliteJoueur.setBounds(0, 135, 145, 20);
 		panel_1.add(nationaliteJoueur);
 		nationaliteJoueur.setVerticalAlignment(SwingConstants.TOP);
@@ -435,18 +441,12 @@ public class VueInfoPanel extends JPanel{
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 2;
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		add(panel, gbc_panel);
-		
-		JPanel panelBtnSupprimer = new JPanel();
 		panel.setLayout(null);
-		GridBagConstraints gbc_panelBtnSupprimer = new GridBagConstraints();
-		gbc_panelBtnSupprimer.fill = GridBagConstraints.BOTH;
-		gbc_panelBtnSupprimer.gridx = 1;
-		gbc_panelBtnSupprimer.gridy = 1;
-		add(panelBtnSupprimer, gbc_panelBtnSupprimer);
 		
 		JButton modfier_1 = new JButton("Modifier");
 		modfier_1.setBounds(10, 10, 200, 50);
@@ -455,10 +455,9 @@ public class VueInfoPanel extends JPanel{
 		panel.add(modfier_1);
 		
 		JButton supprimer = new JButton("Supprimer");
-		supprimer.setBounds(10, 10, 200, 50);
+		panel.add(supprimer);
+		supprimer.setBounds(290, 10, 200, 50);
 		supprimer.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		//supprimer.addActionListener(cm);
-		panelBtnSupprimer.add(supprimer);
 		
 		///
 		
@@ -487,8 +486,11 @@ public class VueInfoPanel extends JPanel{
 		nomEcurie.setText(nom);
 	}
 
-	public static void updateInfoJoueur(String nom) {
-		nomJoueur.setText(nom);
+	public static void updateInfoJoueur(Joueur j) {
+		nomJoueur.setText(j.getNom());
+		prenomJoueur.setText(j.getPrenom());
+		pseudoJoueur.setText(j.getPseudo());
+		nationaliteJoueur.setText(j.getNationalite().getNom());
 		
 	}
 }

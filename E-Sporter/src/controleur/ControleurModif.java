@@ -86,7 +86,8 @@ public class ControleurModif implements ActionListener{
 				this.modele.modifierEcurie(ecNew);
 			}else{
 				Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
-				VueInfoPanel.updateInfoJoueur(j.getNom());
+				System.out.println(jNew.getId());
+				VueInfoPanel.updateInfoJoueur(jNew);
 				this.modele.modifierJoueur(jNew);
 			}
 		}

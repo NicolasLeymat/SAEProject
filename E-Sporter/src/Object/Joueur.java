@@ -204,12 +204,13 @@ public class Joueur {
 		try {
 			
 			pst = connex.
-					prepareStatement("Select j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.id_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where e.id_equipe = j.id_equipe and e.id_equipe = ? order by 3");
+					prepareStatement("Select j.id_joueur ,j.nom, j.prenom, j.pseudonyme, j.datedenaissance, j.nationalites, j.id_equipe from LMN3783A.sae_joueur j, LMN3783A.SAE_Equipe e where e.id_equipe = j.id_equipe and e.id_equipe = ? order by 3");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Joueur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), Nationalite.valueOf(rs.getString(5)));
-				e.setIdEquipe(rs.getInt(6));
+				e = new Joueur(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), Nationalite.valueOf(rs.getString(6)));
+				e.setIdEquipe(rs.getInt(7));
+				e.setId(rs.getInt(1));
 				r.add(e);
 			}
 			
