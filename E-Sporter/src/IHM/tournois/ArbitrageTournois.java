@@ -4,27 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import IHM.info.ListeJoueur;
+import Object.Match;
+import Object.Joueur;
 
 public class ArbitrageTournois extends JFrame {
+	private Match match;
   
-	public ArbitrageTournois() {
+	public ArbitrageTournois(Match t) {
+		this.match = t;
 	    // définition de la fenêtre
 	    setTitle("Fenêtre avec deux listes");
-	    setSize(500, 400);
+	    setSize(500, 250);
 	    setLocationRelativeTo(null);
 	    
 	    // création des listes et de leurs modèles de données
-	    DefaultListModel<String> modeleListe1 = new DefaultListModel<>();
-	    modeleListe1.addElement("Élément 1");
-	    modeleListe1.addElement("Élément 2");
-	    modeleListe1.addElement("Élément 3");
-	    modeleListe1.addElement("Élément 4");
-	    
-	    DefaultListModel<String> modeleListe2 = new DefaultListModel<>();
-	    modeleListe2.addElement("Élément 1");
-	    modeleListe2.addElement("Élément 2");
-	    modeleListe2.addElement("Élément 3");
-	    modeleListe2.addElement("Élément 4");
 	    GridBagLayout gridBagLayout = new GridBagLayout();
 	    gridBagLayout.columnWidths = new int[]{193, 193, 0};
 	    gridBagLayout.rowHeights = new int[]{285, 49, 0};
@@ -33,17 +30,22 @@ public class ArbitrageTournois extends JFrame {
 	    getContentPane().setLayout(gridBagLayout);
 	    
 	    // création des titres
-	    JLabel titreListe1 = new JLabel("Equipe 1");
+	    JLabel titreListe1 = new JLabel(match.getEquipe1().getNom());
 	    titreListe1.setBounds(80, 30, 80, 13);
 	    titreListe1.setHorizontalAlignment(SwingConstants.CENTER);
+
 	    
 	    // création des panneaux pour contenir les titres et les listes
 	    JPanel panneauListe1 = new JPanel();
 	    panneauListe1.setLayout(null);
 	    panneauListe1.add(titreListe1);
-	    
-	    JScrollPane scrollPane_1 = new JScrollPane();
-	    scrollPane_1.setBounds(40, 75, 160, 200);
+		List<Joueur> joueursE1 = match.getEquipe1().getJoueurs();
+
+		JList<Joueur> listeJE1 = new JList<>(new ListeJoueur(joueursE1));
+	    JScrollPane scrollPane_1 = new JScrollPane(listeJE1);
+		System.out.println("-----------\n"+ joueursE1);
+		System.out.println("-----------\n"+ listeJE1.getSize());
+	    scrollPane_1.setBounds(40, 65, 160, 100);
 	    panneauListe1.add(scrollPane_1);
 	    GridBagConstraints gbc_panneauListe1 = new GridBagConstraints();
 	    gbc_panneauListe1.fill = GridBagConstraints.BOTH;
@@ -51,16 +53,20 @@ public class ArbitrageTournois extends JFrame {
 	    gbc_panneauListe1.gridx = 0;
 	    gbc_panneauListe1.gridy = 0;
 	    getContentPane().add(panneauListe1, gbc_panneauListe1);
-	    JLabel titreListe2 = new JLabel("Equipe 2");
+	    JLabel titreListe2 = new JLabel(match.getEquipe2().getNom());
 	    titreListe2.setBounds(80, 30, 80, 15);
 	    titreListe2.setHorizontalAlignment(SwingConstants.CENTER);
 	    
 	    JPanel panneauListe2 = new JPanel();
 	    panneauListe2.setLayout(null);
 	    panneauListe2.add(titreListe2);
+		List<Joueur> joueursE2 = match.getEquipe1().getJoueurs();
+
+		JList<Joueur> listeJE2 = new JList<>(new ListeJoueur(joueursE2));
+
 	    
-	    JScrollPane scrollPane = new JScrollPane();
-	    scrollPane.setBounds(40, 75, 160, 200);
+	    JScrollPane scrollPane = new JScrollPane(listeJE2);
+	    scrollPane.setBounds(40, 65, 160, 100);
 	    panneauListe2.add(scrollPane);
 	    GridBagConstraints gbc_panneauListe2 = new GridBagConstraints();
 	    gbc_panneauListe2.fill = GridBagConstraints.BOTH;
@@ -82,7 +88,7 @@ public class ArbitrageTournois extends JFrame {
 	    JButton boutonListe1 = new JButton("Gagné");
 	    boutonListe1.setBounds(80, 0, 80, 21);
 	    panel.add(boutonListe1);
-	    boutonListe1.setPreferredSize(new Dimension(20, 20));
+	    boutonListe1.setPreferredSize(new Dimension(20, 10));
 	    
 	    JPanel panel_1 = new JPanel();
 	    panel_1.setLayout(null);
@@ -100,9 +106,6 @@ public class ArbitrageTournois extends JFrame {
 	    });
 	}
   
-	public static void main(String[] args) {
-		ArbitrageTournois fenetre = new ArbitrageTournois();
-   
-	}
+
 }
 

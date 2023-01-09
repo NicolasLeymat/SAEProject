@@ -40,7 +40,7 @@ public class VueInfoTournoisPanel extends JPanel {
                 Match match  =(Match) tableModel1.getValueAt(ligne);
 
                 System.out.println(tournoi);
-                IHM.tournois.ArbitrageTournois window = new ArbitrageTournois();
+                IHM.tournois.ArbitrageTournois window = new ArbitrageTournois(match);
                 window.setVisible(true);
             }
         });

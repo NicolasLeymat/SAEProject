@@ -1,6 +1,7 @@
 package Application;
 
 import java.awt.EventQueue;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 
