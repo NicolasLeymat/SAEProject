@@ -64,6 +64,7 @@ public class ControleurAjout implements ActionListener{
 				JFrame frame = this.modele.getPanelFrame(vue);
 				frame.dispose();
 				this.modele.addTournament(obj);
+				MainPanel.updateListTournoi();
 				break;
 			}
 	}

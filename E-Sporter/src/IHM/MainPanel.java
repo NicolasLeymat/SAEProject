@@ -74,6 +74,7 @@ public class MainPanel extends JPanel{
 		listTournoi.setModel(modelTournoi);
 		listTournoi.addMouseListener(controleurTournoi);
 		JScrollPane tournoiPanel = new JScrollPane(listTournoi);
+		tournoiPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		tournoiPanel.setSize(400, 625);
 		tournoiPanel.setMaximumSize(new Dimension(400, 625));
 		tournoiPanel.setMinimumSize(new Dimension(400, 625));
@@ -109,12 +110,14 @@ public class MainPanel extends JPanel{
 		JPanel filterTournamentPanel = new JPanel();
 		tournoiPanel.setColumnHeaderView(filterTournamentPanel);
 		
+		ControleurFilter<String> filterTournoi = new ControleurFilter<>("Tournament", this);
 		filterTournament = new JComboBox<>();
 		filterTournament.addItem("Sans filtre");
 		filterTournament.addItem("Phase d'inscription");
 		filterTournament.addItem("En cours");
 		filterTournament.addItem("Terminés");
 		filterTournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
+		filterTournament.addActionListener(filterTournoi);
 		filterTournamentPanel.add(filterTournament);
 
 	}
@@ -129,11 +132,23 @@ public class MainPanel extends JPanel{
 		modelEcurie.addAll(l);
 	}
 	
+	public static void changeModelElementTournoi(List<Tournoi> l) {
+		modelTournoi.clear();
+		modelTournoi.addAll(l);
+	}
+	
 	public static void updateListEquipe() {
 		modelEquipe.clear();
 		e = Equipe.getAllEquipes();
 		modelEquipe.addAll(e);
 		listEquipe.setModel(modelEquipe);
+	}
+	
+	public static void updateListTournoi() {
+		modelTournoi.clear();
+		t = Tournoi.getAllTournois();
+		modelTournoi.addAll(t);
+		listTournoi.setModel(modelTournoi);
 	}
 	
 	public static void updateListEcuries() {

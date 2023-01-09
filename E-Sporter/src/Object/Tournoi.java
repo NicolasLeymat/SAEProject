@@ -68,7 +68,7 @@ public class Tournoi {
 
 	//Constructeur de la classe "Tournoi"
 	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode, ETAT etat) throws Exception {
-		this.etat = etat;
+		this.setEtat(etat);
 
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
@@ -254,7 +254,7 @@ public class Tournoi {
 					tournoi.setId(Tournoi.getLastId() + 1);
 				}
 
-				pst = connex.prepareStatement("insert into LMN3783A.sae_tournoi(id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur,id_mode) values(?,?,?,?,?,?,?)");
+				pst = connex.prepareStatement("insert into LMN3783A.sae_tournoi(id_tournoi, nom, datetournoi, championnat, notoriete, id_organisateur,id_mode, etat) values(?,?,?,?,?,?,?,?)");
 				pst.setInt(1, tournoi.getId());
 				pst.setString(2, tournoi.getNom());
 				pst.setDate(3, tournoi.getDateTournoi());
@@ -262,6 +262,7 @@ public class Tournoi {
 				pst.setInt(5, tournoi.getNotoriete());
 				pst.setInt(6, tournoi.getId_Organisateur());
 				pst.setInt(7, tournoi.getId_Mode().getIdMode());
+				pst.setString(8, tournoi.getEtat().getValue());
 				pst.executeUpdate();
 				pst.close();
 
@@ -439,6 +440,14 @@ public class Tournoi {
 			ex.printStackTrace();
 		}
 		return tournois;
+	}
+
+	public ETAT getEtat() {
+		return etat;
+	}
+
+	public void setEtat(ETAT etat) {
+		this.etat = etat;
 	}
 	
 }

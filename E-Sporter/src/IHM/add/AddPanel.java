@@ -19,6 +19,7 @@ import Object.ModeDeJeu;
 import Object.Nationalite;
 import Object.Organisateur;
 import Object.Tournoi;
+import Object.Tournoi.ETAT;
 import controleur.ControleurAdd;
 import controleur.ControleurAjout;
 import controleur.ModeleESporter;
@@ -291,7 +292,8 @@ public class AddPanel extends JPanel {
 				Tournoi.Notoriete not  = (Tournoi.Notoriete)  this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), Tournoi.ETAT.INSC);
+					System.out.println(this.formattingText());
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), ETAT.INSC);
 					System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -309,9 +311,10 @@ public class AddPanel extends JPanel {
 		String textToFormat = this.brithDateTF.getText();
 		String[] values = textToFormat.split("/");
 		int year = Integer.parseInt(values[2]);
+		System.out.println(year);
 		int month = Integer.parseInt(values[1]);
 		int day = Integer.parseInt(values[0]);
-		return new Date(year, month, day);
+		return new Date(year - 1900, month - 1, day);
 	}
 
 }

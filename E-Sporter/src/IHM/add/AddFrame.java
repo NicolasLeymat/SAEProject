@@ -25,19 +25,19 @@ public class AddFrame extends JFrame {
 		this.setResizable(false);
 		switch(type) {
 			case "Player":{
-				this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-150));
 				break;
 			}
 			case "Team":{
-				this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-200));
 				break;
 			}
 			case "Orga":{
-				this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
 				break;
 			}
 			case "Tournament":{
-				this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-100));
 				break;
 			}
 		}
