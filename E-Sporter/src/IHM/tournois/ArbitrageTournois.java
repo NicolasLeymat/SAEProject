@@ -12,7 +12,6 @@ public class ArbitrageTournois extends JFrame {
 	    setTitle("Fenêtre avec deux listes");
 	    setSize(500, 400);
 	    setLocationRelativeTo(null);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    // création des listes et de leurs modèles de données
 	    DefaultListModel<String> modeleListe1 = new DefaultListModel<>();
