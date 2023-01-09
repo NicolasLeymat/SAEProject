@@ -9,6 +9,7 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.Tournoi;
 import controleur.ControleurAdd;
+import controleur.ControleurDelete;
 import controleur.ControleurJList;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
@@ -57,6 +58,7 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.e = e;
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
+		ControleurDelete cd = new ControleurDelete(e, this);
 		this.setSize(750, 450);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{258, 200, 258, 0};
@@ -220,6 +222,7 @@ public class VueInfoPanel extends JPanel{
 		
 		JButton delete = new JButton("Supprimer");
 		delete.setBounds(52, 10, 175, 50);
+		delete.addActionListener(cd);
 		panel_1.add(delete);
 		delete.setFont(ModeleESporter.FONT_MEDIUM);
 		
@@ -237,6 +240,7 @@ public class VueInfoPanel extends JPanel{
 		this.setSize(500, 400);
 		ControleurAdd c = new ControleurAdd(this, e);
 		ControleurModif cm = new ControleurModif(e, this);
+		ControleurDelete cd = new ControleurDelete(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 70, 0};
@@ -313,7 +317,7 @@ public class VueInfoPanel extends JPanel{
 		JButton delete = new JButton("Supprimer");
 		delete.setBounds(20, 10, 150, 50);
 		delete.setFont(ModeleESporter.FONT_MEDIUM);
-		delete.addActionListener(null);
+		delete.addActionListener(cd);
 		panel_3.add(delete);
 		
 		JPanel panel = new JPanel();
@@ -381,6 +385,7 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.j = j;
 		this.setSize(750, 400);
 		ControleurModif cm = new ControleurModif(j, this);
+		ControleurDelete cd = new ControleurDelete(j, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 70, 0};
@@ -492,6 +497,7 @@ public class VueInfoPanel extends JPanel{
 		JButton supprimer = new JButton("Supprimer");
 		panel.add(supprimer);
 		supprimer.setBounds(290, 10, 200, 50);
+		supprimer.addActionListener(cd);
 		supprimer.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		///
