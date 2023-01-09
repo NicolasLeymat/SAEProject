@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import IHM.MainPanel;
@@ -61,39 +62,40 @@ public class ControleurDelete implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
-		if(b.getText().equals("Modifier")) {
-			if(this.nature == "Equipe"){
-				this.v = new VueModifFrame(eq);
-				this.v.setVisible(true);
-			}else if (this.nature == "Ecurie"){
-				this.v = new VueModifFrame(ec);
-				this.v.setVisible(true);
+		if(b.getText().equals("Supprimer")) {
+			
+			int resultat = JOptionPane.showConfirmDialog(this.v, "Êtes-vous sûr de vouloir vraiment supprimer ceci ?","Confirm", JOptionPane.YES_NO_OPTION);
+			if (resultat == JOptionPane.YES_OPTION) {
+				switch(this.nature) {
+				case "Equipe":
+					modele.supprimerEquipe(eq);
+					this.modele.getPanelFrame(vue).dispose();
+					MainPanel.updateListEquipe();
+					VueInfoPanel.updateListEquipe();
+					MainPanel.updateListEcuries();
+					break;
+				case "Ecurie":
+					modele.supprimerEcurie(ec);
+					MainPanel.updateListEcuries();
+					this.modele.getPanelFrame(vue).dispose();
+					break;
+				case "Tournoi":
+					modele.supprimerTournoi(t);
+					MainPanel.updateListTournoi();
+					this.modele.getPanelFrame(vue).dispose();
+					break;
+				case "Joueur":
+					modele.supprimerJoueur(j);
+					VueInfoPanel.updateListJoueur();
+					VueInfoPanel.updateListJoueur();
+					this.modele.getPanelFrame(vue).dispose();
+					break;
+			}
 			}
 			else {
-				this.v = new VueModifFrame(j);
-				this.v.setVisible(true);
+				System.out.println("sauce");
 			}
 		}
-		if(b.getText().equals("Confirmer")) {
-			this.modele.getPanelFrame(vue).dispose();
-			if(this.nature == "Equipe"){
-				Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
-				VueInfoPanel.updateInfoEquipe(eqNew.getNom());
-				this.modele.modifierEquipe(eqNew);
-			}else if (this.nature == "Ecurie"){
-				Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
-				VueInfoPanel.updateInfoEcurie(ec.getNom());
-				this.modele.modifierEcurie(ecNew);
-			}else{
-				Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
-				System.out.println(jNew.getId());
-				VueInfoPanel.updateInfoJoueur(jNew);
-				this.modele.modifierJoueur(jNew);
-			}
-		}
-		if(b.getText().equals("Annuler")) {
-			this.modele.getPanelFrame(vue).dispose();
-			}	
 	}
 
 	
