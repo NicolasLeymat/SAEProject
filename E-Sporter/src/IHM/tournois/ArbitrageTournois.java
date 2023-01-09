@@ -18,13 +18,13 @@ public class ArbitrageTournois extends JFrame {
 		this.match = t;
 	    // définition de la fenêtre
 	    setTitle("Fenêtre avec deux listes");
-	    setSize(500, 250);
+	    setSize(500, 275);
 	    setLocationRelativeTo(null);
 	    
 	    // création des listes et de leurs modèles de données
 	    GridBagLayout gridBagLayout = new GridBagLayout();
 	    gridBagLayout.columnWidths = new int[]{193, 193, 0};
-	    gridBagLayout.rowHeights = new int[]{285, 49, 0};
+	    gridBagLayout.rowHeights = new int[]{185, 25, 0};
 	    gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 	    gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 	    getContentPane().setLayout(gridBagLayout);
