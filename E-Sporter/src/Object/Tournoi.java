@@ -47,7 +47,13 @@ public class Tournoi {
 		INSC("INSC");
 		private String value;
 		ETAT(String s ) {
-			this.value = s;
+			this.setValue(s);
+		}
+		public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
 		}
 	}
 
@@ -405,6 +411,34 @@ public class Tournoi {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static List<Tournoi> getTournoiWithFilter(ETAT e){
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		List<Tournoi> tournois = new ArrayList<>();
+		Tournoi t = null;
+		
+		try {
+			
+			pst = connex.prepareStatement("select id_tournoi,etat, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi where etat = ? order by nom");
+			pst.setString(1, e.getValue());
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				ETAT etat = ETAT.valueOf(rs.getString("etat"));
+				t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")),etat);
+				t.setId(rs.getInt(1));
+				tournois.add(t);
+			}
+			
+			rs.close();
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return tournois;
 	}
 	
 }
