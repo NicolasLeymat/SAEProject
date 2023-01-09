@@ -27,14 +27,14 @@ public class ArbitrageTournois extends JFrame {
 	    modeleListe2.addElement("Élément 4");
 	    GridBagLayout gridBagLayout = new GridBagLayout();
 	    gridBagLayout.columnWidths = new int[]{193, 193, 0};
-	    gridBagLayout.rowHeights = new int[]{285, -23, 0};
+	    gridBagLayout.rowHeights = new int[]{285, 49, 0};
 	    gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 	    gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 	    getContentPane().setLayout(gridBagLayout);
 	    
 	    // création des titres
 	    JLabel titreListe1 = new JLabel("Equipe 1");
-	    titreListe1.setBounds(98, 29, 39, 13);
+	    titreListe1.setBounds(80, 30, 80, 13);
 	    titreListe1.setHorizontalAlignment(SwingConstants.CENTER);
 	    
 	    // création des panneaux pour contenir les titres et les listes
@@ -52,7 +52,7 @@ public class ArbitrageTournois extends JFrame {
 	    gbc_panneauListe1.gridy = 0;
 	    getContentPane().add(panneauListe1, gbc_panneauListe1);
 	    JLabel titreListe2 = new JLabel("Equipe 2");
-	    titreListe2.setBounds(91, 28, 48, 15);
+	    titreListe2.setBounds(80, 30, 80, 15);
 	    titreListe2.setHorizontalAlignment(SwingConstants.CENTER);
 	    
 	    JPanel panneauListe2 = new JPanel();
@@ -80,7 +80,7 @@ public class ArbitrageTournois extends JFrame {
 	    
 	    // création des boutons
 	    JButton boutonListe1 = new JButton("Gagné");
-	    boutonListe1.setBounds(80, 0, 61, 21);
+	    boutonListe1.setBounds(80, 0, 80, 21);
 	    panel.add(boutonListe1);
 	    boutonListe1.setPreferredSize(new Dimension(20, 20));
 	    
@@ -92,7 +92,7 @@ public class ArbitrageTournois extends JFrame {
 	    gbc_panel_1.gridy = 1;
 	    getContentPane().add(panel_1, gbc_panel_1);
 	    JButton boutonListe2 = new JButton("Gagné");
-	    boutonListe2.setBounds(85, 0, 61, 21);
+	    boutonListe2.setBounds(81, 0, 82, 21);
 	    panel_1.add(boutonListe2);
 	    boutonListe2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
