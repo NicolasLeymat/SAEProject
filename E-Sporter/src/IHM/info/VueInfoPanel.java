@@ -48,6 +48,7 @@ public class VueInfoPanel extends JPanel{
 	public VueInfoPanel(Equipe e) {
 		System.out.println("----------------------------------------");
 		System.out.println(e);
+		System.out.println(e);
 		modeleJoueur.clear();
 		VueInfoPanel.e = null;
 		VueInfoPanel.e = e;

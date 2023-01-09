@@ -48,4 +48,8 @@ public class TableauMatch extends AbstractTableModel {
                 return null;
         }
     }
+
+    public Object getValueAt(int rowIndex) {
+        return matchs.get(rowIndex);
+    }
 }
