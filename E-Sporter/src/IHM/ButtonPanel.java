@@ -11,6 +11,7 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 
 import controleur.ControleurAdd;
+import controleur.ModeleESporter;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -30,7 +31,7 @@ public class ButtonPanel extends JPanel{
 		
 		JLabel lblTeam = new JLabel("Listes des équipes : ");
 		lblTeam.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTeam.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblTeam.setFont(ModeleESporter.FONT_MEDIUM);
 		lblTeam.setBounds(120, 10, 150, 30);
 		panel.add(lblTeam);
 		
@@ -41,13 +42,13 @@ public class ButtonPanel extends JPanel{
 		JButton addSupervisor = new JButton("Ajouter une écurie");
 		addSupervisor.setLocation(100, 35);
 		panel_1.add(addSupervisor);
-		addSupervisor.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		addSupervisor.setFont(ModeleESporter.FONT_MEDIUM);
 		addSupervisor.setSize(new Dimension(200, 50));
 		addSupervisor.addActionListener(c);
 		
 		JLabel lblEcuries = new JLabel("Listes des écuries : ");
 		lblEcuries.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEcuries.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblEcuries.setFont(ModeleESporter.FONT_MEDIUM);
 		lblEcuries.setBounds(120, 10, 150, 30);
 		panel_1.add(lblEcuries);
 		
@@ -58,13 +59,13 @@ public class ButtonPanel extends JPanel{
 		JButton NewTournament = new JButton("Ajouter un tournoi");
 		NewTournament.setLocation(100, 35);
 		panel_2.add(NewTournament);
-		NewTournament.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		NewTournament.setFont(ModeleESporter.FONT_MEDIUM);
 		NewTournament.setSize(new Dimension(200, 50));
 		NewTournament.addActionListener(c);
 		
 		JLabel lblTournois = new JLabel("Listes des tournois : ");
 		lblTournois.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTournois.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblTournois.setFont(ModeleESporter.FONT_MEDIUM);
 		lblTournois.setBounds(120, 10, 150, 30);
 		panel_2.add(lblTournois);
 	}

@@ -2,6 +2,10 @@ package Object;
 
 import Application.Connexion;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +14,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Equipe {
 
@@ -37,7 +44,10 @@ public class Equipe {
 	 * liste des joueurs de l'equipe
 	 */
 	private List<Joueur> listeJoueurs;
-
+	/**
+	 * Logo de l'équipe
+	 */
+	private ImageIcon logo;
 	/**
 	 * construit une equipe a partir de son nom
 	 * @param nom
@@ -289,7 +299,7 @@ public class Equipe {
 		Equipe e = null;
 		try {
 			st = connex.createStatement();
-			rs = st.executeQuery("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe order by nom");
+			rs = st.executeQuery("select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe order by nom");
 			while (rs.next()) {
 				e = createEquipeFromRs(rs);
 				equipes.add(e);
@@ -348,7 +358,7 @@ public class Equipe {
 		Equipe e = null;
 		List<Equipe> r = new ArrayList<Equipe>();
 		try {
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_ecurie= ?");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where id_ecurie= ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -362,6 +372,7 @@ public class Equipe {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		//System.out.println(r);
 		return r;
 	}
 	/**
@@ -379,7 +390,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where lower(nom) LIKE lower(?)");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where lower(nom) LIKE lower(?)");
 			pst.setString(1, "%"+nom+"%");
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -409,7 +420,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_equipe = ?");
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where id_equipe = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -439,7 +450,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where nom = ?");
+			pst = connex.prepareStatement("Select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where nom = ?");
 			pst.setString(1, nom);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -520,7 +531,7 @@ public class Equipe {
 		
 		try {
 			
-			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode from LMN3783A.sae_equipe where id_mode = ?");
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where id_mode = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -573,6 +584,17 @@ public class Equipe {
 		e.setPoints(rs.getInt(3));
 		e.setIdEcurie(rs.getInt(4));
 		e.setIdModeDeJeu(rs.getInt(5));
+		Image image = null;
+		String link = rs.getString(6);
+		//System.out.println("Link : "+link);
+		try {
+			URL url = new URL(link);
+			//System.out.println("URL : "+url.openStream());
+			image = ImageIO.read(url);
+			e.setLogo(new ImageIcon(image));
+		} catch (IOException e1) {
+			e.setLogo(null);
+		}
 		e.listeJoueurs = Joueur.getJoueursFromEquipe(e.getId());
 		return e;
 	}
@@ -580,6 +602,14 @@ public class Equipe {
 	@Override
 	public String toString() {
 		return nom+", Points : " + points;
+	}
+	
+	public ImageIcon getLogo() {
+		return logo;
+	}
+	
+	public void setLogo(ImageIcon logo) {
+		this.logo = logo;
 	}
 	
 }
