@@ -42,7 +42,7 @@ public class Tournoi {
 	private ETAT etat;
 
 	public enum ETAT {
-		EN_COURS("ENC"),
+		ENC("ENC"),
 		FINI("FINI"),
 		INSC("INSC");
 		private String value;

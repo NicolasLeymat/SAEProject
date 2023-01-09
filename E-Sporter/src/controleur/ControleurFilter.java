@@ -53,7 +53,7 @@ public class ControleurFilter<E> implements ActionListener{
 						etat = ETAT.INSC;
 						break;
 					case "En cours":
-						etat = ETAT.EN_COURS;
+						etat = ETAT.ENC;
 						break;
 					case "Terminés":
 						etat = ETAT.FINI;
