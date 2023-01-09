@@ -17,9 +17,8 @@ public class ArbitrageTournois extends JFrame {
 	public ArbitrageTournois(Match t) {
 		this.match = t;
 	    // définition de la fenêtre
-
-	    setTitle("Arbitrage Tournois");
-	    setSize(500, 400);
+	    setTitle("Fenêtre avec deux listes");
+	    setSize(500, 275);
 	    setLocationRelativeTo(null);
 	    
 	    // création des listes et de leurs modèles de données
