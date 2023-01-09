@@ -204,4 +204,16 @@ public class ModeleESporter {
 	public void supprimerEquipe(Equipe e) {
 		Equipe.supprimerEquipe(e);
 	}
+	
+	public void supprimerEcurie(Ecurie e) {
+		Ecurie.supprimerEcurie(e);
+	}
+	
+	public void supprimerJoueur(Joueur j) {
+		Joueur.supprimerJoueur(j);
+	}
+	
+	public void supprimerTournoi(Tournoi t) {
+		Tournoi.supprimerTournoi(t);
+	}
 }
