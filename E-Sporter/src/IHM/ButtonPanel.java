@@ -11,6 +11,7 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 
 import controleur.ControleurAdd;
+import controleur.ControleurChamp;
 import controleur.ModeleESporter;
 
 import java.awt.GridLayout;
@@ -21,6 +22,7 @@ public class ButtonPanel extends JPanel{
 	
 	public ButtonPanel() {
 		ControleurAdd c = new ControleurAdd(this, null);
+		ControleurChamp champ = new ControleurChamp(this);
 		setSize(1200, 100);
 		Dimension btnSize = new Dimension(200,75);
 		setLayout(new GridLayout(0, 3, 0, 0));
@@ -35,6 +37,15 @@ public class ButtonPanel extends JPanel{
 		lblTeam.setBounds(120, 10, 150, 30);
 		panel.add(lblTeam);
 		
+		//
+		JButton seeChamp = new JButton("Championnat du monde");
+		seeChamp.setLocation(100, 35);
+		panel.add(seeChamp);
+		seeChamp.setFont(ModeleESporter.FONT_MEDIUM);
+		seeChamp.setSize(new Dimension(200, 50));
+		seeChamp.addActionListener(champ);
+		//
+
 		JPanel panel_1 = new JPanel();
 		add(panel_1);
 		panel_1.setLayout(null);

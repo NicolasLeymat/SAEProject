@@ -178,11 +178,6 @@ public class VueInfoPanel extends JPanel{
 		addPlayer.addActionListener(c);
 		panelJoueur.add(addPlayer);
 		
-		JButton deletePlayer = new JButton("Supprimer un joueur");
-		deletePlayer.setFont(ModeleESporter.FONT_MEDIUM);
-		deletePlayer.setBounds(35, 347, 200, 25);
-		panelJoueur.add(deletePlayer);
-		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -299,11 +294,6 @@ public class VueInfoPanel extends JPanel{
 		addTeam.setBounds(35, 261, 200, 25);
 		addTeam.addActionListener(c);
 		panel_2.add(addTeam);
-		
-		JButton deleteTeam = new JButton("Supprimer une équipe");
-		deleteTeam.setFont(ModeleESporter.FONT_MEDIUM);
-		deleteTeam.setBounds(35, 297, 200, 25);
-		panel_2.add(deleteTeam);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);

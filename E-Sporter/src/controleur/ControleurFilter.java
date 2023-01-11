@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 import IHM.MainPanel;
+import IHM.champ.ChampPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.ModeDeJeu;
@@ -16,9 +18,9 @@ import Object.Tournoi.ETAT;
 public class ControleurFilter<E> implements ActionListener{
 
 	private String filterType;
-	private MainPanel vue;
+	private JPanel vue;
 	
-	public ControleurFilter(String filterType, MainPanel vue) {
+	public ControleurFilter(String filterType, JPanel vue) {
 		this.vue = vue;
 		this.filterType = filterType;
 	}
@@ -60,6 +62,10 @@ public class ControleurFilter<E> implements ActionListener{
 						break;
 				}
 				MainPanel.changeModelElementTournoi(Tournoi.getTournoiWithFilter(etat));
+				break;
+			case "Championnat":
+				ChampPanel.changeModelResultChamp(Equipe.getClassementByGame(ModeDeJeu.getModeDeJeuFromNom((String) item).getIdMode()));
+				System.out.println(Equipe.getClassementByGame(ModeDeJeu.getModeDeJeuFromNom((String) item).getIdMode()));
 				break;
 		}
 		//this.vue.updateListEquipe();
