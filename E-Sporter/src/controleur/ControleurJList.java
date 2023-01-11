@@ -40,13 +40,17 @@ public class ControleurJList implements MouseListener {
 			}
 			JFrame windowTournoi = null;
 			switch (tournoiSelected.getEtat())  {
-				case FINI :  windowTournoi = new ClassementTournois();
+				case FINI :
+					System.out.println(tournoiSelected.toString());
+					windowTournoi = new ClassementTournois(tournoiSelected);
 				break;
 
 				case INSC: //A faire
 				break;
 
-				case ENC: windowTournoi = new VueInfoTournoisFrame(tournoiSelected);
+				case ENC:
+					System.out.println(tournoiSelected);
+					windowTournoi = new VueInfoTournoisFrame(tournoiSelected);
 				break;
 			}
 			windowTournoi.setVisible(true);

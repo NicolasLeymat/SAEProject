@@ -2,20 +2,28 @@ package IHM.info;
 
 import javax.swing.table.AbstractTableModel;
 import Object.Tournoi;
+import Object.Equipe;
 
 import java.util.List;
+import java.util.Map;
 
 public class TableauTournoi  extends AbstractTableModel {
-    private String[] columnNames = {"Tournoi", "Jeu", "Notoriété"};
-    private List<Tournoi> tournois;
+    private String[] columnNames = {"#", "Joueur", "Victoires","Defaites"};
+    private Tournoi tournoi;
 
-    public TableauTournoi(List<Tournoi> tournois) {
-        this.tournois = tournois;
+    public TableauTournoi(Tournoi tournoi) {
+        this.tournoi = tournoi;
     }
 
     @Override
     public int getRowCount() {
-        return tournois.size();
+        try {
+            return tournoi.getPhaseElim().getClassement().length;
+        }
+        catch (Exception e) {
+            return 0;
+        }
+
     }
 
     @Override
@@ -29,14 +37,23 @@ public class TableauTournoi  extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Tournoi tournoi = tournois.get(rowIndex);
+        Equipe[] equipes;
+        Map<Equipe,Integer[]> victoires = tournoi.getVictoires();
+        try {
+            equipes = tournoi.getPhaseElim().getClassement();
+        }
+        catch (Exception e){
+            return 0;
+        }
         switch (columnIndex) {
             case 0:
-                return tournoi.getNom();
+                return rowIndex +1;
             case 1:
-                return tournoi.getId_Mode().getJeu().getNom();
+                return equipes[rowIndex];
             case 2:
-                return tournoi.getNotoriete();
+                return victoires.get(equipes[rowIndex])[0];
+            case 3:
+                return victoires.get(equipes[rowIndex])[1];
             default:
                 return null;
         }

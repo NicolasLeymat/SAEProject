@@ -1,5 +1,7 @@
 package IHM.tournois;
 
+import IHM.info.TableauMatchHistorique;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,11 +15,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager;
+
+import Object.Tournoi;
+import Object.Match;
+import controleur.ModeleESporter;
+
 
 public class ClassementTournois extends JFrame {
 
@@ -28,24 +37,16 @@ public class ClassementTournois extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ClassementTournois frame = new ClassementTournois();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+
+
 
 	/**
 	 * Create the frame.
 	 */
-	public ClassementTournois() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private Tournoi tournoi;
+	public ClassementTournois(Tournoi t) {
+		this.tournoi = t;
 		setBounds(100, 100, 500, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,8 +59,8 @@ public class ClassementTournois extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblNewLabel_2 = new JLabel("Résultats du tournois");
-		lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 20));
+		JLabel lblNewLabel_2 = new JLabel("Résultats du tournoi");
+		lblNewLabel_2.setFont(ModeleESporter.FONT_LARGE);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_2.gridx = 0;
@@ -126,51 +127,14 @@ public class ClassementTournois extends JFrame {
 		contentPane.add(scrollPane_1, gbc_scrollPane_1);
 		
 		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Equipe 1", "Equipe 2", "Date", "Phase"
-				
-			}
-		));
+		List<Match> matchsPoules = tournoi.getPhasePoule().getMatchs();
+		List<Match> matchsElims = tournoi.getPhaseElim().getMatchs();
+		List<Match> matchs = new ArrayList<>();
+		matchs.addAll(matchsPoules);
+		matchs.addAll(matchsElims);
+		table_1.setModel(new TableauMatchHistorique(matchs));
 		table_1.setShowGrid(false);
-		table_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		table_1.setFont(ModeleESporter.FONT_SMALL);
 		
 		scrollPane_1.setViewportView(table_1);
 	}

@@ -18,7 +18,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class Equipe {
+public class Equipe implements Comparable<Equipe> {
 
 	/**
 	 * id de l'ecurie
@@ -611,5 +611,9 @@ public class Equipe {
 	public void setLogo(ImageIcon logo) {
 		this.logo = logo;
 	}
-	
+
+	@Override
+	public int compareTo(Equipe o) {
+		 return o.points - this.points;
+	}
 }

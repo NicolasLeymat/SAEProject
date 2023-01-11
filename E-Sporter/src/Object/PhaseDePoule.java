@@ -52,11 +52,22 @@ public class PhaseDePoule extends Phase {
 		if(isElim() && listEquipe.size()< 16) {
 			throw  new Exception("Pas assez d'equipes");
 		}
-		Collections.shuffle(getTournoi().getListeEquipe());
+		//Sous listes de niveaux
+		List<Equipe>[] subLists = new ArrayList[4];
+		//Tri des equipes par points
+		Collections.sort(listEquipe);
+		for (int i = 0; i < 4; i++) {
+			subLists[i] = new ArrayList<Equipe>();
+			for (int j = 0; j < 4; j++) {
+				//ajout des niveaux
+				subLists[i].add(listEquipe.get(i * 4 + j));
+			}
+			Collections.shuffle(subLists[i]);
+		}
 		for (int i = 0; i < 4; i++) {
 			poules.add(new HashMap<Equipe, Integer>());
 			for (int j =0;  j<4;j++) {
-				poules.get(i).put(listEquipe.get(i*4+j),0);
+				poules.get(i).put(subLists[i].get(j),0);
 			}
 		}
 		this.genererMatchs();
@@ -132,6 +143,11 @@ public class PhaseDePoule extends Phase {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public String getType() {
+		return "Poules";
 	}
 
 	//Fonction qui permet de récuperer le tournoi d'une phase

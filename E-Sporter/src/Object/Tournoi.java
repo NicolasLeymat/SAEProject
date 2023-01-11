@@ -9,7 +9,9 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Application.Connexion;
 
@@ -352,6 +354,42 @@ public class Tournoi {
 				phaseElim.getMatchs()) {
 			m.getWinner().addPoints(5);
 		}
+	}
+
+	private Map<Equipe,Integer[]> getVictoiresPhase (Phase phase) {
+		Map<Equipe,Integer[]> res = new HashMap<>();
+		if (phase.getMatchs() != null) {
+			for (Match m : phase.getMatchs()) {
+				Equipe gagnant = m.getWinner();
+				Equipe perdant = m.getLoser();
+				if (gagnant == null) {
+					continue;
+				}
+				if (!res.containsKey(gagnant) ) {
+					res.put(gagnant, new Integer[]{1,0});
+				}
+				if (!res.containsKey(perdant) ) {
+					res.put(gagnant, new Integer[]{0,1});
+				}
+				res.get(gagnant)[0]++;
+				res.get(perdant)[1]++;
+			}
+		}
+			return res;
+	}
+
+	public Map<Equipe,Integer[]> getVictoires() {
+		Map<Equipe,Integer[]> welim = getVictoiresPhase(this.phaseElim);
+		Map<Equipe,Integer[]> res = getVictoiresPhase(this.phasePoule);
+		for (Equipe equipe:
+			 welim.keySet()) {
+			if (!res.containsKey(equipe)) {
+				continue;
+			}
+			res.get(equipe)[0] += welim.get(equipe)[0];
+			res.get(equipe)[1] += welim.get(equipe)[1];
+		}
+		return res;
 	}
 	
 	public static List<Tournoi> getAllTournois() {

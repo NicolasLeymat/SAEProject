@@ -97,7 +97,6 @@ public abstract class Phase {
             throw  new Exception("Objet non relié");
         }
 
-
         Connection connex = Connexion.connexion();
         PreparedStatement pst = connex.prepareStatement("SELECT ID_MATCH, DATEMATCH, ID_EQUIPE1, ID_EQUIPE2, ID_GAGNANT FROM lmn3783a.sae_match where id_phase = ?");
         pst.setInt(1,id);
@@ -108,7 +107,7 @@ public abstract class Phase {
                     rs.getDate("DATEMATCH"),
                     Equipe.getEquipeFromId(rs.getInt("id_equipe1")),
                     Equipe.getEquipeFromId(rs.getInt("id_equipe2")),
-                    null);
+                    this);
             matchSelect.setId(rs.getInt(1));
             this.matchs.add(matchSelect);
             if (rs.getObject("id_gagnant") == null) {
@@ -123,6 +122,8 @@ public abstract class Phase {
         }
 
     }
+
+    public abstract String getType ();
 
     @Override
     public String toString() {

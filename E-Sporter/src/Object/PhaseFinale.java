@@ -72,6 +72,11 @@ public class PhaseFinale extends Phase{
         return true;
     }
 
+    @Override
+    public String getType() {
+        return "Eliminatoire";
+    }
+
     public boolean estFinie () {
         return finale && matchsFinis();
     }
@@ -92,6 +97,8 @@ public class PhaseFinale extends Phase{
         res[3] = getMatch(6).getLoser();
         return res;
     }
+
+
 
     @Override
     public boolean isElim() {
