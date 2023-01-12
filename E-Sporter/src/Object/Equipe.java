@@ -329,17 +329,16 @@ public class Equipe implements Comparable<Equipe> {
 		
 		try {
 			
-			ps = connex.prepareStatement("select id_equipe, nom, points, id_ecurie,id_mode from LMN3783A.sae_equipe where id_mode = ? ORDER BY points");
+			ps = connex.prepareStatement("select id_equipe, nom, points, id_ecurie,id_mode, logo from LMN3783A.sae_equipe where id_mode = ? ORDER BY points desc");
 			ps.setInt(1,idMode);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				e = new Equipe(rs.getString(2));
-				e.setId(rs.getInt(1));
-				e.setPoints(rs.getInt(3));
-				e.setIdEcurie(rs.getInt(4));
-				e.setIdModeDeJeu(rs.getInt(5));
+				e = createEquipeFromRs(rs);
 				equipes.add(e);
 			}
+			
+			rs.close();
+			ps.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

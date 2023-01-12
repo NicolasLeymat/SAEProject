@@ -1,11 +1,22 @@
 package IHM.tournois;
 
-import javax.swing.*;
-import java.awt.*;
+
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import IHM.info.ListeJoueur;
 import Object.Match;

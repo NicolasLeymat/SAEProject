@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controleur.ModeleESporter;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -24,22 +27,6 @@ public class InscriptionTournois extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InscriptionTournois frame = new InscriptionTournois();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public InscriptionTournois() {
@@ -57,7 +44,7 @@ public class InscriptionTournois extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Titre Tournois");
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lblNewLabel.setFont(ModeleESporter.FONT_LARGE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridwidth = 2;
@@ -67,7 +54,7 @@ public class InscriptionTournois extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Equipes");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.gridheight = 2;
 		gbc_lblNewLabel_1.gridwidth = 2;
@@ -78,7 +65,7 @@ public class InscriptionTournois extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("Sélectionnez une équipe ");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNewLabel_2.setFont(ModeleESporter.FONT_MEDIUM);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.gridheight = 2;
 		gbc_lblNewLabel_2.gridwidth = 7;
@@ -107,7 +94,7 @@ public class InscriptionTournois extends JFrame {
 		contentPane.add(comboBox, gbc_comboBox);
 		
 		JButton btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setFont(new Font("Dialog", Font.PLAIN, 10));
+		btnSupprimer.setFont(ModeleESporter.FONT_SMALL);
 		GridBagConstraints gbc_btnSupprimer = new GridBagConstraints();
 		gbc_btnSupprimer.gridwidth = 2;
 		gbc_btnSupprimer.insets = new Insets(0, 0, 5, 5);
@@ -116,7 +103,7 @@ public class InscriptionTournois extends JFrame {
 		contentPane.add(btnSupprimer, gbc_btnSupprimer);
 		
 		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 10));
+		btnNewButton.setFont(ModeleESporter.FONT_SMALL);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 8;

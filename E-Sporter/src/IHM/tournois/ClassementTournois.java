@@ -79,7 +79,7 @@ public class ClassementTournois extends JFrame {
 		JLabel lblNewLabel = new JLabel("Classement");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel, BorderLayout.CENTER);
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -90,7 +90,7 @@ public class ClassementTournois extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
-		table.setFont(new Font("Dialog", Font.PLAIN, 15));
+		table.setFont(ModeleESporter.FONT_MEDIUM);
 		table.setShowGrid(false);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -117,7 +117,7 @@ public class ClassementTournois extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Matchs");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
