@@ -17,33 +17,36 @@ public class VueInfoTournoisPanel extends JPanel {
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-        TableauMatch tableModel1;
+        ListeMatch listemodel1;
         // Création des modèles de tableau
         if (tournoi.getPhasePoule().matchsFinis()) {
-             tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
+             listemodel1 = new ListeMatch(tournoi.getPhaseElim().getMatchs());
         }
         else {
-             tableModel1 = new TableauMatch(tournoi.getPhasePoule().getMatchs());
+             listemodel1 = new ListeMatch(tournoi.getPhasePoule().getMatchs());
         }
 
         //Spacing
         this.add(Box.createRigidArea(new Dimension(0,5)));
 
         // Création des tableaux
-        JTable table1 = new JTable(tableModel1);
-        table1.getTableHeader().setFont(ModeleESporter.FONT_MEDIUM);
+        JList table1 = new JList(listemodel1);
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int ligne = table1.rowAtPoint(e.getPoint());
+                int ligne = table1.getSelectedIndex();
 
-                Match match  =(Match) tableModel1.getValueAt(ligne);
+                Match match  =(Match) listemodel1.getValueAt(ligne);
 
                 System.out.println(tournoi);
                 IHM.tournois.ArbitrageTournois window = new ArbitrageTournois(match);
                 window.setVisible(true);
             }
         });
+        DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        //table1.setCellRenderer(centerRenderer);
+        table1.setFont(new Font("monospaced",Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
 
         // Création de la barre de défilement pour les tableaux
         JScrollPane scrollPane1 = new JScrollPane(table1);

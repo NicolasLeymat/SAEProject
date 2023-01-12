@@ -46,11 +46,34 @@ public class TestsTournoi {
     public void testClassementPoule() throws Exception {
         PhaseDePoule phaseDePoule = tournoi.getPhasePoule();
         phaseDePoule.genererPoules();
-       phaseDePoule.enregistrerGagnant(0, phaseDePoule.getMatch(0),1);
         Equipe gagnant =  phaseDePoule.getMatch(0).getWinner();
         System.out.println(tournoi.getPhasePoule().toString());
         assertEquals(gagnant, phaseDePoule.getPremier(0));
     }
+/*
+    @Test
+    public void testClassementPouleSQL() throws Exception {
+        Tournoi tournoiSQL = new Tournoi("Tournoi test SQL",Date.valueOf("2024-12-12"),0,1,1,ModeDeJeu.getModeDeJeuFromId(1), Tournoi.ETAT.INSC);
+        Connection connect = Connexion.connexion();
+        connect.setAutoCommit(false);
+        Tournoi.enregistrerTournoi(tournoiSQL);
+        for (int i = 0; i < 16; i++) {
+            Ecurie ecurieadd = new Ecurie("Ecurie test "+i);
+            Equipe equipeadd = new Equipe("Equipe test"+i);
+            ecurieadd.addEquipe(equipeadd);
+            Ecurie.enregistrerEcurie(ecurieadd);
+            tournoiSQL.addEquipe(equipeadd);
+        }
+
+        PhaseDePoule phaseDePoule = tournoiSQL.getPhasePoule();
+        phaseDePoule.genererPoules();
+        Phase.enregistrerPhase(phaseDePoule);
+        phaseDePoule.enregistrerGagnant(0,phaseDePoule.getMatch(0),1);
+        Equipe gagnant =  phaseDePoule.getMatch(0).getWinner();
+        System.out.println(tournoiSQL.getPhasePoule().toString());
+        assertEquals(gagnant, phaseDePoule.getPremier(0));
+        connect.commit();
+    }*/
 
     @Test
     public void testPhaseFinale() throws Exception {

@@ -67,19 +67,26 @@ public abstract class Phase {
         Connection connex = Connexion.connexion();
         PreparedStatement pst;
         try {
-
-
             if (p.getId() == -1) {
                 p.setId(p.getLastId()+1);
             }
 
-            pst = connex.prepareStatement("insert into LMN3783A.sae_tournoi(id_phase, elim, id_tournoi values(?,?,?)");
+            pst = connex.prepareStatement("insert into LMN3783A.sae_phase(id_phase, elim, id_tournoi) values(?,?,?)");
             pst.setInt(1, p.getId());
             pst.setInt(2, (p.isElim()) ? 1 : 0);
             pst.setInt(3, p.getTournoi().getId());
-            pst.executeUpdate();
+            if (pst.executeUpdate() == 0) {
+                System.out.println("Phase non insere");
+                pst.close();
+                return -1;
+            };
 
-            pst.close();
+            for (Match m:
+                 p.matchs) {
+                Match.enregistrermatch(m);
+            }
+
+
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -77,7 +77,7 @@ public class Match {
 		}
 	}
 
-	public int getLastId() {
+	public static int getLastId() {
 		Connection ct = Connexion.connexion();
 		Statement st;
 		ResultSet rs;
@@ -101,23 +101,17 @@ public class Match {
 		
 		try {
 			if (m.getId() == -1) {
-				m.setId(Tournoi.getLastId()+1);
+				m.setId(Match.getLastId()+1);
 			}
-			pst= connex.prepareStatement("INSERT INTO SAE_MATCHS VALUES (?,?,?)");
+			pst= connex.prepareStatement("INSERT INTO LMN3783A.SAE_MATCH(ID_MATCH,DATEMATCH,ID_PHASE,ID_EQUIPE1,ID_EQUIPE2) VALUES (?,?,?,?,?)");
 			pst.setInt(1, m.getId());
 			pst.setDate(2, m.date);
 			pst.setInt(3, m.phase.getId());
+			pst.setInt(4, m.getEquipe1().getId());
+			pst.setInt(5, m.getEquipe2().getId());
 			pst.executeUpdate();
-			pst2 = connex.prepareStatement("INSERT INTO SAE_CONCERNER VALUES(?,?)");
-			pst2.setInt(1, m.getEquipe1().getId());
-			pst2.setInt(2, m.getId());
-			pst2.executeUpdate();
-			pst2.setInt(1, m.getEquipe2().getId());
-			pst2.setInt(2, m.getId());
-			pst2.executeUpdate();
 			
 			pst.close();
-			pst2.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
