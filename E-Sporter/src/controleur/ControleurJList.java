@@ -47,6 +47,7 @@ public class ControleurJList implements MouseListener {
 				break;
 
 				case INSC:
+					System.out.println(tournoiSelected.toString());
 					windowTournoi = new FrameInscriptionTournois(tournoiSelected);
 				break;
 
