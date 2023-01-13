@@ -8,6 +8,7 @@ import javax.swing.*;
 import IHM.info.SeeInfoFrame;
 import IHM.info.VueInfoTournoisFrame;
 import IHM.tournois.FrameClassementTournois;
+import IHM.tournois.FrameInscriptionTournois;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
@@ -45,7 +46,9 @@ public class ControleurJList implements MouseListener {
 					windowTournoi = new FrameClassementTournois(tournoiSelected);
 				break;
 
-				case INSC: //A faire
+				case INSC:
+					System.out.println(tournoiSelected.toString());
+					windowTournoi = new FrameInscriptionTournois(tournoiSelected);
 				break;
 
 				case ENC:
