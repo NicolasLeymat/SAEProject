@@ -2,7 +2,7 @@ package IHM.info;
 
 import javax.swing.*;
 
-import IHM.tournois.ArbitrageTournois;
+import IHM.tournois.FrameArbitrageTournois;
 import Object.Tournoi;
 import Object.Match;
 import controleur.ModeleESporter;
@@ -39,7 +39,7 @@ public class VueInfoTournoisPanel extends JPanel {
                 Match match  =(Match) listemodel1.getValueAt(ligne);
 
                 System.out.println(tournoi);
-                IHM.tournois.ArbitrageTournois window = new ArbitrageTournois(match);
+                IHM.tournois.FrameArbitrageTournois window = new FrameArbitrageTournois(match);
                 window.setVisible(true);
             }
         });

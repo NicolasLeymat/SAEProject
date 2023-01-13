@@ -301,7 +301,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return nom + " " + prenom;
+		return this.pseudo;
 	}
 
 	

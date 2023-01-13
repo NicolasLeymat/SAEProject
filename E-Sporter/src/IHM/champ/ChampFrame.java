@@ -20,7 +20,7 @@ public class ChampFrame extends JFrame {
 	 */
 	public ChampFrame() {
 		this.setResizable(false);
-		
+		this.setName("Classement Mondiaux");
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT-200));
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();

@@ -6,7 +6,7 @@ import Object.Joueur;
 import java.util.List;
 
 
-public class ListeJoueur extends AbstractListModel {
+public class ListeJoueur<T> extends AbstractListModel {
     private List<Joueur> joueurs;
 
     public ListeJoueur(List<Joueur> joueurs) {
@@ -19,8 +19,8 @@ public class ListeJoueur extends AbstractListModel {
     }
 
     @Override
-    public Object getElementAt(int index) {
-        return joueurs.get(index).getPseudo();
+    public T getElementAt(int index) {
+        return (T) joueurs.get(index);
     }
 
 
