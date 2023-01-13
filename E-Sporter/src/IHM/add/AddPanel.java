@@ -38,7 +38,6 @@ public class AddPanel extends JPanel {
 	//Class Variable
 	private final int WIDTH = 450;
 	private final int HEIGHT = 500;
-	private final int MAIN_FONT_SIZE = 17;
 	private String mode;
 	
 	//OverAll Field
@@ -199,10 +198,6 @@ public class AddPanel extends JPanel {
 		JLabel lblNomOrganisateur = new JLabel("Organisateur  :");
 		lblNomOrganisateur.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNomOrganisateur.setBounds(10, 229, 125, 20);
-		
-
-		
-		
 		
 		switch(type) {
 			case "Player":{

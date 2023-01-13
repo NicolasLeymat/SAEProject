@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import IHM.info.SeeInfoFrame;
 import IHM.info.VueInfoTournoisFrame;
-import IHM.tournois.ClassementTournois;
+import IHM.tournois.FrameClassementTournois;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
@@ -42,7 +42,7 @@ public class ControleurJList implements MouseListener {
 			switch (tournoiSelected.getEtat())  {
 				case FINI :
 					System.out.println(tournoiSelected.toString());
-					windowTournoi = new ClassementTournois(tournoiSelected);
+					windowTournoi = new FrameClassementTournois(tournoiSelected);
 				break;
 
 				case INSC: //A faire
@@ -59,7 +59,7 @@ public class ControleurJList implements MouseListener {
 			System.out.println(list.getModel().getElementAt(index).getClass().toString());
 			SeeInfoFrame windowJoueur = new SeeInfoFrame((Joueur) list.getModel().getElementAt(index));
 			windowJoueur.setVisible(true);
-			break;
+			break; 
 		}
 
 	}

@@ -1,63 +1,38 @@
 package IHM.tournois;
 
-import IHM.info.TableauMatchHistorique;
-
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import javax.swing.JScrollPane;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.SwingConstants;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.UIManager;
 
-import Object.Tournoi;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import IHM.info.TableauMatchHistorique;
 import Object.Match;
+import Object.Tournoi;
 import controleur.ModeleESporter;
 
+public class VueClassementTournois extends JPanel{
 
-public class ClassementTournois extends JFrame {
-
-	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
-
-	/**
-	 * Launch the application.
-	 */
-
-
-
-
-	/**
-	 * Create the frame.
-	 */
-	private Tournoi tournoi;
-	public ClassementTournois(Tournoi t) {
-		this.tournoi = t;
-		setBounds(100, 100, 500, 600);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{293, 0};
-		gbl_contentPane.rowHeights = new int[]{82, 45, 106, 45, 297, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+	private Tournoi t;
+	
+	public VueClassementTournois(Tournoi t) {
+		this.t = t;
+		GridBagLayout gbl_this = new GridBagLayout();
+		gbl_this.columnWidths = new int[]{293, 0};
+		gbl_this.rowHeights = new int[]{82, 45, 106, 45, 297, 0};
+		gbl_this.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_this.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		this.setLayout(gbl_this);
 		
 		JLabel lblNewLabel_2 = new JLabel("Résultats du tournoi");
 		lblNewLabel_2.setFont(ModeleESporter.FONT_LARGE);
@@ -65,7 +40,7 @@ public class ClassementTournois extends JFrame {
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_2.gridx = 0;
 		gbc_lblNewLabel_2.gridy = 0;
-		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		this.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -73,7 +48,7 @@ public class ClassementTournois extends JFrame {
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
-		contentPane.add(panel, gbc_panel);
+		this.add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("Classement");
@@ -87,7 +62,7 @@ public class ClassementTournois extends JFrame {
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
-		contentPane.add(scrollPane, gbc_scrollPane);
+		this.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
 		table.setFont(ModeleESporter.FONT_MEDIUM);
@@ -111,7 +86,7 @@ public class ClassementTournois extends JFrame {
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 3;
-		contentPane.add(panel_1, gbc_panel_1);
+		this.add(panel_1, gbc_panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_1 = new JLabel("Matchs");
@@ -124,11 +99,11 @@ public class ClassementTournois extends JFrame {
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 0;
 		gbc_scrollPane_1.gridy = 4;
-		contentPane.add(scrollPane_1, gbc_scrollPane_1);
+		this.add(scrollPane_1, gbc_scrollPane_1);
 		
 		table_1 = new JTable();
-		List<Match> matchsPoules = tournoi.getPhasePoule().getMatchs();
-		List<Match> matchsElims = tournoi.getPhaseElim().getMatchs();
+		List<Match> matchsPoules = t.getPhasePoule().getMatchs();
+		List<Match> matchsElims = t.getPhaseElim().getMatchs();
 		List<Match> matchs = new ArrayList<>();
 		matchs.addAll(matchsPoules);
 		matchs.addAll(matchsElims);
@@ -138,5 +113,5 @@ public class ClassementTournois extends JFrame {
 		
 		scrollPane_1.setViewportView(table_1);
 	}
-
+	
 }
