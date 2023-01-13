@@ -10,6 +10,8 @@ import controleur.ModeleESporter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class VueInfoTournoisPanel extends JPanel {
@@ -41,6 +43,13 @@ public class VueInfoTournoisPanel extends JPanel {
                 System.out.println(tournoi);
                 IHM.tournois.FrameArbitrageTournois window = new FrameArbitrageTournois(match);
                 window.setVisible(true);
+
+                window.addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        Match.validerVainqueur(match);
+                        table1.repaint();
+                    }
+                });
             }
         });
         DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();

@@ -38,14 +38,14 @@ public class TestsTournoi {
 
     @Test
     public void testGenererMatchsPhaseGroupe () throws Exception {
-        tournoi.getPhasePoule().genererPoules();
+        tournoi.getPhasePoule().genererMatchs();
 		System.out.println( tournoi.getPhasePoule().toString());
     }
 
     @Test
     public void testClassementPoule() throws Exception {
         PhaseDePoule phaseDePoule = tournoi.getPhasePoule();
-        phaseDePoule.genererPoules();
+        phaseDePoule.genererMatchs();
         Equipe gagnant =  phaseDePoule.getMatch(0).getWinner();
         System.out.println(tournoi.getPhasePoule().toString());
         assertEquals(gagnant, phaseDePoule.getPremier(0));
@@ -79,7 +79,7 @@ public class TestsTournoi {
     public void testPhaseFinale() throws Exception {
         PhaseDePoule phaseDePoule = tournoi.getPhasePoule();
         PhaseFinale phaseE = tournoi.getPhaseElim();
-        phaseDePoule.genererPoules();
+        phaseDePoule.genererMatchs();
         int i = 0;
         for (Match m:
              phaseDePoule.getMatchs()) {

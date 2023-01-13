@@ -114,6 +114,17 @@ public class Tournoi {
 		return null;
 	}
 
+	public void demarrer() throws Exception {
+		if (this.etat != ETAT.INSC) {
+			throw  new IllegalArgumentException("Le tournoi est déja lancé");
+		}
+		if (this.listeEquipe.size() < 16 ) {
+			throw  new IllegalArgumentException("Le tournoi n'est pas plein, il faut 16 equipes, il y en a "+listeEquipe.size() );
+		}
+		this.getPhasePoule().genererMatchs();
+		this.etat = ETAT.ENC;
+	}
+
 	public PhaseDePoule getPhasePoule() {
 		return phasePoule;
 	}

@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class ListeJoueur<T> extends AbstractListModel {
-    private List<Joueur> joueurs;
+    private List<T> joueurs;
 
-    public ListeJoueur(List<Joueur> joueurs) {
+    public ListeJoueur(List<T> joueurs) {
         this.joueurs = joueurs;
     }
 

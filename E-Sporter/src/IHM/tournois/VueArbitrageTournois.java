@@ -18,14 +18,30 @@ import javax.swing.SwingConstants;
 import IHM.info.ListeJoueur;
 import Object.Joueur;
 import Object.Match;
+import controleur.ControleurArbitrageTournoi;
 import controleur.ControleurJList;
 
 public class VueArbitrageTournois extends JPanel{
 
 	private Match match;
-	
+	private JButton buttonWin1;
+	private JButton buttonWin2;
+
+	public Match getMatch() {
+		return match;
+	}
+
+	public JButton getButtonWin1() {
+		return buttonWin1;
+	}
+
+	public JButton getButtonWin2() {
+		return buttonWin2;
+	}
+
 	public VueArbitrageTournois(Match m) {
 		this.match = m;
+		ControleurArbitrageTournoi controleurM = new ControleurArbitrageTournoi(this);
 		// création des listes et de leurs modèles de données
 	    GridBagLayout gridBagLayout = new GridBagLayout();
 	    gridBagLayout.columnWidths = new int[]{193, 193, 0};
@@ -91,10 +107,15 @@ public class VueArbitrageTournois extends JPanel{
 	    this.add(panel, gbc_panel);
 	    
 	    // création des boutons
-	    JButton boutonListe1 = new JButton("Gagné");
-	    boutonListe1.setBounds(80, 0, 80, 21);
-	    panel.add(boutonListe1);
-	    boutonListe1.setPreferredSize(new Dimension(20, 10));
+		buttonWin1 = new JButton("Gagné");
+	    buttonWin1.setBounds(80, 0, 80, 21);
+	    panel.add(buttonWin1);
+	    buttonWin1.setPreferredSize(new Dimension(20, 10));
+		buttonWin1.addActionListener(controleurM);
+
+		if (match.getWinner() == match.getEquipe1()) {
+			buttonWin1.setEnabled(false);
+		}
 	    
 	    JPanel panel_1 = new JPanel();
 	    panel_1.setLayout(null);
@@ -103,10 +124,14 @@ public class VueArbitrageTournois extends JPanel{
 	    gbc_panel_1.gridx = 1;
 	    gbc_panel_1.gridy = 1;
 	    this.add(panel_1, gbc_panel_1);
-	    JButton boutonListe2 = new JButton("Gagné");
-	    boutonListe2.setBounds(81, 0, 82, 21);
-	    panel_1.add(boutonListe2);
-	    boutonListe2.addActionListener(null);
+		buttonWin2 = new JButton("Gagné");
+	    buttonWin2.setBounds(81, 0, 82, 21);
+	    panel_1.add(buttonWin2);
+	    buttonWin2.addActionListener(controleurM);
+
+		if (match.getWinner() == match.getEquipe2()) {
+			buttonWin2.setEnabled(false);
+		}
 	}
 }
 	

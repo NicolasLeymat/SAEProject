@@ -17,9 +17,6 @@ public class PhaseDePoule extends Phase {
 		this.poules = new ArrayList<>();
 	}
 
-
-
-
 	public List<Map<Equipe, Integer>> getPoules() {
 		return poules;
 	}
@@ -47,7 +44,7 @@ public class PhaseDePoule extends Phase {
 		return this.getClassement(poule).get(1);
 	}
 
-	public void genererPoules() throws Exception {
+	private void genererPoules() throws Exception {
 		List<Equipe> listEquipe = getTournoi().getListeEquipe();
 		if(isElim() && listEquipe.size()< 16) {
 			throw  new Exception("Pas assez d'equipes");
@@ -70,10 +67,16 @@ public class PhaseDePoule extends Phase {
 				poules.get(i).put(subLists[i].get(j),0);
 			}
 		}
-		this.genererMatchs();
 	}
 
 	public void genererMatchs() {
+		try {
+			genererPoules();
+		}
+		catch (Exception e) {
+			System.out.println("Erreur lors de la gen de poule");
+			return;
+		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getTournoi().getDateTournoi());
 		calendar.add(Calendar.DATE,-1);

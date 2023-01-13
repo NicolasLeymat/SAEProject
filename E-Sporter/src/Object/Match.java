@@ -120,16 +120,16 @@ public class Match {
 		return 1;
 	}
 	
-	public static int validerVainqueur(Match match, int winner) {
+	public static int validerVainqueur(Match match) {
 		Connection ct = Connexion.connexion();
 		if (match.id == 0) {
 			throw new IllegalArgumentException("match inexistant");
 		}
-		match.setWinner(winner);
 		try {
-			PreparedStatement ps = ct.prepareStatement("UPDATE SAE_MATCH SET WINNER = ? WHERE ID = ?");
-			ps.setInt(1, winner);
+			PreparedStatement ps = ct.prepareStatement("UPDATE LMN3783A.SAE_MATCH SET ID_GAGNANT = ? WHERE ID_MATCH = ?");
+			ps.setInt(1, match.getWinner().getId());
 			ps.setInt(2, match.id);
+			ps.executeUpdate();
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
