@@ -46,7 +46,7 @@ public class VueInscriptionTournois extends JPanel{
 		
 		ControleurInscription i = new ControleurInscription(this);
 		
-		JLabel lblNewLabel = new JLabel("Titre Tournois");
+		JLabel lblNewLabel = new JLabel(t.getNom());
 		lblNewLabel.setFont(ModeleESporter.FONT_LARGE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -176,9 +176,15 @@ public class VueInscriptionTournois extends JPanel{
 		if (listEquipesTournoi.getModel().getSize() >= 16) {
 			btnAjouter.setEnabled(false);
 		}
+		else {
+			btnAjouter.setEnabled(true);
+		}
 		
 		if (listEquipesTournoi.getModel().getSize() <=0) {
 			btnSupprimer.setEnabled(false);
+		}
+		else {
+			btnSupprimer.setEnabled(true);
 		}
 	}
 
