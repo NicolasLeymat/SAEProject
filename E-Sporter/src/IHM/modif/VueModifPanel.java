@@ -182,7 +182,7 @@ public class VueModifPanel extends JPanel{
 		nameLabel.setBounds(10, 53, 120, 20);
 		
 		
-		NameTF = new JTextField();
+		NameTF = new JTextField(j.getNom());
 		NameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
 		NameTF.setBounds(140, 53, 150, 20);
 		NameTF.setColumns(10);
@@ -192,7 +192,7 @@ public class VueModifPanel extends JPanel{
 		lblPrenom.setBounds(10, 78, 120, 20);
 		
 		
-		firstNameTF = new JTextField();
+		firstNameTF = new JTextField(j.getPrenom());
 		firstNameTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
 		firstNameTF.setColumns(10);
 		firstNameTF.setBounds(140, 81, 150, 20);
@@ -203,7 +203,7 @@ public class VueModifPanel extends JPanel{
 		lblPseudonyme.setBounds(10, 108, 130, 20);
 		
 		
-		pseudoTF = new JTextField();
+		pseudoTF = new JTextField(j.getPseudo());
 		pseudoTF.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
 		pseudoTF.setColumns(10);
 		pseudoTF.setBounds(140, 109, 150, 20);
@@ -233,6 +233,7 @@ public class VueModifPanel extends JPanel{
 		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat()); 
 		natChoice = new JComboBox<>();
 		natChoice.setModel(modelNat);
+		natChoice.setSelectedItem(j.getNationalite().getNom());
 		natChoice.setBounds(140, 140, 150, 22);
 	
 		

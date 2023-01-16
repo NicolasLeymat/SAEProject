@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -286,6 +287,26 @@ public class Equipe implements Comparable<Equipe> {
 		}
 		return 1;
 	}
+	
+	public static int inscrireEquipeTournoi(Equipe equipe, Tournoi tournoi) {
+    	Connection connex = Connexion.connexion();
+    	PreparedStatement pst;
+
+		try {
+			pst = connex.
+					prepareStatement("insert into LMN3783A.sae_participer(id_tournoi, id_equipe) values(?,?)");
+			pst.setInt(1, tournoi.getId());
+			pst.setInt(2, equipe.getId());
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return -1;
+		}
+		return 1;
+    }
 	
 	/**
 	 * retourne toutes les equipes de la BD
@@ -615,4 +636,70 @@ public class Equipe implements Comparable<Equipe> {
 	public int compareTo(Equipe o) {
 		 return o.points - this.points;
 	}
+	public static List<Equipe> getAllEquipesFromTournoi(Tournoi t) {
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		Equipe e = null;
+		try {
+			pst = connex.prepareStatement("select e.id_equipe, e.nom, e.points, e.id_ecurie, e.id_mode, e.logo from LMN3783A.sae_equipe e, LMN3783A.sae_tournoi t, "
+					+ "LMN3783A.sae_participer p where e.id_equipe = p.id_equipe and p.id_tournoi = t.id_tournoi and t.id_tournoi = ?"
+					+ "order by nom");
+			pst.setInt(1,t.getId());
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = createEquipeFromRs(rs);
+				equipes.add(e);
+			}
+			
+			rs.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return equipes;
+	}
+	public static List<Equipe> getAllEquipesFromModeDeJeu(int m) {
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst = null;
+		ResultSet rs;
+		Equipe e = null;
+		try {
+			pst = connex.prepareStatement("select id_equipe, nom, points, id_ecurie, id_mode, logo from LMN3783A.sae_equipe where id_mode = ? order by nom");
+			pst.setInt(1, m);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				e = createEquipeFromRs(rs);
+				equipes.add(e);
+			}
+				
+			rs.close();
+				
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return equipes;
+	}
+	public static int supprimerEquipeTournoi(Equipe obj, Tournoi t) {
+		Connection connex = Connexion.connexion();
+    	PreparedStatement pst;
+
+		try {
+			pst = connex.
+					prepareStatement("delete from LMN3783A.sae_participer where id_equipe = ? and id_tournoi = ?");
+			pst.setInt(1, obj.getId());
+			pst.setInt(2, t.getId());
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
+	
 }
