@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -150,6 +151,11 @@ public class VueInscriptionTournois extends JPanel{
 		btnPanel.add(btnAjouter);
 		btnPanel.add(btnSupprimer);
 		
+		JButton confirmer = new JButton("Confirmer");
+		confirmer.setBounds(175, 0, 100, 50);
+		btnPanel.add(confirmer);
+		confirmer.addActionListener(ci);
+		
 		if (listEquipesTournoi.getModel().getSize() >= 16) {
 			btnAjouter.setEnabled(false);
 		}
@@ -192,6 +198,16 @@ public class VueInscriptionTournois extends JPanel{
 			return listEquipesTournoi.getModel().getElementAt(0);
 		}
 		return listEquipesTournoi.getSelectedValue();
+	}
+
+	public List<Equipe> getAllListEquipesTournoi() {
+		List<Equipe> e = new LinkedList<Equipe>();
+		
+		for(int i = 0; i < listEquipesTournoi.getModel().getSize(); i++) {
+			e.add(listEquipesTournoi.getModel().getElementAt(i));
+		}
+		
+		return e;
 	}
 	
 

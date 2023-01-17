@@ -291,7 +291,7 @@ public class Equipe implements Comparable<Equipe> {
 	public static int inscrireEquipeTournoi(Equipe equipe, Tournoi tournoi) {
     	Connection connex = Connexion.connexion();
     	PreparedStatement pst;
-
+    	
 		try {
 			pst = connex.
 					prepareStatement("insert into LMN3783A.sae_participer(id_tournoi, id_equipe) values(?,?)");
@@ -682,6 +682,7 @@ public class Equipe implements Comparable<Equipe> {
 		}
 		return equipes;
 	}
+	
 	public static int supprimerEquipeTournoi(Equipe obj, Tournoi t) {
 		Connection connex = Connexion.connexion();
     	PreparedStatement pst;

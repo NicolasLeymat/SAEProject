@@ -297,13 +297,15 @@ public class Tournoi {
 					return -1;
 				}
 				
-				pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ? where id_equipe = ?" );
+				pst = connex.prepareStatement("update LMN3783A.sae_tournoi set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ?, etat=? where id_tournoi = ?" );
 				pst.setString(1, t.getNom());
 				pst.setDate(2, t.getDateTournoi());
 				pst.setInt(3, t.getChampionnat());
 				pst.setInt(4,t.getNotoriete());
 				pst.setInt(5,t.getId_Organisateur());
 				pst.setInt(6, t.getId_Mode().getIdMode());
+				pst.setString(7, t.getEtat().getValue());
+				pst.setInt(8, t.getId());
 				pst.executeUpdate();
 
 				pst.close();
