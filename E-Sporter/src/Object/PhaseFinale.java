@@ -18,9 +18,12 @@ public class PhaseFinale extends Phase{
         datephasefinale.setTime(getTournoi().getDateTournoi());
         datephasefinale.add(Calendar.DATE,6);
         this.phaseDePoule = phaseDePoule;
-        System.out.println("Coucou:::::::" + this.phaseDePoule);
         this.matchsAJouer = new ArrayList<Match>();
-        finale = false;
+        finale =false;
+    }
+
+    public void setFinalefromMatchs() {
+        finale = (matchsAJouer.size() == 2 && matchs.size() >=6 );
     }
 
 
@@ -64,6 +67,8 @@ public class PhaseFinale extends Phase{
     }
 
     public boolean matchsFinis() {
+        System.out.println("MATCHS A JOUER");
+        System.out.println(matchsAJouer);
         for (Match m:
              matchsAJouer) {
             if (m.getWinner() == null) {
@@ -97,6 +102,13 @@ public class PhaseFinale extends Phase{
         res[2] = getMatch(6).getWinner();
         res[3] = getMatch(6).getLoser();
         return res;
+    }
+
+    @Override
+    public void enregistrerMatchs() {
+        for (Match m : matchsAJouer) {
+            Match.enregistrermatch(m);
+        }
     }
 
 

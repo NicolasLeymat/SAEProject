@@ -5,6 +5,8 @@ import IHM.info.VueInfoTournoisFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Object.Phase;
+import Object.Tournoi;
 
 public class ControlleurListeMatch implements ActionListener {
     private enum ETAT {
@@ -16,55 +18,67 @@ public class ControlleurListeMatch implements ActionListener {
 
     public ControlleurListeMatch(VueInfoTournoisFrame vue) {
         this.vue = vue;
-        if (!vue.getTournoi().getPhasePoule().matchsFinis()) {
-            System.out.println("POULE PAS FINIE");
-            this.etat = ETAT.ENCOURS;
-            vue.setActiveNextButton(false);
-        } else if (!(vue.getTournoi().getPhaseElim() == null) && vue.getTournoi().getPhaseElim().matchsFinis()) {
+        setBoutonSuivant();
+    }
+
+    public void setBoutonSuivant() {
+        if (vue.getTournoi().elimmatchsfini()) {
             System.out.println("ELIM");
             if (!vue.getTournoi().getPhaseElim().estFinie()) {
                 System.out.println("ELIM FINIE");
                 this.etat = ETAT.FINIELIM;
-            }
-            else {
-                System.out.println("C LA FIN");
+                vue.setActiveNextButton(true);
+            } else {
+                System.out.println("TOURNOI FINI");
                 this.etat = ETAT.FINI;
+                vue.setActiveNextButton(true);
             }
-            vue.setActiveNextButton(true);
-        }
-        else {
+        } else if (vue.getTournoi().getPhaseElim() == null) {
             System.out.println("POULE FINIE");
-            this.etat =ETAT.FINIPOULE;
+            System.out.println(vue.getTournoi().getPhaseElim());
+            this.etat = ETAT.FINIPOULE;
             vue.setActiveNextButton(true);
+        } else {
+            System.out.println("POULE OU ELIM PAS FINIE");
+            this.etat = ETAT.ENCOURS;
+            vue.setActiveNextButton(false);
         }
-
     }
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton bouton = (JButton) e.getSource();
-        switch(etat) {
-            case FINIPOULE : etat = ETAT.ENCOURS;
-            System.out.println(vue.getTournoi());
-            vue.getTournoi().genererPhaseFinale();
-            bouton.setEnabled(false);
-            break;
-
-            case FINIELIM: etat =ETAT.ENCOURS;
-            vue.getTournoi().getPhaseElim().genererMatchs();
-            bouton.setEnabled(false);
-            break;
-
-            case FINI:
+        switch (etat) {
+            case FINIPOULE -> {
+                etat = ETAT.ENCOURS;
+                System.out.println(vue.getTournoi());
+                vue.getTournoi().genererPhaseFinale();
+                Phase.enregistrerPhase(vue.getTournoi().getPhaseElim());
+                bouton.setEnabled(false);
+                vue.dispose();
+            }
+            case FINIELIM -> {
+                etat = ETAT.ENCOURS;
+                vue.getTournoi().getPhaseElim().genererMatchs();
+                vue.getTournoi().getPhaseElim().enregistrerMatchs();
+                bouton.setEnabled(false);
+                vue.dispose();
+            }
+            case FINI -> {
                 bouton.setText("Terminer le tournoi");
                 try {
                     vue.getTournoi().ajouterPoints();
+                    vue.getTournoi().setEtat(Tournoi.ETAT.FINI);
+                    vue.getTournoi().actualiserEtat();
                     vue.dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new RuntimeException(ex);
                 }
-
+            }
         }
     }
 }

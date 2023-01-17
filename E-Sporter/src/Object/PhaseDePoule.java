@@ -61,12 +61,8 @@ public class PhaseDePoule extends Phase {
 									poules.get(finalI).put(m.getEquipe1(),0);
 									participants.add(m.getEquipe1());
 								}
-								if (m.getWinner() == m.getEquipe1()) {
-									enregistrerGagnant(finalI,m,1);
-								}
-								else {
-									enregistrerGagnant(finalI,m,2);
-								}
+								enregistrerGagnant(finalI,m);
+
 							});
 		}
 
@@ -156,9 +152,8 @@ public class PhaseDePoule extends Phase {
 		return res;
 	}
 
-	public void enregistrerGagnant(int poule, Match m,int gagnant) {
+	public void enregistrerGagnant(int poule, Match m) {
 		if (getMatchs().contains(m)) {
-			m.setWinner(gagnant);
 			Equipe egagnante = m.getWinner();
 			Map<Equipe,Integer> pouleselect = poules.get(poule);
 			pouleselect.put(egagnante,pouleselect.get(egagnante)+1);

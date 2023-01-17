@@ -4,7 +4,9 @@ import Object.Tournoi;
 import controleur.ControlleurListeMatch;
 
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.ContainerAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,12 +26,12 @@ public class VueInfoTournoisFrame extends JFrame {
         this.setSize(600, 450);
         this.setLayout(new BorderLayout());
 
-        VueInfoTournoisPanel  infoTournoisPanel= new VueInfoTournoisPanel(tournoi);
+        this.nextbutton  = new JButton("Phase suivante");
+        ControlleurListeMatch controlleurListeMatch = new ControlleurListeMatch(this);
+        VueInfoTournoisPanel  infoTournoisPanel= new VueInfoTournoisPanel(tournoi,controlleurListeMatch);
 
         JPanel panelBouton = new JPanel();
         panelBouton.setLayout(new BoxLayout(panelBouton,BoxLayout.LINE_AXIS));
-        this.nextbutton  = new JButton("Phase suivante");
-        ControlleurListeMatch controlleurListeMatch = new ControlleurListeMatch(this);
         this.nextbutton.addActionListener(controlleurListeMatch);
 
         panelBouton.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));

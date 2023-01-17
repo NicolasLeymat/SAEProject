@@ -83,7 +83,7 @@ public class TestsTournoi {
         int i = 0;
         for (Match m:
              phaseDePoule.getMatchs()) {
-            phaseDePoule.enregistrerGagnant(i,m,1);
+            phaseDePoule.enregistrerGagnant(i,m);
             i=(i+1)%4;
         }
         tournoi.genererPhaseFinale();

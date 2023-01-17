@@ -5,6 +5,7 @@ import javax.swing.*;
 import IHM.tournois.FrameArbitrageTournois;
 import Object.Tournoi;
 import Object.Match;
+import controleur.ControlleurListeMatch;
 import controleur.ModeleESporter;
 
 import java.awt.*;
@@ -15,14 +16,14 @@ import java.awt.event.WindowEvent;
 
 
 public class VueInfoTournoisPanel extends JPanel {
-    public VueInfoTournoisPanel(Tournoi tournoi) {
+    public VueInfoTournoisPanel(Tournoi tournoi, ControlleurListeMatch controleur) {
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         ListeMatch listemodel1;
         // Création des modèles de tableau
         if (!(tournoi.getPhaseElim() == null)) {
-             listemodel1 = new ListeMatch(tournoi.getPhaseElim().getMatchs());
+             listemodel1 = new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer());
         }
         else {
              listemodel1 = new ListeMatch(tournoi.getPhasePoule().getMatchs());
@@ -48,6 +49,7 @@ public class VueInfoTournoisPanel extends JPanel {
                     public void windowClosing(WindowEvent e) {
                         Match.validerVainqueur(match);
                         table1.repaint();
+                        controleur.setBoutonSuivant();
                     }
                 });
             }

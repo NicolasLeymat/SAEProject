@@ -10,7 +10,7 @@ import java.util.Map;
 
 public abstract class Phase {
     private Tournoi tournoi;
-    private List<Match> matchs;
+    protected List<Match> matchs;
     private int id;
 
     public abstract void genererMatchs();
@@ -83,12 +83,7 @@ public abstract class Phase {
                 return -1;
             };
 
-            for (Match m:
-                 p.matchs) {
-                Match.enregistrermatch(m);
-            }
-
-
+            p.enregistrerMatchs();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -97,6 +92,12 @@ public abstract class Phase {
         return 1;
 
     }
+
+    protected void enregistrerMatchs() {
+        for (Match m : matchs) {
+            Match.enregistrermatch(m);
+        }
+    };
 
     //Verifie que tous les matchs à jouer ont un gagnant
     public abstract boolean matchsFinis() ;

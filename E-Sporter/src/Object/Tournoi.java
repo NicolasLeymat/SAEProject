@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import Application.Connexion;
+import oracle.jdbc.proxy.annotation.Pre;
 
 //Classe qui définit les fonctions d'un tournoi
 public class Tournoi {
@@ -209,6 +210,10 @@ public class Tournoi {
 	public PhaseFinale getPhaseElim() {
 		return phaseElim;
 	}
+
+	public boolean elimmatchsfini() {
+		return this.phaseElim != null && this.phaseElim.matchsFinis();
+	}
 	
 	private static boolean verifierPresenceTournoi( Tournoi tournoi) throws SQLException {
 		PreparedStatement pst;
@@ -291,13 +296,10 @@ public class Tournoi {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
 			try {
-
-
 				if (!verifierPresenceTournoi(t)) {
 					return -1;
 				}
-				
-				pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ? where id_equipe = ?" );
+				pst = connex.prepareStatement("update LMN3783A.sae_tournoi set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ? where id_tournoi = ?" );
 				pst.setString(1, t.getNom());
 				pst.setDate(2, t.getDateTournoi());
 				pst.setInt(3, t.getChampionnat());
@@ -313,6 +315,27 @@ public class Tournoi {
 				return -1;
 			}
 			return 1;
+		}
+
+		public int actualiserEtat() {
+			Connection connex = Connexion.connexion();
+
+			try {
+				if (verifierPresenceTournoi(this)) {
+					return -1;
+				}
+
+				PreparedStatement pst = connex.prepareStatement("UPDATE LM3783A.sae_tournoi set ETAT = ? where id_tournoi = ?");
+				pst.setString(1,this.getEtat().getValue());
+				pst.setInt(2,this.getId());
+				return pst.executeUpdate();
+
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				return -1;
+			}
+
 		}
 		
 		public static int supprimerTournoi(Tournoi t) {
@@ -455,7 +478,10 @@ public class Tournoi {
 			st.setInt(2,1);
 			if ( this.phasePoule != null && rs.next() ) {
 				System.out.println("Coucou 2 :::" + this.phasePoule);
-				this.phaseElim = new PhaseFinale(this,this.phasePoule);
+				PhaseFinale phaseFinale = new PhaseFinale(this,this.phasePoule);
+				phaseFinale.getMatchsFromID();
+				phaseFinale.setFinalefromMatchs();
+				this.phaseElim = phaseFinale;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
