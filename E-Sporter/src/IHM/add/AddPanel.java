@@ -223,6 +223,8 @@ public class AddPanel extends JPanel {
 				nameLabel.setBounds(10, 70, 80, 30);
 				NameTF.setBounds(140, 70, 200, 30);
 				confirmBtn.setBounds(250, 10, 150, 50);
+				MainPanel.add(natChoice);
+				MainPanel.add(lblNat);
 				break;
 			}
 			case "Tournament":{
@@ -276,6 +278,7 @@ public class AddPanel extends JPanel {
 			}
 			case "Orga":{
 				Ecurie ec = new Ecurie(this.NameTF.getText());
+				ec.setNat(Nationalite.getByNom((String) this.natChoice.getSelectedItem()));
 				return ec;
 			}
 			case "Tournament":{

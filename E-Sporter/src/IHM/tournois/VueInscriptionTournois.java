@@ -21,114 +21,138 @@ import Object.Nationalite;
 import Object.Tournoi;
 import controleur.ControleurInscription;
 import controleur.ModeleESporter;
+import java.awt.GridLayout;
+import javax.swing.ScrollPaneConstants;
 
 public class VueInscriptionTournois extends JPanel{
 
 	private Tournoi t;
 	private Object obj;
-	private static JList<Equipe> list = new JList<>();
+	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
 	private static JList<Equipe> listEquipesTournoi = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipeTournoi = new DefaultListModel<>();
-	private static JScrollPane scrollPane;
-	private static JScrollPane scrollPane_1;
 	private static JButton btnAjouter;
 	private static JButton btnSupprimer;
 	
+	
 	public VueInscriptionTournois(Tournoi t) {
+		
 		this.t = t;
-		GridBagLayout gbl_this = new GridBagLayout();
-		gbl_this.columnWidths = new int[]{51, 170, 0, 69, 11, 175, 50, 0};
-		gbl_this.rowHeights = new int[]{0, 37, 0, 0, 0, 0, 46, 23, 63, 21, 51, 50, 0};
-		gbl_this.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_this.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		this.setLayout(gbl_this);
 		
-		ControleurInscription i = new ControleurInscription(this);
-		
-		JLabel lblNewLabel = new JLabel(t.getNom());
-		lblNewLabel.setFont(ModeleESporter.FONT_LARGE);
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridwidth = 3;
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 1;
-		this.add(lblNewLabel, gbc_lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Equipes");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.gridheight = 2;
-		gbc_lblNewLabel_1.gridwidth = 2;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 2;
-		this.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Equipes tournois");
-		lblNewLabel_2.setFont(ModeleESporter.FONT_MEDIUM);
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.gridwidth = 2;
-		gbc_lblNewLabel_2.gridheight = 2;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 4;
-		gbc_lblNewLabel_2.gridy = 2;
-		this.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		list = new JList<>();
 		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));		
-		list.setModel(modeleEquipe);
-		
-		listEquipesTournoi = new JList<>();
 		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
+		listEquipe.setModel(modeleEquipe);
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
 		
-		scrollPane = new JScrollPane(list);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 2;
-		gbc_scrollPane.gridheight = 5;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 4;
-		this.add(scrollPane, gbc_scrollPane);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{450, 0};
+		gridBagLayout.rowHeights = new int[]{40, 200, 50, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
+		JPanel panelTitre = new JPanel();
+		GridBagConstraints gbc_panelTitre = new GridBagConstraints();
+		gbc_panelTitre.insets = new Insets(0, 0, 5, 0);
+		gbc_panelTitre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panelTitre.gridx = 0;
+		gbc_panelTitre.gridy = 0;
+		add(panelTitre, gbc_panelTitre);
+		GridBagLayout gbl_panelTitre = new GridBagLayout();
+		gbl_panelTitre.columnWidths = new int[]{450, 0};
+		gbl_panelTitre.rowHeights = new int[]{35, 0};
+		gbl_panelTitre.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panelTitre.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panelTitre.setLayout(gbl_panelTitre);
 		
+		JLabel titreLbl = new JLabel(t.getNom());
+		titreLbl.setFont(ModeleESporter.FONT_LARGE);
+		titreLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_titreLbl = new GridBagConstraints();
+		gbc_titreLbl.fill = GridBagConstraints.BOTH;
+		gbc_titreLbl.gridx = 0;
+		gbc_titreLbl.gridy = 0;
+		panelTitre.add(titreLbl, gbc_titreLbl);
 		
+		JPanel listPanel = new JPanel();
+		GridBagConstraints gbc_listPanel = new GridBagConstraints();
+		gbc_listPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_listPanel.fill = GridBagConstraints.BOTH;
+		gbc_listPanel.gridx = 0;
+		gbc_listPanel.gridy = 1;
+		add(listPanel, gbc_listPanel);
+		GridBagLayout gbl_listPanel = new GridBagLayout();
+		gbl_listPanel.columnWidths = new int[]{225, 225, 0};
+		gbl_listPanel.rowHeights = new int[]{102, 0};
+		gbl_listPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_listPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		listPanel.setLayout(gbl_listPanel);
 		
-		scrollPane_1 = new JScrollPane(listEquipesTournoi);
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridheight = 5;
-		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 4;
-		gbc_scrollPane_1.gridy = 4;
-		this.add(scrollPane_1, gbc_scrollPane_1);
+		JPanel panelEquipe = new JPanel();
+		panelEquipe.setLayout(null);
+		GridBagConstraints gbc_panelEquipe = new GridBagConstraints();
+		gbc_panelEquipe.fill = GridBagConstraints.BOTH;
+		gbc_panelEquipe.insets = new Insets(0, 0, 0, 5);
+		gbc_panelEquipe.gridx = 0;
+		gbc_panelEquipe.gridy = 0;
+		listPanel.add(panelEquipe, gbc_panelEquipe);
+		
+		JLabel lblNewLabel = new JLabel("Equipes : ");
+		lblNewLabel.setBounds(0, 0, 223, 30);
+		panelEquipe.add(lblNewLabel);
+		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JScrollPane scrollPaneEquipe = new JScrollPane(listEquipe);
+		scrollPaneEquipe.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneEquipe.setBounds(22, 40, 180, 150);
+		panelEquipe.add(scrollPaneEquipe);
+		
+		JPanel panelEquipeTournoi = new JPanel();
+		panelEquipeTournoi.setLayout(null);
+		
+		JScrollPane scrollPaneEquipeTournoi = new JScrollPane(listEquipesTournoi);
+		scrollPaneEquipeTournoi.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneEquipeTournoi.setBounds(22, 40, 180, 150);
+		panelEquipeTournoi.add(scrollPaneEquipeTournoi);
+		
+		GridBagConstraints gbc_panelEquipeTournoi = new GridBagConstraints();
+		gbc_panelEquipeTournoi.fill = GridBagConstraints.BOTH;
+		gbc_panelEquipeTournoi.gridx = 1;
+		gbc_panelEquipeTournoi.gridy = 0;
+		listPanel.add(panelEquipeTournoi, gbc_panelEquipeTournoi);
+		
+		JLabel lblNewLabel_1 = new JLabel("Equipes Tournoi :\r\n");
+		lblNewLabel_1.setBounds(0, 0, 225, 30);
+		panelEquipeTournoi.add(lblNewLabel_1);
+		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel btnPanel = new JPanel();
+		btnPanel.setLayout(null);
+		GridBagConstraints gbc_btnPanel = new GridBagConstraints();
+		gbc_btnPanel.fill = GridBagConstraints.BOTH;
+		gbc_btnPanel.gridx = 0;
+		gbc_btnPanel.gridy = 2;
+		add(btnPanel, gbc_btnPanel);
 		
 		btnAjouter = new JButton("Ajouter");
-		btnAjouter.setFont(ModeleESporter.FONT_SMALL);
-		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
-		gbc_btnAjouter.gridwidth = 2;
-		gbc_btnAjouter.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAjouter.gridx = 1;
-		gbc_btnAjouter.gridy = 10;
-		this.add(btnAjouter, gbc_btnAjouter);
-		btnAjouter.addActionListener(i);
+		btnAjouter.setLocation(60, 0);
+		btnAjouter.setSize(100, 50);
+		btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setLocation(290, 0);
+		btnSupprimer.setSize(100, 50);
+		
+		ControleurInscription ci = new ControleurInscription(this);
+		btnAjouter.addActionListener(ci);
+		btnSupprimer.addActionListener(ci);
+		btnPanel.add(btnAjouter);
+		btnPanel.add(btnSupprimer);
+		
 		if (listEquipesTournoi.getModel().getSize() >= 16) {
 			btnAjouter.setEnabled(false);
 		}
-		
-		btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setFont(ModeleESporter.FONT_SMALL);
-		GridBagConstraints gbc_btnSupprimer_1 = new GridBagConstraints();
-		gbc_btnSupprimer_1.gridwidth = 2;
-		gbc_btnSupprimer_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSupprimer_1.gridx = 4;
-		gbc_btnSupprimer_1.gridy = 10;
-		this.add(btnSupprimer, gbc_btnSupprimer_1);
-		btnSupprimer.addActionListener(i);
 		if (listEquipesTournoi.getModel().getSize() <=0) {
 			btnSupprimer.setEnabled(false);
 		}
@@ -158,16 +182,23 @@ public class VueInscriptionTournois extends JPanel{
 	}
 
 	public Equipe getInfoToObject() {
-		return list.getSelectedValue();
+		if(listEquipe.getSelectedValue() == null) {
+			return listEquipe.getModel().getElementAt(0);
+		}
+		return listEquipe.getSelectedValue();
 	}
 	public Equipe getListEquipesTournoi() {
+		if(listEquipesTournoi.getSelectedValue() == null) {
+			return listEquipesTournoi.getModel().getElementAt(0);
+		}
 		return listEquipesTournoi.getSelectedValue();
 	}
+	
 
 	public static void updateListEquipe(Tournoi t) {
 		modeleEquipe.clear();
 		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));	
-		list.setModel(modeleEquipe);
+		listEquipe.setModel(modeleEquipe);
 		
 		modeleEquipeTournoi.clear();
 		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
@@ -185,8 +216,6 @@ public class VueInscriptionTournois extends JPanel{
 		}
 		else {
 			btnSupprimer.setEnabled(true);
-		}
+		} 
 	}
-
-	
 }

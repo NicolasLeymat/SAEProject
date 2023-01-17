@@ -33,12 +33,16 @@ public class ControleurInscription implements ActionListener{
 		if (btn.getText() == "Ajouter") {
 				Equipe obj = (Equipe) this.vue.getInfoToObject();
 				Tournoi t = this.vue.getTournoi();
+				//System.out.println("Id Tournoi : " + t.getId());
 				JFrame frame = this.modele.getPanelFrame(vue);
 				this.modele.addParticipation(obj,t);
 				VueInscriptionTournois.updateListEquipe(t);
 		}
 		if (btn.getText() == "Supprimer") {
 			Equipe obj = (Equipe) this.vue.getListEquipesTournoi();
+			if(obj == null) {
+				
+			}
 			Tournoi t = this.vue.getTournoi();
 			JFrame frame = this.modele.getPanelFrame(vue);
 			this.modele.deleteParticipation(obj,t);
