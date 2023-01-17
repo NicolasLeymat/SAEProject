@@ -216,4 +216,12 @@ public class ModeleESporter {
 	public void supprimerTournoi(Tournoi t) {
 		Tournoi.supprimerTournoi(t);
 	}
+
+	public void addParticipation(Equipe obj, Tournoi t) {
+		Equipe.inscrireEquipeTournoi(obj, t);
+	}
+	
+	public void deleteParticipation(Equipe obj, Tournoi t) {
+		Equipe.supprimerEquipeTournoi(obj, t);
+	}
 }

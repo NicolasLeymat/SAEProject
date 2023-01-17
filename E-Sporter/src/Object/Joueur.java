@@ -135,6 +135,8 @@ public class Joueur {
 		return 1;
     }
     
+    
+    
     public static int modifierJoueur(Joueur j) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
