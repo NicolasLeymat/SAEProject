@@ -36,7 +36,6 @@ public class ListeMatch extends AbstractListModel {
         for (int i = 0; i < separateur; i++) {
             res+=" ";
         }
-        System.out.println(res.length());
         res+="VS";
 
         for (int i = 0; i < 15; i++) {

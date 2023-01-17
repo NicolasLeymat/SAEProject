@@ -21,7 +21,7 @@ public class VueInfoTournoisPanel extends JPanel {
 
         ListeMatch listemodel1;
         // Création des modèles de tableau
-        if (tournoi.getPhasePoule().matchsFinis()) {
+        if (!(tournoi.getPhaseElim() == null)) {
              listemodel1 = new ListeMatch(tournoi.getPhaseElim().getMatchs());
         }
         else {

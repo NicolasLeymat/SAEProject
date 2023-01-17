@@ -4,7 +4,9 @@ import Application.Connexion;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Phase {
     private Tournoi tournoi;
@@ -104,16 +106,39 @@ public abstract class Phase {
             throw  new Exception("Objet non relié");
         }
 
+        Map<Integer,Equipe> mapequipe = new HashMap<>();
+
         Connection connex = Connexion.connexion();
         PreparedStatement pst = connex.prepareStatement("SELECT ID_MATCH, DATEMATCH, ID_EQUIPE1, ID_EQUIPE2, ID_GAGNANT FROM lmn3783a.sae_match where id_phase = ?");
         pst.setInt(1,id);
 
+        Equipe equipe1;
+        Equipe equipe2;
+
+        //Dedoublonage
         ResultSet rs = pst.executeQuery();
         while (rs.next()) {
+            equipe1 = Equipe.getEquipeFromId(rs.getInt("id_equipe1"));
+            int idequipe1 = equipe1.getId();
+            if (mapequipe.containsKey(idequipe1)) {
+                 equipe1 = mapequipe.get(idequipe1);
+            }
+            else {
+                mapequipe.put(idequipe1,equipe1);
+            }
+
+            equipe2 = Equipe.getEquipeFromId(rs.getInt("id_equipe2"));
+            int idequipe2 = equipe2.getId();
+            if (mapequipe.containsKey(idequipe2)) {
+                equipe2 = mapequipe.get(idequipe2);
+            }
+            else {
+                mapequipe.put(idequipe2,equipe2);
+            }
             Match matchSelect = new Match(
                     rs.getDate("DATEMATCH"),
-                    Equipe.getEquipeFromId(rs.getInt("id_equipe1")),
-                    Equipe.getEquipeFromId(rs.getInt("id_equipe2")),
+                    equipe1,
+                    equipe2,
                     this);
             matchSelect.setId(rs.getInt(1));
             this.matchs.add(matchSelect);

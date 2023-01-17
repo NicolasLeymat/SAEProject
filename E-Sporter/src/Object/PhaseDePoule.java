@@ -5,6 +5,8 @@ import Application.Connexion;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //Classe qui définit les fonctions d'une phase
 public class PhaseDePoule extends Phase {
@@ -23,6 +25,7 @@ public class PhaseDePoule extends Phase {
 
 	private List<Equipe> getClassement(int poule) {
 		List<Equipe> res = new ArrayList<Equipe>();
+		System.out.println(poules);
 		res.addAll(poules.get(poule).keySet());
 
 		Collections.sort(res, (x,y) ->
@@ -34,6 +37,39 @@ public class PhaseDePoule extends Phase {
 			}
 		});
 				return res;
+	}
+
+	public void setPoulesFromMatchs() {
+		List<Equipe> participants = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			List<Match> filtrematch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
+			Equipe equipe = filtrematch.stream().findFirst().get().getEquipe1();
+			poules.add(new HashMap<Equipe,Integer>());
+			poules.get(i).put(equipe,0);
+			int finalI;
+			finalI = i;
+			System.out.println(equipe);
+
+			filtrematch.stream().filter((m) -> m.getEquipe1() == equipe || m.getEquipe2() == equipe)
+					.forEach((m) ->
+							{
+								if (m.getEquipe1()== equipe) {
+									poules.get(finalI).put(m.getEquipe2(),0);
+									participants.add(m.getEquipe2());
+								}
+								else {
+									poules.get(finalI).put(m.getEquipe1(),0);
+									participants.add(m.getEquipe1());
+								}
+								if (m.getWinner() == m.getEquipe1()) {
+									enregistrerGagnant(finalI,m,1);
+								}
+								else {
+									enregistrerGagnant(finalI,m,2);
+								}
+							});
+		}
+
 	}
 
 	public Equipe getPremier(int poule) {
@@ -124,8 +160,15 @@ public class PhaseDePoule extends Phase {
 		if (getMatchs().contains(m)) {
 			m.setWinner(gagnant);
 			Equipe egagnante = m.getWinner();
-			poules.get(poule).put(egagnante,poules.get(poule).get(egagnante)+1);
+			Map<Equipe,Integer> pouleselect = poules.get(poule);
+			pouleselect.put(egagnante,pouleselect.get(egagnante)+1);
 		}
+	}
+
+	public void getMatchsFromID() throws Exception {
+		super.getMatchsFromID();
+		setPoulesFromMatchs();
+		System.out.println(toStringPoule());
 	}
 
 
@@ -136,9 +179,11 @@ public class PhaseDePoule extends Phase {
 
 	@Override
 	public boolean matchsFinis() {
+		/*
 		if (poules.isEmpty()) {
+			System.out.println("C VIDE");
 			return false;
-		}
+		}*/
 		for (Match m :
 				getMatchs()) {
 			if (m.getWinner() == null)  {

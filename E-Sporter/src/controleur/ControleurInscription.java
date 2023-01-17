@@ -1,6 +1,6 @@
 package controleur;
 
-import IHM.tournois.InscriptionTournois;
+import IHM.tournois.VueInscriptionTournois;
 
 public class ControleurInscription {
 

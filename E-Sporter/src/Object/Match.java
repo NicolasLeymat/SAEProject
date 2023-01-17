@@ -125,6 +125,9 @@ public class Match {
 		if (match.id == 0) {
 			throw new IllegalArgumentException("match inexistant");
 		}
+		if (match.getWinner() == null) {
+			return 2;
+		}
 		try {
 			PreparedStatement ps = ct.prepareStatement("UPDATE LMN3783A.SAE_MATCH SET ID_GAGNANT = ? WHERE ID_MATCH = ?");
 			ps.setInt(1, match.getWinner().getId());

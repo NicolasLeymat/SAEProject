@@ -86,7 +86,7 @@ public class Tournoi {
 		this.id_organisateur = id_organisateur;
 		this.listeEquipe = new ArrayList<Equipe>();
 		this.phasePoule = new PhaseDePoule(this);
-		this.phaseElim = new PhaseFinale(this,phasePoule);
+		//this.phaseElim = new PhaseFinale(this,phasePoule);
 		this.id_Mode = id_Mode;
 		this.id = -1;
 	}
@@ -192,6 +192,7 @@ public class Tournoi {
 
 	public void genererPhaseFinale() {
 		if (phasePoule.matchsFinis()) {
+			phaseElim = new PhaseFinale(this,this.phasePoule);
 			phaseElim.genererMatchs();
 		}
 	}
@@ -453,6 +454,7 @@ public class Tournoi {
 			}
 			st.setInt(2,1);
 			if ( this.phasePoule != null && rs.next() ) {
+				System.out.println("Coucou 2 :::" + this.phasePoule);
 				this.phaseElim = new PhaseFinale(this,this.phasePoule);
 			}
 		} catch (SQLException e) {

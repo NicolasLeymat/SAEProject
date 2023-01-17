@@ -18,6 +18,7 @@ public class PhaseFinale extends Phase{
         datephasefinale.setTime(getTournoi().getDateTournoi());
         datephasefinale.add(Calendar.DATE,6);
         this.phaseDePoule = phaseDePoule;
+        System.out.println("Coucou:::::::" + this.phaseDePoule);
         this.matchsAJouer = new ArrayList<Match>();
         finale = false;
     }

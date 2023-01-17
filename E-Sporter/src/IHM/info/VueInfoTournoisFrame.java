@@ -1,13 +1,25 @@
 package IHM.info;
 
 import Object.Tournoi;
+import controleur.ControlleurListeMatch;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class VueInfoTournoisFrame extends JFrame {
+    private Tournoi tournoi;
+
+    private JButton nextbutton;
+    public Tournoi getTournoi() {
+        return tournoi;
+    }
+
     public VueInfoTournoisFrame(Tournoi tournoi) {
+        this.tournoi =tournoi;
+
 
         this.setSize(600, 450);
         this.setLayout(new BorderLayout());
@@ -16,11 +28,14 @@ public class VueInfoTournoisFrame extends JFrame {
 
         JPanel panelBouton = new JPanel();
         panelBouton.setLayout(new BoxLayout(panelBouton,BoxLayout.LINE_AXIS));
-        JButton boutonNext  = new JButton("Phase suivante");
+        this.nextbutton  = new JButton("Phase suivante");
+        ControlleurListeMatch controlleurListeMatch = new ControlleurListeMatch(this);
+        this.nextbutton.addActionListener(controlleurListeMatch);
+
         panelBouton.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
         panelBouton.add(Box.createHorizontalGlue());
         panelBouton.add(Box.createRigidArea(new Dimension(10, 0)));
-        panelBouton.add(boutonNext);
+        panelBouton.add(this.nextbutton);
         this.add(panelBouton);
 
         //Put everything together, using the content pane's BorderLayout.
@@ -29,8 +44,10 @@ public class VueInfoTournoisFrame extends JFrame {
         contentPane.add(panelBouton, BorderLayout.PAGE_END);
 
 
+    }
 
-
+    public void setActiveNextButton(boolean b) {
+        nextbutton.setEnabled(b);
     }
 
 
