@@ -33,7 +33,7 @@ public class AddFrame extends JFrame {
 				break;
 			}
 			case "Orga":{
-				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
+				this.setMinimumSize(new Dimension(WIDTH, HEIGHT-150));
 				break;
 			}
 			case "Tournament":{

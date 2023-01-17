@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import Application.Connexion;
-import oracle.jdbc.proxy.annotation.Pre;
 
 //Classe qui définit les fonctions d'un tournoi
 public class Tournoi {
@@ -210,10 +209,6 @@ public class Tournoi {
 	public PhaseFinale getPhaseElim() {
 		return phaseElim;
 	}
-
-	public boolean elimmatchsfini() {
-		return this.phaseElim != null && this.phaseElim.matchsFinis();
-	}
 	
 	private static boolean verifierPresenceTournoi( Tournoi tournoi) throws SQLException {
 		PreparedStatement pst;
@@ -296,6 +291,8 @@ public class Tournoi {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
 			try {
+
+
 				if (!verifierPresenceTournoi(t)) {
 					return -1;
 				}
@@ -337,7 +334,7 @@ public class Tournoi {
 			}
 
 		}
-		
+
 		public static int supprimerTournoi(Tournoi t) {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;

@@ -79,7 +79,7 @@ public class PhaseDePoule extends Phase {
 	private void genererPoules() throws Exception {
 		List<Equipe> listEquipe = getTournoi().getListeEquipe();
 		if(isElim() && listEquipe.size()< 16) {
-			throw  new Exception("Pas assez d'equipes");
+			throw new Exception("Pas assez d'equipes");
 		}
 		//Sous listes de niveaux
 		List<Equipe>[] subLists = new ArrayList[4];

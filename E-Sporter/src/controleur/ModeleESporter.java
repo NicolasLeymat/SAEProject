@@ -209,7 +209,7 @@ public class ModeleESporter {
 		Ecurie.supprimerEcurie(e);
 	}
 	
-	public void supprimerJoueur(Joueur j) {
+	public void supprimerJoueur(Joueur j) { 
 		Joueur.supprimerJoueur(j);
 	}
 	
