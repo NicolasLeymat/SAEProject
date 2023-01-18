@@ -4,14 +4,14 @@ import javax.swing.table.AbstractTableModel;
 import Object.Tournoi;
 import Object.Equipe;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 
-public class TableauTournoi  extends AbstractTableModel {
+public class TableauClassementTournoi extends AbstractTableModel {
     private String[] columnNames = {"#", "Joueur", "Victoires","Defaites"};
     private Tournoi tournoi;
 
-    public TableauTournoi(Tournoi tournoi) {
+    public TableauClassementTournoi(Tournoi tournoi) {
         this.tournoi = tournoi;
     }
 
@@ -45,15 +45,17 @@ public class TableauTournoi  extends AbstractTableModel {
         catch (Exception e){
             return 0;
         }
+        System.out.println("EQUIPE \n"+ Arrays.stream(equipes).toList());
+        System.out.println("VICTOIRES \n" + victoires.keySet().stream().toList());
         switch (columnIndex) {
             case 0:
                 return rowIndex +1;
             case 1:
                 return equipes[rowIndex];
             case 2:
-                return victoires.get(equipes[rowIndex])[0];
+                return 0;//victoires.get(equipes[rowIndex])[0];
             case 3:
-                return victoires.get(equipes[rowIndex])[1];
+                return 0;//victoires.get(equipes[rowIndex])[1];
             default:
                 return null;
         }

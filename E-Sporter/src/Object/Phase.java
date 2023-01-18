@@ -164,6 +164,7 @@ public abstract class Phase {
                 "elim=" + isElim() +
                 ", matchs=\n" + getMatchs() +
                 ", id =\n" +id +
+                ", id tournoi = " + tournoi.getId() +
                 '}';
     }
 }

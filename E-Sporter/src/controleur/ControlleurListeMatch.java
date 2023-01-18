@@ -40,6 +40,7 @@ public class ControlleurListeMatch implements ActionListener {
             vue.setActiveNextButton(true);
         } else {
             System.out.println("POULE OU ELIM PAS FINIE");
+            System.out.println(vue.getTournoi().getPhaseElim());
             this.etat = ETAT.ENCOURS;
             vue.setActiveNextButton(false);
         }
@@ -57,6 +58,8 @@ public class ControlleurListeMatch implements ActionListener {
                 System.out.println(vue.getTournoi());
                 vue.getTournoi().genererPhaseFinale();
                 Phase.enregistrerPhase(vue.getTournoi().getPhaseElim());
+                System.out.println("PHASE ELIM GENERE");
+                System.out.println(vue.getTournoi().getPhaseElim());
                 bouton.setEnabled(false);
                 vue.dispose();
             }

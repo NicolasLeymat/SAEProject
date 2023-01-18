@@ -23,21 +23,21 @@ public class PhaseFinale extends Phase{
     }
 
     public void setFinalefromMatchs() {
-        finale = (matchsAJouer.size() == 2 && matchs.size() >=6 );
+        finale = (matchsAJouer.size() == 2 && matchs.size() >=8 );
     }
 
 
     @Override
     public void genererMatchs()  {
         if (getMatchs().isEmpty()) {
-
+            System.out.println("GENERATION DES MATCHS");
             for (int i = 0; i < 2; i++) {
                 datephasefinale.add(Calendar.DATE,1);
                 for (int j = 0; j < 2; j++) {
                     matchsAJouer.add(new Match(new Date(datephasefinale.getTime().getTime()),phaseDePoule.getPremier(j+2*i),phaseDePoule.getDeuxième(3-j-2*i),this));
                 }
             }
-            getMatchs().addAll(matchsAJouer);
+            matchs.addAll(matchsAJouer);
         }
         else {
             if (matchsFinis() && !finale) {
@@ -67,8 +67,6 @@ public class PhaseFinale extends Phase{
     }
 
     public boolean matchsFinis() {
-        System.out.println("MATCHS A JOUER");
-        System.out.println(matchsAJouer);
         for (Match m:
              matchsAJouer) {
             if (m.getWinner() == null) {
@@ -87,6 +85,17 @@ public class PhaseFinale extends Phase{
         return finale && matchsFinis();
     }
 
+    public void getMatchsFromID () throws Exception{
+        super.getMatchsFromID();
+        if (matchs.size() <=4) {
+            matchsAJouer.addAll(matchs);
+        }
+        else {
+            matchsAJouer.add(matchs.get(matchs.size()-1));
+            matchsAJouer.add(matchs.get(matchs.size()-2));
+        }
+    }
+
 
     public List<Match> getMatchsAJouer() {
         return matchsAJouer;
@@ -97,10 +106,11 @@ public class PhaseFinale extends Phase{
             throw new Exception("le tournoi n'est pas fini");
         }
         Equipe[] res = new Equipe[4];
-        res[0] = getMatch(7).getWinner();
-        res[1] = getMatch(7).getLoser();
-        res[2] = getMatch(6).getWinner();
-        res[3] = getMatch(6).getLoser();
+        int taille = matchs.size();
+        res[0] = matchs.get(taille-1).getWinner();
+        res[1] = matchs.get(taille-1).getLoser();
+        res[2] = matchs.get(taille-2).getWinner();
+        res[3] = matchs.get(taille-2).getLoser();
         return res;
     }
 

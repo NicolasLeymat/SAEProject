@@ -29,7 +29,11 @@ public class Tournoi {
 	private PhaseDePoule phasePoule;
 	private PhaseFinale phaseElim;
 
-	 public enum Notoriete {
+	public boolean elimmatchsfini() {
+		return (this.getPhaseElim() != null && this.getPhaseElim().matchsFinis());
+	}
+
+	public enum Notoriete {
 		LOCAL(1) ,NATIONAL(2), INTERNATIONAL(3);
 		private int value;
 		Notoriete(int i) {
@@ -401,7 +405,7 @@ public class Tournoi {
 					res.put(gagnant, new Integer[]{1,0});
 				}
 				if (!res.containsKey(perdant) ) {
-					res.put(gagnant, new Integer[]{0,1});
+					res.put(perdant, new Integer[]{0,1});
 				}
 				res.get(gagnant)[0]++;
 				res.get(perdant)[1]++;
@@ -473,9 +477,11 @@ public class Tournoi {
 				phaseDePoule.getMatchsFromID();
 			}
 			st.setInt(2,1);
+			rs = st.executeQuery();
 			if ( this.phasePoule != null && rs.next() ) {
 				System.out.println("Coucou 2 :::" + this.phasePoule);
 				PhaseFinale phaseFinale = new PhaseFinale(this,this.phasePoule);
+				phaseFinale.setId(rs.getInt("id_phase"));
 				phaseFinale.getMatchsFromID();
 				phaseFinale.setFinalefromMatchs();
 				this.phaseElim = phaseFinale;
