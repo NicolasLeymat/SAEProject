@@ -56,6 +56,7 @@ public class AddPanel extends JPanel {
 	private JTextField orgaTf;
 	private JComboBox<String> comboBox;
 	private JButton confirmBtn;
+	private JTextField textField;
 	
 	
 	public AddPanel(String type, Object obj) {
@@ -165,7 +166,7 @@ public class AddPanel extends JPanel {
 		
 		JLabel lblMode = new JLabel("Mode de jeu :");
 		lblMode.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
-		lblMode.setBounds(10, 85, 90, 20);
+		lblMode.setBounds(10, 85, 120, 20);
 		
 		DefaultComboBoxModel<String> modeModel = new DefaultComboBoxModel<>(ModeleESporter.getAllModeName());
 		comboBox = new JComboBox<>(modeModel);
@@ -199,6 +200,19 @@ public class AddPanel extends JPanel {
 		lblNomOrganisateur.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNomOrganisateur.setBounds(10, 229, 125, 20);
 		
+		Title.setText("Ajout d'une équipe");
+		MainPanel.add(lblMode);
+		MainPanel.add(comboBox);
+		
+		textField = new JTextField();
+		textField.setBounds(140, 120, 150, 19);
+		textField.setColumns(10);
+		textField.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
+		
+		JLabel lblNewLabel = new JLabel("Lien du logo :");
+		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
+		lblNewLabel.setBounds(10, 115, 100, 20);
+		
 		switch(type) {
 			case "Player":{
 				Title.setText("Ajout d'un joueur");
@@ -216,6 +230,8 @@ public class AddPanel extends JPanel {
 				Title.setText("Ajout d'une équipe");
 				MainPanel.add(lblMode);
 				MainPanel.add(comboBox);
+				MainPanel.add(lblNewLabel);
+				MainPanel.add(textField);
 				break;
 			}
 			case "Orga":{
@@ -275,6 +291,7 @@ public class AddPanel extends JPanel {
 			case "Team":{
 				Ecurie ecurieToAdd = (Ecurie) this.obj;
 				Equipe e = new Equipe(this.NameTF.getText());
+				e.setStringLogo(textField.getText());
 				e.setIdEcurie(ecurieToAdd.getId());
 				e.setIdModeDeJeu(ModeDeJeu.getModeDeJeuFromNom((String)comboBox.getSelectedItem()).getIdMode());
 				return e;
@@ -317,5 +334,4 @@ public class AddPanel extends JPanel {
 		int day = Integer.parseInt(values[0]);
 		return new Date(year - 1900, month - 1, day);
 	}
-
 }

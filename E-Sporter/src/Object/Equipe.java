@@ -50,6 +50,7 @@ public class Equipe implements Comparable<Equipe> {
 	 * Logo de l'équipe
 	 */
 	private ImageIcon logo;
+	private String stringLogo;
 	/**
 	 * construit une equipe a partir de son nom
 	 * @param nom
@@ -104,6 +105,9 @@ public class Equipe implements Comparable<Equipe> {
 	 */
 	private void setPoints(int points) {
 		this.points = points;
+	}
+	public void setStringLogo(String logo) {
+		this.stringLogo = logo;
 	}
 	/**
 	 * ajoute des points a une equipe
@@ -191,7 +195,6 @@ public class Equipe implements Comparable<Equipe> {
 		this.listeJoueurs.add(joueur);
 	}
 	
-	
 	/**
 	 * enregistre une equipe dans la BD
 	 * @param equipe
@@ -216,12 +219,13 @@ public class Equipe implements Comparable<Equipe> {
 				equipe.setId(Equipe.getLastId()+1);
 			}
 			
-			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, points, id_ecurie, id_mode) values(?,?,?,?,?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_equipe(id_equipe, nom, points, logo, id_ecurie, id_mode) values(?,?,?,?,?,?)");
 			pst.setInt(1, equipe.getId());
 			pst.setString(2, equipe.getNom());
 			pst.setInt(3, equipe.getPoints());
-			pst.setInt(4,equipe.getIdEcurie());
-			pst.setInt(5,equipe.getIdModeDeJeu());
+			pst.setString(4, equipe.stringLogo);
+			pst.setInt(5,equipe.getIdEcurie());
+			pst.setInt(6,equipe.getIdModeDeJeu());
 			pst.executeUpdate();
 			
 			for (Joueur j : equipe.getJoueurs()) {
