@@ -300,13 +300,15 @@ public class Tournoi {
 				if (!verifierPresenceTournoi(t)) {
 					return -1;
 				}
-				pst = connex.prepareStatement("update LMN3783A.sae_tournoi set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ? where id_tournoi = ?" );
+				pst = connex.prepareStatement("update LMN3783A.sae_tournoi set nom = ?, datetournoi = ?, championnat = ?, notoriete = ?, id_organisateur= ?,id_mode = ?, etat=? where id_tournoi = ?" );
 				pst.setString(1, t.getNom());
 				pst.setDate(2, t.getDateTournoi());
 				pst.setInt(3, t.getChampionnat());
 				pst.setInt(4,t.getNotoriete());
 				pst.setInt(5,t.getId_Organisateur());
 				pst.setInt(6, t.getId_Mode().getIdMode());
+				pst.setString(7, t.getEtat().getValue());
+				pst.setInt(8, t.getId());
 				pst.executeUpdate();
 
 				pst.close();
@@ -365,15 +367,25 @@ public class Tournoi {
 
 	@Override
 	public String toString() {
-		return "Tournoi{" +
-				"nom='" + nom + '\'' +
-				", date=" + dateTournoi +
-				", notoriete=" + notoriete +
-				", listeEquipe=" + listeEquipe +
-				", phasePoule=" + phasePoule +
-				", phaseElim=" + phaseElim +
-				",id=" + id +
-				'}';
+		String res = "";
+		
+		res += this.nom;
+		switch(this.etat) {
+			case INSC:{
+				res += ", tournoi en phase d'inscription";
+				break;
+			}
+			case ENC:{
+				res+= ", tournoi en cours";
+				break;
+			}
+			case FINI:{
+				res+= ", tournoi fini"; 
+				break;
+			}
+		}
+		
+		return res;
 	}
 
 	//Ajoute les points à la fin d'un tournoi

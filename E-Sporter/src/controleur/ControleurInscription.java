@@ -17,6 +17,8 @@ import IHM.tournois.VueInscriptionTournois;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
+import Object.Phase;
+import Object.PhaseDePoule;
 import Object.Tournoi;
 import Object.Tournoi.ETAT;
 
@@ -38,8 +40,6 @@ public class ControleurInscription implements ActionListener{
 			case "Ajouter":{
 				Equipe obj = (Equipe) this.vue.getInfoToObject();
 				Tournoi t = this.vue.getTournoi();
-				//System.out.println("Id Tournoi : " + t.getId());
-				JFrame frame = this.modele.getPanelFrame(vue);
 				this.modele.addParticipation(obj,t);
 				VueInscriptionTournois.updateListEquipe(t);
 				break;
@@ -50,7 +50,6 @@ public class ControleurInscription implements ActionListener{
 					
 				}
 				Tournoi t = this.vue.getTournoi();
-				JFrame frame = this.modele.getPanelFrame(vue);
 				this.modele.deleteParticipation(obj,t);
 				VueInscriptionTournois.updateListEquipe(t);
 				break;
@@ -69,11 +68,11 @@ public class ControleurInscription implements ActionListener{
 							try {
 								t.addEquipe(equipe);
 							} catch (Exception e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						}
 						t.getPhasePoule().genererMatchs();
+						Phase.enregistrerPhase(t.getPhasePoule());
 					}
 				}
 				JFrame frame = this.modele.getPanelFrame(vue);

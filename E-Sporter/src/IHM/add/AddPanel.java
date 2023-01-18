@@ -54,14 +54,14 @@ public class AddPanel extends JPanel {
 	private JComboBox<String> comboChamp;
 	private JComboBox<Tournoi.Notoriete> comboNotoriete;
 	private JTextField orgaTf;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JButton confirmBtn;
 	
 	
 	public AddPanel(String type, Object obj) {
 		ControleurAjout c = new ControleurAjout(this);
 		this.obj = obj;
-		System.out.println(obj);
+		//System.out.println(obj);
 		this.setMode(type);
 		this.setSize(WIDTH, HEIGHT);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -244,6 +244,9 @@ public class AddPanel extends JPanel {
 				MainPanel.add(brithDateTF);
 				break;
 			}
+			default:{
+				break;
+			}
 		}
 	}
 
@@ -265,7 +268,7 @@ public class AddPanel extends JPanel {
 						this.pseudoTF.getText(), 
 						this.brithDateTF.getText(), 
 						Nationalite.getByNom((String) this.natChoice.getSelectedItem()));
-				System.out.println((String) this.natChoice.getSelectedItem());
+				//System.out.println((String) this.natChoice.getSelectedItem());
 				j.setIdEquipe(teamToAdd.getId());
 				return j;
 			}
@@ -290,9 +293,9 @@ public class AddPanel extends JPanel {
 				Tournoi.Notoriete not  = (Tournoi.Notoriete)  this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					System.out.println(this.formattingText());
+					//System.out.println(this.formattingText());
 					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), ETAT.INSC);
-					System.out.println("Tournoi : " + t);
+					//System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -309,7 +312,7 @@ public class AddPanel extends JPanel {
 		String textToFormat = this.brithDateTF.getText();
 		String[] values = textToFormat.split("/");
 		int year = Integer.parseInt(values[2]);
-		System.out.println(year);
+		//System.out.println(year);
 		int month = Integer.parseInt(values[1]);
 		int day = Integer.parseInt(values[0]);
 		return new Date(year - 1900, month - 1, day);

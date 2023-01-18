@@ -18,6 +18,9 @@ public class VueInfoTournoisFrame extends JFrame {
     public Tournoi getTournoi() {
         return tournoi;
     }
+    public void setButtonText(String s) {
+    	nextbutton.setText(s);
+    }
 
     public VueInfoTournoisFrame(Tournoi tournoi) {
         this.tournoi =tournoi;

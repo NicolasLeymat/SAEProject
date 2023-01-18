@@ -25,22 +25,16 @@ public class ControlleurListeMatch implements ActionListener {
         if (vue.getTournoi().elimmatchsfini()) {
             System.out.println("ELIM");
             if (!vue.getTournoi().getPhaseElim().estFinie()) {
-                System.out.println("ELIM FINIE");
                 this.etat = ETAT.FINIELIM;
                 vue.setActiveNextButton(true);
             } else {
-                System.out.println("TOURNOI FINI");
                 this.etat = ETAT.FINI;
                 vue.setActiveNextButton(true);
             }
         } else if (vue.getTournoi().getPhaseElim() == null) {
-            System.out.println("POULE FINIE");
-            System.out.println(vue.getTournoi().getPhaseElim());
             this.etat = ETAT.FINIPOULE;
             vue.setActiveNextButton(true);
         } else {
-            System.out.println("POULE OU ELIM PAS FINIE");
-            System.out.println(vue.getTournoi().getPhaseElim());
             this.etat = ETAT.ENCOURS;
             vue.setActiveNextButton(false);
         }
@@ -55,11 +49,8 @@ public class ControlleurListeMatch implements ActionListener {
         switch (etat) {
             case FINIPOULE -> {
                 etat = ETAT.ENCOURS;
-                System.out.println(vue.getTournoi());
                 vue.getTournoi().genererPhaseFinale();
                 Phase.enregistrerPhase(vue.getTournoi().getPhaseElim());
-                System.out.println("PHASE ELIM GENERE");
-                System.out.println(vue.getTournoi().getPhaseElim());
                 bouton.setEnabled(false);
                 vue.dispose();
             }
@@ -71,16 +62,14 @@ public class ControlleurListeMatch implements ActionListener {
                 vue.dispose();
             }
             case FINI -> {
-                bouton.setText("Terminer le tournoi");
-                try {
+                vue.setButtonText("Terminer le tournoi");
+            	try {
                     vue.getTournoi().ajouterPoints();
                     vue.getTournoi().setEtat(Tournoi.ETAT.FINI);
-                    System.out.println (vue.getTournoi().actualiserEtat());
-                    System.out.println(vue.getTournoi().getEtat());
+                    Tournoi.modifierTournoi(vue.getTournoi());
                     vue.dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    throw new RuntimeException(ex);
                 }
             }
         }

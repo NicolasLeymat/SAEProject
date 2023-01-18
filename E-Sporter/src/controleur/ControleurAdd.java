@@ -11,14 +11,10 @@ import IHM.add.AddPanel;
 
 public class ControleurAdd implements ActionListener{
 	
-	private JPanel vue;
-	private ModeleESporter modele;
 	private AddFrame frame;
 	private Object obj;
 	
 	public ControleurAdd(JPanel v, Object obj) {
-		this.vue = v;
-		this.modele = new ModeleESporter();
 		this.frame = null;
 		this.obj = obj;
 	}
@@ -46,6 +42,9 @@ public class ControleurAdd implements ActionListener{
 			case "Ajouter un tournoi":{
 				this.frame = new AddFrame("Tournament", null);
 				this.frame.setVisible(true);
+				break;
+			}
+			default:{
 				break;
 			}
 		}
