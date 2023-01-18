@@ -322,11 +322,11 @@ public class Tournoi {
 			Connection connex = Connexion.connexion();
 
 			try {
-				if (verifierPresenceTournoi(this)) {
+				if (!verifierPresenceTournoi(this)) {
 					return -1;
 				}
 
-				PreparedStatement pst = connex.prepareStatement("UPDATE LM3783A.sae_tournoi set ETAT = ? where id_tournoi = ?");
+				PreparedStatement pst = connex.prepareStatement("UPDATE LMN3783A.sae_Tournoi set ETAT = ? where id_tournoi = ?");
 				pst.setString(1,this.getEtat().getValue());
 				pst.setInt(2,this.getId());
 				return pst.executeUpdate();

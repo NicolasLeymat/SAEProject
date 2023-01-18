@@ -75,7 +75,8 @@ public class ControlleurListeMatch implements ActionListener {
                 try {
                     vue.getTournoi().ajouterPoints();
                     vue.getTournoi().setEtat(Tournoi.ETAT.FINI);
-                    vue.getTournoi().actualiserEtat();
+                    System.out.println (vue.getTournoi().actualiserEtat());
+                    System.out.println(vue.getTournoi().getEtat());
                     vue.dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
