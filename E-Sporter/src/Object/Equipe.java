@@ -123,9 +123,11 @@ public class Equipe implements Comparable<Equipe> {
 				return;
 			}
 
-			PreparedStatement ps = connection.prepareStatement("UPDATE EQUIPE SET points = ? where id_equipe = ?");
+			PreparedStatement ps = connection.prepareStatement("UPDATE lmn3783a.sae_EQUIPE SET points = ? where id_equipe = ?");
 			ps.setInt(1,this.getPoints());
 			ps.setInt(2,this.getId());
+			System.out.println("POINTS "+this.getNom()+" = "+ this.points);
+			ps.executeUpdate();
 		}
 		catch (SQLException e) {
 			System.out.println("Erreur SQL " + e.getMessage());

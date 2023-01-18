@@ -41,6 +41,9 @@ public class PhaseDePoule extends Phase {
 
 	public void setPoulesFromMatchs() {
 		List<Equipe> participants = new ArrayList<>();
+		if (getMatchs().isEmpty()) {
+			return;
+		}
 		for (int i = 0; i < 4; i++) {
 			List<Match> filtrematch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
 			Equipe equipe = filtrematch.stream().findFirst().get().getEquipe1();
@@ -153,7 +156,7 @@ public class PhaseDePoule extends Phase {
 	}
 
 	public void enregistrerGagnant(int poule, Match m) {
-		if (getMatchs().contains(m)) {
+		if (getMatchs().contains(m) && m.getWinner() != null) {
 			Equipe egagnante = m.getWinner();
 			Map<Equipe,Integer> pouleselect = poules.get(poule);
 			pouleselect.put(egagnante,pouleselect.get(egagnante)+1);
@@ -179,8 +182,9 @@ public class PhaseDePoule extends Phase {
 			System.out.println("C VIDE");
 			return false;
 		}*/
+		System.out.println(matchs);
 		for (Match m :
-				getMatchs()) {
+				matchs) {
 			if (m.getWinner() == null)  {
 				return false;
 			}

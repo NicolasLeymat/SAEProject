@@ -1,9 +1,6 @@
 package IHM.tournois;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import IHM.info.TableauClassementTournoi;
@@ -101,7 +99,12 @@ public class VueClassementTournois extends JPanel{
 		matchs.addAll(matchsElims);
 		tableHistorique.setModel(new TableauMatchHistorique(matchs));
 		tableHistorique.setShowGrid(false);
-		tableHistorique.setFont(ModeleESporter.FONT_SMALL);
+		tableHistorique.setFont(new Font("monospaced", Font.PLAIN,ModeleESporter.FONT_SIZE_MEDIUM));
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		tableClassement.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+		tableClassement.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
 		
 		scrollPane_1.setViewportView(tableHistorique);
 	}

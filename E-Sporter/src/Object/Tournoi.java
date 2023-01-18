@@ -126,6 +126,7 @@ public class Tournoi {
 			throw  new IllegalArgumentException("Le tournoi n'est pas plein, il faut 16 equipes, il y en a "+listeEquipe.size() );
 		}
 		this.getPhasePoule().genererMatchs();
+		PhaseDePoule.enregistrerPhase(this.getPhasePoule());
 		this.etat = ETAT.ENC;
 	}
 
@@ -393,6 +394,7 @@ public class Tournoi {
 		if (!phaseElim.estFinie()) {
 			throw new Exception("le tournoi n'est pas fini");
 		}
+		System.out.println("AJOUT DE POINTS");
 		Equipe[] classement = phaseElim.getClassement();
 		classement[0].addPoints(PointsClassement.PREMIER.points*notoriete);
 		classement[1].addPoints(PointsClassement.DEUXIEME.points*notoriete);
@@ -428,14 +430,21 @@ public class Tournoi {
 
 	public Map<Equipe,Integer[]> getVictoires() {
 		Map<Equipe,Integer[]> welim = getVictoiresPhase(this.phaseElim);
+		System.out.println("Equipes en elim : "+ welim.keySet().stream().map((e) -> e.hashCode()).toList());
 		Map<Equipe,Integer[]> res = getVictoiresPhase(this.phasePoule);
+		System.out.println("Equipes en poules : "+ res.keySet().stream().map((e) -> e.hashCode()).toList());
 		for (Equipe equipe:
 			 welim.keySet()) {
-			if (!res.containsKey(equipe)) {
+			Equipe equipetest = res.keySet().stream().filter((e) -> e.getId() == equipe.getId()).findFirst().orElse(null);
+			if (equipetest == null) {
 				continue;
 			}
-			res.get(equipe)[0] += welim.get(equipe)[0];
-			res.get(equipe)[1] += welim.get(equipe)[1];
+			System.out.println("e test " + equipetest);
+			System.out.println("e en cours " + equipe);
+			res.get(equipetest)[0] += welim.get(equipe)[0];
+			System.out.print("Victoires totales " + equipe.getNom() + " "+ res.get(equipetest)[0]);
+			res.get(equipetest)[1] += welim.get(equipe)[1];
+			System.out.println("Defaites " + res.get(equipetest)[1]);
 		}
 		return res;
 	}
@@ -475,6 +484,10 @@ public class Tournoi {
 
 		if (id <0) {
 			throw new Exception("Objet non relié");
+		}
+
+		if (etat == ETAT.INSC) {
+			return;
 		}
 
 		try {

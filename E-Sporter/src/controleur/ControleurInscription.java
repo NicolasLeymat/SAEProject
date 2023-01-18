@@ -60,10 +60,8 @@ public class ControleurInscription implements ActionListener{
 				System.out.println(this.vue.getAllListEquipesTournoi().size());
 				List<Equipe> equipes = this.vue.getAllListEquipesTournoi();
 				if(equipes.size() == 16) {
-					int resultat = JOptionPane.showConfirmDialog(this.vue, "Le tournoi est complet actuelement si vous etes sur qu'aucune équipe ne se désiste vous pouvez lancé celui-ci","Lancer le tournoi !!", JOptionPane.OK_CANCEL_OPTION);
+					int resultat = JOptionPane.showConfirmDialog(this.vue, "Souhaitez-vous valider l'inscription ?","Confirmer Inscription", JOptionPane.OK_CANCEL_OPTION);
 					if (resultat == JOptionPane.OK_OPTION) {
-						t.setEtat(ETAT.ENC);
-						Tournoi.modifierTournoi(t);
 						for(Equipe equipe : equipes) {
 							try {
 								t.addEquipe(equipe);
@@ -71,7 +69,13 @@ public class ControleurInscription implements ActionListener{
 								e1.printStackTrace();
 							}
 						}
-						t.getPhasePoule().genererMatchs();
+						try {
+							System.out.println(t.getEtat());
+							t.demarrer();
+							Tournoi.modifierTournoi(t);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 						Phase.enregistrerPhase(t.getPhasePoule());
 					}
 				}

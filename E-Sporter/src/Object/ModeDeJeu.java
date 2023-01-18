@@ -160,6 +160,7 @@ public class ModeDeJeu {
 			
 		}catch (SQLException e) {
 			e.getStackTrace();
+			return  res;
 		}
 		
 		return res;

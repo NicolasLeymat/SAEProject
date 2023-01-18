@@ -31,7 +31,7 @@ public class ControlleurListeMatch implements ActionListener {
                 this.etat = ETAT.FINI;
                 vue.setActiveNextButton(true);
             }
-        } else if (vue.getTournoi().getPhaseElim() == null) {
+        } else if (vue.getTournoi().getPhaseElim() == null && vue.getTournoi().getPhasePoule().matchsFinis()) {
             this.etat = ETAT.FINIPOULE;
             vue.setActiveNextButton(true);
         } else {
