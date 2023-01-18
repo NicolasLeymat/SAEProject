@@ -11,8 +11,9 @@ public class FrameArbitrageTournois extends JFrame {
 	public FrameArbitrageTournois(Match t) {
 		this.match = t;
 	    // définition de la fenêtre
-	    setTitle("Fenêtre avec deux listes");
+	    setTitle(t.getEquipe1().getNom() +" VS "+ t.getEquipe2().getNom());
 	    setSize(500, 275);
+		setResizable(false);
 	    setLocationRelativeTo(null);
 	    this.setContentPane(new VueArbitrageTournois(t));
 	}

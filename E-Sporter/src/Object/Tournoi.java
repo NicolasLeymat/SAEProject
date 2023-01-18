@@ -416,13 +416,14 @@ public class Tournoi {
 					continue;
 				}
 				if (!res.containsKey(gagnant) ) {
-					res.put(gagnant, new Integer[]{1,0});
+					res.put(gagnant, new Integer[]{0,0});
 				}
 				if (!res.containsKey(perdant) ) {
-					res.put(perdant, new Integer[]{0,1});
+					res.put(perdant, new Integer[]{0,0});
 				}
-				res.get(gagnant)[0]++;
-				res.get(perdant)[1]++;
+					res.get(gagnant)[0]++;
+					res.get(perdant)[1]++;
+
 			}
 		}
 			return res;
@@ -430,9 +431,7 @@ public class Tournoi {
 
 	public Map<Equipe,Integer[]> getVictoires() {
 		Map<Equipe,Integer[]> welim = getVictoiresPhase(this.phaseElim);
-		System.out.println("Equipes en elim : "+ welim.keySet().stream().map((e) -> e.hashCode()).toList());
 		Map<Equipe,Integer[]> res = getVictoiresPhase(this.phasePoule);
-		System.out.println("Equipes en poules : "+ res.keySet().stream().map((e) -> e.hashCode()).toList());
 		for (Equipe equipe:
 			 welim.keySet()) {
 			Equipe equipetest = res.keySet().stream().filter((e) -> e.getId() == equipe.getId()).findFirst().orElse(null);
@@ -441,6 +440,7 @@ public class Tournoi {
 			}
 			System.out.println("e test " + equipetest);
 			System.out.println("e en cours " + equipe);
+			System.out.println(equipetest.getNom()+" Poules " + res.get(equipetest)[0] + "ELIM "+ welim.get(equipe)[0]);
 			res.get(equipetest)[0] += welim.get(equipe)[0];
 			System.out.print("Victoires totales " + equipe.getNom() + " "+ res.get(equipetest)[0]);
 			res.get(equipetest)[1] += welim.get(equipe)[1];
