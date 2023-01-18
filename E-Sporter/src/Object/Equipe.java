@@ -1,6 +1,7 @@
 package Object;
 
 import Application.Connexion;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -113,6 +114,22 @@ public class Equipe implements Comparable<Equipe> {
 	public void addPoints(int points) throws Exception {
 		if (points <0) {throw new IllegalArgumentException("nombre de points a jouter doit etre positif");}
 		this.setPoints(this.points+points);
+
+		try  {
+			Connection connection = Connexion.connexion();
+
+			if (this.getId() <0) {
+				System.out.println("Equipe non liée");
+				return;
+			}
+
+			PreparedStatement ps = connection.prepareStatement("UPDATE EQUIPE SET points = ? where id_equipe = ?");
+			ps.setInt(1,this.getPoints());
+			ps.setInt(2,this.getId());
+		}
+		catch (SQLException e) {
+			System.out.println("Erreur SQL " + e.getMessage());
+		}
 	}
 	/**
 	 * retourne l'id de l'ecurie associee a l'equipe

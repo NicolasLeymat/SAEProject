@@ -10,8 +10,21 @@ import java.util.Map;
 public class TableauClassementTournoi extends AbstractTableModel {
     private String[] columnNames = {"#", "Joueur", "Victoires","Defaites"};
     private Tournoi tournoi;
+    private Equipe[] equipes;
+
+    private Map<Equipe,Integer[]> victoires;
 
     public TableauClassementTournoi(Tournoi tournoi) {
+        try {
+            equipes = tournoi.getPhaseElim().getClassement();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return;
+        }
+        victoires = tournoi.getVictoires();
+        System.out.println("EQUIPE \n"+ Arrays.stream(equipes).toList());
+        System.out.println("VICTOIRES \n" + victoires.keySet().stream().toList());
         this.tournoi = tournoi;
     }
 
@@ -37,16 +50,6 @@ public class TableauClassementTournoi extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Equipe[] equipes;
-        Map<Equipe,Integer[]> victoires = tournoi.getVictoires();
-        try {
-            equipes = tournoi.getPhaseElim().getClassement();
-        }
-        catch (Exception e){
-            return 0;
-        }
-        System.out.println("EQUIPE \n"+ Arrays.stream(equipes).toList());
-        System.out.println("VICTOIRES \n" + victoires.keySet().stream().toList());
         switch (columnIndex) {
             case 0:
                 return rowIndex +1;
