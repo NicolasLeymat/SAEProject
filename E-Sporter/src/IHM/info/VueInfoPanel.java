@@ -51,8 +51,6 @@ public class VueInfoPanel extends JPanel{
 
 
 	public VueInfoPanel(Equipe e) {
-		System.out.println("----------------------------------------");
-		System.out.println(e);
 		modeleJoueur.clear();
 		VueInfoPanel.e = null;
 		VueInfoPanel.e = e;
@@ -154,7 +152,6 @@ public class VueInfoPanel extends JPanel{
 		
 		ControleurJList controleur = new ControleurJList();
 		modeleJoueur.addAll(e.getJoueurs());
-		System.out.println("--------------------------------------------------\n"+e.getJoueurs());
 		//Solution pour ne pas dupliquer les listeners
 		listJ = new JList<>();
 		//
@@ -201,11 +198,6 @@ public class VueInfoPanel extends JPanel{
 		gbc_panel_2.gridx = 1;
 		gbc_panel_2.gridy = 1;
 		add(panel_2, gbc_panel_2);
-		
-		JButton add_To_Tournament = new JButton("Ajouter à un tournoi");
-		add_To_Tournament.setBounds(20, 10, 175, 50);
-		panel_2.add(add_To_Tournament);
-		add_To_Tournament.setFont(ModeleESporter.FONT_MEDIUM);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
