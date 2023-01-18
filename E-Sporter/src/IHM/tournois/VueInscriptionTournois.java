@@ -41,7 +41,9 @@ public class VueInscriptionTournois extends JPanel{
 		
 		this.t = t;
 		
+		modeleEquipe.clear();
 		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));		
+		modeleEquipeTournoi.clear();
 		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
 		listEquipe.setModel(modeleEquipe);
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
