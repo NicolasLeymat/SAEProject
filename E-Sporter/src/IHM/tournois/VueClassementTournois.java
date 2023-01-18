@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import IHM.info.TableauClassementTournoi;
 import IHM.info.TableauMatchHistorique;
@@ -105,7 +106,21 @@ public class VueClassementTournois extends JPanel{
 		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 		tableClassement.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
 		tableClassement.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
-		
+
+
+
+		TableColumnModel columnModelclassement = tableClassement.getColumnModel();
+		columnModelclassement.getColumn(3).setMaxWidth(25);
+		columnModelclassement.getColumn(0).setMaxWidth(20);
+		columnModelclassement.getColumn(2).setMaxWidth(25);
+
+		TableColumnModel columnModelhistorique = tableHistorique.getColumnModel();
+		columnModelhistorique.getColumn(3).setMaxWidth(115);
+		columnModelhistorique.getColumn(3).setMinWidth(115);
+		columnModelhistorique.getColumn(2).setMinWidth(100);
+		columnModelhistorique.getColumn(2).setMaxWidth(100);
+		columnModelhistorique.getColumn(2).setCellRenderer(centerRenderer);
+
 		scrollPane_1.setViewportView(tableHistorique);
 	}
 	

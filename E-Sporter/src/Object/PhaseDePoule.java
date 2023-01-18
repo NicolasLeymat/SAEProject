@@ -41,36 +41,53 @@ public class PhaseDePoule extends Phase {
 
 	public void setPoulesFromMatchs() {
 		List<Equipe> participants = new ArrayList<>();
+		List<Equipe> verifies = new ArrayList<>();
 		if (getMatchs().isEmpty()) {
 			return;
 		}
 		for (int i = 0; i < 4; i++) {
 			List<Match> filtrematch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
-			Equipe equipe = filtrematch.stream().findFirst().get().getEquipe1();
+			Match match1 = filtrematch.stream().findFirst().get();
+			Equipe equipe = match1.getEquipe1();
+			verifies.clear();
 			poules.add(new HashMap<Equipe,Integer>());
-			poules.get(i).put(equipe,0);
+			//poules.get(i).put(equipe,0);
+			//enregistrerGagnant(i,match1);
 			int finalI;
 			finalI = i;
 			System.out.println(equipe);
-
 			filtrematch.stream().filter((m) -> m.getEquipe1() == equipe || m.getEquipe2() == equipe)
 					.forEach((m) ->
 							{
+								List<Match> matchsjoueurs;
 								if (m.getEquipe1()== equipe) {
-									poules.get(finalI).put(m.getEquipe2(),0);
+									if (poules.get(finalI).get(m.getEquipe2()) == null ) {
+										poules.get(finalI).put(m.getEquipe2(),0);
+									}
+									matchsjoueurs = matchs.stream().filter((me) -> me.getEquipe1() == m.getEquipe2() && !verifies.contains(me.getEquipe2())|| me.getEquipe2() == m.getEquipe2() && !verifies.contains(me.getEquipe1())).collect(Collectors.toList());
+									verifies.add(m.getEquipe2());
 									participants.add(m.getEquipe2());
+									setPoule(finalI,matchsjoueurs);
 								}
 								else {
-									poules.get(finalI).put(m.getEquipe1(),0);
+									if (poules.get(finalI).get(m.getEquipe1()) == null ) {
+										poules.get(finalI).put(m.getEquipe1(),0);
+									}
+									matchsjoueurs = matchs.stream().filter((me) -> (me.getEquipe2() == m.getEquipe1() && !verifies.contains(me.getEquipe1()) || me.getEquipe1() == m.getEquipe1()) && !verifies.contains(me.getEquipe2())).collect(Collectors.toList());
+									verifies.add(m.getEquipe1());
 									participants.add(m.getEquipe1());
+									setPoule(finalI,matchsjoueurs);
 								}
-								enregistrerGagnant(finalI,m);
-
 							});
 		}
 
 	}
 
+	private void setPoule(int poule, List<Match> matchs) {
+		for (Match m : matchs) {
+			enregistrerGagnant(poule,m);
+		}
+	}
 	public Equipe getPremier(int poule) {
 		return this.getClassement(poule).get(0);
 	}
@@ -159,7 +176,13 @@ public class PhaseDePoule extends Phase {
 		if (getMatchs().contains(m) && m.getWinner() != null) {
 			Equipe egagnante = m.getWinner();
 			Map<Equipe,Integer> pouleselect = poules.get(poule);
-			pouleselect.put(egagnante,pouleselect.get(egagnante)+1);
+			if (pouleselect.get(egagnante) == null ) {
+				pouleselect.put(egagnante,0);
+			}
+			if (pouleselect.get(m.getLoser()) == null ) {
+				pouleselect.put(m.getLoser(),0);
+			}
+				pouleselect.put(egagnante, pouleselect.get(egagnante) + 1);
 		}
 	}
 
@@ -177,11 +200,6 @@ public class PhaseDePoule extends Phase {
 
 	@Override
 	public boolean matchsFinis() {
-		/*
-		if (poules.isEmpty()) {
-			System.out.println("C VIDE");
-			return false;
-		}*/
 		System.out.println(matchs);
 		for (Match m :
 				matchs) {

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class TableauClassementTournoi extends AbstractTableModel {
-    private String[] columnNames = {"#", "Equipe", "Victoires","Defaites"};
+    private String[] columnNames = {"#", "Equipe", "V","D"};
     private Tournoi tournoi;
     private Equipe[] equipes;
 
