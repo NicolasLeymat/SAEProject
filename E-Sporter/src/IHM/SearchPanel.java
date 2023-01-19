@@ -13,9 +13,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SearchPanel extends JPanel{
 	private JTextField searchField;
+	private JButton searchButton;
 	
 	public SearchPanel() {
 		this.setVisible(true);
@@ -48,13 +52,25 @@ public class SearchPanel extends JPanel{
 		gbc_searchField.gridx = 1;
 		gbc_searchField.gridy = 1;
 		this.add(searchField, gbc_searchField);
+		
+		searchButton = new JButton("Rechercher");
+		GridBagConstraints gbc_searchButton = new GridBagConstraints();
+		gbc_searchButton.fill = GridBagConstraints.BOTH;
+		gbc_searchButton.gridx = 2;
+		gbc_searchButton.gridy = 1;
+		searchButton.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
+		add(searchButton, gbc_searchButton);
 	}
 	
 	public void changeWitdth(int newWidth) {
 		this.searchField.setSize(newWidth, 50);
 	}
 	
-	public void addListenerToSearchField(CaretListener c) {
-		this.searchField.addCaretListener(c);
+	public void addListenerButton(ActionListener c) {
+		this.searchButton.addActionListener(c);
+	}
+	
+	public String getTextSearch() {
+		return this.searchField.getText();
 	}
 }

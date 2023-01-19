@@ -28,7 +28,7 @@ public class VuePrincipale extends JPanel{
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		this.searchPanel = new SearchPanel();
-		searchPanel.addListenerToSearchField(controleurRecherche);
+		searchPanel.addListenerButton(controleurRecherche);
 		
 		GridBagConstraints gbc_searchPanel = new GridBagConstraints();
 		gbc_searchPanel.fill = GridBagConstraints.BOTH;
@@ -53,5 +53,9 @@ public class VuePrincipale extends JPanel{
 		gbc_mainPanel.gridy = 2;
 		this.add(mainPanel, gbc_mainPanel);
 		
+	}
+	
+	public String getTextSearch() {
+		return this.searchPanel.getTextSearch();
 	}
 }

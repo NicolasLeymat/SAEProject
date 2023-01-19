@@ -360,7 +360,7 @@ public class Tournoi {
 				pst.close();
 				
 			} catch (SQLException ex) {
-				ex.printStackTrace();
+				ex.printStackTrace(); 
 				return -1; 
 			}
 			return 1;

@@ -8,7 +8,7 @@ import java.awt.GridBagConstraints;
 
 public class App extends JFrame{
 
-	public static final int WIDTH = 1200;
+	public static final int WIDTH = 1300;
 	public static final int HEIGHT = 625;
 	
 	public App() throws Exception {

@@ -137,7 +137,7 @@ public class AddPanel extends JPanel {
 		
 		JLabel lblNat = new JLabel("Nationalités : ");
 		lblNat.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
-		lblNat.setBounds(10, 138, 91, 20);
+		lblNat.setBounds(10, 138, 120, 20);
 		
 		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat()); 
 		natChoice = new JComboBox<>();
@@ -200,10 +200,6 @@ public class AddPanel extends JPanel {
 		lblNomOrganisateur.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNomOrganisateur.setBounds(10, 229, 125, 20);
 		
-		Title.setText("Ajout d'une équipe");
-		MainPanel.add(lblMode);
-		MainPanel.add(comboBox);
-		
 		textField = new JTextField();
 		textField.setBounds(140, 120, 150, 19);
 		textField.setColumns(10);
@@ -212,6 +208,7 @@ public class AddPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Lien du logo :");
 		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNewLabel.setBounds(10, 115, 100, 20);
+	
 		
 		switch(type) {
 			case "Player":{
