@@ -65,6 +65,26 @@ public abstract class Phase {
         return r;
     }
 
+    public static int supprimerPhaseNoObject(int id) {
+        Connection connex = Connexion.connexion();
+        PreparedStatement pst;
+
+        //Suppression des matchs lies
+        try {
+            pst = connex.prepareStatement("Delete from LMN3783A.SAE_match where id_phase = ?");
+            pst.setInt(1,id);
+            pst.executeUpdate();
+            //Suppression de la phase
+            pst = connex.prepareStatement("Delete from LMN3783A.SAE_phase where id_phase = ?");
+            pst.setInt(1,id);
+            return pst.executeUpdate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public static int enregistrerPhase(Phase p) {
         Connection connex = Connexion.connexion();
         PreparedStatement pst;

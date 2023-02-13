@@ -348,14 +348,15 @@ public class Tournoi {
 			ResultSet rs;
 			
 			try {
-
 				if (verifierPresenceTournoi(t)) {
 					return -1;
 				}
-				
-				pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where nom = ? and datetournoi= ?" );
-				pst.setString(1, t.getNom());
-				pst.setDate(2, t.getDateTournoi());
+				//Suppression des phases
+				Phase.supprimerPhaseNoObject(t.phasePoule.getId());
+				Phase.supprimerPhaseNoObject(t.phaseElim.getId());
+
+				pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where id_tournoi = ?" );
+				pst.setInt(1, t.id);
 				pst.executeUpdate();
 				pst.close();
 				
@@ -365,6 +366,35 @@ public class Tournoi {
 			}
 			return 1;
 		}
+
+	public static int supprimerTournoiNoObject(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+
+		try {
+			//Suppression des phases
+			pst = connex.prepareStatement("SELECT ID_PHASE from LMN3783A.sae_phase where id_tournoi  = ?");
+			pst.setInt(1,id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Phase.supprimerPhaseNoObject(rs.getInt(1));
+			}
+			//Suppression des inscriptions
+			pst = connex.prepareStatement("delete from LMN3783A.sae_participer where id_tournoi = ?" );
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			//Suppression du tournoi
+			pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where id_tournoi = ?" );
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			pst.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
 
 	@Override
 	public String toString() {
@@ -462,9 +492,14 @@ public class Tournoi {
 			rs = st.executeQuery("select id_tournoi,etat, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
 			while (rs.next()) {
 				ETAT etat = ETAT.valueOf(rs.getString("etat"));
-				t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")),etat);
-				t.setId(rs.getInt(1));
-				tournois.add(t);
+				try {
+					t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")), etat);
+					t.setId(rs.getInt(1));
+					tournois.add(t);
+				}
+				catch (Exception e) {
+					Tournoi.supprimerTournoiNoObject(rs.getInt(1));
+				}
 			}
 			
 			rs.close();
