@@ -89,16 +89,28 @@ public class Joueur {
 	public void setNationalite(Nationalite nationalite) {
 		this.nationalite = nationalite;
 	}
-
+	
+	/**
+	 * Retourne l'id d'une équipe
+	 * @return
+	 */
 	public int getIdEquipe() {
 		return idEquipe;
 	}
 
+	/**
+	 * Modifie l'id d'une équipe
+	 * @param idEquipe
+	 */
 	public void setIdEquipe(int idEquipe) {
 		this.idEquipe = idEquipe;
 	}
 
-    
+	/**
+	 * Enregistre un joueur
+	 * @param joueur
+	 * @return
+	 */
     public static int enregistrerJoueur(Joueur joueur) {
     	Connection connex = Connexion.connexion();
     	PreparedStatement pst;
@@ -136,7 +148,11 @@ public class Joueur {
     }
     
     
-    
+    /**
+     * Modifie un joueur dans la BD
+     * @param j
+     * @return
+     */
     public static int modifierJoueur(Joueur j) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -169,6 +185,11 @@ public class Joueur {
 		return 1;
 	}
     
+    /**
+     * Supprime un joueur dans la BD
+     * @param j
+     * @return
+     */
     public static int supprimerJoueur(Joueur j) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -196,12 +217,17 @@ public class Joueur {
 		return 1;
 	}
     
+    /**
+     * Retourne les joueurs d'une équipe
+     * @param id
+     * @return
+     */
     public static List<Joueur> getJoueursFromEquipe(int id) {
     	Connection connex = Connexion.connexion();
 		PreparedStatement pst = null;
 		ResultSet rs;
-		Joueur e = null;
-		List<Joueur> r = new ArrayList<Joueur>();
+		Joueur j = null;
+		List<Joueur> list_j = new ArrayList<Joueur>();
 		
 		try {
 			
@@ -210,10 +236,10 @@ public class Joueur {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				e = new Joueur(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), Nationalite.valueOf(rs.getString(6)));
-				e.setIdEquipe(rs.getInt(7));
-				e.setId(rs.getInt(1));
-				r.add(e);
+				j = new Joueur(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), Nationalite.valueOf(rs.getString(6)));
+				j.setIdEquipe(rs.getInt(7));
+				j.setId(rs.getInt(1));
+				list_j.add(j);
 			}
 			
 			rs.close();
@@ -222,9 +248,13 @@ public class Joueur {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return r;
+		return list_j;
 	}
     
+    /**
+     * Retoune le dernier id
+     * @return
+     */
     public static int getLastId() {
 		Connection connex = Connexion.connexion();
 		Statement st;
@@ -247,6 +277,11 @@ public class Joueur {
 		return r;
 	}
     
+    /**
+     * Retourne le nom d'un joueur a partir d'un id
+     * @param id
+     * @return
+     */
     public static String getNomJoueurFromId(int id) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -270,6 +305,7 @@ public class Joueur {
 		}
 		return s;
 	}
+    
     
     private static int verifierPresenceJoueur(Joueur j, int v) {
     	Connection connex = Connexion.connexion();

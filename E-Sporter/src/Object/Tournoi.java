@@ -227,19 +227,6 @@ public class Tournoi {
 		return rs.getInt(1) >=1;
 	}
 	
-	private static boolean verifierPresenceTournoi( int id) throws SQLException {
-		PreparedStatement pst;
-		ResultSet rs;
-		Connection connex = Connexion.connexion();
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_tournoi where id_tournoi = ?" );
-		pst.setInt(1, id);
-		rs = pst.executeQuery();
-		rs.next();
-		boolean res = rs.getInt(1) >= 1;
-		rs.close();
-		return res;
-	}
-	
 	
 	public static int getLastId() {
 		Connection connex = Connexion.connexion();

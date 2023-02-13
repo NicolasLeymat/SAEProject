@@ -35,19 +35,35 @@ public class Jeu {
 		this.nom = nomJeu;
 		this.modesDeJeu = new ArrayList<ModeDeJeu>();
 	}
-
+	
+	/**
+	 * Retourne un nom
+	 * @return
+	 */
 	public String getNom() {
 		return this.nom;
 	}
-
+	
+	/**
+	 * Modifie un nom
+	 * @param nomJeu
+	 */
 	public void setNom(String nomJeu) {
 		this.nom = nomJeu;
 	}
 	
+	/**
+	 * Retourne la liste des modes d'un jeu
+	 * @return
+	 */
 	public List<ModeDeJeu> getModesDeJeu(){
 		return this.modesDeJeu;
 	}
 	
+	/**
+	 * Modifie la liste des modes d'un jeu
+	 * @param l
+	 */
 	public void setModeDeJeu(List<ModeDeJeu> l) {
 		this.modesDeJeu = l;
 	}
@@ -73,6 +89,11 @@ public class Jeu {
 		return r;
 	}
 	
+	/**
+	 * Retourne le jeu a partir d'un id
+	 * @param id
+	 * @return
+	 */
 	public static Jeu getJeuFromId(int id) {
         Connection connx = Connexion.connexion();
 		Jeu jeu = null;
@@ -123,11 +144,18 @@ public class Jeu {
 		
 		return res;
 	}
-
+	/**
+	 * Retourner un id
+	 * @return
+	 */
 	public int getId() {
 		return this.id;
 	}
 	
+	/**
+	 * Modifie un id
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
