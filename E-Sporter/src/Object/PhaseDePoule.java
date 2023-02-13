@@ -1,12 +1,9 @@
 package Object;
 
-import Application.Connexion;
-
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 //Classe qui définit les fonctions d'une phase
 public class PhaseDePoule extends Phase {

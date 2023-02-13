@@ -90,7 +90,7 @@ public abstract class Phase {
         PreparedStatement pst;
         try {
             if (p.getId() == -1) {
-                p.setId(p.getLastId()+1);
+                p.setId(Phase.getLastId()+1);
             }
 
             pst = connex.prepareStatement("insert into LMN3783A.sae_phase(id_phase, elim, id_tournoi) values(?,?,?)");

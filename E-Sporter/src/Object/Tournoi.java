@@ -345,7 +345,6 @@ public class Tournoi {
 		public static int supprimerTournoi(Tournoi t) {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
-			ResultSet rs;
 			
 			try {
 				if (verifierPresenceTournoi(t)) {

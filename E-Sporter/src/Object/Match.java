@@ -1,7 +1,6 @@
 package Object;
 
 import Application.Connexion;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 
@@ -98,7 +97,6 @@ public class Match {
 	public static int enregistrermatch(Match m) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
-		PreparedStatement pst2;
 		
 		try {
 			if (m.getId() == -1) {
