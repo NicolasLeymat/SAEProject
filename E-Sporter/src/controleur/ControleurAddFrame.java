@@ -13,7 +13,7 @@ public class ControleurAddFrame implements ActionListener{
 	private AddFrame frame;
 	private Object obj;
 	
-	public ControleurAddFrame(JPanel v, Object obj) {
+	public ControleurAddFrame(Object obj) {
 		this.frame = null;
 		this.obj = obj;
 	}

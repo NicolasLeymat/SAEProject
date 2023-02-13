@@ -1,26 +1,16 @@
 package controleur;
 
-import java.awt.Frame;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import IHM.MainPanel;
-import IHM.add.AddPanel;
-import IHM.info.VueInfoPanel;
 import IHM.tournois.VueInscriptionTournois;
-import Object.Ecurie;
 import Object.Equipe;
-import Object.Joueur;
 import Object.Phase;
-import Object.PhaseDePoule;
 import Object.Tournoi;
-import Object.Tournoi.ETAT;
 
 public class ControleurInscription implements ActionListener{
 
@@ -32,31 +22,26 @@ public class ControleurInscription implements ActionListener{
 		this.modele = new ModeleESporter();
 	}
 	
-	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		JButton btn = (JButton) e.getSource();
+		Tournoi t = this.vue.getTournoi();
 		switch(btn.getText()) {
 			case "Ajouter":{
-				Equipe obj = (Equipe) this.vue.getInfoToObject();
-				Tournoi t = this.vue.getTournoi();
-				this.modele.addParticipation(obj,t);
+				Equipe eq = (Equipe) this.vue.getInfoToObject();
+				this.modele.addParticipation(eq,t);
 				VueInscriptionTournois.updateListEquipe(t);
 				break;
 			}
 			case "Supprimer":{
-				Equipe obj = (Equipe) this.vue.getListEquipesTournoi();
-				if(obj == null) {
-					
+				Equipe eq = (Equipe) this.vue.getListEquipesTournoi();
+				if(eq != null) {
+					this.modele.deleteParticipation(eq,t);
+					VueInscriptionTournois.updateListEquipe(t);
 				}
-				Tournoi t = this.vue.getTournoi();
-				this.modele.deleteParticipation(obj,t);
-				VueInscriptionTournois.updateListEquipe(t);
 				break;
 			}
 			case "Confirmer":{
-				//System.out.println(this.vue.getAllListEquipesTournoi());
-				Tournoi t = this.vue.getTournoi();
 				System.out.println(this.vue.getAllListEquipesTournoi().size());
 				List<Equipe> equipes = this.vue.getAllListEquipesTournoi();
 				if(equipes.size() == 16) {

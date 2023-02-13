@@ -17,8 +17,8 @@ public class ButtonPanel extends JPanel{
 
 	
 	public ButtonPanel() {
-		ControleurAddFrame c = new ControleurAddFrame(this, null);
-		ControleurChamp champ = new ControleurChamp(this);
+		ControleurAddFrame c = new ControleurAddFrame(null);
+		ControleurChamp champ = new ControleurChamp();
 		setSize(1200, 100);
 		Dimension btnSize = new Dimension(200,75);
 		setLayout(new GridLayout(0, 3, 0, 0));

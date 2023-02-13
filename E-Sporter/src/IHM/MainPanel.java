@@ -83,7 +83,7 @@ public class MainPanel extends JPanel{
 		JPanel filterTeamPanel = new JPanel();
 		teamPanel.setColumnHeaderView(filterTeamPanel);
 		
-		ControleurFilter<String> controleurTeam = new ControleurFilter<>("Equipe",this);
+		ControleurFilter<String> controleurTeam = new ControleurFilter<>("Equipe");
 		filterTeam = new JComboBox<>();
 		filterTeam.addItem("Sans filtre");
 		for(String s : ModeleESporter.getAllModeName()){
@@ -96,7 +96,7 @@ public class MainPanel extends JPanel{
 		
 		JPanel filterOrgaPanel = new JPanel();
 		ecuriePanel.setColumnHeaderView(filterOrgaPanel);
-		ControleurFilter<String> controleurOrga = new ControleurFilter<>("Ecurie", this);
+		ControleurFilter<String> controleurOrga = new ControleurFilter<>("Ecurie");
 		filterOrga = new JComboBox<>();
 		filterOrga.addItem("Sans filtre");
 		String[] listNat = ModeleESporter.getAllNat();
@@ -110,7 +110,7 @@ public class MainPanel extends JPanel{
 		JPanel filterTournamentPanel = new JPanel();
 		tournoiPanel.setColumnHeaderView(filterTournamentPanel);
 		
-		ControleurFilter<String> filterTournoi = new ControleurFilter<>("Tournament", this);
+		ControleurFilter<String> filterTournoi = new ControleurFilter<>("Tournament");
 		filterTournament = new JComboBox<>();
 		filterTournament.addItem("Sans filtre");
 		filterTournament.addItem("Phase d'inscription");

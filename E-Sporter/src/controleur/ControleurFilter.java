@@ -18,15 +18,14 @@ import Object.Tournoi.ETAT;
 public class ControleurFilter<E> implements ActionListener{
 
 	private String filterType;
-	private JPanel vue;
 	
-	public ControleurFilter(String filterType, JPanel vue) {
-		this.vue = vue;
+	public ControleurFilter(String filterType) {
 		this.filterType = filterType;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		@SuppressWarnings("unchecked")
 		JComboBox<E> comboBox = (JComboBox<E>) e.getSource();
 		int index = comboBox.getSelectedIndex();
 		E item = comboBox.getItemAt(index);
@@ -68,8 +67,6 @@ public class ControleurFilter<E> implements ActionListener{
 				System.out.println(Equipe.getClassementByGame(ModeDeJeu.getModeDeJeuFromNom((String) item).getIdMode()));
 				break;
 		}
-		//this.vue.updateListEquipe();
-		System.out.println(item.toString() + " / " + this.filterType);
 		
 	}
 	

@@ -49,7 +49,7 @@ public class ChampPanel extends JPanel {
 		JPanel filterTeamPanel = new JPanel();
 		teamPanel.setColumnHeaderView(filterTeamPanel);
 		
-		ControleurFilter<String> controleurMode = new ControleurFilter<>("Championnat",this);
+		ControleurFilter<String> controleurMode = new ControleurFilter<>("Championnat");
 		filterMode = new JComboBox<>();
 		for(String s : ModeleESporter.getAllModeName()){
 			filterMode.addItem(s);

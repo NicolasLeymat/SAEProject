@@ -27,7 +27,6 @@ public class ControleurAddPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
 		switch(this.vue.getMode()) {
 			case "Player":{
 				Joueur obj = (Joueur) this.vue.getInfoToObject();
@@ -68,32 +67,6 @@ public class ControleurAddPanel implements ActionListener{
 				MainPanel.updateListTournoi();
 				break;
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 	}
 		
 	}

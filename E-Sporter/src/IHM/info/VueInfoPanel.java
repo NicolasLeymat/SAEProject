@@ -50,7 +50,7 @@ public class VueInfoPanel extends JPanel{
 		modeleJoueur.clear();
 		VueInfoPanel.e = null;
 		VueInfoPanel.e = e;
-		ControleurAddFrame c = new ControleurAddFrame(this, e);
+		ControleurAddFrame c = new ControleurAddFrame(e);
 		ControleurModif cm = new ControleurModif(e, this);
 		ControleurDelete cd = new ControleurDelete(e, this);
 		this.setSize(750, 450);
@@ -221,7 +221,7 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.ec = null;
 		VueInfoPanel.ec = e;
 		this.setSize(500, 400);
-		ControleurAddFrame c = new ControleurAddFrame(this, e);
+		ControleurAddFrame c = new ControleurAddFrame(e);
 		ControleurModif cm = new ControleurModif(e, this);
 		ControleurDelete cd = new ControleurDelete(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();

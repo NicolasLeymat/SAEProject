@@ -23,8 +23,6 @@ public class ControleurArbitrageTournoi implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource().getClass());
-        if (e.getSource() instanceof JButton) {
             JButton bouton = (JButton) e.getSource();
             if (bouton == vue.getButtonWin1()) {
                 bouton.setEnabled(false);
@@ -36,7 +34,5 @@ public class ControleurArbitrageTournoi implements ActionListener {
                 vue.getButtonWin1().setEnabled(true);
                 match.setWinner(2);
             }
-
-        }
     }
 }

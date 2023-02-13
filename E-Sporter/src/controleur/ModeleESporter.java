@@ -55,15 +55,9 @@ public class ModeleESporter {
 	}
 	
 	public JFrame getPanelFrame(JPanel vue) {
-		JFrame f2 = (JFrame) SwingUtilities.getWindowAncestor(vue);
-		return f2;
+		return (JFrame) SwingUtilities.getWindowAncestor(vue);
 	}
-	
-	public static JFrame getPanelFrameStatic(JPanel vue) {
-		JFrame f2 = (JFrame) SwingUtilities.getWindowAncestor(vue);
-		return f2;
-	}
-	
+		
 	public void addPlayer(Joueur j) {
 		Joueur.enregistrerJoueur(j);
 	}
@@ -91,37 +85,17 @@ public class ModeleESporter {
 	}
 	
 	public static String[] getAllNat(){
-		String[] n = Nationalite.getAllNationalites();
-		return n;
+		return Nationalite.getAllNationalites();
 	}
 	
 	public static String[] getAllModeName(){
 		List<ModeDeJeu> l = ModeDeJeu.getAllModeDeJeu();
-		int size = ModeDeJeu.getAllModeDeJeu().size();
+		int size = l.size();
 		String[] res = new String[size];
 		for(int i = 0; i< size; i++) {
 			res[i] = l.get(i).getNom();
 		}
 		return res;
-	}
-	
-	public static void getAll() {
-		allEcurie = Ecurie.getAllEcuries();
-		allEquipe = Equipe.getAllEquipes();
-		allTournoi = Tournoi.getAllTournois();
-		try {
-			connx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public List<Object> recherche(String prompt){
-		for(Equipe e : allEquipe) {
-			
-		}
-		return null;
 	}
 	
 	public List<Equipe> getRecherche(String prompt){
@@ -153,45 +127,46 @@ public class ModeleESporter {
 		Equipe.modifierEquipe(eq);
 	}
 	
-	public boolean estNomEquipeDispo(String nom) {
-		List<Equipe> l = allEquipe;
-		List<String> l2 = new LinkedList<>();
-		int nbOccurence = 0;
-		for(Equipe e : l) {
-			l2.add(e.getNom());
-		}
-		
-		for(String s : l2) {
-			if(s.equals(nom)) {
-				nbOccurence += 1;
-			}
-		}
-		if(nbOccurence == 0) {
-			return true;
-		}else {			
-			return false;
-		}
-	}
 
-	public boolean estNomeEcurieDispo(String nom) {
-		List<Ecurie> l = allEcurie;
-		List<String> l2 = new LinkedList<>();
-		int nbOccurence = 0;
-		for(Ecurie e : l) {
-			l2.add(e.getNom());
-		}
-		
-		for(String s : l2) {
-			if(s.equals(nom)) {
-				nbOccurence += 1;
-			}
-		}
-		if(nbOccurence == 0) {
-			return true;
-		}else {			
-			return false;
-		}
-	}
+//	public boolean estNomEquipeDispo(String nom) {
+//		List<Equipe> l = allEquipe;
+//		List<String> l2 = new LinkedList<>();
+//		int nbOccurence = 0;
+//		for(Equipe e : l) {
+//			l2.add(e.getNom());
+//		}
+//		
+//		for(String s : l2) {
+//			if(s.equals(nom)) {
+//				nbOccurence += 1;
+//			}
+//		}
+//		if(nbOccurence == 0) {
+//			return true;
+//		}else {			
+//			return false;
+//		}
+//	}
+
+//	public boolean estNomeEcurieDispo(String nom) {
+//		List<Ecurie> l = allEcurie;
+//		List<String> l2 = new LinkedList<>();
+//		int nbOccurence = 0;
+//		for(Ecurie e : l) {
+//			l2.add(e.getNom());
+//		}
+//		
+//		for(String s : l2) {
+//			if(s.equals(nom)) {
+//				nbOccurence += 1;
+//			}
+//		}
+//		if(nbOccurence == 0) {
+//			return true;
+//		}else {			
+//			return false;
+//		}
+//	}
 	
 	public void modifierEcurie(Ecurie ec) {
 		Ecurie.modifierEcurie(ec);
