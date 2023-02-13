@@ -12,8 +12,17 @@ import Application.Connexion;
 
 public class Jeu {
 
+	/**
+	 * id du jeu
+	 */
 	private int id;
+	/**
+	 * nom du jeu
+	 */
 	private String nom;
+	/**
+	 * tous les modes de jeu d'un jeu
+	 */
 	private List<ModeDeJeu> modesDeJeu;
 	
 	/**
@@ -26,20 +35,11 @@ public class Jeu {
 		this.nom = nomJeu;
 		this.modesDeJeu = new ArrayList<ModeDeJeu>();
 	}
-	
-	public int getIdJeu() {
-		return this.id;
-	}
-	
-	public void setIdJeu(int id) {
-		this.id = id;
-	}
-	
+
 	public String getNom() {
 		return this.nom;
 	}
 
-	
 	public void setNom(String nomJeu) {
 		this.nom = nomJeu;
 	}
@@ -71,47 +71,6 @@ public class Jeu {
 			ee.printStackTrace();
 		}
 		return r;
-	}
-	
-	/**
-	 * retourne l'id du jeu passé en paramètre
-	 * @param jeu
-	 * @return idJeu
-	 */
-	public static int getId(Jeu jeu) {
-		Connection connex = Connexion.connexion();
-		PreparedStatement pst;
-		ResultSet rs;
-		try {
-			pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
-			pst.setString(1, jeu.getNom());
-			rs = pst.executeQuery();
-			rs.next();
-			return rs.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-		}
-	
-	/**
-	 * Enregistre un jeu dans la basede donnée
-	 * @return 1 si le jeu est enregistré dans la base et -1 si erreur
-	 */
-	public int enregistrerJeu() {
-		Connection connex = Connexion.connexion();
-		PreparedStatement pst;
-		int lastId = this.getLastId();
-		try {
-			pst = connex.prepareStatement("insert into LMN3783A.sae_jeu values(?,?)");
-			pst.setInt(1, lastId+1);
-			pst.setString(2, nom);
-			pst.executeUpdate();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			return -1;
-		}
-		return 1;
 	}
 	
 	public static Jeu getJeuFromId(int id) {

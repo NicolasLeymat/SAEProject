@@ -11,11 +11,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-/*
- * Travail restant :
- * - ajouter le logo
- */
-
 public class Ecurie {
 	
 	/**
@@ -92,6 +87,21 @@ public class Ecurie {
 	 */
 	public void setLogo(ImageIcon logo) {
 		this.logo = logo;
+	}
+	/**
+	 * retourne la nationalite de l'ecurie
+	 * @return nationalite
+	 */
+	public Nationalite getNat() {
+		return nat;
+	}
+	/**
+	 * ajoute ou modifie la nationalite d'une ecurie
+	 * @param nat
+	 * 		nationalite de l'ecurie
+	 */
+	public void setNat(Nationalite nat) {
+		this.nat = nat;
 	}
 	
 	/**
@@ -467,7 +477,13 @@ public class Ecurie {
 		
 		return res;
 	}
-
+	/**
+	 * retourne toutes les ecuries appartenant a une nationalite
+	 * @param nat
+	 * 		nationalite des equipes choisies
+	 * @return
+	 * 		les ecuries qui correspondent a la nationalite
+	 */
 	public static List<Ecurie> getEcurieFromNat(Nationalite nat){
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -498,20 +514,12 @@ public class Ecurie {
 		
 	}
 	
-	
+	/**
+	 * retourne le nom de l'ecurie
+	 */
 	@Override
 	public String toString() {
 		return this.nom;
-	}
-
-
-	public Nationalite getNat() {
-		return nat;
-	}
-
-
-	public void setNat(Nationalite nat) {
-		this.nat = nat;
 	}
 
 }
