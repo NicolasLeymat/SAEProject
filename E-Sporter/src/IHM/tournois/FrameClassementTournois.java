@@ -42,7 +42,7 @@ public class FrameClassementTournois extends JFrame {
 	 */
 	public FrameClassementTournois(Tournoi t) {
 		this.tournoi = t;
-		setBounds(100, 100, 1000, 600);
+		setBounds(100, 100, 1000, 665);
 		contentPane = new VueClassementTournois(t);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
