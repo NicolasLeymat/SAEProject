@@ -1,11 +1,9 @@
 package Object;
 
 import Application.Connexion;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,9 +44,12 @@ public class Equipe implements Comparable<Equipe> {
 	 */
 	private List<Joueur> listeJoueurs;
 	/**
-	 * Logo de l'équipe
+	 * logo de l'equipe
 	 */
 	private ImageIcon logo;
+	/**
+	 * adresse du logo de l'equipe
+	 */
 	private String stringLogo;
 	/**
 	 * construit une equipe a partir de son nom
@@ -106,6 +106,11 @@ public class Equipe implements Comparable<Equipe> {
 	private void setPoints(int points) {
 		this.points = points;
 	}
+	/**
+	 * change le lien du logo
+	 * @param logo
+	 * 		URL du logo
+	 */
 	public void setStringLogo(String logo) {
 		this.stringLogo = logo;
 	}
@@ -280,7 +285,7 @@ public class Equipe implements Comparable<Equipe> {
 	 * supprime une equipe dans la BD
 	 * @param equipe
 	 * 		equipe a supprimer
-	 * @return
+	 * @return 1 si l'equipe a ete supprimee, -1 sinon
 	 */
 	public static int supprimerEquipe(Equipe equipe) {
 		Connection connex = Connexion.connexion();
@@ -311,6 +316,14 @@ public class Equipe implements Comparable<Equipe> {
 		return 1;
 	}
 	
+	/**
+	 * inscrit une equipe a un tournoi
+	 * @param equipe
+	 * 		equipe a inscrire
+	 * @param tournoi
+	 * 		tournoi d'inscription
+	 * @return 1 si l'equipe a ete inscrite, -1 sinon
+	 */
 	public static int inscrireEquipeTournoi(Equipe equipe, Tournoi tournoi) {
     	Connection connex = Connexion.connexion();
     	PreparedStatement pst;
@@ -419,7 +432,7 @@ public class Equipe implements Comparable<Equipe> {
 		return r;
 	}
 	/**
-	 * retourne toutes les equipes dont le nom commence par le parametre nom
+	 * retourne toutes les equipes dont le nom contient le parametre nom
 	 * @param nom
 	 * 		debut du nom des equipes que l'on recherche
 	 * @return toutes les equipes dont le nom commence par le parametre
@@ -564,12 +577,17 @@ public class Equipe implements Comparable<Equipe> {
 		return s;
 	}
 	
+	/**
+	 * retourne la liste des equipes associee a un mode de jeu
+	 * @param id
+	 * 		id du mode de jeu
+	 * @return liste des equipes du mode
+	 */
 	public static List<Equipe> getEquipeFromMode(int id){
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
 		Equipe e = null;
-		String s = null;
 		List<Equipe> l = new LinkedList<>();
 		
 		try {
@@ -591,7 +609,14 @@ public class Equipe implements Comparable<Equipe> {
 		return l;
 	}
 	
-	
+	/**
+	 * verifie la presence d'une equipe dans la BD
+	 * @param e
+	 * 		equipe a verifier
+	 * @param v
+	 * 		parametre permettant de reconnaitre quelle partie de la methode il faut utiliser
+	 * @return 1 si l'equipe existe, 0 sinon
+	 */
 	private static int verifierPresenceEquipe(Equipe e, int v) {
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
@@ -620,6 +645,14 @@ public class Equipe implements Comparable<Equipe> {
 		return res;
 	}
 	
+	/**
+	 * creer une equipe a partir d'un ResultSet
+	 * @param rs
+	 * 		ResultSet permettant la creation de l'equipe
+	 * @return
+	 * 		equipe creee a partir du ResultSet
+	 * @throws SQLException
+	 */
 	private static Equipe createEquipeFromRs(ResultSet rs) throws SQLException {
 		Equipe e;
 		e = new Equipe(rs.getString(2));
@@ -629,10 +662,8 @@ public class Equipe implements Comparable<Equipe> {
 		e.setIdModeDeJeu(rs.getInt(5));
 		Image image = null;
 		String link = rs.getString(6);
-		//System.out.println("Link : "+link);
 		try {
 			URL url = new URL(link);
-			//System.out.println("URL : "+url.openStream());
 			image = ImageIO.read(url);
 			e.setLogo(new ImageIcon(image));
 		} catch (IOException e1) {
@@ -642,23 +673,42 @@ public class Equipe implements Comparable<Equipe> {
 		return e;
 	}
 
+	/**
+	 * retourne le nom d'une equipe et ses points
+	 */
 	@Override
 	public String toString() {
 		return nom+", Points : " + points;
 	}
 	
+	/**
+	 * retourne le logo de l'equipe
+	 * @return logo
+	 */
 	public ImageIcon getLogo() {
 		return logo;
 	}
-	
+	/**
+	 * change le logo de l'equipe 
+	 * @param logo
+	 */
 	public void setLogo(ImageIcon logo) {
 		this.logo = logo;
 	}
-
+	/**
+	 * compare deux equipes
+	 */
 	@Override
 	public int compareTo(Equipe o) {
 		 return o.points - this.points;
 	}
+	/**
+	 * retourne la liste des equipes participant a un tournoi
+	 * @param t
+	 * 		le tournoi choisi
+	 * @return
+	 * 		liste des equipes
+	 */
 	public static List<Equipe> getAllEquipesFromTournoi(Tournoi t) {
 		List<Equipe> equipes = new ArrayList<Equipe>();
 		Connection connex = Connexion.connexion();
@@ -683,6 +733,12 @@ public class Equipe implements Comparable<Equipe> {
 		}
 		return equipes;
 	}
+	/**
+	 * retourne toutes les equipes appartenant a un mode de jeu
+	 * @param m
+	 * 		mode de jeu choisi
+	 * @return liste des equipes du mode de jeu
+	 */
 	public static List<Equipe> getAllEquipesFromModeDeJeu(int m) {
 		List<Equipe> equipes = new ArrayList<Equipe>();
 		Connection connex = Connexion.connexion();
@@ -705,15 +761,22 @@ public class Equipe implements Comparable<Equipe> {
 		}
 		return equipes;
 	}
-	
-	public static int supprimerEquipeTournoi(Equipe obj, Tournoi t) {
+	/**
+	 * desinscrit une equipe d'un tournoi
+	 * @param e
+	 * 		equipe a desinscrire
+	 * @param t
+	 * 		tournoi choisi
+	 * @return 1 si l'equipe a ete desinscrite, -1 sinon
+	 */
+	public static int supprimerEquipeTournoi(Equipe e, Tournoi t) {
 		Connection connex = Connexion.connexion();
     	PreparedStatement pst;
 
 		try {
 			pst = connex.
 					prepareStatement("delete from LMN3783A.sae_participer where id_equipe = ? and id_tournoi = ?");
-			pst.setInt(1, obj.getId());
+			pst.setInt(1, e.getId());
 			pst.setInt(2, t.getId());
 			pst.executeUpdate();
 			
