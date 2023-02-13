@@ -4,13 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.SwingConstants;
 
-import controleur.ControleurAdd;
+import controleur.ControleurAddFrame;
 import controleur.ControleurChamp;
 import controleur.ModeleESporter;
 
@@ -21,7 +17,7 @@ public class ButtonPanel extends JPanel{
 
 	
 	public ButtonPanel() {
-		ControleurAdd c = new ControleurAdd(this, null);
+		ControleurAddFrame c = new ControleurAddFrame(this, null);
 		ControleurChamp champ = new ControleurChamp(this);
 		setSize(1200, 100);
 		Dimension btnSize = new Dimension(200,75);

@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,12 +14,12 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.Tournoi;
 
-public class ControleurAjout implements ActionListener{
+public class ControleurAddPanel implements ActionListener{
 
 	private AddPanel vue;
 	private ModeleESporter modele;
 	
-	public ControleurAjout(AddPanel vue) {
+	public ControleurAddPanel(AddPanel vue) {
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 	}

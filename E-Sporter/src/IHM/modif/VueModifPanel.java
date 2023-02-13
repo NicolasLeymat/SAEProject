@@ -7,26 +7,20 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
 import Object.Nationalite;
-import controleur.ControleurAjout;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
 import java.awt.Insets;
-import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 

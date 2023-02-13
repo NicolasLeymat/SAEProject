@@ -9,7 +9,6 @@ import java.text.ParseException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
 import Object.Ecurie;
@@ -17,17 +16,13 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.ModeDeJeu;
 import Object.Nationalite;
-import Object.Organisateur;
 import Object.Tournoi;
 import Object.Tournoi.ETAT;
-import controleur.ControleurAdd;
-import controleur.ControleurAjout;
+import controleur.ControleurAddPanel;
 import controleur.ModeleESporter;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -60,7 +55,7 @@ public class AddPanel extends JPanel {
 	
 	
 	public AddPanel(String type, Object obj) {
-		ControleurAjout c = new ControleurAjout(this);
+		ControleurAddPanel c = new ControleurAddPanel(this);
 		this.obj = obj;
 		//System.out.println(obj);
 		this.setMode(type);

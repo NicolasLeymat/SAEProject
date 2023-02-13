@@ -7,14 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import IHM.add.AddFrame;
-import IHM.add.AddPanel;
 
-public class ControleurAdd implements ActionListener{
+public class ControleurAddFrame implements ActionListener{
 	
 	private AddFrame frame;
 	private Object obj;
 	
-	public ControleurAdd(JPanel v, Object obj) {
+	public ControleurAddFrame(JPanel v, Object obj) {
 		this.frame = null;
 		this.obj = obj;
 	}

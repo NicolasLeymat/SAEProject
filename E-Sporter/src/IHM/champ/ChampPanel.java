@@ -3,43 +3,20 @@ package IHM.champ;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.text.MaskFormatter;
 
-import Object.Ecurie;
 import Object.Equipe;
-import Object.Joueur;
-import Object.ModeDeJeu;
-import Object.Nationalite;
-import Object.Organisateur;
-import Object.Tournoi;
-import Object.Tournoi.ETAT;
-import controleur.ControleurAdd;
-import controleur.ControleurAjout;
 import controleur.ControleurFilter;
 import controleur.ControleurJList;
 import controleur.ModeleESporter;
 
 import java.awt.Dimension;
-import java.awt.Font;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
 
 public class ChampPanel extends JPanel {
 
