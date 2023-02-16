@@ -33,14 +33,14 @@ public class VueModifPanel extends JPanel{
 	private JTextField NameTF;
 	private JTextField firstNameTF;
 	private JTextField pseudoTF;
-	private JComboBox natChoice;
+	private JComboBox<String> natChoice;
 	private Equipe e;
 	private Ecurie ec;
 	private Joueur j;
 
 	public VueModifPanel(Equipe e) {
 		this.e = e;
-		ControleurModif c = new ControleurModif(e, this); 
+		ControleurModif controleurModif = new ControleurModif(e, this); 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{100, 100, 0};
@@ -80,11 +80,11 @@ public class VueModifPanel extends JPanel{
 		JButton btnNewButton = new JButton("Confirmer");
 		btnNewButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnNewButton.setBounds(240, 25, 200, 50);
-		btnNewButton.addActionListener(c);
+		btnNewButton.addActionListener(controleurModif);
 		panel.add(btnNewButton);
 		
 		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.addActionListener(c);
+		btnAnnuler.addActionListener(controleurModif);
 		btnAnnuler.setForeground(new Color(255, 0, 0));
 		btnAnnuler.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnAnnuler.setBounds(10, 25, 100, 50);
@@ -93,7 +93,7 @@ public class VueModifPanel extends JPanel{
 	
 	public VueModifPanel(Ecurie ec) {
 		this.ec = ec;
-		ControleurModif c = new ControleurModif(ec, this);
+		ControleurModif controleurModif = new ControleurModif(ec, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 100, 0};
@@ -116,10 +116,10 @@ public class VueModifPanel extends JPanel{
 		NameTF.setColumns(10);
 		PrincPanel.add(NameTF);
 		
-		JLabel lblNewLabel = new JLabel("Nom");
-		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		lblNewLabel.setBounds(10, 10, 92, 27);
-		PrincPanel.add(lblNewLabel);
+		JLabel lblNom = new JLabel("Nom");
+		lblNom.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		lblNom.setBounds(10, 10, 92, 27);
+		PrincPanel.add(lblNom);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -129,17 +129,17 @@ public class VueModifPanel extends JPanel{
 		gbc_panel.gridy = 1;
 		add(panel, gbc_panel);
 		
-		JButton btnNewButton = new JButton("Confirmer");
-		btnNewButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		btnNewButton.setBounds(240, 25, 200, 50);
-		btnNewButton.addActionListener(c);
-		panel.add(btnNewButton);
+		JButton confBtn = new JButton("Confirmer");
+		confBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		confBtn.setBounds(240, 25, 200, 50);
+		confBtn.addActionListener(controleurModif);
+		panel.add(confBtn);
 		
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setForeground(new Color(255, 0, 0));
 		btnAnnuler.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnAnnuler.setBounds(10, 25, 100, 50);
-		btnAnnuler.addActionListener(c);
+		btnAnnuler.addActionListener(controleurModif);
 		panel.add(btnAnnuler);
 	}
 	
@@ -147,7 +147,7 @@ public class VueModifPanel extends JPanel{
 	 * @wbp.parser.constructor
 	 */
 	public VueModifPanel(Joueur j) {
-		ControleurModif c = new ControleurModif(j, this);
+		ControleurModif controleurModif = new ControleurModif(j, this);
 		this.j = j;
 		System.out.println(j);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -216,7 +216,7 @@ public class VueModifPanel extends JPanel{
 		JButton confirmBtn = new JButton("Confirmer");
 		confirmBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
 		confirmBtn.setBounds(230, 10, 200, 50);
-		confirmBtn.addActionListener(c);
+		confirmBtn.addActionListener(controleurModif);
 		BtnPanel.add(confirmBtn);
 		
 		

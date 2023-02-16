@@ -101,11 +101,11 @@ public class VueInscriptionTournois extends JPanel{
 		gbc_panelEquipe.gridy = 0;
 		listPanel.add(panelEquipe, gbc_panelEquipe);
 		
-		JLabel lblNewLabel = new JLabel("Equipes : ");
-		lblNewLabel.setBounds(0, 0, 223, 30);
-		panelEquipe.add(lblNewLabel);
-		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblEquipes = new JLabel("Equipes : ");
+		lblEquipes.setBounds(0, 0, 223, 30);
+		panelEquipe.add(lblEquipes);
+		lblEquipes.setFont(ModeleESporter.FONT_MEDIUM);
+		lblEquipes.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JScrollPane scrollPaneEquipe = new JScrollPane(listEquipe);
 		scrollPaneEquipe.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -126,11 +126,11 @@ public class VueInscriptionTournois extends JPanel{
 		gbc_panelEquipeTournoi.gridy = 0;
 		listPanel.add(panelEquipeTournoi, gbc_panelEquipeTournoi);
 		
-		JLabel lblNewLabel_1 = new JLabel("Equipes Tournoi :\r\n");
-		lblNewLabel_1.setBounds(0, 0, 225, 30);
-		panelEquipeTournoi.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(ModeleESporter.FONT_MEDIUM);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblEquipeTournoi = new JLabel("Equipes Tournoi :\r\n");
+		lblEquipeTournoi.setBounds(0, 0, 225, 30);
+		panelEquipeTournoi.add(lblEquipeTournoi);
+		lblEquipeTournoi.setFont(ModeleESporter.FONT_MEDIUM);
+		lblEquipeTournoi.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel btnPanel = new JPanel();
 		btnPanel.setLayout(null);
@@ -168,17 +168,16 @@ public class VueInscriptionTournois extends JPanel{
 
 	private static List<Equipe> equipeDif(Tournoi t,List<Equipe> allEquipesFromModeDeJeu) {
 		List<Equipe> res = new ArrayList<>();
-		List<Equipe> test = Equipe.getAllEquipesFromTournoi(t);
-		boolean check = false;
+		List<Equipe> equipes = Equipe.getAllEquipesFromTournoi(t);
+		boolean equipesDif = false;
 		for (Equipe e : allEquipesFromModeDeJeu) {
-			check = false;
-			for (Equipe e2 : test) {
+			for (Equipe e2 : equipes) {
 				if (e.getId() == e2.getId()) {
-					check = true;
+					equipesDif = true;
 					break;
 				}
 			}
-			if (check == false) {
+			if (equipesDif == false) {
 				res.add(e);
 			}
 		}
