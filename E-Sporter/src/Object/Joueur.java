@@ -227,7 +227,7 @@ public class Joueur {
 		PreparedStatement pst = null;
 		ResultSet rs;
 		Joueur j = null;
-		List<Joueur> list_j = new ArrayList<Joueur>();
+		List<Joueur> listJoueurs = new ArrayList<Joueur>();
 		
 		try {
 			
@@ -239,7 +239,7 @@ public class Joueur {
 				j = new Joueur(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), Nationalite.valueOf(rs.getString(6)));
 				j.setIdEquipe(rs.getInt(7));
 				j.setId(rs.getInt(1));
-				list_j.add(j);
+				listJoueurs.add(j);
 			}
 			
 			rs.close();
@@ -248,7 +248,7 @@ public class Joueur {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return list_j;
+		return listJoueurs;
 	}
     
     /**
