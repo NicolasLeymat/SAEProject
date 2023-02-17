@@ -9,6 +9,7 @@ import javax.swing.*;
 public class ListeMatch extends AbstractListModel {
     private List<Match> matchs;
     private static final int TAILLESEP = 25;
+    private static final int TAILLESEP2 = 15;
     public ListeMatch(List<Match> matchs) {
         this.matchs = matchs;
     }
@@ -21,24 +22,24 @@ public class ListeMatch extends AbstractListModel {
     @Override
     public Object getElementAt(int index) {
         Match match = matchs.get(index);
-        String stringJ1="";
+        String stringE1="";
         String stringJ2="";
         if (match.getWinner() == match.getEquipe1()) {
-            stringJ1 +="👑 ";
+            stringE1 +="👑 ";
         }
         if (match.getWinner() == match.getEquipe2()) {
             stringJ2 +="👑 ";
         }
-        stringJ1 += match.getEquipe1().getNom();
+        stringE1 += match.getEquipe1().getNom();
         stringJ2 += match.getEquipe2().getNom();
-        String res =stringJ1;
-        int separateur = TAILLESEP -stringJ1.length();
+        String res =stringE1;
+        int separateur = TAILLESEP -stringE1.length();
         for (int i = 0; i < separateur; i++) {
             res+=" ";
         }
         res+="VS";
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < TAILLESEP2; i++) {
             res+=" ";
         }
         res+=stringJ2;
