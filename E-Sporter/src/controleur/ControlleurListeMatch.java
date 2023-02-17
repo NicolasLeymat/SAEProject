@@ -64,7 +64,7 @@ public class ControlleurListeMatch implements ActionListener {
                 vue.setButtonText("Terminer le tournoi");
             	try {
                     t.ajouterPoints();
-                    t.setEtat(Tournoi.ETAT.FINI);
+                    t.setEtat(Tournoi.EtatTournoi.FINI);
                     Tournoi.modifierTournoi(t);
                     vue.dispose();
                 } catch (Exception ex) {

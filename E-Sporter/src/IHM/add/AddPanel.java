@@ -17,7 +17,7 @@ import Object.Joueur;
 import Object.ModeDeJeu;
 import Object.Nationalite;
 import Object.Tournoi;
-import Object.Tournoi.ETAT;
+import Object.Tournoi.EtatTournoi;
 import controleur.ControleurAddPanel;
 import controleur.ModeleESporter;
 
@@ -303,7 +303,7 @@ public class AddPanel extends JPanel {
 				Tournoi t = null;
 				try {
 					//System.out.println(this.formattingText());
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), ETAT.INSC);
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), EtatTournoi.INSC);
 					//System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

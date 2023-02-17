@@ -13,7 +13,7 @@ import Object.Equipe;
 import Object.ModeDeJeu;
 import Object.Nationalite;
 import Object.Tournoi;
-import Object.Tournoi.ETAT;
+import Object.Tournoi.EtatTournoi;
 
 public class ControleurFilter<E> implements ActionListener{
 
@@ -45,19 +45,19 @@ public class ControleurFilter<E> implements ActionListener{
 				MainPanel.changeModelElementEcurie(Ecurie.getEcurieFromNat(Nationalite.getByNom((String) item)));
 				break;
 			case "Tournament":
-				ETAT etat = null;
+				EtatTournoi etat = null;
 				switch ((String)item) {
 					case "Sans filtre":
 						MainPanel.changeModelElementTournoi(Tournoi.getAllTournois());
 						return;
 					case "Phase d'inscription":
-						etat = ETAT.INSC;
+						etat = EtatTournoi.INSC;
 						break;
 					case "En cours":
-						etat = ETAT.ENC;
+						etat = EtatTournoi.ENC;
 						break;
 					case "Terminés":
-						etat = ETAT.FINI;
+						etat = EtatTournoi.FINI;
 						break;
 				}
 				MainPanel.changeModelElementTournoi(Tournoi.getTournoiWithFilter(etat));

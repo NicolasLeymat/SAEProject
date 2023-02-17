@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class PhaseDePoule extends Phase {
 
 	private List<Map<Equipe,Integer>> poules;
+	private static final int NB_POULES = 4;
 
 	//Constructeur de la classe "Phase"
 	public PhaseDePoule( Tournoi tournoi) {
@@ -38,43 +39,40 @@ public class PhaseDePoule extends Phase {
 	public void setPoulesFromMatchs() {
 		List<Equipe> participants = new ArrayList<>();
 		List<Equipe> verifies = new ArrayList<>();
-		if (getMatchs().isEmpty()) {
-			return;
-		}
-		for (int i = 0; i < 4; i++) {
-			List<Match> filtrematch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
-			Match match1 = filtrematch.stream().findFirst().get();
-			Equipe equipe = match1.getEquipe1();
-			verifies.clear();
-			poules.add(new HashMap<Equipe,Integer>());
-			//poules.get(i).put(equipe,0);
-			//enregistrerGagnant(i,match1);
-			int finalI;
-			finalI = i;
-			System.out.println(equipe);
-			filtrematch.stream().filter((m) -> m.getEquipe1() == equipe || m.getEquipe2() == equipe)
-					.forEach((m) ->
-							{
-								List<Match> matchsjoueurs;
-								if (m.getEquipe1()== equipe) {
-									if (poules.get(finalI).get(m.getEquipe2()) == null ) {
-										poules.get(finalI).put(m.getEquipe2(),0);
+		if (!getMatchs().isEmpty()) {
+			for (int i = 0; i < NB_POULES; i++) {
+				List<Match> filtreMatch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
+				Match match1 = filtreMatch.stream().findFirst().get();
+				Equipe equipe = match1.getEquipe1();
+				verifies.clear();
+				poules.add(new HashMap<Equipe,Integer>());
+				int finalI;
+				finalI = i;
+				System.out.println(equipe);
+				filtreMatch.stream().filter((m) -> m.getEquipe1() == equipe || m.getEquipe2() == equipe)
+						.forEach((m) ->
+								{
+									List<Match> matchsJoueurs;
+									if (m.getEquipe1()== equipe) {
+										if (poules.get(finalI).get(m.getEquipe2()) == null ) {
+											poules.get(finalI).put(m.getEquipe2(),0);
+										}
+										matchsJoueurs = matchs.stream().filter((me) -> me.getEquipe1() == m.getEquipe2() && !verifies.contains(me.getEquipe2())|| me.getEquipe2() == m.getEquipe2() && !verifies.contains(me.getEquipe1())).collect(Collectors.toList());
+										verifies.add(m.getEquipe2());
+										participants.add(m.getEquipe2());
+										setPoule(finalI,matchsJoueurs);
 									}
-									matchsjoueurs = matchs.stream().filter((me) -> me.getEquipe1() == m.getEquipe2() && !verifies.contains(me.getEquipe2())|| me.getEquipe2() == m.getEquipe2() && !verifies.contains(me.getEquipe1())).collect(Collectors.toList());
-									verifies.add(m.getEquipe2());
-									participants.add(m.getEquipe2());
-									setPoule(finalI,matchsjoueurs);
-								}
-								else {
-									if (poules.get(finalI).get(m.getEquipe1()) == null ) {
-										poules.get(finalI).put(m.getEquipe1(),0);
+									else {
+										if (poules.get(finalI).get(m.getEquipe1()) == null ) {
+											poules.get(finalI).put(m.getEquipe1(),0);
+										}
+										matchsJoueurs = matchs.stream().filter((me) -> (me.getEquipe2() == m.getEquipe1() && !verifies.contains(me.getEquipe1()) || me.getEquipe1() == m.getEquipe1()) && !verifies.contains(me.getEquipe2())).collect(Collectors.toList());
+										verifies.add(m.getEquipe1());
+										participants.add(m.getEquipe1());
+										setPoule(finalI,matchsJoueurs);
 									}
-									matchsjoueurs = matchs.stream().filter((me) -> (me.getEquipe2() == m.getEquipe1() && !verifies.contains(me.getEquipe1()) || me.getEquipe1() == m.getEquipe1()) && !verifies.contains(me.getEquipe2())).collect(Collectors.toList());
-									verifies.add(m.getEquipe1());
-									participants.add(m.getEquipe1());
-									setPoule(finalI,matchsjoueurs);
-								}
-							});
+								});
+			}
 		}
 
 	}
@@ -98,21 +96,22 @@ public class PhaseDePoule extends Phase {
 			throw new Exception("Pas assez d'equipes");
 		}
 		//Sous listes de niveaux
-		List<Equipe>[] subLists = new ArrayList[4];
+		@SuppressWarnings("unchecked")
+		List<Equipe>[] subLists = new ArrayList[NB_POULES];
 		//Tri des equipes par points
 		Collections.sort(listEquipe);
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < NB_POULES; i++) {
 			subLists[i] = new ArrayList<Equipe>();
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < NB_POULES; j++) {
 				//ajout des niveaux
-				subLists[i].add(listEquipe.get(i * 4 + j));
+				subLists[i].add(listEquipe.get(i * NB_POULES + j));
 			}
 			Collections.shuffle(subLists[i]);
 		}
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < NB_POULES; i++) {
 			poules.add(new HashMap<Equipe, Integer>());
-			for (int j =0;  j<4;j++) {
-				poules.get(i).put(subLists[i].get(j),0);
+			for (int j =0;  j<NB_POULES;j++) {
+				poules.get(i).put(subLists[j].get(i),0);
 			}
 		}
 	}
@@ -129,13 +128,13 @@ public class PhaseDePoule extends Phase {
 		calendar.setTime(getTournoi().getDateTournoi());
 		calendar.add(Calendar.DATE,-1);
 		List<List<Equipe[]>> paires = new ArrayList<List<Equipe[]>>();
-		for (int i = 0; i < 4; i++) {
-			List<Equipe> listEquipePoule = new ArrayList(poules.get(i).keySet());
+		for (int i = 0; i < NB_POULES; i++) {
+			List<Equipe> listEquipePoule = new ArrayList<>(poules.get(i).keySet());
 			Collections.shuffle(listEquipePoule);
 			List<Equipe[]>paire = new ArrayList<>();
 			paires.add(paire);
 			for (int j = 0; j < 3; j++) {
-				for (int k = j+1; k <4 ; k++) {
+				for (int k = j+1; k <NB_POULES ; k++) {
 					paire.add(new Equipe[] {listEquipePoule.get(j),listEquipePoule.get(k)} );
 				}
 			}
@@ -143,7 +142,7 @@ public class PhaseDePoule extends Phase {
 		}
 		for (int i = 0; i <6; i++) {
 			calendar.add(Calendar.DATE,1);
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < NB_POULES; j++) {
 				Equipe equipe1 = paires.get(j).get(i)[0];
 				Equipe equipe2 = paires.get(j).get(i)[1];
 				Match match = new Match(new Date(calendar.getTime().getTime()),equipe1,equipe2,this);
@@ -210,13 +209,6 @@ public class PhaseDePoule extends Phase {
 	public String getType() {
 		return "Poules";
 	}
-
-	//Fonction qui permet de récuperer le tournoi d'une phase
-
-
-
-
-
 
 	@Override
 	public String toString() {

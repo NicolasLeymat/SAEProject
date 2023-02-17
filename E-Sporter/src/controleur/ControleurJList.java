@@ -34,7 +34,7 @@ public class ControleurJList extends MouseListenerImp {
 		case "class Object.Tournoi":
 			Tournoi tournoiSelected = (Tournoi) element;
 			try {
-				tournoiSelected.getPhasesfromID();
+				tournoiSelected.getPhasesFromId();
 			} catch (Exception ex) {
 				throw new RuntimeException(ex);
 			}
