@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,31 +107,6 @@ public class ModeDeJeu {
 			rs.next();
 			m = new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4)));
 			
-			rs.close();
-			pst.close();
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return m;
-	}
-	
-	public static List<ModeDeJeu> getModeDeJeuFromNomAll(String nom) {
-		Connection connex = Connexion.connexion();
-		PreparedStatement pst;
-		ResultSet rs;
-		List<ModeDeJeu> m = new ArrayList<>();
-		
-		try {
-			
-			//rajouter verification
-			
-			pst = connex.prepareStatement("select id_mode, nom, nb_joueur, id_jeu from LMN3783A.sae_mode_de_jeu where nom = ?");
-			pst.setString(1, nom);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				m.add(new ModeDeJeu(rs.getInt(1), rs.getString(2), rs.getInt(3),Jeu.getJeuFromId(rs.getInt(4))));
-			}
 			rs.close();
 			pst.close();
 			
