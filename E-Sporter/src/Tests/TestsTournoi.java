@@ -20,7 +20,7 @@ public class TestsTournoi {
 
     @Before
     public void setUp() throws Exception {
-        tournoi = new Tournoi("Tournoi test", Date.valueOf("2023-12-12"), 1,1,1, ModeDeJeu.getModeDeJeuFromId(1), Tournoi.ETAT.INSC);
+        tournoi = new Tournoi("Tournoi test", Date.valueOf("2023-12-12"), 1,1,1, ModeDeJeu.getModeDeJeuFromId(1), Tournoi.EtatTournoi.INSC);
         this.connx = Connexion.connexion();
         for (int i = 0; i < 16; i++) {
             Ecurie ecurieadd = new Ecurie("Ecurie "+i);

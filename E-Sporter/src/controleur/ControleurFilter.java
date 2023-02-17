@@ -13,20 +13,19 @@ import Object.Equipe;
 import Object.ModeDeJeu;
 import Object.Nationalite;
 import Object.Tournoi;
-import Object.Tournoi.ETAT;
+import Object.Tournoi.EtatTournoi;
 
 public class ControleurFilter<E> implements ActionListener{
 
 	private String filterType;
-	private JPanel vue;
 	
-	public ControleurFilter(String filterType, JPanel vue) {
-		this.vue = vue;
+	public ControleurFilter(String filterType) {
 		this.filterType = filterType;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		@SuppressWarnings("unchecked")
 		JComboBox<E> comboBox = (JComboBox<E>) e.getSource();
 		int index = comboBox.getSelectedIndex();
 		E item = comboBox.getItemAt(index);
@@ -46,19 +45,19 @@ public class ControleurFilter<E> implements ActionListener{
 				MainPanel.changeModelElementEcurie(Ecurie.getEcurieFromNat(Nationalite.getByNom((String) item)));
 				break;
 			case "Tournament":
-				ETAT etat = null;
+				EtatTournoi etat = null;
 				switch ((String)item) {
 					case "Sans filtre":
 						MainPanel.changeModelElementTournoi(Tournoi.getAllTournois());
 						return;
 					case "Phase d'inscription":
-						etat = ETAT.INSC;
+						etat = EtatTournoi.INSC;
 						break;
 					case "En cours":
-						etat = ETAT.ENC;
+						etat = EtatTournoi.ENC;
 						break;
 					case "Terminés":
-						etat = ETAT.FINI;
+						etat = EtatTournoi.FINI;
 						break;
 				}
 				MainPanel.changeModelElementTournoi(Tournoi.getTournoiWithFilter(etat));
@@ -68,8 +67,6 @@ public class ControleurFilter<E> implements ActionListener{
 				System.out.println(Equipe.getClassementByGame(ModeDeJeu.getModeDeJeuFromNom((String) item).getIdMode()));
 				break;
 		}
-		//this.vue.updateListEquipe();
-		System.out.println(item.toString() + " / " + this.filterType);
 		
 	}
 	

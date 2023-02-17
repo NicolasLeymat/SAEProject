@@ -8,7 +8,7 @@ import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
 import Object.Tournoi;
-import controleur.ControleurAdd;
+import controleur.ControleurAddFrame;
 import controleur.ControleurDelete;
 import controleur.ControleurJList;
 import controleur.ControleurModif;
@@ -21,13 +21,9 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.JLabel;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
 
 public class VueInfoPanel extends JPanel{
 
@@ -54,7 +50,7 @@ public class VueInfoPanel extends JPanel{
 		modeleJoueur.clear();
 		VueInfoPanel.e = null;
 		VueInfoPanel.e = e;
-		ControleurAdd c = new ControleurAdd(this, e);
+		ControleurAddFrame c = new ControleurAddFrame(e);
 		ControleurModif cm = new ControleurModif(e, this);
 		ControleurDelete cd = new ControleurDelete(e, this);
 		this.setSize(750, 450);
@@ -225,7 +221,7 @@ public class VueInfoPanel extends JPanel{
 		VueInfoPanel.ec = null;
 		VueInfoPanel.ec = e;
 		this.setSize(500, 400);
-		ControleurAdd c = new ControleurAdd(this, e);
+		ControleurAddFrame c = new ControleurAddFrame(e);
 		ControleurModif cm = new ControleurModif(e, this);
 		ControleurDelete cd = new ControleurDelete(e, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();

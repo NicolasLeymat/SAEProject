@@ -38,7 +38,7 @@ public class VueModifFrame extends JFrame{
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public VueModifFrame(Ecurie eq) {
+	public VueModifFrame(Ecurie ec) {
 		this.setVisible(true);
 		this.setSize(new Dimension(WIDHT, HEIGHT));
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -47,7 +47,7 @@ public class VueModifFrame extends JFrame{
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-		vue = new VueModifPanel(eq);
+		vue = new VueModifPanel(ec);
 		GridBagConstraints gbc_vue = new GridBagConstraints();
 		gbc_vue.fill = GridBagConstraints.BOTH;
 		gbc_vue.gridx = 0;

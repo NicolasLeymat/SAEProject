@@ -8,10 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import IHM.MainPanel;
-import IHM.VuePrincipale;
 import IHM.info.VueInfoPanel;
 import IHM.modif.VueModifFrame;
-import IHM.modif.VueModifPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
@@ -36,8 +34,8 @@ public class ControleurDelete implements ActionListener{
 		
 	}
 	
-	public ControleurDelete(Ecurie eq,JPanel vue) {
-		this.ec = eq;
+	public ControleurDelete(Ecurie ec,JPanel vue) {
+		this.ec = ec;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 		this.nature = "Ecurie";
@@ -90,10 +88,7 @@ public class ControleurDelete implements ActionListener{
 					VueInfoPanel.updateListJoueur();
 					this.modele.getPanelFrame(vue).dispose();
 					break;
-			}
-			}
-			else {
-				System.out.println("sauce");
+				}
 			}
 		}
 	}

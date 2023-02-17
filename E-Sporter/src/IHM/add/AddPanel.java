@@ -9,7 +9,6 @@ import java.text.ParseException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
 import Object.Ecurie;
@@ -17,17 +16,13 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.ModeDeJeu;
 import Object.Nationalite;
-import Object.Organisateur;
 import Object.Tournoi;
-import Object.Tournoi.ETAT;
-import controleur.ControleurAdd;
-import controleur.ControleurAjout;
+import Object.Tournoi.EtatTournoi;
+import controleur.ControleurAddPanel;
 import controleur.ModeleESporter;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -60,7 +55,7 @@ public class AddPanel extends JPanel {
 	
 	
 	public AddPanel(String type, Object obj) {
-		ControleurAjout c = new ControleurAjout(this);
+		ControleurAddPanel c = new ControleurAddPanel(this);
 		this.obj = obj;
 		//System.out.println(obj);
 		this.setMode(type);
@@ -308,7 +303,7 @@ public class AddPanel extends JPanel {
 				Tournoi t = null;
 				try {
 					//System.out.println(this.formattingText());
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), ETAT.INSC);
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), EtatTournoi.INSC);
 					//System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

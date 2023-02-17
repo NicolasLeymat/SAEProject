@@ -12,8 +12,17 @@ import Application.Connexion;
 
 public class Jeu {
 
+	/**
+	 * id du jeu
+	 */
 	private int id;
+	/**
+	 * nom du jeu
+	 */
 	private String nom;
+	/**
+	 * tous les modes de jeu d'un jeu
+	 */
 	private List<ModeDeJeu> modesDeJeu;
 	
 	/**
@@ -27,27 +36,34 @@ public class Jeu {
 		this.modesDeJeu = new ArrayList<ModeDeJeu>();
 	}
 	
-	public int getIdJeu() {
-		return this.id;
-	}
-	
-	public void setIdJeu(int id) {
-		this.id = id;
-	}
-	
+	/**
+	 * Retourne un nom
+	 * @return
+	 */
 	public String getNom() {
 		return this.nom;
 	}
-
 	
+	/**
+	 * Modifie un nom
+	 * @param nomJeu
+	 */
 	public void setNom(String nomJeu) {
 		this.nom = nomJeu;
 	}
 	
+	/**
+	 * Retourne la liste des modes d'un jeu
+	 * @return
+	 */
 	public List<ModeDeJeu> getModesDeJeu(){
 		return this.modesDeJeu;
 	}
 	
+	/**
+	 * Modifie la liste des modes d'un jeu
+	 * @param l
+	 */
 	public void setModeDeJeu(List<ModeDeJeu> l) {
 		this.modesDeJeu = l;
 	}
@@ -74,46 +90,10 @@ public class Jeu {
 	}
 	
 	/**
-	 * retourne l'id du jeu passé en paramètre
-	 * @param jeu
-	 * @return idJeu
+	 * Retourne le jeu a partir d'un id
+	 * @param id
+	 * @return
 	 */
-	public static int getId(Jeu jeu) {
-		Connection connex = Connexion.connexion();
-		PreparedStatement pst;
-		ResultSet rs;
-		try {
-			pst = connex.prepareStatement("select id_jeu from LMN3783A.sae_jeu where LMN3783A.sae_jeu.nom = ?");
-			pst.setString(1, jeu.getNom());
-			rs = pst.executeQuery();
-			rs.next();
-			return rs.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-		}
-	
-	/**
-	 * Enregistre un jeu dans la basede donnée
-	 * @return 1 si le jeu est enregistré dans la base et -1 si erreur
-	 */
-	public int enregistrerJeu() {
-		Connection connex = Connexion.connexion();
-		PreparedStatement pst;
-		int lastId = this.getLastId();
-		try {
-			pst = connex.prepareStatement("insert into LMN3783A.sae_jeu values(?,?)");
-			pst.setInt(1, lastId+1);
-			pst.setString(2, nom);
-			pst.executeUpdate();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			return -1;
-		}
-		return 1;
-	}
-	
 	public static Jeu getJeuFromId(int id) {
         Connection connx = Connexion.connexion();
 		Jeu jeu = null;
@@ -163,6 +143,21 @@ public class Jeu {
 		}
 		
 		return res;
+	}
+	/**
+	 * Retourner un id
+	 * @return
+	 */
+	public int getId() {
+		return this.id;
+	}
+	
+	/**
+	 * Modifie un id
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

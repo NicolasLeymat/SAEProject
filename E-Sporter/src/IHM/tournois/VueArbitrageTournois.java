@@ -61,7 +61,7 @@ public class VueArbitrageTournois extends JPanel{
 	    panneauListe1.setLayout(null);
 	    panneauListe1.add(titreListe1);
 		List<Joueur> joueursE1 = match.getEquipe1().getJoueurs();
-		ListeJoueur<Joueur> modelL1 = new ListeJoueur<>(joueursE1);
+		ListeJoueur modelL1 = new ListeJoueur(joueursE1);
 		JList<Joueur> listeJE1 = new JList<Joueur>(modelL1);
 	    JScrollPane scrollPane_1 = new JScrollPane(listeJE1);
 		System.out.println("-----------\n"+ joueursE1);
@@ -83,7 +83,7 @@ public class VueArbitrageTournois extends JPanel{
 	    panneauListe2.add(titreListe2);
 		List<Joueur> joueursE2 = match.getEquipe2().getJoueurs(); 
 		ControleurJList controleur = new ControleurJList();
-		ListeJoueur<Joueur> modelL2 = new ListeJoueur<>(joueursE2);
+		ListeJoueur modelL2 = new ListeJoueur(joueursE2);
 		JList<Joueur> listeJE2 = new JList<Joueur>(modelL2);
 		listeJE2.addMouseListener(controleur);
 		listeJE1.addMouseListener(controleur);

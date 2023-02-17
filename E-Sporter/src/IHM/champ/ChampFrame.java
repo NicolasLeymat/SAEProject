@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 
 public class ChampFrame extends JFrame {
 
@@ -29,6 +28,7 @@ public class ChampFrame extends JFrame {
 		gridBagLayout.columnWeights = new double[]{1.0};
 		gridBagLayout.rowWeights = new double[]{1.0};
 		getContentPane().setLayout(gridBagLayout);
+
 		contentPane = new ChampPanel();
 		GridBagConstraints gbc_contentPane = new GridBagConstraints();
 		gbc_contentPane.gridy = 0;

@@ -11,7 +11,11 @@ public class PhaseFinale extends Phase{
     private List<Match> matchsAJouer;
     private boolean finale;
 
-
+    /**
+     * Constructeur de la classe "PhaseFinale"
+     * @param tournoi
+     * @param phaseDePoule
+     */
     public PhaseFinale(Tournoi tournoi,PhaseDePoule phaseDePoule) {
         super(tournoi);
         datephasefinale = Calendar.getInstance();
@@ -21,12 +25,15 @@ public class PhaseFinale extends Phase{
         this.matchsAJouer = new ArrayList<Match>();
         finale =false;
     }
-
+    
+    
     public void setFinalefromMatchs() {
         finale = (matchsAJouer.size() == 2 && matchs.size() >=8 );
     }
 
-
+    /**
+     * Génere les matchs
+     */
     @Override
     public void genererMatchs()  {
         if (getMatchs().isEmpty()) {
@@ -65,7 +72,10 @@ public class PhaseFinale extends Phase{
             }
         }
     }
-
+    
+    /**
+     * Vérifie si les match sont finis
+     */
     public boolean matchsFinis() {
         for (Match m:
              matchsAJouer) {
@@ -84,7 +94,10 @@ public class PhaseFinale extends Phase{
     public boolean estFinie () {
         return finale && matchsFinis();
     }
-
+    
+    /**
+     * Récupere les match a partir d'un id
+     */
     public void getMatchsFromID () throws Exception{
         super.getMatchsFromID();
         if (matchs.size() <=4) {
@@ -96,11 +109,19 @@ public class PhaseFinale extends Phase{
         }
     }
 
-
+    /**
+     * Récupere les matchs à jouer
+     * @return
+     */
     public List<Match> getMatchsAJouer() {
         return matchsAJouer;
     }
-
+    
+    /**
+     * Récupere le classement
+     * @return
+     * @throws Exception
+     */
     public Equipe[] getClassement() throws Exception {
         if (!estFinie()) {
             throw new Exception("le tournoi n'est pas fini");
@@ -113,7 +134,10 @@ public class PhaseFinale extends Phase{
         res[3] = matchs.get(taille-2).getLoser();
         return res;
     }
-
+    
+    /**
+     * Enregistre les matchs
+     */
     @Override
     public void enregistrerMatchs() {
         for (Match m : matchsAJouer) {
@@ -122,7 +146,9 @@ public class PhaseFinale extends Phase{
     }
 
 
-
+    /**
+     * Vérifie si une phase est éliminatoire
+     */
     @Override
     public boolean isElim() {
         return true;

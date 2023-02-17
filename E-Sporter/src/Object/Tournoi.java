@@ -33,7 +33,7 @@ public class Tournoi {
 		return (this.getPhaseElim() != null && this.getPhaseElim().matchsFinis());
 	}
 
-	public enum Notoriete {
+	public static enum Notoriete {
 		LOCAL(1) ,NATIONAL(2), INTERNATIONAL(3);
 		private int value;
 		Notoriete(int i) {
@@ -45,14 +45,14 @@ public class Tournoi {
 		}
 	}
 
-	private ETAT etat;
+	private EtatTournoi etat;
 
-	public enum ETAT {
+	public static enum EtatTournoi {
 		ENC("ENC"),
 		FINI("FINI"),
 		INSC("INSC");
 		private String value;
-		ETAT(String s ) {
+		EtatTournoi(String s ) {
 			this.setValue(s);
 		}
 		public String getValue() {
@@ -64,7 +64,7 @@ public class Tournoi {
 	}
 
 	//Definit les points gagnés selon la place finale
-	private enum PointsClassement {
+	private static enum PointsClassement {
 		PREMIER(100),DEUXIEME(60),TROISIEME(30),QUATRIEME(10);
 		private int points;
 		PointsClassement(int nb) {
@@ -73,13 +73,13 @@ public class Tournoi {
 	}
 
 	//Constructeur de la classe "Tournoi"
-	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode, ETAT etat) throws Exception {
+	public Tournoi(String nom, Date dateTournoi, int championnat,int notoriete, int id_organisateur, ModeDeJeu id_Mode, EtatTournoi etat) throws Exception {
 		this.setEtat(etat);
 
 		if (notoriete > 3 || notoriete < 1) {
 			throw new Exception();
 		}
-		if (etat == ETAT.INSC && dateInvalide(dateTournoi)) {
+		if (etat == EtatTournoi.INSC && dateInvalide(dateTournoi)) {
 			throw new Exception();
 		}
 		
@@ -119,7 +119,7 @@ public class Tournoi {
 	}
 
 	public void demarrer() throws Exception {
-		if (this.etat != ETAT.INSC) {
+		if (this.etat != EtatTournoi.INSC) {
 			throw  new IllegalArgumentException("Le tournoi est déja lancé");
 		}
 		if (this.listeEquipe.size() < 16 ) {
@@ -127,7 +127,7 @@ public class Tournoi {
 		}
 		this.getPhasePoule().genererMatchs();
 		PhaseDePoule.enregistrerPhase(this.getPhasePoule());
-		this.etat = ETAT.ENC;
+		this.etat = EtatTournoi.ENC;
 	}
 
 	public PhaseDePoule getPhasePoule() {
@@ -225,19 +225,6 @@ public class Tournoi {
 		rs = pst.executeQuery();
 		rs.next();
 		return rs.getInt(1) >=1;
-	}
-	
-	private static boolean verifierPresenceTournoi( int id) throws SQLException {
-		PreparedStatement pst;
-		ResultSet rs;
-		Connection connex = Connexion.connexion();
-		pst = connex.prepareStatement("select count(1) from LMN3783A.sae_tournoi where id_tournoi = ?" );
-		pst.setInt(1, id);
-		rs = pst.executeQuery();
-		rs.next();
-		boolean res = rs.getInt(1) >= 1;
-		rs.close();
-		return res;
 	}
 	
 	
@@ -345,17 +332,17 @@ public class Tournoi {
 		public static int supprimerTournoi(Tournoi t) {
 			Connection connex = Connexion.connexion();
 			PreparedStatement pst;
-			ResultSet rs;
 			
 			try {
-
 				if (verifierPresenceTournoi(t)) {
 					return -1;
 				}
-				
-				pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where nom = ? and datetournoi= ?" );
-				pst.setString(1, t.getNom());
-				pst.setDate(2, t.getDateTournoi());
+				//Suppression des phases
+				Phase.supprimerPhaseNoObject(t.phasePoule.getId());
+				Phase.supprimerPhaseNoObject(t.phaseElim.getId());
+
+				pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where id_tournoi = ?" );
+				pst.setInt(1, t.id);
 				pst.executeUpdate();
 				pst.close();
 				
@@ -365,6 +352,35 @@ public class Tournoi {
 			}
 			return 1;
 		}
+
+	public static int supprimerTournoiNoObject(int id) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+
+		try {
+			//Suppression des phases
+			pst = connex.prepareStatement("SELECT ID_PHASE from LMN3783A.sae_phase where id_tournoi  = ?");
+			pst.setInt(1,id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Phase.supprimerPhaseNoObject(rs.getInt(1));
+			}
+			//Suppression des inscriptions
+			pst = connex.prepareStatement("delete from LMN3783A.sae_participer where id_tournoi = ?" );
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			//Suppression du tournoi
+			pst = connex.prepareStatement("delete from LMN3783A.sae_tournoi where id_tournoi = ?" );
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			pst.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
 
 	@Override
 	public String toString() {
@@ -434,17 +450,17 @@ public class Tournoi {
 		Map<Equipe,Integer[]> res = getVictoiresPhase(this.phasePoule);
 		for (Equipe equipe:
 			 welim.keySet()) {
-			Equipe equipetest = res.keySet().stream().filter((e) -> e.getId() == equipe.getId()).findFirst().orElse(null);
-			if (equipetest == null) {
+			Equipe equipeTest = res.keySet().stream().filter((e) -> e.getId() == equipe.getId()).findFirst().orElse(null);
+			if (equipeTest == null) {
 				continue;
 			}
-			System.out.println("e test " + equipetest);
+			System.out.println("e test " + equipeTest);
 			System.out.println("e en cours " + equipe);
-			System.out.println(equipetest.getNom()+" Poules " + res.get(equipetest)[0] + "ELIM "+ welim.get(equipe)[0]);
-			res.get(equipetest)[0] += welim.get(equipe)[0];
-			System.out.print("Victoires totales " + equipe.getNom() + " "+ res.get(equipetest)[0]);
-			res.get(equipetest)[1] += welim.get(equipe)[1];
-			System.out.println("Defaites " + res.get(equipetest)[1]);
+			System.out.println(equipeTest.getNom()+" Poules " + res.get(equipeTest)[0] + "ELIM "+ welim.get(equipe)[0]);
+			res.get(equipeTest)[0] += welim.get(equipe)[0];
+			System.out.print("Victoires totales " + equipe.getNom() + " "+ res.get(equipeTest)[0]);
+			res.get(equipeTest)[1] += welim.get(equipe)[1];
+			System.out.println("Defaites " + res.get(equipeTest)[1]);
 		}
 		return res;
 	}
@@ -461,10 +477,15 @@ public class Tournoi {
 			st = connex.createStatement();
 			rs = st.executeQuery("select id_tournoi,etat, nom, datetournoi, championnat, notoriete, id_organisateur, id_mode from LMN3783A.sae_tournoi order by nom");
 			while (rs.next()) {
-				ETAT etat = ETAT.valueOf(rs.getString("etat"));
-				t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")),etat);
-				t.setId(rs.getInt(1));
-				tournois.add(t);
+				EtatTournoi etat = EtatTournoi.valueOf(rs.getString("etat"));
+				try {
+					t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")), etat);
+					t.setId(rs.getInt(1));
+					tournois.add(t);
+				}
+				catch (Exception e) {
+					Tournoi.supprimerTournoiNoObject(rs.getInt(1));
+				}
 			}
 			
 			rs.close();
@@ -476,7 +497,7 @@ public class Tournoi {
 		return tournois;
 	}
 
-	public void getPhasesfromID() throws Exception {
+	public void getPhasesFromId() throws Exception {
 
 		Connection connex = Connexion.connexion();
 		PreparedStatement st;
@@ -486,40 +507,37 @@ public class Tournoi {
 			throw new Exception("Objet non relié");
 		}
 
-		if (etat == ETAT.INSC) {
-			return;
-		}
-
-		try {
-			st = connex.prepareStatement("SELECT id_phase,elim from lmn3783a.sae_phase where id_tournoi = ? and elim = ?");
-			st.setInt(1,this.id);
-			st.setInt(2,0);
-			rs = st.executeQuery();
-			if (rs.next()) {
-				PhaseDePoule phaseDePoule = new PhaseDePoule(this);
-				phaseDePoule.setId(rs.getInt(1));
-				this.phasePoule =  phaseDePoule;
-				phaseDePoule.getMatchsFromID();
+		if (etat != EtatTournoi.INSC) {
+			try {
+				st = connex.prepareStatement("SELECT id_phase,elim from lmn3783a.sae_phase where id_tournoi = ? and elim = ?");
+				st.setInt(1,this.id);
+				st.setInt(2,0);
+				rs = st.executeQuery();
+				if (rs.next()) {
+					PhaseDePoule phaseDePoule = new PhaseDePoule(this);
+					phaseDePoule.setId(rs.getInt(1));
+					this.phasePoule =  phaseDePoule;
+					phaseDePoule.getMatchsFromID();
+				}
+				st.setInt(2,1);
+				rs = st.executeQuery();
+				if ( this.phasePoule != null && rs.next() ) {
+					System.out.println("Coucou 2 :::" + this.phasePoule);
+					PhaseFinale phaseFinale = new PhaseFinale(this,this.phasePoule);
+					phaseFinale.setId(rs.getInt("id_phase"));
+					phaseFinale.getMatchsFromID();
+					phaseFinale.setFinalefromMatchs();
+					this.phaseElim = phaseFinale;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			st.setInt(2,1);
-			rs = st.executeQuery();
-			if ( this.phasePoule != null && rs.next() ) {
-				System.out.println("Coucou 2 :::" + this.phasePoule);
-				PhaseFinale phaseFinale = new PhaseFinale(this,this.phasePoule);
-				phaseFinale.setId(rs.getInt("id_phase"));
-				phaseFinale.getMatchsFromID();
-				phaseFinale.setFinalefromMatchs();
-				this.phaseElim = phaseFinale;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-
 	}
 	
-	public static List<Tournoi> getTournoiWithFilter(ETAT e){
+	public static List<Tournoi> getTournoiWithFilter(EtatTournoi e){
 		Connection connex = Connexion.connexion();
 		PreparedStatement pst;
 		ResultSet rs;
@@ -532,7 +550,7 @@ public class Tournoi {
 			pst.setString(1, e.getValue());
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				ETAT etat = ETAT.valueOf(rs.getString("etat"));
+				EtatTournoi etat = EtatTournoi.valueOf(rs.getString("etat"));
 				t = new Tournoi(rs.getString("nom"), rs.getDate("datetournoi"), rs.getInt("championnat"), rs.getInt("notoriete"), rs.getInt("id_organisateur"), ModeDeJeu.getModeDeJeuFromId(rs.getInt("id_mode")),etat);
 				t.setId(rs.getInt(1));
 				tournois.add(t);
@@ -547,11 +565,11 @@ public class Tournoi {
 		return tournois;
 	}
 
-	public ETAT getEtat() {
+	public EtatTournoi getEtat() {
 		return etat;
 	}
 
-	public void setEtat(ETAT etat) {
+	public void setEtat(EtatTournoi etat) {
 		this.etat = etat;
 	}
 	

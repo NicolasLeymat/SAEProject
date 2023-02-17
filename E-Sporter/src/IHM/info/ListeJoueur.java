@@ -6,21 +6,36 @@ import Object.Joueur;
 import java.util.List;
 
 
-public class ListeJoueur<T> extends AbstractListModel {
-    private List<T> joueurs;
+public class ListeJoueur extends AbstractListModel {
+    private List<Joueur> joueurs;
 
-    public ListeJoueur(List<T> joueurs) {
+    /**
+     * Constructeur de la liste
+     *
+     * @param joueurs Liste des joueurs à integrer dans la liste
+     */
+    public ListeJoueur(List<Joueur> joueurs) {
         this.joueurs = joueurs;
     }
 
+    /**
+     * Renvoie la taille de la liste
+     *
+     * @return nombre d'élements de la liste
+     */
     @Override
     public int getSize() {
         return joueurs.size();
     }
 
+    /**
+     *
+     * @param index l'indice de la liste
+     * @return le joueur à l'indice demandé
+     */
     @Override
-    public T getElementAt(int index) {
-        return (T) joueurs.get(index);
+    public Joueur getElementAt(int index) {
+        return  joueurs.get(index);
     }
 
 

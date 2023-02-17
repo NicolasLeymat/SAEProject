@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,12 +14,12 @@ import Object.Equipe;
 import Object.Joueur;
 import Object.Tournoi;
 
-public class ControleurAjout implements ActionListener{
+public class ControleurAddPanel implements ActionListener{
 
 	private AddPanel vue;
 	private ModeleESporter modele;
 	
-	public ControleurAjout(AddPanel vue) {
+	public ControleurAddPanel(AddPanel vue) {
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 	}
@@ -28,7 +27,6 @@ public class ControleurAjout implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
 		switch(this.vue.getMode()) {
 			case "Player":{
 				Joueur obj = (Joueur) this.vue.getInfoToObject();
@@ -69,32 +67,6 @@ public class ControleurAjout implements ActionListener{
 				MainPanel.updateListTournoi();
 				break;
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 	}
 		
 	}
