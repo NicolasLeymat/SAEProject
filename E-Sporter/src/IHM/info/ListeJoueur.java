@@ -1,11 +1,12 @@
 package IHM.info;
 
 import javax.swing.*;
+import Object.Joueur;
 
 import java.util.List;
 
 
-public class ListeJoueur<Joueur> extends AbstractListModel {
+public class ListeJoueur extends AbstractListModel {
     private List<Joueur> joueurs;
 
     /**
