@@ -10,16 +10,28 @@ public class PhaseDePoule extends Phase {
 	private List<Map<Equipe,Integer>> poules;
 	private static final int NB_POULES = 4;
 
-	//Constructeur de la classe "Phase"
+	/**
+	 * Constructeur de la classe "Phase"
+	 * @param tournoi
+	 */
 	public PhaseDePoule( Tournoi tournoi) {
 		super(tournoi);
 		this.poules = new ArrayList<>();
 	}
-
+	
+	/**
+	 * Récupere la liste des poules
+	 * @return
+	 */
 	public List<Map<Equipe, Integer>> getPoules() {
 		return poules;
 	}
-
+	
+	/**
+	 * Récupere le classement
+	 * @param poule
+	 * @return
+	 */
 	private List<Equipe> getClassement(int poule) {
 		List<Equipe> res = new ArrayList<Equipe>();
 		System.out.println(poules);
@@ -35,7 +47,10 @@ public class PhaseDePoule extends Phase {
 		});
 				return res;
 	}
-
+	
+	/**
+	 * Modification des poules d'un match
+	 */
 	public void setPoulesFromMatchs() {
 		List<Equipe> participants = new ArrayList<>();
 		List<Equipe> verifies = new ArrayList<>();
@@ -76,20 +91,40 @@ public class PhaseDePoule extends Phase {
 		}
 
 	}
-
+	
+	/**
+	 * Modification d'un poule
+	 * @param poule
+	 * @param matchs
+	 */
 	private void setPoule(int poule, List<Match> matchs) {
 		for (Match m : matchs) {
 			enregistrerGagnant(poule,m);
 		}
 	}
+	
+	/**
+	 * Récupere la premiere poule
+	 * @param poule
+	 * @return
+	 */
 	public Equipe getPremier(int poule) {
 		return this.getClassement(poule).get(0);
 	}
 
+	/**
+	 * Récupere la deuxième poule
+	 * @param poule
+	 * @return
+	 */
 	public Equipe getDeuxième(int poule) {
 		return this.getClassement(poule).get(1);
 	}
-
+	
+	/**
+	 * Génere les poules
+	 * @throws Exception
+	 */
 	private void genererPoules() throws Exception {
 		List<Equipe> listEquipe = getTournoi().getListeEquipe();
 		if(isElim() && listEquipe.size()< 16) {
@@ -116,6 +151,9 @@ public class PhaseDePoule extends Phase {
 		}
 	}
 
+	/**
+	 * Génere les matchs
+	 */
 	public void genererMatchs() {
 		try {
 			genererPoules();
@@ -150,7 +188,10 @@ public class PhaseDePoule extends Phase {
 			}
 		}
 	}
-
+	/**
+	 * Transforme une poule en "string"
+	 * @return
+	 */
 	public String toStringPoule() {
 		String res = "";
 		int i = 0;
@@ -166,7 +207,12 @@ public class PhaseDePoule extends Phase {
 		}
 		return res;
 	}
-
+	
+	/**
+	 * Enregistre le gagnant
+	 * @param poule
+	 * @param m
+	 */
 	public void enregistrerGagnant(int poule, Match m) {
 		if (getMatchs().contains(m) && m.getWinner() != null) {
 			Equipe egagnante = m.getWinner();
@@ -180,7 +226,10 @@ public class PhaseDePoule extends Phase {
 				pouleselect.put(egagnante, pouleselect.get(egagnante) + 1);
 		}
 	}
-
+	
+	/**
+	 * Récupere les match à partir d'un id
+	 */
 	public void getMatchsFromID() throws Exception {
 		super.getMatchsFromID();
 		setPoulesFromMatchs();
@@ -188,11 +237,16 @@ public class PhaseDePoule extends Phase {
 	}
 
 
-    //Fonction qui permet de savoir si c'est une phase éliminatoire ou pas 
+    /**
+     * Permet de savoir si c'est une phase éliminatoire ou pas
+     */
 	public boolean isElim() {
 		return false;
 	}
-
+	
+	/**
+	 * Permet de savoir si les match sont términés
+	 */
 	@Override
 	public boolean matchsFinis() {
 		System.out.println(matchs);
@@ -204,12 +258,16 @@ public class PhaseDePoule extends Phase {
 		}
 		return true;
 	}
-
+	
+	
 	@Override
 	public String getType() {
 		return "Poules";
 	}
 
+	/**
+	 * Permet de transformer des objets en "string"
+	 */
 	@Override
 	public String toString() {
 		return super.toString()+
