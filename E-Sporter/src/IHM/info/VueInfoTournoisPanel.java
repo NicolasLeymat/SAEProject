@@ -62,16 +62,16 @@ public class VueInfoTournoisPanel extends JPanel {
         // Création de la barre de défilement pour les tableaux
         JScrollPane scrollPane1 = new JScrollPane(table1);
 
-        JLabel titre = new JLabel(tournoi.getNom());
-        titre.setFont(ModeleESporter.FONT_LARGE);
-        titre.setAlignmentX(0.5f);
-        this.add(titre);
+        JLabel titreTournoi = new JLabel(tournoi.getNom());
+        titreTournoi.setFont(ModeleESporter.FONT_LARGE);
+        titreTournoi.setAlignmentX(0.5f);
+        this.add(titreTournoi);
         this.add(Box.createRigidArea(new Dimension(0,10)));
 
-        JLabel titreArbitrer = new JLabel("Matchs en cours");
-        titreArbitrer.setFont(ModeleESporter.FONT_LARGE);
-        titreArbitrer.setAlignmentX(0.5f);
-        this.add(titreArbitrer);
+        JLabel titreMatchs = new JLabel("Matchs en cours");
+        titreMatchs.setFont(ModeleESporter.FONT_LARGE);
+        titreMatchs.setAlignmentX(0.5f);
+        this.add(titreMatchs);
         this.add(Box.createRigidArea(new Dimension(0,5)));
         this.add(scrollPane1);
 

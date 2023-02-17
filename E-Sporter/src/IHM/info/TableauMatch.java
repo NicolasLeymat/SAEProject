@@ -26,24 +26,31 @@ public class TableauMatch extends AbstractTableModel {
         return columnNames[col];
     }
 
+    /**
+     * Rend les valeurs de chaque cellule du tableau
+     * @param rowIndex        la ligne
+     * @param columnIndex     la colonne
+     * @return
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Match match = matchs.get(rowIndex);
-        String stringJ1="";
-        String stringJ2="";
+        String stringE1="";
+        String stringE2="";
+        //Affichage du nom de joueur avec une couronne s'il est gagnant
         if (match.getWinner() == match.getEquipe1()) {
-            stringJ1 +="👑 ";
+            stringE1 +="👑 ";
         }
         if (match.getWinner() == match.getEquipe2()) {
-            stringJ2 +="👑 ";
+            stringE2 +="👑 ";
         }
-        stringJ1 += match.getEquipe1().getNom();
-        stringJ2 += match.getEquipe2().getNom();
+        stringE1 += match.getEquipe1().getNom();
+        stringE2 += match.getEquipe2().getNom();
         switch (columnIndex) {
             case 0:
-                return stringJ1;
+                return stringE1;
             case 1:
-                return stringJ2;
+                return stringE2;
             default:
                 return null;
         }
