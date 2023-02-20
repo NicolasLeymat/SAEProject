@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import IHM.MainPanel;
 import IHM.info.VueInfoPanel;
@@ -84,6 +85,7 @@ public class ControleurModif implements ActionListener{
 					this.modele.modifierEquipe(eqNew);
 					MainPanel.updateListEquipe();
 					VueInfoPanel.updateListEquipe();
+					JOptionPane.showMessageDialog(null, "Modification confirmer.");
 					break;
 				case "Ecurie":
 					Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
