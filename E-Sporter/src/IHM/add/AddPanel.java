@@ -30,23 +30,24 @@ import javax.swing.JButton;
 
 public class AddPanel extends JPanel {
 
-	//Class Variable
+	//Variables de classe
 	private static final long serialVersionUID = 1L;
 	private final int WIDTH = 450;
 	private final int HEIGHT = 500;
+	
+	
+	//Variable générale
+	private JTextField NameTF;
 	private String mode;
 	
-	//OverAll Field
-	private JTextField NameTF;
-	
-	//Player Field
+	//Variable joueur
 	private JTextField firstNameTF;
 	private JTextField pseudoTF;
 	private JFormattedTextField brithDateTF;
 	private JComboBox<String> natChoice;
 	private Object obj;
 	
-	//Tournament
+	//Variable tournoi
 	private JComboBox<String> comboChamp;
 	private JComboBox<Tournoi.Notoriete> comboNotoriete;
 	private JTextField orgaTf;
@@ -60,6 +61,8 @@ public class AddPanel extends JPanel {
 		this.obj = obj;
 		this.setMode(type);
 		this.setSize(WIDTH, HEIGHT);
+		
+		//création du layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{430, 75, 0};
@@ -67,6 +70,7 @@ public class AddPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		//pannel principal
 		JPanel MainPanel = new JPanel();
 		MainPanel.setLayout(null);
 		GridBagConstraints gbc_MainPanel = new GridBagConstraints();
@@ -76,44 +80,47 @@ public class AddPanel extends JPanel {
 		gbc_MainPanel.gridy = 0;
 		add(MainPanel, gbc_MainPanel);
 		
+		// label du titre
 		JLabel Title = new JLabel("");
 		Title.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		Title.setBounds(125, 0, 200, 25);
 		MainPanel.add(Title);
 		
+		// label du nom
 		JLabel nameLabel = new JLabel("Nom  :");
 		nameLabel.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		nameLabel.setBounds(10, 53, 80, 20);
 		
-		
+		// champ de texte du nom
 		NameTF = new JTextField();
 		NameTF.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		NameTF.setBounds(140, 53, 150, 20);
 		NameTF.setColumns(10);
 		
+		// label du prénom
 		JLabel lblPrenom = new JLabel("Prenom  :");
 		lblPrenom.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblPrenom.setBounds(10, 78, 80, 20);
 		
-		
+		// champ de texte du prénom
 		firstNameTF = new JTextField();
 		firstNameTF.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		firstNameTF.setColumns(10);
 		firstNameTF.setBounds(140, 81, 150, 20);
 		
-		
+		//label du pseudonyme
 		JLabel lblPseudonyme = new JLabel("Pseudonyme  :");
 		lblPseudonyme.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblPseudonyme.setBounds(10, 108, 91, 20);
 		
-		
+		// champ de texte du pseudo
 		pseudoTF = new JTextField();
 		pseudoTF.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		pseudoTF.setColumns(10);
 		pseudoTF.setBounds(140, 109, 150, 20);
 		
 		
-		
+		// création du panel des boutons
 		JPanel BtnPanel = new JPanel();
 		BtnPanel.setLayout(null);
 		GridBagConstraints gbc_BtnPanel = new GridBagConstraints();
@@ -123,26 +130,30 @@ public class AddPanel extends JPanel {
 		gbc_BtnPanel.gridy = 1;
 		add(BtnPanel, gbc_BtnPanel);
 		
+		// bouton confirmer
 		confirmBtn = new JButton("Confirmer");
 		confirmBtn.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		confirmBtn.setBounds(230, 10, 200, 50);
 		confirmBtn.addActionListener(c);
 		BtnPanel.add(confirmBtn);
 		
-		
+		// label nationalités
 		JLabel lblNat = new JLabel("Nationalités : ");
 		lblNat.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNat.setBounds(10, 138, 120, 20);
 		
+		// création de la boite combinée
 		DefaultComboBoxModel<String> modelNat = new DefaultComboBoxModel<>(ModeleESporter.getAllNat()); 
 		natChoice = new JComboBox<>();
 		natChoice.setModel(modelNat);
 		natChoice.setBounds(140, 140, 150, 22);
 		
+		// label de la date de naissance
 		JLabel lblDate = new JLabel("Date de Naissance : ");
 		lblDate.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblDate.setBounds(12, 168, 125, 22);
 		
+		// mise en forme de la date
 		brithDateTF = new JFormattedTextField();
 		try {
 			MaskFormatter formatter = new MaskFormatter("##/##/####");
@@ -156,6 +167,7 @@ public class AddPanel extends JPanel {
 		brithDateTF.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		brithDateTF.setBounds(140, 171, 150, 22);
 		
+		//ajout aua pannel principal
 		MainPanel.add(nameLabel);
 		MainPanel.add(NameTF);
 		
@@ -258,14 +270,17 @@ public class AddPanel extends JPanel {
 		}
 	}
 
+	// renvoie le mode
 	public String getMode() {
 		return mode;
 	}
 
+	// met à jour le mode
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
 
+	// fonction qui renvoie les données d'un objet
 	public Object getInfoToObject() {
 		
 		switch (this.mode) {
@@ -276,7 +291,6 @@ public class AddPanel extends JPanel {
 						this.pseudoTF.getText(), 
 						this.brithDateTF.getText(), 
 						Nationalite.getByNom((String) this.natChoice.getSelectedItem()));
-				//System.out.println((String) this.natChoice.getSelectedItem());
 				j.setIdEquipe(teamToAdd.getId());
 				return j;
 			}
@@ -302,11 +316,8 @@ public class AddPanel extends JPanel {
 				Tournoi.Notoriete not  = (Tournoi.Notoriete)  this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					//System.out.println(this.formattingText());
 					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), EtatTournoi.INSC);
-					//System.out.println("Tournoi : " + t);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return t;
@@ -316,6 +327,7 @@ public class AddPanel extends JPanel {
 		}
 	}
 	
+	// fonction permettant de gérer le format de la date
 	@SuppressWarnings("deprecation")
 	private Date formattingText() {
 		String textToFormat = this.brithDateTF.getText();
