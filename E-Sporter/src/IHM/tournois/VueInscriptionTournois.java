@@ -42,6 +42,7 @@ public class VueInscriptionTournois extends JPanel{
 		this.t = t;
 		
 		modeleEquipe.clear();
+		System.out.println(t.getId_Mode().getIdMode());
 		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));		
 		modeleEquipeTournoi.clear();
 		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
@@ -179,6 +180,9 @@ public class VueInscriptionTournois extends JPanel{
 			}
 			if (equipesDif == false) {
 				res.add(e);
+			}
+			else {
+				equipesDif = false;
 			}
 		}
 		return res;
