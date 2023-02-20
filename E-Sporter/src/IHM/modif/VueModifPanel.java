@@ -215,10 +215,16 @@ public class VueModifPanel extends JPanel{
 		
 		JButton confirmBtn = new JButton("Confirmer");
 		confirmBtn.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
-		confirmBtn.setBounds(230, 10, 200, 50);
+		confirmBtn.setBounds(275, 10, 200, 50);
 		confirmBtn.addActionListener(controleurModif);
 		BtnPanel.add(confirmBtn);
 		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setForeground(new Color(255, 0, 0));
+		btnAnnuler.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
+		btnAnnuler.setBounds(10, 10, 200, 50);
+		btnAnnuler.addActionListener(controleurModif);
+		BtnPanel.add(btnAnnuler);
 		
 		JLabel lblNat = new JLabel("Nationalités : ");
 		lblNat.setFont(new Font("Berlin Sans FB", Font.PLAIN, ModeleESporter.FONT_SIZE_LARGE));
