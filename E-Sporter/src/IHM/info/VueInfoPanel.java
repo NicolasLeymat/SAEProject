@@ -502,6 +502,7 @@ public class VueInfoPanel extends JPanel{
 		modeleEquipe.clear();
 		ecurie = Ecurie.getEcurieFromId(ecurie.getId());
 		modeleEquipe.addAll(ecurie.getEquipes());
+		System.out.println(ecurie.getEquipes());
 		listEquipe.setModel(modeleEquipe);
 	}
 	

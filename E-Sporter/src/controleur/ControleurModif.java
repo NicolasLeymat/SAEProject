@@ -4,17 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import IHM.MainPanel;
-import IHM.VuePrincipale;
 import IHM.info.VueInfoPanel;
 import IHM.modif.VueModifFrame;
 import IHM.modif.VueModifPanel;
 import Object.Ecurie;
 import Object.Equipe;
 import Object.Joueur;
-import Object.Tournoi;
+
 
 public class ControleurModif implements ActionListener{
 
@@ -84,6 +83,9 @@ public class ControleurModif implements ActionListener{
 					VueInfoPanel.updateInfoEquipe(eqNew.getNom());
 					MainPanel.updateListEquipe();
 					this.modele.modifierEquipe(eqNew);
+					MainPanel.updateListEquipe();
+					VueInfoPanel.updateListEquipe();
+					JOptionPane.showMessageDialog(null, "Modification confirmer.");
 					break;
 				case "Ecurie":
 					Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
