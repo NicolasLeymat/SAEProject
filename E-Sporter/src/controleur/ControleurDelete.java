@@ -84,9 +84,10 @@ public class ControleurDelete implements ActionListener{
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				case "Joueur":
+					System.out.println(j);
 					modele.supprimerJoueur(j);
 					VueInfoPanel.updateListJoueur();
-					VueInfoPanel.updateListJoueur();
+					MainPanel.updateListEquipe();
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				}

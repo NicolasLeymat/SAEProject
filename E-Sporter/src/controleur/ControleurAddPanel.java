@@ -30,18 +30,19 @@ public class ControleurAddPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch(this.vue.getMode()) {
 			case "Player":{
-				JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
+				//JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
 				Joueur obj = (Joueur) this.vue.getInfoToObject();
-				System.out.println(obj);
+				//System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
-				this.modele.addPlayer(obj);
+				int i = this.modele.addPlayer(obj);
+				System.out.println(i);
 				VueInfoPanel.updateListJoueur();
 				MainPanel.updateListEquipe();
 				frame.dispose();
 				break;
 			}
 			case "Team":{
-				JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
+				//JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
 				Equipe obj = (Equipe) this.vue.getInfoToObject();
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);
@@ -56,7 +57,7 @@ public class ControleurAddPanel implements ActionListener{
 				Ecurie obj = (Ecurie) this.vue.getInfoToObject();
 				int resultatRequete = this.modele.addOrga(obj);
 				if(resultatRequete == 1) {
-					JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
+					//JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
 					System.out.println(obj);
 					JFrame frame = this.modele.getPanelFrame(vue);
 					MainPanel.updateListEcuries();
@@ -67,7 +68,7 @@ public class ControleurAddPanel implements ActionListener{
 				break;
 			}
 			case "Tournament":{
-				JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
+				//JOptionPane.showMessageDialog(this.vue, "Ajout en cours...");
 				Tournoi obj = (Tournoi) this.vue.getInfoToObject();
 				System.out.println(obj);
 				JFrame frame = this.modele.getPanelFrame(vue);

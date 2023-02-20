@@ -64,8 +64,9 @@ public class ModeleESporter {
 		return (JFrame) SwingUtilities.getWindowAncestor(vue);
 	}
 		
-	public void addPlayer(Joueur j) {
-		Joueur.enregistrerJoueur(j);
+	public int addPlayer(Joueur j) {
+		int i = Joueur.enregistrerJoueur(j);
+		return i;
 	}
 	
 	public void addTeam(Equipe e) {

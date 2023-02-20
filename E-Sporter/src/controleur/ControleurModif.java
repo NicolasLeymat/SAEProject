@@ -82,6 +82,7 @@ public class ControleurModif implements ActionListener{
 				case "Equipe":
 					Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
 					VueInfoPanel.updateInfoEquipe(eqNew.getNom());
+					MainPanel.updateListEquipe();
 					this.modele.modifierEquipe(eqNew);
 					break;
 				case "Ecurie":
@@ -92,6 +93,7 @@ public class ControleurModif implements ActionListener{
 				case "Joueur":
 					Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
 					VueInfoPanel.updateInfoJoueur(jNew);
+					MainPanel.updateListEquipe();
 					this.modele.modifierJoueur(jNew);
 					break;
 			}
