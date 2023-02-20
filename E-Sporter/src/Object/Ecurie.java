@@ -313,7 +313,7 @@ public class Ecurie {
 			while (rs.next()) {
 				e = new Ecurie(rs.getString(1));
 				e.setId(id);
-				//e.listeEquipes = Equipe.getEquipesFromEcurie(id);
+				e.listeEquipes = Equipe.getEquipesFromEcurie(id);
 			}
 			
 			rs.close();
