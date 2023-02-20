@@ -31,6 +31,7 @@ import javax.swing.JButton;
 public class AddPanel extends JPanel {
 
 	//Class Variable
+	private static final long serialVersionUID = 1L;
 	private final int WIDTH = 450;
 	private final int HEIGHT = 500;
 	private String mode;
@@ -57,7 +58,6 @@ public class AddPanel extends JPanel {
 	public AddPanel(String type, Object obj) {
 		ControleurAddPanel c = new ControleurAddPanel(this);
 		this.obj = obj;
-		//System.out.println(obj);
 		this.setMode(type);
 		this.setSize(WIDTH, HEIGHT);
 		GridBagLayout gridBagLayout = new GridBagLayout();
