@@ -316,7 +316,7 @@ public class AddPanel extends JPanel {
 				Tournoi.Notoriete not  = (Tournoi.Notoriete)  this.comboNotoriete.getSelectedItem();
 				Tournoi t = null;
 				try {
-					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromId(0), EtatTournoi.INSC);
+					t =new Tournoi(this.NameTF.getText(), this.formattingText(), champ, not.getValue() , 0, ModeDeJeu.getModeDeJeuFromNom((String)comboBox.getSelectedItem()), EtatTournoi.INSC);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
