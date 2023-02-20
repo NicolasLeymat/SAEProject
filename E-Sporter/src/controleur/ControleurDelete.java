@@ -62,19 +62,20 @@ public class ControleurDelete implements ActionListener{
 		JButton b = (JButton) e.getSource();
 		if(b.getText().equals("Supprimer")) {
 			
-			int resultat = JOptionPane.showConfirmDialog(this.v, "Êtes-vous sûr de vouloir vraiment supprimer ceci ?","Confirm", JOptionPane.YES_NO_OPTION);
+			int resultat = JOptionPane.showConfirmDialog(this.vue, "Êtes-vous sûr de vouloir vraiment supprimer ceci ?","Confirm", JOptionPane.YES_NO_OPTION);
 			if (resultat == JOptionPane.YES_OPTION) {
 				switch(this.nature) {
 				case "Equipe":
 					modele.supprimerEquipe(eq);
-					this.modele.getPanelFrame(vue).dispose();
 					MainPanel.updateListEquipe();
 					VueInfoPanel.updateListEquipe();
 					MainPanel.updateListEcuries();
+					this.modele.getPanelFrame(vue).dispose();
 					break;
 				case "Ecurie":
 					modele.supprimerEcurie(ec);
 					MainPanel.updateListEcuries();
+					JOptionPane.showMessageDialog(this.vue, "Ecurie supprimer avec succès");
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				case "Tournoi":

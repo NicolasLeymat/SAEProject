@@ -18,7 +18,6 @@ public class ControleurAddFrame implements ActionListener{
 		this.obj = obj;
 	}
 	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();

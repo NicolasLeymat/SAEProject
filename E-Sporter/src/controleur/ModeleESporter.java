@@ -48,12 +48,18 @@ public class ModeleESporter {
 	public static List<Tournoi> allTournoi;
 	private static Connection connx;
 	
+	/*
+	 * Constructeur de la classe
+	 */
 	public ModeleESporter() {
 		resultatRechercheEcuries = new LinkedList<>();
 		resultatRechercheEquipes = new LinkedList<>();
 		connx = Connexion.connexion();
 	}
 	
+	/*
+	 * 
+	 */
 	public JFrame getPanelFrame(JPanel vue) {
 		return (JFrame) SwingUtilities.getWindowAncestor(vue);
 	}
@@ -71,10 +77,10 @@ public class ModeleESporter {
 		}
 	}
 	
-	public void addOrga(Ecurie e) {
-		Ecurie.enregistrerEcurie(e);
+	public int addOrga(Ecurie e) {
+		int res = Ecurie.enregistrerEcurie(e);
+		return res;
 	}
-	
 	public void addTournament(Tournoi t) {
 		try {
 			Tournoi.enregistrerTournoi(t);
