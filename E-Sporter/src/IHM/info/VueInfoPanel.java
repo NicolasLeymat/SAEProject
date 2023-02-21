@@ -27,6 +27,10 @@ import javax.swing.JButton;
 
 public class VueInfoPanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
 	private static JList<Joueur> listJoueur = new JList<>();

@@ -16,12 +16,15 @@ import controleur.ModeleESporter;
 
 import java.awt.GridLayout;
 import java.util.List;
-import java.awt.Font;
 import javax.swing.JComboBox;
 
 public class MainPanel extends JPanel{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modelEquipe = new DefaultListModel<>();
 	
