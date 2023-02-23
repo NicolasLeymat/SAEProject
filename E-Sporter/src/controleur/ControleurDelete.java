@@ -18,7 +18,7 @@ public class ControleurDelete implements ActionListener {
 	private JPanel vue;
 	private Equipe eq;
 	private Ecurie ec;
-	private Tournoi t;
+	//private Tournoi t;
 	private Joueur j;
 	private ModeleESporter modele;
 	private String nature;
@@ -39,7 +39,7 @@ public class ControleurDelete implements ActionListener {
 	}
 
 	public ControleurDelete(Tournoi t, JPanel vue) {
-		this.t = t;
+		//this.t = t;
 		this.vue = vue;
 		this.modele = new ModeleESporter();
 		this.nature = "Tournoi";
@@ -64,10 +64,13 @@ public class ControleurDelete implements ActionListener {
 			if (resultat == JOptionPane.YES_OPTION) {
 				switch (this.nature) {
 				case "Equipe":
+					//traitement
+					if (modele.supprimerEquipe(eq) == -1) {
+						JOptionPane.showMessageDialog(this.vue, "L'équipe n'a pas pu être supprimée car elle est liée à un tournoi");
+						break;
+					}
 					//pop up indiquant que l'exécution est en cours
 					JDialog dialog = dialog();
-					//traitement
-					modele.supprimerEquipe(eq);
 					MainPanel.updateListEquipe();
 					VueInfoPanel.updateListEquipe();
 					MainPanel.updateListEcuries();
@@ -78,30 +81,39 @@ public class ControleurDelete implements ActionListener {
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				case "Ecurie":
+					if (modele.supprimerEcurie(ec) == -1) {
+						JOptionPane.showMessageDialog(this.vue, "L'écurie n'a pas pu être supprimée car elle est liée à un tournoi");
+						break;
+					}
 					//pop up indiquant que l'exécution est en cours
 					dialog = dialog();
-					modele.supprimerEcurie(ec);
 					MainPanel.updateListEcuries();
 					//execution terminer fermeture de la pop up
 					closeDialog(dialog);
 					JOptionPane.showMessageDialog(this.vue, "Ecurie supprimer avec succès");
 					this.modele.getPanelFrame(vue).dispose();
 					break;
-				case "Tournoi":
+				/*case "Tournoi":
+					if (modele.supprimerTournoi(t) == -1) {
+						JOptionPane.showMessageDialog(this.vue, "Il faut supprimer les écuries participantes avant de pouvoir supprimer le tournoi!");
+						break;
+					}
 					//pop up indiquant que l'exécution est en cours
 					dialog = dialog();
-					modele.supprimerTournoi(t);
 					MainPanel.updateListTournoi();
 					//execution terminer fermeture de la pop up
 					closeDialog(dialog);
 					JOptionPane.showMessageDialog(this.vue, "Tournoi supprimer avec succès");
 					this.modele.getPanelFrame(vue).dispose();
-					break;
+					break;*/
 				case "Joueur":
 					System.out.println(j);
+					if (modele.supprimerJoueur(j) == -1) {
+						JOptionPane.showMessageDialog(this.vue, "Le Joueur n'a pas être supprimer");
+						break;
+					}
 					//pop up indiquant que l'exécution est en cours
 					dialog = dialog();
-					modele.supprimerJoueur(j);
 					VueInfoPanel.updateListJoueur();
 					MainPanel.updateListEquipe();
 					//execution terminer fermeture de la pop up
@@ -114,7 +126,7 @@ public class ControleurDelete implements ActionListener {
 		}
 	}
 	public JDialog dialog() {
-		JOptionPane popup = new JOptionPane("message", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, this.vue);
+		JOptionPane popup = new JOptionPane("Suppression en cours...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, this.vue);
 		JDialog dialog = popup.createDialog("En cours d'exécution...");
 		dialog.setModal(false);
 		dialog.setVisible(true);

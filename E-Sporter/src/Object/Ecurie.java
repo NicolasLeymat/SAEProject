@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -41,7 +42,7 @@ public class Ecurie {
 	public Ecurie(String nom) {
 		this.id = -1;
 		this.nom = nom;
-		this.listeEquipes = new ArrayList<Equipe>();
+		this.listeEquipes = new LinkedList<Equipe>();
 	}
 	/**
 	 * retourne l'id d'une ecurie
@@ -244,6 +245,7 @@ public class Ecurie {
 				return -1;
 			}
 			
+			System.out.println("esu : " + ecurie.getEquipes());
 			for (Equipe eq : ecurie.getEquipes()) {
 				Equipe.supprimerEquipe(eq);
 			}
@@ -520,6 +522,18 @@ public class Ecurie {
 	@Override
 	public String toString() {
 		return this.nom;
+	}
+	
+	public void replaceEquipe(Equipe teamToAdd) {
+		for(int i = 0; i < this.listeEquipes.size(); i++) {
+			if(teamToAdd.getNom().equals(this.listeEquipes.get(i).getNom())) {
+				this.listeEquipes.remove(i);
+			}
+		}
+		this.listeEquipes.add(teamToAdd);
+	}
+	
+	public void removeByName(String name) {
 	}
 
 }

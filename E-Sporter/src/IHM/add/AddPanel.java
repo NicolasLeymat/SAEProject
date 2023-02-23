@@ -55,10 +55,13 @@ public class AddPanel extends JPanel {
 	private JButton confirmBtn;
 	private JTextField textField;
 	
+	private Object obj2;
+	private static Ecurie oldEc;
 	
-	public AddPanel(String type, Object obj) {
+	public AddPanel(String type, Object obj, Object obj2) {
 		ControleurAddPanel c = new ControleurAddPanel(this);
 		this.obj = obj;
+		this.obj2 = obj2;
 		this.setMode(type);
 		this.setSize(WIDTH, HEIGHT);
 		
@@ -285,6 +288,9 @@ public class AddPanel extends JPanel {
 		
 		switch (this.mode) {
 			case "Player": {
+				if(oldEc == null) {
+					oldEc = (Ecurie) obj2;
+				}
 				Equipe teamToAdd = (Equipe) this.obj;
 				Joueur j = new Joueur(this.NameTF.getText(), 
 						this.firstNameTF.getText(), 
@@ -292,6 +298,9 @@ public class AddPanel extends JPanel {
 						this.brithDateTF.getText(), 
 						Nationalite.getByNom((String) this.natChoice.getSelectedItem()));
 				j.setIdEquipe(teamToAdd.getId());
+				teamToAdd.addJoueur(j);
+				//teamToAdd.getEcurie().replaceEquipe(teamToAdd);
+				oldEc.replaceEquipe(teamToAdd);
 				return j;
 			}
 			case "Team":{
@@ -300,6 +309,8 @@ public class AddPanel extends JPanel {
 				e.setStringLogo(textField.getText());
 				e.setIdEcurie(ecurieToAdd.getId());
 				e.setIdModeDeJeu(ModeDeJeu.getModeDeJeuFromNom((String)comboBox.getSelectedItem()).getIdMode());
+				ecurieToAdd.addEquipe(e);
+				oldEc = ecurieToAdd;
 				return e;
 			}
 			case "Orga":{

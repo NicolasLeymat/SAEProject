@@ -300,6 +300,7 @@ public class Equipe implements Comparable<Equipe> {
 			}
 			
 			for (Joueur j : equipe.getJoueurs()) {
+				System.out.println("joueur : " + j);
 				Joueur.supprimerJoueur(j);
 			}
 			
@@ -311,6 +312,7 @@ public class Equipe implements Comparable<Equipe> {
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+			System.out.println(equipe.getJoueurs());
 			return -1; 
 		}
 		return 1;

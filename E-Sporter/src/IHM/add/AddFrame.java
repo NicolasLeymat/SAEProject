@@ -2,6 +2,12 @@ package IHM.add;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+
+import org.hamcrest.core.IsInstanceOf;
+
+import Object.Ecurie;
+import Object.Equipe;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -42,7 +48,18 @@ public class AddFrame extends JFrame {
 		gridBagLayout.rowWeights = new double[]{1.0};
 		this.setLayout(gridBagLayout);
 		// ajout de l'objet au panel
-		contentPane = new AddPanel(type, obj);
+		if(obj != null) {	
+			if(obj.getClass().toString().equals("class Object.Equipe")) {
+				Equipe eq = (Equipe) obj;
+				Ecurie e = eq.getEcurie();
+				contentPane = new AddPanel(type, obj, e);
+			}else {
+				contentPane = new AddPanel(type, obj, null);
+			}
+		}else {
+			contentPane = new AddPanel(type, obj, null);
+		}
+		
 		// création des contraintes
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
