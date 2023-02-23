@@ -65,7 +65,7 @@ public class ControleurDelete implements ActionListener {
 				switch (this.nature) {
 				case "Equipe":
 					//traitement
-					if (modele.supprimerEquipe(eq) == -1) {
+					if (modele.supprimerEquipe(eq) == -2) {
 						JOptionPane.showMessageDialog(this.vue, "L'équipe n'a pas pu être supprimée car elle est liée à un tournoi");
 						break;
 					}
@@ -81,8 +81,8 @@ public class ControleurDelete implements ActionListener {
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				case "Ecurie":
-					if (modele.supprimerEcurie(ec) == -1) {
-						JOptionPane.showMessageDialog(this.vue, "L'écurie n'a pas pu être supprimée car elle est liée à un tournoi");
+					if (modele.supprimerEcurie(ec) == -2) {
+						JOptionPane.showMessageDialog(this.vue, "L'écurie n'a pas pu être supprimée car ses équipes sont liées à un tournoi");
 						break;
 					}
 					//pop up indiquant que l'exécution est en cours
@@ -108,8 +108,8 @@ public class ControleurDelete implements ActionListener {
 					break;*/
 				case "Joueur":
 					System.out.println(j);
-					if (modele.supprimerJoueur(j) == -1) {
-						JOptionPane.showMessageDialog(this.vue, "Le Joueur n'a pas être supprimer");
+					if (modele.supprimerJoueur(j) == -2) {
+						JOptionPane.showMessageDialog(this.vue, "Le Joueur n'a pas être supprimer, réessayez !");
 						break;
 					}
 					//pop up indiquant que l'exécution est en cours

@@ -313,7 +313,7 @@ public class Equipe implements Comparable<Equipe> {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			System.out.println(equipe.getJoueurs());
-			return -1; 
+			return -2; 
 		}
 		return 1;
 	}

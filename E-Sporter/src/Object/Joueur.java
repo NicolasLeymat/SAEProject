@@ -212,7 +212,7 @@ public class Joueur {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return -1; 
+			return -2; 
 		}
 		return 1;
 	}
