@@ -1,5 +1,6 @@
 package IHM.info;
 
+import java.util.Comparator;
 import java.util.List;
 import Object.Match;
 
@@ -10,7 +11,7 @@ public class ListeMatch extends AbstractListModel {
     private static final int TAILLESEP = 50;
     private static final String VSTRING = "CONTRE";
     public ListeMatch(List<Match> matchs) {
-        this.matchs = matchs;
+        this.matchs = matchs.stream().sorted(Comparator.comparingInt(Match::getNumpoule)).toList();
     }
 
     @Override

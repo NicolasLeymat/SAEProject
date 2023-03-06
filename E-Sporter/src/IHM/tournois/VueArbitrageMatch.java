@@ -40,10 +40,6 @@ public class VueArbitrageMatch extends JPanel{
 	public VueArbitrageMatch(Match m) {
 
 		this.match = m;
-
-
-
-
 		ControleurArbitrageTournoi controleurM = new ControleurArbitrageTournoi(this);
 		// création des listes et de leurs modèles de données
 	    GridBagLayout gridBagLayout = new GridBagLayout();

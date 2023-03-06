@@ -204,11 +204,11 @@ public class AddPanel extends JPanel {
 		orgaTf = new JTextField();
 		orgaTf.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		orgaTf.setColumns(10);
-		orgaTf.setBounds(140, 229, 150, 20);
+		orgaTf.setBounds(140, 187, 150, 20);
 		
 		JLabel lblNomOrganisateur = new JLabel("Organisateur  :");
 		lblNomOrganisateur.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
-		lblNomOrganisateur.setBounds(10, 229, 125, 20);
+		lblNomOrganisateur.setBounds(10, 187, 125, 20);
 		
 		textField = new JTextField();
 		textField.setBounds(140, 120, 150, 19);
@@ -218,7 +218,6 @@ public class AddPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Lien du logo :");
 		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNewLabel.setBounds(10, 115, 100, 20);
-	
 		
 		switch(type) {
 			case "Player":{
@@ -256,8 +255,6 @@ public class AddPanel extends JPanel {
 				MainPanel.add(lblNomOrganisateur);
 				MainPanel.add(comboNotoriete);
 				MainPanel.add(lblNotorit);
-				MainPanel.add(comboChamp);
-				MainPanel.add(lblChampionnat);
 				MainPanel.add(lblMode);
 				MainPanel.add(comboBox);
 				lblDate.setBounds(12, 120, 125, 20);
