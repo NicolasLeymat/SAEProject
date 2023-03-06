@@ -18,6 +18,17 @@ public class PhaseDePoule extends Phase {
 		super(tournoi);
 		this.poules = new ArrayList<>();
 	}
+
+	public int nbMatchsRestants() {
+		int res = 0;
+		for (Match m :
+				matchs) {
+			if (m.getWinner() == null) {
+				res++;
+			}
+		}
+		return res;
+	}
 	
 	/**
 	 * Récupere la liste des poules
@@ -59,6 +70,7 @@ public class PhaseDePoule extends Phase {
 				List<Match> filtreMatch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
 				Match match1 = filtreMatch.stream().findFirst().get();
 				Equipe equipe = match1.getEquipe1();
+				match1.setNumPoule(i);
 				verifies.clear();
 				poules.add(new HashMap<Equipe,Integer>());
 				int finalI;
@@ -68,6 +80,7 @@ public class PhaseDePoule extends Phase {
 						.forEach((m) ->
 								{
 									List<Match> matchsJoueurs;
+									m.setNumPoule(finalI+1);
 									if (m.getEquipe1()== equipe) {
 										if (poules.get(finalI).get(m.getEquipe2()) == null ) {
 											poules.get(finalI).put(m.getEquipe2(),0);

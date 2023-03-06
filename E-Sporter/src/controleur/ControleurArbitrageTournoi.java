@@ -6,17 +6,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import IHM.tournois.VueArbitrageTournois;
+import IHM.tournois.VueArbitrageMatch;
 import Object.Match;
 
 public class ControleurArbitrageTournoi implements ActionListener {
-    private VueArbitrageTournois vue;
+    private VueArbitrageMatch vue;
+
+    private ModeleESporter modele;
     private Match match;
 
 
-    public ControleurArbitrageTournoi(VueArbitrageTournois vue) {
+    public ControleurArbitrageTournoi(VueArbitrageMatch vue) {
         this.vue = vue;
         this.match = vue.getMatch();
+        this.modele = new ModeleESporter();
     }
 
 
@@ -34,5 +37,7 @@ public class ControleurArbitrageTournoi implements ActionListener {
                 vue.getButtonWin1().setEnabled(true);
                 match.setWinner(2);
             }
+            modele.getPanelFrame(vue).dispose();
+
     }
 }

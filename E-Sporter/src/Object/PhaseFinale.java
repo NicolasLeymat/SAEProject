@@ -26,6 +26,16 @@ public class PhaseFinale extends Phase{
         finale =false;
     }
     
+    public int nbMatchsRestants () {
+        int res = 0;
+        for (Match m :
+                matchsAJouer) {
+            if (m.getWinner() == null) {
+               res++;
+            }}
+        return res;
+    }
+    
     
     public void setFinalefromMatchs() {
         finale = (matchsAJouer.size() == 2 && matchs.size() >=8 );

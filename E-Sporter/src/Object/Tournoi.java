@@ -126,7 +126,6 @@ public class Tournoi {
 			throw  new IllegalArgumentException("Le tournoi n'est pas plein, il faut 16 equipes, il y en a "+listeEquipe.size() );
 		}
 		this.getPhasePoule().genererMatchs();
-		PhaseDePoule.enregistrerPhase(this.getPhasePoule());
 		this.etat = EtatTournoi.ENC;
 	}
 
@@ -416,8 +415,10 @@ public class Tournoi {
 		classement[1].addPoints(PointsClassement.DEUXIEME.points*notoriete);
 		classement[2].addPoints(PointsClassement.TROISIEME.points*notoriete);
 		classement[3].addPoints(PointsClassement.QUATRIEME.points*notoriete);
+		System.out.println(phaseElim.getMatchs());
 		for (Match m :
 				phaseElim.getMatchs()) {
+
 			m.getWinner().addPoints(5);
 		}
 	}

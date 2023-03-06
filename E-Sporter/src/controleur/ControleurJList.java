@@ -1,12 +1,11 @@
 package controleur;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
 import IHM.info.SeeInfoFrame;
-import IHM.info.VueInfoTournoisFrame;
+import IHM.info.VueInfoTournoisEnCoursFrame;
 import IHM.tournois.FrameClassementTournois;
 import IHM.tournois.FrameInscriptionTournois;
 import Object.Ecurie;
@@ -49,7 +48,7 @@ public class ControleurJList extends MouseListenerImp {
 				break;
 
 				case ENC:
-					windowTournoi = new VueInfoTournoisFrame(tournoiSelected);
+					windowTournoi = new VueInfoTournoisEnCoursFrame(tournoiSelected);
 				break;
 			}
 			windowTournoi.setVisible(true);

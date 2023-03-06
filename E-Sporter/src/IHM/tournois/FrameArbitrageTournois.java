@@ -15,7 +15,7 @@ public class FrameArbitrageTournois extends JFrame {
 	    setSize(500, 275);
 		setResizable(false);
 	    setLocationRelativeTo(null);
-	    this.setContentPane(new VueArbitrageTournois(match));
+	    this.setContentPane(new VueArbitrageMatch(match));
 	}
   
 

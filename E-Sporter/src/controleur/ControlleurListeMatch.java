@@ -1,6 +1,6 @@
 package controleur;
 
-import IHM.info.VueInfoTournoisFrame;
+import IHM.info.VueInfoTournoisEnCoursFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +14,9 @@ public class ControlleurListeMatch implements ActionListener {
     }
 
     private Etat etat;
-    private VueInfoTournoisFrame vue;
+    private VueInfoTournoisEnCoursFrame vue;
 
-    public ControlleurListeMatch(VueInfoTournoisFrame vue) {
+    public ControlleurListeMatch(VueInfoTournoisEnCoursFrame vue) {
         this.vue = vue;
         setBoutonSuivant();
     }
@@ -52,6 +52,7 @@ public class ControlleurListeMatch implements ActionListener {
                 Phase.enregistrerPhase(t.getPhaseElim());
                 bouton.setEnabled(false);
                 vue.dispose();
+                break;
             }
             case FINIELIM: {
                 etat = Etat.ENCOURS;
@@ -59,6 +60,7 @@ public class ControlleurListeMatch implements ActionListener {
                 t.getPhaseElim().enregistrerMatchs();
                 bouton.setEnabled(false);
                 vue.dispose();
+                break;
             }
             case FINI: {
                 vue.setButtonText("Terminer le tournoi");
@@ -70,6 +72,7 @@ public class ControlleurListeMatch implements ActionListener {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                break;
             }
         }
     }

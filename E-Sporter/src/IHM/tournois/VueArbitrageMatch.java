@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,7 +19,7 @@ import Object.Match;
 import controleur.ControleurArbitrageTournoi;
 import controleur.ControleurJList;
 
-public class VueArbitrageTournois extends JPanel{
+public class VueArbitrageMatch extends JPanel{
 
 	private Match match;
 	private JButton buttonWin1;
@@ -39,8 +37,13 @@ public class VueArbitrageTournois extends JPanel{
 		return buttonWin2;
 	}
 
-	public VueArbitrageTournois(Match m) {
+	public VueArbitrageMatch(Match m) {
+
 		this.match = m;
+
+
+
+
 		ControleurArbitrageTournoi controleurM = new ControleurArbitrageTournoi(this);
 		// création des listes et de leurs modèles de données
 	    GridBagLayout gridBagLayout = new GridBagLayout();
@@ -117,21 +120,32 @@ public class VueArbitrageTournois extends JPanel{
 			buttonWin1.setEnabled(false);
 		}
 	    
-	    JPanel panel_1 = new JPanel();
-	    panel_1.setLayout(null);
-	    GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-	    gbc_panel_1.fill = GridBagConstraints.BOTH;
-	    gbc_panel_1.gridx = 1;
-	    gbc_panel_1.gridy = 1;
-	    this.add(panel_1, gbc_panel_1);
+	    JPanel panelGagnant2 = new JPanel();
+	    panelGagnant2.setLayout(null);
+	    GridBagConstraints gbcPanelGagnant2 = new GridBagConstraints();
+	    gbcPanelGagnant2.fill = GridBagConstraints.BOTH;
+	    gbcPanelGagnant2.gridx = 1;
+	    gbcPanelGagnant2.gridy = 1;
+	    this.add(panelGagnant2, gbcPanelGagnant2);
 		buttonWin2 = new JButton("Gagné");
 	    buttonWin2.setBounds(81, 0, 82, 21);
-	    panel_1.add(buttonWin2);
+	    panelGagnant2.add(buttonWin2);
 	    buttonWin2.addActionListener(controleurM);
 
 		if (match.getWinner() == match.getEquipe2()) {
 			buttonWin2.setEnabled(false);
 		}
+
+		//Affichage de la date
+		JPanel panelDate = new JPanel();
+		GridBagConstraints gbcPanelDate = new GridBagConstraints();
+		gbcPanelDate.fill = GridBagConstraints.BOTH;
+		gbcPanelDate.gridx = 0;
+		gbcPanelDate.gridy = 2;
+		gbcPanelDate.gridwidth = 2;
+		this.add(panelDate, gbcPanelDate);
+		JLabel labelDate = new JLabel("Date "+m.getDate());
+		panelDate.add(labelDate);
 	}
 }
 	

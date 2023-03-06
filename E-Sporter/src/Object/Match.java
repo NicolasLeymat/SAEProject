@@ -12,6 +12,8 @@ public class Match {
 	private int id;
 	private Date date;
 
+	private int numpoule;
+
 	public Match(Date date, Equipe equipe1, Equipe equipe2, Phase phase) {
 		this.setDate(date);
 		this.equipe1 = equipe1;
@@ -19,6 +21,14 @@ public class Match {
 		this.phase = phase;
 		this.winner = null;
 		this.id = -1;
+	}
+
+	public void setNumPoule(int numPoule) {
+		this.numpoule = numPoule;
+	}
+
+	public int getNumpoule() {
+		return numpoule;
 	}
 
 	public int getId() {
