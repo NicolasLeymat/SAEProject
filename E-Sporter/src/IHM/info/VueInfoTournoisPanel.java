@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -24,17 +25,50 @@ public class VueInfoTournoisPanel extends JPanel {
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-        ListeMatch listeMatch;
+        List<ListeMatch> listes = new ArrayList<>();
+
         // Création des modèles de tableau
         if (!(tournoi.getPhaseElim() == null)) {
-             listeMatch = new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer());
+             listes.add(new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer()));
         }
         else {
-             listeMatch = new ListeMatch(tournoi.getPhasePoule().getMatchs());
+            for (int i = 0; i < 4; i++) {
+             listes.add(new ListeMatch(tournoi.getPhasePoule().getListeMatchPoule(i)));
+            }
+
         }
 
         //Spacing
         this.add(Box.createRigidArea(new Dimension(0,5)));
+
+        if (listes.size() >1) {
+        for (int i = 0; i < listes.size(); i++) {
+        setList(tournoi, controleur, sourceFrame, listes.get(i),"Poule"+(i+1));
+        }}
+        else {
+            if (tournoi.getPhaseElim().estFinale()) {
+                setList(tournoi, controleur, sourceFrame,new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer().subList(0,1)) ,"Petite finale");
+                setList(tournoi, controleur, sourceFrame,new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer().subList(1,2)) ,"Finale");
+            }
+            else {
+                String titre;
+                if (tournoi.getPhaseElim().getMatchsAJouer().size()<=2) {
+                    titre = "Demi finale";
+                } else if (tournoi.getPhaseElim().getMatchsAJouer().size()<=4) {
+                    titre = "Quarts de finale";
+                }
+                else {
+                    titre = "Phase éliminatoire";
+                }
+                setList(tournoi, controleur, sourceFrame, new ListeMatch(tournoi.getPhaseElim().getMatchsAJouer()), titre);
+            }
+        }
+
+
+    }
+
+    private void setList(Tournoi tournoi, ControlleurListeMatch controleur, VueInfoTournoisEnCoursFrame sourceFrame, ListeMatch listeMatch,String titre) {
+
 
         // Création des tableaux
         JList jListMatchs = new JList(listeMatch);
@@ -46,7 +80,7 @@ public class VueInfoTournoisPanel extends JPanel {
                 Match match  =(Match) listeMatch.getValueAt(ligne);
 
                 System.out.println(tournoi);
-                IHM.tournois.FrameArbitrageTournois window = new FrameArbitrageTournois(match);
+                FrameArbitrageTournois window = new FrameArbitrageTournois(match);
                 window.setVisible(true);
 
                 window.addWindowListener(new WindowAdapter() {
@@ -68,21 +102,13 @@ public class VueInfoTournoisPanel extends JPanel {
 
         JScrollPane scrollPane1 = new JScrollPane(jListMatchs);
 
-        JLabel titreTournoi = new JLabel(tournoi.getNom());
-        titreTournoi.setFont(ModeleESporter.FONT_LARGE);
-        titreTournoi.setAlignmentX(0.5f);
-        this.add(titreTournoi);
-        this.add(Box.createRigidArea(new Dimension(0,10)));
 
-        JLabel titreMatchs = new JLabel("Matchs en cours");
+        JLabel titreMatchs = new JLabel(titre);
         titreMatchs.setFont(ModeleESporter.FONT_LARGE);
         titreMatchs.setAlignmentX(0.5f);
         this.add(titreMatchs);
         this.add(Box.createRigidArea(new Dimension(0,5)));
         this.add(scrollPane1);
-
-
-
     }
 
 

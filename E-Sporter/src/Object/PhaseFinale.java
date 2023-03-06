@@ -78,7 +78,7 @@ public class PhaseFinale extends Phase{
                 getMatchs().addAll(matchsAJouer);
             }
             else {
-                System.out.println(""+matchsFinis()+finale);
+                System.out.println("Fini "+matchsFinis()+finale);
             }
         }
     }
@@ -103,6 +103,10 @@ public class PhaseFinale extends Phase{
 
     public boolean estFinie () {
         return finale && matchsFinis();
+    }
+
+    public boolean estFinale() {
+        return finale;
     }
     
     /**

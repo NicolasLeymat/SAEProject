@@ -2,6 +2,7 @@ package IHM.info;
 
 import Object.Tournoi;
 import controleur.ControlleurListeMatch;
+import controleur.ModeleESporter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,14 +26,20 @@ public class VueInfoTournoisEnCoursFrame extends JFrame {
         this.tournoi =tournoi;
         this.labelMatchsRestants = new JLabel();
 
+        JLabel titreTournoi = new JLabel(tournoi.getNom(),SwingConstants.CENTER);
+        titreTournoi.setFont(ModeleESporter.FONT_LARGE);
+        titreTournoi.setAlignmentX(0.5f);
 
-        this.setSize(600, 450);
+
+        this.setMaximumSize(new Dimension(1400, 800));
+        this.setMinimumSize(new Dimension(1400, 225));
         this.setLayout(new BorderLayout());
 
         this.nextbutton  = new JButton("Phase suivante");
         ControlleurListeMatch controlleurListeMatch = new ControlleurListeMatch(this);
         JPanel panelBoutons = new JPanel();
         VueInfoTournoisPanel  infoTournoisPanel= new VueInfoTournoisPanel(tournoi,controlleurListeMatch,this);
+
 
         panelBoutons.setLayout(new BoxLayout(panelBoutons,BoxLayout.LINE_AXIS));
         this.nextbutton.addActionListener(controlleurListeMatch);
@@ -50,6 +57,7 @@ public class VueInfoTournoisEnCoursFrame extends JFrame {
 
         //Put everything together, using the content pane's BorderLayout.
         Container contentPane = getContentPane();
+        contentPane.add(titreTournoi, BorderLayout.NORTH);
         contentPane.add(infoTournoisPanel, BorderLayout.CENTER);
         contentPane.add(panelBoutons, BorderLayout.PAGE_END);
 

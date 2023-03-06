@@ -54,13 +54,8 @@ public class ListeMatch extends AbstractListModel {
         for (int i = 0; i < (TAILLESEP-stringE2.length()); i++) {
             res+=" ";
         }
-        if (match.getNumpoule() != 0) {
-            res += " Poule : " + match.getNumpoule();
-        }
-        else {
-            for (int i = 0; i < 6; i++) {
-                res += " ";
-            }
+        for (int i = 0; i < 6; i++) {
+            res += " ";
         }
         for (int i = 0; i < 6; i++) {
             res += " ";

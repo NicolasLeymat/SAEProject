@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 public class PhaseDePoule extends Phase {
 
 	private List<Map<Equipe,Integer>> poules;
+
+	private List<List<Match>> listeMatchspoules;
 	private static final int NB_POULES = 4;
 
 	/**
@@ -17,6 +19,10 @@ public class PhaseDePoule extends Phase {
 	public PhaseDePoule( Tournoi tournoi) {
 		super(tournoi);
 		this.poules = new ArrayList<>();
+	}
+
+	public List<Match> getListeMatchPoule(int poule) {
+		return this.listeMatchspoules.get(poule);
 	}
 
 	public int nbMatchsRestants() {
@@ -65,8 +71,10 @@ public class PhaseDePoule extends Phase {
 	public void setPoulesFromMatchs() {
 		List<Equipe> participants = new ArrayList<>();
 		List<Equipe> verifies = new ArrayList<>();
+		List<List<Match>> listeMatchspoules = new ArrayList<>();
 		if (!getMatchs().isEmpty()) {
 			for (int i = 0; i < NB_POULES; i++) {
+				List<Match> matchsPoule = new ArrayList<>();
 				List<Match> filtreMatch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
 				Match match1 = filtreMatch.stream().findFirst().get();
 				Equipe equipe = match1.getEquipe1();
@@ -100,10 +108,14 @@ public class PhaseDePoule extends Phase {
 										participants.add(m.getEquipe1());
 										setPoule(finalI,matchsJoueurs);
 									}
+									matchsPoule.addAll(matchsJoueurs);
 								});
+				System.out.println("Poule " +matchsPoule);
+				listeMatchspoules.add(matchsPoule);
 			}
 		}
-
+		System.out.println("Poules " +listeMatchspoules);
+		this.listeMatchspoules = listeMatchspoules;
 	}
 	
 	/**
