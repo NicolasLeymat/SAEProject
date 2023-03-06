@@ -423,7 +423,7 @@ public class Tournoi {
 		}
 	}
 
-	private Map<Equipe,Integer[]> getVictoiresPhase (Phase phase) {
+	public Map<Equipe,Integer[]> getVictoiresPhase (Phase phase) {
 		Map<Equipe,Integer[]> res = new HashMap<>();
 		if (phase.getMatchs() != null) {
 			for (Match m : phase.getMatchs()) {
