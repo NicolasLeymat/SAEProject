@@ -728,6 +728,7 @@ public class Equipe implements Comparable<Equipe> {
 			}
 			
 			rs.close();
+			pst.close();
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
