@@ -197,6 +197,7 @@ public class PhaseDePoule extends Phase {
 				Equipe equipe1 = paires.get(j).get(i)[0];
 				Equipe equipe2 = paires.get(j).get(i)[1];
 				Match match = new Match(new Date(calendar.getTime().getTime()),equipe1,equipe2,this);
+				match.setNumPoule(j);
 				getMatchs().add(match);
 			}
 		}

@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 import IHM.info.SeeInfoFrame;
-import IHM.info.VueInfoTournoisFrame;
+import IHM.info.VueInfoTournoisEnCoursFrame;
 import IHM.tournois.FrameClassementTournois;
 import IHM.tournois.FrameInscriptionTournois;
 import IHM.tournois.VueInscriptionTournois;
@@ -30,30 +30,37 @@ public class ControleurInscriptionMouse extends MouseListenerImp {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Tournoi t =this.vue.getTournoi();
-			
+
+		//activation si double click
+		if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+			dbClickAjoutRetrait(t);
+		}
+
+	}
+
+	private void dbClickAjoutRetrait(Tournoi t) {
 		switch(name) {
 		case "Equipe":{
 			if (VueInscriptionTournois.listEquipesTournoi.getModel().getSize() < 16) {
-		
+
 			Equipe eq = (Equipe) this.vue.getInfoToObject();
-			this.modele.addParticipation(eq,t);
+			this.modele.addParticipation(eq, t);
 			VueInscriptionTournois.updateListEquipe(t);
+		}
 			break;
 		}
-		}
 		case "EquipeTournoi":{
-			
+
 			if ( VueInscriptionTournois.listEquipesTournoi.getModel().getSize() > 0){
-			
+
 			Equipe eq = (Equipe) this.vue.getListEquipesTournoi();
 			if(eq != null) {
-				this.modele.deleteParticipation(eq,t);
+				this.modele.deleteParticipation(eq, t);
 				VueInscriptionTournois.updateListEquipe(t);
 			}
 			break;
 		}
 		}
 	}
-		
-}
+	}
 }
