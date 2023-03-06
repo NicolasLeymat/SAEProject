@@ -21,6 +21,7 @@ import Object.Joueur;
 import Object.Nationalite;
 import Object.Tournoi;
 import controleur.ControleurInscription;
+import controleur.ControleurInscriptionMouse;
 import controleur.ModeleESporter;
 import java.awt.GridLayout;
 import javax.swing.ScrollPaneConstants;
@@ -31,7 +32,7 @@ public class VueInscriptionTournois extends JPanel{
 	private Object obj;
 	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
-	private static JList<Equipe> listEquipesTournoi = new JList<>();
+	public static JList<Equipe> listEquipesTournoi = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipeTournoi = new DefaultListModel<>();
 	private static JButton btnAjouter;
 	private static JButton btnSupprimer;
@@ -41,6 +42,9 @@ public class VueInscriptionTournois extends JPanel{
 		
 		this.t = t;
 		
+		ControleurInscriptionMouse cm1 = new ControleurInscriptionMouse(this, "Equipe");
+		ControleurInscriptionMouse cm2 = new ControleurInscriptionMouse(this, "EquipeTournoi");
+		
 		modeleEquipe.clear();
 		System.out.println(t.getId_Mode().getIdMode());
 		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));		
@@ -48,6 +52,9 @@ public class VueInscriptionTournois extends JPanel{
 		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
 		listEquipe.setModel(modeleEquipe);
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
+		
+		listEquipe.addMouseListener(cm1);
+		listEquipesTournoi.addMouseListener(cm2);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{450, 0};
@@ -239,4 +246,5 @@ public class VueInscriptionTournois extends JPanel{
 			btnSupprimer.setEnabled(true);
 		} 
 	}
+	
 }
