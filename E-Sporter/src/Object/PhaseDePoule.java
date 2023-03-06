@@ -2,6 +2,7 @@ package Object;
 
 import java.sql.Date;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 //Classe qui définit les fonctions d'une phase
@@ -50,18 +51,21 @@ public class PhaseDePoule extends Phase {
 	 * @return
 	 */
 	private List<Equipe> getClassement(int poule) {
+		Map<Equipe, Integer[]> t = this.getTournoi().getVictoiresPhase(this);
 		List<Equipe> res = new ArrayList<Equipe>();
-		System.out.println(poules);
 		res.addAll(poules.get(poule).keySet());
-
-		Collections.sort(res, (x,y) ->
+		System.out.println("RESULTAT = " + res + "FIN DU RES");
+		Collections.sort(res, (equipe1,equipe2) ->
 			 {
-			if (poules.get(poule).get(x) >= poules.get(poule).get(y)) {
+			if (	t.get(equipe1)[0] >=
+					t.get(equipe2)[0]
+				) {
 				return -1;
 			} else {
 				return 1;
 			}
 		});
+		System.out.println("RESULTAT = " + res + "FIN DU RES");
 				return res;
 	}
 	
