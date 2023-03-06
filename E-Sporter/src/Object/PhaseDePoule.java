@@ -70,12 +70,13 @@ public class PhaseDePoule extends Phase {
 				List<Match> filtreMatch = getMatchs().stream().filter((m)-> !participants.contains(m.getEquipe1()) && !participants.contains(m.getEquipe2())).collect(Collectors.toList());
 				Match match1 = filtreMatch.stream().findFirst().get();
 				Equipe equipe = match1.getEquipe1();
-				match1.setNumPoule(i);
+				match1.setNumPoule(i+1);
 				verifies.clear();
 				poules.add(new HashMap<Equipe,Integer>());
 				int finalI;
 				finalI = i;
 				System.out.println(equipe);
+				poules.get(finalI).put(equipe,0);
 				filtreMatch.stream().filter((m) -> m.getEquipe1() == equipe || m.getEquipe2() == equipe)
 						.forEach((m) ->
 								{
@@ -112,6 +113,7 @@ public class PhaseDePoule extends Phase {
 	 */
 	private void setPoule(int poule, List<Match> matchs) {
 		for (Match m : matchs) {
+			m.setNumPoule(poule+1);
 			enregistrerGagnant(poule,m);
 		}
 	}
