@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import IHM.MainPanel;
@@ -77,25 +78,36 @@ public class ControleurModif implements ActionListener{
 		
 		if(b.getText().equals("Confirmer")) {
 			this.modele.getPanelFrame(vue).dispose();
-			switch(this.nature) {
+		
+			switch(this.nature) {				
 				case "Equipe":
+					
 					Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
+					JDialog dialog = dialog();
+					
 					VueInfoPanel.updateInfoEquipe(eqNew.getNom());
-					MainPanel.updateListEquipe();
+					MainPanel.updateListEquipe();			
 					this.modele.modifierEquipe(eqNew);
 					MainPanel.updateListEquipe();
 					VueInfoPanel.updateListEquipe();
-					JOptionPane.showMessageDialog(null, "Modification confirmer.");
+					closeDialog(dialog);
+					JOptionPane.showMessageDialog(null, "Modification confirmé.");
 					break;
 				case "Ecurie":
 					Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
+					dialog = dialog();
+					
 					VueInfoPanel.updateInfoEcurie(ec.getNom());
+					closeDialog(dialog);
 					this.modele.modifierEcurie(ecNew);
 					break;
 				case "Joueur":
+					
 					Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
+					dialog = dialog();
 					VueInfoPanel.updateInfoJoueur(jNew);
 					MainPanel.updateListEquipe();
+					closeDialog(dialog);
 					this.modele.modifierJoueur(jNew);
 					break;
 			}
@@ -104,7 +116,20 @@ public class ControleurModif implements ActionListener{
 			this.modele.getPanelFrame(vue).dispose();
 			}	
 	}
-
+	
+	public JDialog dialog() {
+		JOptionPane popup = new JOptionPane("Modification en cours...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, this.vue);
+		JDialog dialog = popup.createDialog("En cours d'exécution...");
+		dialog.setModal(false);
+		dialog.setVisible(true);
+		return dialog;
+		
+	}
+	
+	public void closeDialog(JDialog dialog) {
+		dialog.setVisible(false);
+		dialog.dispose();
+	}
 	
 	
 }
