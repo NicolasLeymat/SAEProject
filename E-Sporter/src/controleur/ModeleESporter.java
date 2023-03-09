@@ -69,13 +69,14 @@ public class ModeleESporter {
 		return i;
 	}
 	
-	public void addTeam(Equipe e) {
+	public int addTeam(Equipe e) {
 		try {
-			Equipe.enregistrerEquipe(e);
+			return Equipe.enregistrerEquipe(e);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		return 0;
 	}
 	
 	public int addOrga(Ecurie e) {

@@ -46,14 +46,23 @@ public class ControleurAddPanel implements ActionListener {
 			Equipe obj = (Equipe) this.vue.getInfoToObject();
 			System.out.println(obj);
 			JFrame frame = this.modele.getPanelFrame(vue);
-			this.modele.addTeam(obj);
-			VueInfoPanel.updateListEquipe();
-			MainPanel.updateListEquipe();
-			MainPanel.updateListEcuries();
-			closeDialog(dialog);
-			JOptionPane.showMessageDialog(this.vue, "Equipe ajoutée avec succès");
-			frame.dispose();
-			break;
+			int info = this.modele.addTeam(obj);
+			if (info == -2) {
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue,
+						"L'équipe n'a pas pu être ajoutée car le nom est déjà existant !");
+			} else if (info == -1) {
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue, "Erreur, Veuillez réessayer !");
+			} else {
+				VueInfoPanel.updateListEquipe();
+				MainPanel.updateListEquipe();
+				MainPanel.updateListEcuries();
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue, "Equipe ajoutée avec succès");
+				frame.dispose();
+				break;
+			}
 		}
 		case "Orga": {
 			Ecurie obj = (Ecurie) this.vue.getInfoToObject();

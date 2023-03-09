@@ -218,7 +218,7 @@ public class Equipe implements Comparable<Equipe> {
 			// A remplacer par un trigger
 			existe = verifierPresenceEquipe(equipe,1);
 			if (existe != 0) {
-				return -1;
+				return -2;
 			}
 			
 			if (equipe.getId() == -1) {
