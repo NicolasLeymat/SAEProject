@@ -31,8 +31,7 @@ public class VueInfoTournoisEnCoursFrame extends JFrame {
         titreTournoi.setAlignmentX(0.5f);
 
 
-        this.setMaximumSize(new Dimension(1400, 800));
-        this.setMinimumSize(new Dimension(1400, 225));
+        this.setMinimumSize(new Dimension(1400, 600));
         this.setLayout(new BorderLayout());
 
         this.nextbutton  = new JButton("Phase suivante");
@@ -55,10 +54,12 @@ public class VueInfoTournoisEnCoursFrame extends JFrame {
         panelBoutons.add(this.nextbutton);
         this.add(panelBoutons);
 
+        JScrollPane scrollInfoTournoiPanel = new JScrollPane(infoTournoisPanel);
+
         //Put everything together, using the content pane's BorderLayout.
         Container contentPane = getContentPane();
         contentPane.add(titreTournoi, BorderLayout.NORTH);
-        contentPane.add(infoTournoisPanel, BorderLayout.CENTER);
+        contentPane.add(scrollInfoTournoiPanel, BorderLayout.CENTER);
         contentPane.add(panelBoutons, BorderLayout.PAGE_END);
 
 

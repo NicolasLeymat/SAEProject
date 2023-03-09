@@ -24,12 +24,13 @@ public class ControlleurListeMatch implements ActionListener {
     public void setBoutonSuivant() {
     	Tournoi t = this.vue.getTournoi();
         if (t.elimmatchsfini()) {
-            System.out.println("ELIM");
+            System.out.println("ELIM FINI");
             if (!t.getPhaseElim().estFinie()) {
                 this.etat = Etat.FINIELIM;
                 vue.setActiveNextButton(true);
             } else {
                 this.etat = Etat.FINI;
+                vue.setButtonText("Terminer le tournoi");
                 vue.setActiveNextButton(true);
             }
         } else if (t.getPhaseElim() == null && t.getPhasePoule().matchsFinis()) {
@@ -63,7 +64,6 @@ public class ControlleurListeMatch implements ActionListener {
                 break;
             }
             case FINI: {
-                vue.setButtonText("Terminer le tournoi");
             	try {
                     t.ajouterPoints();
                     t.setEtat(Tournoi.EtatTournoi.FINI);

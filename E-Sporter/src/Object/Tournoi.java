@@ -419,7 +419,12 @@ public class Tournoi {
 		for (Match m :
 				phaseElim.getMatchs()) {
 
-			m.getWinner().addPoints(5);
+			try {
+				m.getWinner().addPoints(5);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

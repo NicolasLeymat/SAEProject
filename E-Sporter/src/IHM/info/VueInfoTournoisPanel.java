@@ -39,11 +39,11 @@ public class VueInfoTournoisPanel extends JPanel {
         }
 
         //Spacing
-        this.add(Box.createRigidArea(new Dimension(0,5)));
+        //this.add(Box.createRigidArea(new Dimension(0,5)));
 
         if (listes.size() >1) {
         for (int i = 0; i < listes.size(); i++) {
-        setList(tournoi, controleur, sourceFrame, listes.get(i),"Poule"+(i+1));
+        setList(tournoi, controleur, sourceFrame, listes.get(i),"Poule "+(i+1));
         }}
         else {
             if (tournoi.getPhaseElim().estFinale()) {
@@ -93,9 +93,7 @@ public class VueInfoTournoisPanel extends JPanel {
                 });
             }
         });
-        DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        //jListMatchs.setCellRenderer(centerRenderer);
+
         jListMatchs.setFont(new Font("monospaced",Font.PLAIN, ModeleESporter.FONT_SIZE_MEDIUM));
 
         // Création de la barre de défilement pour les tableaux
@@ -107,7 +105,7 @@ public class VueInfoTournoisPanel extends JPanel {
         titreMatchs.setFont(ModeleESporter.FONT_LARGE);
         titreMatchs.setAlignmentX(0.5f);
         this.add(titreMatchs);
-        this.add(Box.createRigidArea(new Dimension(0,5)));
+        //this.add(Box.createRigidArea(new Dimension(0,5)));
         this.add(scrollPane1);
     }
 
