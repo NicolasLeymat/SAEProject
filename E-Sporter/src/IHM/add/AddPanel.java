@@ -53,7 +53,7 @@ public class AddPanel extends JPanel {
 	private JTextField orgaTf;
 	private JComboBox<String> comboBox;
 	private JButton confirmBtn;
-	private JTextField textField;
+	private JTextField lienImageTf;
 	
 	private Object obj2;
 	private static Ecurie oldEc;
@@ -84,10 +84,10 @@ public class AddPanel extends JPanel {
 		add(MainPanel, gbc_MainPanel);
 		
 		// label du titre
-		JLabel Title = new JLabel("");
-		Title.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
-		Title.setBounds(125, 0, 200, 25);
-		MainPanel.add(Title);
+		JLabel lblTitre = new JLabel("");
+		lblTitre.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
+		lblTitre.setBounds(125, 0, 200, 25);
+		MainPanel.add(lblTitre);
 		
 		// label du nom
 		JLabel nameLabel = new JLabel("Nom  :");
@@ -195,7 +195,7 @@ public class AddPanel extends JPanel {
 		value[0] = "Non";
 		DefaultComboBoxModel<String> champModel = new DefaultComboBoxModel<>(value);
 		comboChamp = new JComboBox<String>(champModel);
-		comboChamp.setBounds(140, 192, 150, 25);
+		comboChamp.setBounds(140, 192, 250, 25);
 		
 		JLabel lblChampionnat = new JLabel("Championnat : ");
 		lblChampionnat.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
@@ -210,18 +210,18 @@ public class AddPanel extends JPanel {
 		lblNomOrganisateur.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		lblNomOrganisateur.setBounds(10, 187, 125, 20);
 		
-		textField = new JTextField();
-		textField.setBounds(140, 120, 150, 19);
-		textField.setColumns(10);
-		textField.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
+		lienImageTf = new JTextField();
+		lienImageTf.setBounds(140, 120, 350, 19);
+		lienImageTf.setColumns(10);
+		lienImageTf.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
 		
 		JLabel lblNewLabel = new JLabel("Lien du logo :");
 		lblNewLabel.setFont(ModeleESporter.FONT_MEDIUM_LARGE);
-		lblNewLabel.setBounds(10, 115, 100, 20);
+		lblNewLabel.setBounds(10, 115, 200, 20);
 		
 		switch(type) {
 			case "Player":{
-				Title.setText("Ajout d'un joueur");
+				lblTitre.setText("Ajout d'un joueur");
 				MainPanel.add(lblPrenom);
 				MainPanel.add(firstNameTF);
 				MainPanel.add(lblPseudonyme);
@@ -233,15 +233,18 @@ public class AddPanel extends JPanel {
 				break;
 			}
 			case "Team":{
-				Title.setText("Ajout d'une équipe");
+				lblTitre.setText("Ajout d'une équipe");
 				MainPanel.add(lblMode);
 				MainPanel.add(comboBox);
 				MainPanel.add(lblNewLabel);
-				MainPanel.add(textField);
+				MainPanel.add(lienImageTf);
+				comboBox.setBounds(140, 85, 200, 25);
+				confirmBtn.setBounds(350, 10, 150, 50);
+				lblTitre.setBounds(200, 0, 200, 25);
 				break;
 			}
 			case "Orga":{
-				Title.setText("Ajout d'une écurie");
+				lblTitre.setText("Ajout d'une écurie");
 				nameLabel.setBounds(10, 70, 80, 30);
 				NameTF.setBounds(140, 70, 200, 30);
 				confirmBtn.setBounds(250, 10, 150, 50);
@@ -250,7 +253,7 @@ public class AddPanel extends JPanel {
 				break;
 			}
 			case "Tournament":{
-				Title.setText("Ajout d'un tournoi");
+				lblTitre.setText("Ajout d'un tournoi");
 				MainPanel.add(orgaTf);
 				MainPanel.add(lblNomOrganisateur);
 				MainPanel.add(comboNotoriete);
@@ -303,7 +306,7 @@ public class AddPanel extends JPanel {
 			case "Team":{
 				Ecurie ecurieToAdd = (Ecurie) this.obj;
 				Equipe e = new Equipe(this.NameTF.getText());
-				e.setStringLogo(textField.getText());
+				e.setStringLogo(lienImageTf.getText());
 				e.setIdEcurie(ecurieToAdd.getId());
 				e.setIdModeDeJeu(ModeDeJeu.getModeDeJeuFromNom((String)comboBox.getSelectedItem()).getIdMode());
 				ecurieToAdd.addEquipe(e);

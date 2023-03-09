@@ -85,7 +85,7 @@ public class AddFrame extends JFrame {
 		case "Player":
 			return new Dimension(WIDTH, HEIGHT - 150);
 		case "Team":
-			return new Dimension(WIDTH, HEIGHT - 200);
+			return new Dimension(WIDTH + 100, HEIGHT - 230);
 		case "Orga":
 			return new Dimension(WIDTH, HEIGHT - 150);
 		case "Tournament":
