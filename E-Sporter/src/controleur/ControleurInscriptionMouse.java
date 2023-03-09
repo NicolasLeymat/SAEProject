@@ -41,9 +41,9 @@ public class ControleurInscriptionMouse extends MouseListenerImp {
 	private void dbClickAjoutRetrait(Tournoi t) {
 		switch(name) {
 		case "Equipe":{
-			if (VueInscriptionTournois.listEquipesTournoi.getModel().getSize() < 16) {
-
+			if (this.vue.getAllListEquipesTournoi().size() < 16) {
 			Equipe eq = (Equipe) this.vue.getInfoToObject();
+			VueInscriptionTournois.addListEquipeTournoi(eq);
 			this.modele.addParticipation(eq, t);
 			VueInscriptionTournois.updateListEquipe(t);
 		}
@@ -51,10 +51,11 @@ public class ControleurInscriptionMouse extends MouseListenerImp {
 		}
 		case "EquipeTournoi":{
 
-			if ( VueInscriptionTournois.listEquipesTournoi.getModel().getSize() > 0){
+			if ( this.vue.getAllListEquipesTournoi().size() > 0){
 
 			Equipe eq = (Equipe) this.vue.getListEquipesTournoi();
 			if(eq != null) {
+				VueInscriptionTournois.delListEquipeTournoi(eq);
 				this.modele.deleteParticipation(eq, t);
 				VueInscriptionTournois.updateListEquipe(t);
 			}

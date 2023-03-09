@@ -53,6 +53,7 @@ public class VueInfoPanel extends JPanel{
 	public VueInfoPanel(Equipe equipe) {
 		modeleJoueur.clear();
 		VueInfoPanel.equipe = equipe;
+		VueInfoPanel.ecurie = Ecurie.getEcurieFromId(equipe.getIdEcurie());
 		ControleurAddFrame c = new ControleurAddFrame(equipe);
 		ControleurModif cm = new ControleurModif(equipe, this);
 		ControleurDelete cd = new ControleurDelete(equipe, this);

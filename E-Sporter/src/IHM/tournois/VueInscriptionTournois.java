@@ -32,24 +32,28 @@ public class VueInscriptionTournois extends JPanel{
 	private Object obj;
 	private static JList<Equipe> listEquipe = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
-	public static JList<Equipe> listEquipesTournoi = new JList<>();
+	private static JList<Equipe> listEquipesTournoi = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipeTournoi = new DefaultListModel<>();
 	private static JButton btnAjouter;
 	private static JButton btnSupprimer;
-	
+	private static List<Equipe> suppressionList;
+	private static List<Equipe> ajoutList;
+	private static List<Equipe> allModeList;
+	private static List<Equipe> allTournoiEquipeList;
 	
 	public VueInscriptionTournois(Tournoi t) {
 		
 		this.t = t;
-		
+		VueInscriptionTournois.allModeList = Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode());
+		VueInscriptionTournois.allTournoiEquipeList = Equipe.getAllEquipesFromTournoi(t);
 		ControleurInscriptionMouse cm1 = new ControleurInscriptionMouse(this, "Equipe");
 		ControleurInscriptionMouse cm2 = new ControleurInscriptionMouse(this, "EquipeTournoi");
 		
 		modeleEquipe.clear();
 		System.out.println(t.getId_Mode().getIdMode());
-		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));		
+		modeleEquipe.addAll(equipeDif(t, allModeList));		
 		modeleEquipeTournoi.clear();
-		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
+		modeleEquipeTournoi.addAll(allTournoiEquipeList);
 		listEquipe.setModel(modeleEquipe);
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
 		
@@ -222,14 +226,19 @@ public class VueInscriptionTournois extends JPanel{
 		return e;
 	}
 	
+	public static void addListEquipeTournoi(Equipe e) {
+		VueInscriptionTournois.modeleEquipeTournoi.addElement(e);
+	}
+	
+	public static void delListEquipeTournoi(Equipe e) {
+		VueInscriptionTournois.modeleEquipeTournoi.removeElement(e);
+	}
 
 	public static void updateListEquipe(Tournoi t) {
 		modeleEquipe.clear();
-		modeleEquipe.addAll(equipeDif(t, Equipe.getAllEquipesFromModeDeJeu(t.getId_Mode().getIdMode())));	
+		modeleEquipe.addAll(equipeDif(t, VueInscriptionTournois.allModeList));	
 		listEquipe.setModel(modeleEquipe);
 		
-		modeleEquipeTournoi.clear();
-		modeleEquipeTournoi.addAll(Equipe.getAllEquipesFromTournoi(t));
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
 		
 		if (listEquipesTournoi.getModel().getSize() >= 16) {
@@ -246,5 +255,30 @@ public class VueInscriptionTournois extends JPanel{
 			btnSupprimer.setEnabled(true);
 		} 
 	}
+	
+	public void addAjoutList(Equipe e) {
+		VueInscriptionTournois.ajoutList.add(e);
+	}
+	
+	public void delAjoutList(Equipe e) {
+		VueInscriptionTournois.ajoutList.remove(e);
+	}
+	
+	public List<Equipe> getAjoutList(){
+		return VueInscriptionTournois.ajoutList;
+	}
+	
+	public void addDelList(Equipe e) {
+		VueInscriptionTournois.suppressionList.add(e);
+	}
+	
+	public void delDelList(Equipe e) {
+		VueInscriptionTournois.suppressionList.remove(e);
+	}
+	
+	public List<Equipe> getDelList() {
+		return VueInscriptionTournois.suppressionList;
+	}
+	
 	
 }

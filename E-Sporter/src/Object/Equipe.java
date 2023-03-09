@@ -328,10 +328,14 @@ public class Equipe implements Comparable<Equipe> {
 	public static int inscrireEquipeTournoi(Equipe equipe, Tournoi tournoi) {
     	Connection connex = Connexion.connexion();
     	PreparedStatement pst;
-    	
+    	int existe;
 		try {
-			pst = connex.
-					prepareStatement("insert into LMN3783A.sae_participer(id_tournoi, id_equipe) values(?,?)");
+			// A remplacer par un trigger
+			existe = verifierPresenceInscription(equipe,tournoi);
+			if (existe != 0) {
+				return -1;
+			}
+			pst = connex.prepareStatement("insert into LMN3783A.sae_participer(id_tournoi, id_equipe) values(?,?)");
 			pst.setInt(1, tournoi.getId());
 			pst.setInt(2, equipe.getId());
 			pst.executeUpdate();
@@ -634,6 +638,28 @@ public class Equipe implements Comparable<Equipe> {
 				pst.setString(1, e.getNom());
 			}
 			
+			rs = pst.executeQuery();
+			rs.next();
+			res = rs.getInt(1);
+			rs.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private static int verifierPresenceInscription(Equipe e, Tournoi tournoi) {
+		Connection connex = Connexion.connexion();
+		PreparedStatement pst;
+		ResultSet rs;
+		int res = 0;
+		
+		try {
+			pst = connex.prepareStatement("select count(1) from LMN3783A.sae_participer where id_equipe = ? and id_tournoi = ?" );
+			pst.setInt(1, e.getId());
+			pst.setInt(2, tournoi.getId());
 			rs = pst.executeQuery();
 			rs.next();
 			res = rs.getInt(1);
