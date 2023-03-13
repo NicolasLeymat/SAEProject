@@ -34,8 +34,6 @@ public class VueInscriptionTournois extends JPanel{
 	private static DefaultListModel<Equipe> modeleEquipe = new DefaultListModel<>();
 	private static JList<Equipe> listEquipesTournoi = new JList<>();
 	private static DefaultListModel<Equipe> modeleEquipeTournoi = new DefaultListModel<>();
-	private static JButton btnAjouter;
-	private static JButton btnSupprimer;
 	private static List<Equipe> suppressionList;
 	private static List<Equipe> ajoutList;
 	private static List<Equipe> allModeList;
@@ -152,30 +150,13 @@ public class VueInscriptionTournois extends JPanel{
 		gbc_btnPanel.gridy = 2;
 		add(btnPanel, gbc_btnPanel);
 		
-		btnAjouter = new JButton("Ajouter");
-		btnAjouter.setLocation(60, 0);
-		btnAjouter.setSize(100, 50);
-		btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setLocation(290, 0);
-		btnSupprimer.setSize(100, 50);
-		
 		ControleurInscription ci = new ControleurInscription(this);
-		btnAjouter.addActionListener(ci);
-		btnSupprimer.addActionListener(ci);
-		btnPanel.add(btnAjouter);
-		btnPanel.add(btnSupprimer);
+
 		
 		JButton confirmer = new JButton("Confirmer");
 		confirmer.setBounds(175, 0, 100, 50);
 		btnPanel.add(confirmer);
 		confirmer.addActionListener(ci);
-		
-		if (listEquipesTournoi.getModel().getSize() >= 16) {
-			btnAjouter.setEnabled(false);
-		}
-		if (listEquipesTournoi.getModel().getSize() <=0) {
-			btnSupprimer.setEnabled(false);
-		}
 	}
 
 	private static List<Equipe> equipeDif(Tournoi t,List<Equipe> allEquipesFromModeDeJeu) {
@@ -240,20 +221,6 @@ public class VueInscriptionTournois extends JPanel{
 		listEquipe.setModel(modeleEquipe);
 		
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
-		
-		if (listEquipesTournoi.getModel().getSize() >= 16) {
-			btnAjouter.setEnabled(false);
-		}
-		else {
-			btnAjouter.setEnabled(true);
-		}
-		
-		if (listEquipesTournoi.getModel().getSize() <=0) {
-			btnSupprimer.setEnabled(false);
-		}
-		else {
-			btnSupprimer.setEnabled(true);
-		} 
 	}
 	
 	public void addAjoutList(Equipe e) {
