@@ -177,9 +177,10 @@ public class Ecurie {
 				ecurie.setId(Ecurie.getLastId()+1);
 			}
 			
-			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie(id_ecurie, nom) values(?,?)");
+			pst = connex.prepareStatement("insert into LMN3783A.sae_ecurie(id_ecurie, nom, nat) values(?,?,?)");
 			pst.setInt(1, ecurie.getId());
 			pst.setString(2, ecurie.getNom());
+			pst.setString(3, ecurie.getNat().getCode());
 			pst.executeUpdate();
 			
 			for (Equipe eq : ecurie.getEquipes()) {

@@ -32,12 +32,24 @@ public class ControleurAddPanel implements ActionListener {
 			Joueur obj = (Joueur) this.vue.getInfoToObject();
 			// System.out.println(obj);
 			JFrame frame = this.modele.getPanelFrame(vue);
-			int i = this.modele.addPlayer(obj);
-			System.out.println(i);
+			int info = this.modele.addPlayer(obj);
 			VueInfoPanel.updateListJoueur();
-			MainPanel.updateListEquipe();
-			closeDialog(dialog);
-			JOptionPane.showMessageDialog(this.vue, "Joueur ajouté avec succès");
+			if (info == -2) {
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue,
+						"Le joueur n'a pas pu être ajoutée car le joueur existe déjà !");
+			}
+			else if (info == -1) {
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue, "Erreur, veuillez réessayer !");
+			}
+			else {
+				System.out.println(info);
+				VueInfoPanel.updateListJoueur();
+				MainPanel.updateListEquipe();
+				closeDialog(dialog);
+				JOptionPane.showMessageDialog(this.vue, "Joueur ajouté avec succès");
+			}
 			frame.dispose();
 			break;
 		}
@@ -50,19 +62,19 @@ public class ControleurAddPanel implements ActionListener {
 			if (info == -2) {
 				closeDialog(dialog);
 				JOptionPane.showMessageDialog(this.vue,
-						"L'équipe n'a pas pu être ajoutée car le nom est déjà existant !");
+						"L'équipe n'a pas pu être ajoutée car une équipe porte déjà le même nom !");
 			} else if (info == -1) {
 				closeDialog(dialog);
-				JOptionPane.showMessageDialog(this.vue, "Erreur, Veuillez réessayer !");
+				JOptionPane.showMessageDialog(this.vue, "Erreur, veuillez réessayer !");
 			} else {
 				VueInfoPanel.updateListEquipe();
 				MainPanel.updateListEquipe();
 				MainPanel.updateListEcuries();
 				closeDialog(dialog);
 				JOptionPane.showMessageDialog(this.vue, "Equipe ajoutée avec succès");
-				frame.dispose();
-				break;
 			}
+			frame.dispose();
+			break;
 		}
 		case "Orga": {
 			Ecurie obj = (Ecurie) this.vue.getInfoToObject();
@@ -73,7 +85,7 @@ public class ControleurAddPanel implements ActionListener {
 				JFrame frame = this.modele.getPanelFrame(vue);
 				MainPanel.updateListEcuries();
 				closeDialog(dialog);
-				JOptionPane.showMessageDialog(this.vue, "Ecurie ajouté avec succès");
+				JOptionPane.showMessageDialog(this.vue, "Ecurie ajoutée avec succès");
 				frame.dispose();
 			} else {
 				JOptionPane.showMessageDialog(this.vue, "Une erreur est survenue lors de la création de l'écurie");

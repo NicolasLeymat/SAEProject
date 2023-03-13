@@ -54,6 +54,7 @@ public class VueInfoPanel extends JPanel{
 		modeleJoueur.clear();
 		VueInfoPanel.equipe = equipe;
 		VueInfoPanel.ecurie = Ecurie.getEcurieFromId(equipe.getIdEcurie());
+		System.out.println(modeleJoueur.getSize());
 		ControleurAddFrame c = new ControleurAddFrame(equipe);
 		ControleurModif cm = new ControleurModif(equipe, this);
 		ControleurDelete cd = new ControleurDelete(equipe, this);
@@ -213,23 +214,23 @@ public class VueInfoPanel extends JPanel{
 		panel_1.add(delete);
 		delete.setFont(ModeleESporter.FONT_MEDIUM);
 		
-		
+		VueInfoPanel.updateListJoueur();
 	}
 
 
 	/**
 	 * Panel d'information d'une equipe
 	 *
-	 * @param equipe L'ecurie
+	 * @param ecurie L'ecurie
 	 */
-	public VueInfoPanel(Ecurie equipe) {
+	public VueInfoPanel(Ecurie ecurie) {
 		modeleEquipe.clear();
 		VueInfoPanel.ecurie = null;
-		VueInfoPanel.ecurie = equipe;
+		VueInfoPanel.ecurie = ecurie;
 		this.setSize(500, 400);
-		ControleurAddFrame c = new ControleurAddFrame(equipe);
-		ControleurModif cm = new ControleurModif(equipe, this);
-		ControleurDelete cd = new ControleurDelete(equipe, this);
+		ControleurAddFrame c = new ControleurAddFrame(ecurie);
+		ControleurModif cm = new ControleurModif(ecurie, this);
+		ControleurDelete cd = new ControleurDelete(ecurie, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 258, 0};
 		gridBagLayout.rowHeights = new int[]{0, 70, 0};
@@ -251,7 +252,7 @@ public class VueInfoPanel extends JPanel{
 		labelNomEcurie.setBounds(0, 10, 145, 17);
 		panel_1.add(labelNomEcurie);
 		
-		VueInfoPanel.labelNomEcurie = new JLabel(equipe.getNom());
+		VueInfoPanel.labelNomEcurie = new JLabel(ecurie.getNom());
 		VueInfoPanel.labelNomEcurie.setFont(ModeleESporter.FONT_MEDIUM);
 		VueInfoPanel.labelNomEcurie.setBounds(0, 35, 145, 13);
 		panel_1.add(VueInfoPanel.labelNomEcurie);
@@ -266,7 +267,7 @@ public class VueInfoPanel extends JPanel{
 		add(panelListes, gbc_panel_2);
 		
 		ControleurJList controleur = new ControleurJList();
-		modeleEquipe.addAll(equipe.getEquipes());
+		modeleEquipe.addAll(ecurie.getEquipes());
 		//
 		listEquipe = new JList<>();
 		//
@@ -317,6 +318,7 @@ public class VueInfoPanel extends JPanel{
 		modfier.setBounds(62, 10, 200, 50);
 		modfier.addActionListener(cm);
 		panelModification.add(modfier);
+		VueInfoPanel.updateListEquipe();
 	}
 
 	/**
@@ -373,7 +375,9 @@ public class VueInfoPanel extends JPanel{
 	 * @param joueur
 	 */
 	public VueInfoPanel(Joueur joueur) {
+		modeleJoueur.clear();
 		VueInfoPanel.joueur = joueur;
+		VueInfoPanel.updateListJoueur();
 		this.setSize(750, 400);
 		ControleurModif cm = new ControleurModif(joueur, this);
 		ControleurDelete cd = new ControleurDelete(joueur, this);
@@ -500,6 +504,7 @@ public class VueInfoPanel extends JPanel{
 		modeleJoueur.clear();
 		equipe = Equipe.getEquipeFromId(equipe.getId());
 		modeleJoueur.addAll(equipe.getJoueurs());
+		System.out.println(equipe.getJoueurs());
 		listJoueur.setModel(modeleJoueur);
 	}
 	

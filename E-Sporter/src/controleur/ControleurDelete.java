@@ -90,7 +90,7 @@ public class ControleurDelete implements ActionListener {
 					MainPanel.updateListEcuries();
 					//execution terminer fermeture de la pop up
 					closeDialog(dialog);
-					JOptionPane.showMessageDialog(this.vue, "Ecurie supprimer avec succès");
+					JOptionPane.showMessageDialog(this.vue, "Ecurie supprimée avec succès");
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				/*case "Tournoi":
@@ -109,7 +109,7 @@ public class ControleurDelete implements ActionListener {
 				case "Joueur":
 					System.out.println(j);
 					if (modele.supprimerJoueur(j) == -2) {
-						JOptionPane.showMessageDialog(this.vue, "Le Joueur n'a pas être supprimer, réessayez !");
+						JOptionPane.showMessageDialog(this.vue, "Le joueur n'a pas être supprimé, réessayez !");
 						break;
 					}
 					//pop up indiquant que l'exécution est en cours
@@ -118,7 +118,7 @@ public class ControleurDelete implements ActionListener {
 					MainPanel.updateListEquipe();
 					//execution terminer fermeture de la pop up
 					closeDialog(dialog);
-					JOptionPane.showMessageDialog(this.vue, "Joueur supprimer avec succès");
+					JOptionPane.showMessageDialog(this.vue, "Joueur supprimé avec succès");
 					this.modele.getPanelFrame(vue).dispose();
 					break;
 				}
