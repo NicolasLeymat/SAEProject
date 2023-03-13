@@ -1,0 +1,7 @@
+organization=nicolasleymat
+projectKey=NicolasLeymat_E_Sporter_Gradle
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.38913
+dashboardUrl=https://sonarcloud.io/dashboard?id=NicolasLeymat_E_Sporter_Gradle
+ceTaskId=AYbHDCJIdam2tRoxAX9F
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYbHDCJIdam2tRoxAX9F

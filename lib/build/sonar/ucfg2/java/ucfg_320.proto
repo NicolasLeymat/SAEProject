@@ -1,0 +1,179 @@
+
+GIHM.add.AddFrame#getMinimumSize(Ljava/lang/String;)Ljava/awt/Dimension;O
+EC:/UwAmp/www/E_Sporter_Gradle/lib/src/main/java/IHM/add/AddFrame.javaQ Q(!"2"3"4"5"6*¿
+2[ \('B
+@
+\ \(
+
+%16int"__id*"
+
+__unknown_file (
+""B
+@
+\ \(%
+
+%17int"__id*"
+
+__unknown_file (
+"";9
+\ \(
+%18java.awt.Dimension"java.awt.DimensionÁ
+¾
+\
+ \(&
+%19"java.awt.Dimension#<init>(II)V*7
+
+__unknown_file (
+
+%18java.awt.Dimension*(
+
+__unknown_file (
+
+
+%16int*(
+
+__unknown_file (
+
+
+%17int"'
+\ \('
+
+%18java.awt.Dimension*¹
+3Y Z(-B
+@
+Z Z(
+
+%12int"__id*"
+
+__unknown_file (
+""B
+@
+Z Z(%
+
+%13int"__id*"
+
+__unknown_file (
+"";9
+Z Z(
+%14java.awt.Dimension"java.awt.Dimension»
+¸
+Z
+ Z(,
+%15"java.awt.Dimension#<init>(II)V*7
+
+__unknown_file (
+
+%14java.awt.Dimension*(
+
+__unknown_file (
+
+
+%12int*"
+
+__unknown_file (
+"""'
+Z Z(-
+
+%14java.awt.Dimension*¶
+4W X(-A
+?
+X X(	
+%8int"__id*"
+
+__unknown_file (
+""A
+?
+X X(%	
+%9int"__id*"
+
+__unknown_file (
+"";9
+X X(
+%10java.awt.Dimension"java.awt.Dimensionº
+·
+X
+ X(,
+%11"java.awt.Dimension#<init>(II)V*7
+
+__unknown_file (
+
+%10java.awt.Dimension*'
+
+__unknown_file (
+	
+%8int*"
+
+__unknown_file (
+"""'
+X X(-
+
+%10java.awt.Dimension*²
+5U V(-A
+?
+V V(	
+%4int"__id*"
+
+__unknown_file (
+""A
+?
+V V(%	
+%5int"__id*"
+
+__unknown_file (
+"":8
+V V(
+%6java.awt.Dimension"java.awt.Dimension¸
+µ
+V
+ V(,
+%7"java.awt.Dimension#<init>(II)V*6
+
+__unknown_file (
+
+%6java.awt.Dimension*'
+
+__unknown_file (
+	
+%4int*"
+
+__unknown_file (
+"""&
+V V(-
+
+%6java.awt.Dimension*²
+6S T(-A
+?
+T T(	
+%0int"__id*"
+
+__unknown_file (
+""A
+?
+T T(%	
+%1int"__id*"
+
+__unknown_file (
+"":8
+T T(
+%2java.awt.Dimension"java.awt.Dimension¸
+µ
+T
+ T(,
+%3"java.awt.Dimension#<init>(II)V*6
+
+__unknown_file (
+
+%2java.awt.Dimension*'
+
+__unknown_file (
+	
+%0int*"
+
+__unknown_file (
+"""&
+T T(-
+
+%2java.awt.Dimension:$
+Q" Q(-
+typejava.lang.StringB
+IHM.add.AddFrame

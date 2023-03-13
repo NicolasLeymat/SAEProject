@@ -1,0 +1,2 @@
+controleur.ModeleESporter#getAllTournoi()Ljava/util/List;
+Object.Tournoi#getAllTournois()Ljava/util/List;

@@ -1,0 +1,15 @@
+IHM.ButtonPanel#<init>()V
+java.awt.GridLayout#<init>(IIII)V
+javax.swing.JPanel#<init>()V
+javax.swing.JButton#<init>(Ljava/lang/String;)V
+controleur.ControleurChamp#<init>()V
+java.awt.GridLayout#instance-init#
+javax.swing.JPanel#instance-init#
+java.awt.Dimension#<init>(II)V
+javax.swing.JLabel#<init>(Ljava/lang/String;)V
+controleur.ControleurAddFrame#instance-init#
+java.awt.Dimension#instance-init#
+controleur.ControleurChamp#instance-init#
+controleur.ControleurAddFrame#<init>(Ljava/lang/Object;)V
+javax.swing.JLabel#instance-init#
+javax.swing.JButton#instance-init#

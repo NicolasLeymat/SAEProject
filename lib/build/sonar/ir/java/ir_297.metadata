@@ -1,0 +1,2 @@
+controleur.ModeleESporter#addPlayer(LObject/Joueur;)I
+Object.Joueur#enregistrerJoueur(LObject/Joueur;)I

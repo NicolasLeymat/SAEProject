@@ -1,0 +1,9 @@
+IHM.modif.VueModifFrame#<init>(LObject/Ecurie;)V
+java.awt.Dimension#<init>(II)V
+IHM.modif.VueModifPanel#instance-init#
+java.awt.GridBagLayout#<init>()V
+java.awt.GridBagLayout#instance-init#
+java.awt.Dimension#instance-init#
+IHM.modif.VueModifPanel#<init>(LObject/Ecurie;)V
+java.awt.GridBagConstraints#instance-init#
+java.awt.GridBagConstraints#<init>()V

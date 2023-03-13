@@ -1,0 +1,4 @@
+controleur.ModeleESporter#<init>()V
+java.util.LinkedList#<init>()V
+java.util.LinkedList#instance-init#
+Application.Connexion#connexion()Ljava/sql/Connection;

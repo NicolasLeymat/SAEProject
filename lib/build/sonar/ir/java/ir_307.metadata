@@ -1,0 +1,2 @@
+controleur.ModeleESporter#modifierEquipe(LObject/Equipe;)V
+Object.Equipe#modifierEquipe(LObject/Equipe;)I

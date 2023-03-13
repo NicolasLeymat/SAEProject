@@ -1,0 +1,2 @@
+controleur.ModeleESporter#getPanelFrame(Ljavax/swing/JPanel;)Ljavax/swing/JFrame;
+javax.swing.SwingUtilities#getWindowAncestor(Ljava/awt/Component;)Ljava/awt/Window;

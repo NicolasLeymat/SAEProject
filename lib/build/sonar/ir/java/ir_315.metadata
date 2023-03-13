@@ -1,0 +1,2 @@
+controleur.ModeleESporter#deleteParticipation(LObject/Equipe;LObject/Tournoi;)V
+Object.Equipe#supprimerEquipeTournoi(LObject/Equipe;LObject/Tournoi;)I

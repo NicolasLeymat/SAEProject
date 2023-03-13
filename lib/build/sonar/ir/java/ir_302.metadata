@@ -1,0 +1,2 @@
+controleur.ModeleESporter#getRechercheEcurie(Ljava/lang/String;)Ljava/util/List;
+Object.Ecurie#getEcurieFromNomAll(Ljava/lang/String;)Ljava/util/List;

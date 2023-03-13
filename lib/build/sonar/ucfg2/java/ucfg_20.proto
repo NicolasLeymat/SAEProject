@@ -1,0 +1,35 @@
+
+6Application.Connexion#connexion()Ljava/sql/Connection;T
+JC:/UwAmp/www/E_Sporter_Gradle/lib/src/main/java/Application/Connexion.java* (3"3*Õ
+2 (!œ
+™
+ (#
+%1java.sql.Connection";Application.Connexion#creerConnexion()Ljava/sql/Connection;*5
+
+__unknown_file ("
+Application.Connexion"'
+ ($
+
+%1java.sql.Connection*Š
+3 (s
+q
+ (
+%0java.sql.Connection"__id*D
+
+__unknown_file ((*&
+Application.Connexion"
+	connexion*
+2
+1*«
+1 (s
+q
+ (
+%2java.sql.Connection"__id*D
+
+__unknown_file ((*&
+Application.Connexion"
+	connexion"'
+ (
+
+%2java.sql.ConnectionB"
+Application.ConnexionH

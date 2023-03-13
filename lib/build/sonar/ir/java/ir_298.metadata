@@ -1,0 +1,2 @@
+controleur.ModeleESporter#addOrga(LObject/Ecurie;)I
+Object.Ecurie#enregistrerEcurie(LObject/Ecurie;)I

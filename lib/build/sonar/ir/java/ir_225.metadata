@@ -1,0 +1,5 @@
+Object.PhaseFinale#getClassement()[LObject/Equipe;
+java.lang.Exception#<init>(Ljava/lang/String;)V
+java.lang.Exception#instance-init#
+==
+estFinie Object.PhaseFinale#estFinie()Z

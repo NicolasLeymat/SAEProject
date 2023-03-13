@@ -1,0 +1,2 @@
+Object.Equipe#getEcurie()LObject/Ecurie;
+Object.Ecurie#getEcurieFromId(I)LObject/Ecurie;

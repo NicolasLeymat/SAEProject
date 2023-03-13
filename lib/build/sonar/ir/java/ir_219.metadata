@@ -1,0 +1,10 @@
+Object.PhaseFinale#genererMatchs()V
+java.util.ArrayList#<init>()V
+Object.Match#<init>(Ljava/sql/Date;LObject/Equipe;LObject/Equipe;LObject/Phase;)V
+java.sql.Date#<init>(J)V
+Object.Match#instance-init#
+java.util.ArrayList#instance-init#
+java.util.Calendar#getTime()Ljava/util/Date;
+java.sql.Date#instance-init#
+==
+matchsFinis Object.PhaseFinale#matchsFinis()Z

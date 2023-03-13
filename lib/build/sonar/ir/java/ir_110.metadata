@@ -1,0 +1,3 @@
+controleur.ControleurAddFrame#actionPerformed(Ljava/awt/event/ActionEvent;)V
+IHM.add.AddFrame#instance-init#
+IHM.add.AddFrame#<init>(Ljava/lang/String;Ljava/lang/Object;)V

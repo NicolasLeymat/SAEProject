@@ -1,0 +1,2 @@
+controleur.ModeleESporter#supprimerJoueur(LObject/Joueur;)I
+Object.Joueur#supprimerJoueur(LObject/Joueur;)I

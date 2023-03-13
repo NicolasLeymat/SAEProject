@@ -1,0 +1,2 @@
+controleur.ModeleESporter#supprimerEcurie(LObject/Ecurie;)I
+Object.Ecurie#supprimerEcurie(LObject/Ecurie;)I

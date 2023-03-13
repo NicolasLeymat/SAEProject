@@ -1,0 +1,2 @@
+controleur.ModeleESporter#supprimerTournoi(LObject/Tournoi;)I
+Object.Tournoi#supprimerTournoi(LObject/Tournoi;)I

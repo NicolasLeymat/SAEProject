@@ -1,0 +1,5 @@
+IHM.tournois.FrameClassementTournois#<init>(LObject/Tournoi;)V
+IHM.tournois.VueClassementTournois#<init>(LObject/Tournoi;)V
+javax.swing.border.EmptyBorder#<init>(IIII)V
+IHM.tournois.VueClassementTournois#instance-init#
+javax.swing.border.EmptyBorder#instance-init#

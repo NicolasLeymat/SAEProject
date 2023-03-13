@@ -1,0 +1,2 @@
+controleur.ModeleESporter#getAllEquipe()Ljava/util/List;
+Object.Equipe#getAllEquipes()Ljava/util/List;

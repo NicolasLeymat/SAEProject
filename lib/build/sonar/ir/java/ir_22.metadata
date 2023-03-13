@@ -1,0 +1,2 @@
+Application.Connexion#connexion()Ljava/sql/Connection;
+Application.Connexion#creerConnexion()Ljava/sql/Connection;

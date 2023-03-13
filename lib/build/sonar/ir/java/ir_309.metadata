@@ -1,0 +1,2 @@
+controleur.ModeleESporter#modifierJoueur(LObject/Joueur;)V
+Object.Joueur#modifierJoueur(LObject/Joueur;)I

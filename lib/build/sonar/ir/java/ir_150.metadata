@@ -1,0 +1,3 @@
+IHM.tournois.FrameArbitrageTournois#<init>(LObject/Match;)V
+IHM.tournois.VueArbitrageTournois#instance-init#
+IHM.tournois.VueArbitrageTournois#<init>(LObject/Match;)V

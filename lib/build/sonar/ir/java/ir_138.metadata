@@ -1,0 +1,5 @@
+Object.Tournoi#verifierPresenceTournoi(LObject/Tournoi;)Z
+Application.Connexion#connexion()Ljava/sql/Connection;
+==
+getDateTournoi Object.Tournoi#getDateTournoi()Ljava/sql/Date;
+getNom Object.Tournoi#getNom()Ljava/lang/String;

@@ -1,0 +1,11 @@
+Object.PhaseDePoule#genererPoules()V
+java.util.ArrayList#<init>()V
+java.util.HashMap#<init>()V
+java.util.ArrayList#instance-init#
+java.util.Collections#shuffle(Ljava/util/List;)V
+java.lang.Exception#<init>(Ljava/lang/String;)V
+java.util.HashMap#instance-init#
+java.util.Collections#sort(Ljava/util/List;)V
+java.lang.Exception#instance-init#
+==
+isElim Object.PhaseDePoule#isElim()Z

@@ -1,0 +1,3 @@
+controleur.ControlleurListeMatch#<init>(LIHM/info/VueInfoTournoisFrame;)V
+==
+setBoutonSuivant controleur.ControlleurListeMatch#setBoutonSuivant()V

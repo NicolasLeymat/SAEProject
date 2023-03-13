@@ -1,0 +1,4 @@
+Object.PhaseDePoule#getMatchsFromID()V
+==
+toStringPoule Object.PhaseDePoule#toStringPoule()Ljava/lang/String;
+setPoulesFromMatchs Object.PhaseDePoule#setPoulesFromMatchs()V

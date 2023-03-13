@@ -1,0 +1,5 @@
+IHM.add.AddPanel#formattingText()Ljava/sql/Date;
+java.lang.String#split(Ljava/lang/String;)[Ljava/lang/String;
+java.lang.Integer#parseInt(Ljava/lang/String;)I
+java.sql.Date#<init>(III)V
+java.sql.Date#instance-init#

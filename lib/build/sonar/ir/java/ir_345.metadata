@@ -1,0 +1,2 @@
+Object.PhaseDePoule#getPremier(I)LObject/Equipe;
+Object.PhaseDePoule#getClassement(I)Ljava/util/List;

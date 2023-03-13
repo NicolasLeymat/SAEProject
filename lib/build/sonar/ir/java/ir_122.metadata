@@ -1,0 +1,6 @@
+Object.Tournoi#demarrer()V
+Object.Phase#enregistrerPhase(LObject/Phase;)I
+java.lang.IllegalArgumentException#<init>(Ljava/lang/String;)V
+java.lang.IllegalArgumentException#instance-init#
+==
+getPhasePoule Object.Tournoi#getPhasePoule()LObject/PhaseDePoule;

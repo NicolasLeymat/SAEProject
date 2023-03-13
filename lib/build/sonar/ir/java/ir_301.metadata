@@ -1,0 +1,2 @@
+controleur.ModeleESporter#getRecherche(Ljava/lang/String;)Ljava/util/List;
+Object.Equipe#getEquipeFromNomAll(Ljava/lang/String;)Ljava/util/List;

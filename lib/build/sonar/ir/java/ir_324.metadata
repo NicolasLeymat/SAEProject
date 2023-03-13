@@ -1,0 +1,4 @@
+IHM.tournois.VueInscriptionTournois#updateListEquipe(LObject/Tournoi;)V
+Object.Equipe#getAllEquipesFromTournoi(LObject/Tournoi;)Ljava/util/List;
+IHM.tournois.VueInscriptionTournois#equipeDif(LObject/Tournoi;Ljava/util/List;)Ljava/util/List;
+Object.Equipe#getAllEquipesFromModeDeJeu(I)Ljava/util/List;

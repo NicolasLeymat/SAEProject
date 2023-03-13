@@ -1,0 +1,2 @@
+IHM.info.VueInfoPanel#updateInfoJoueur(LObject/Joueur;)V
+Object.Nationalite#getNom()Ljava/lang/String;

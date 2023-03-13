@@ -1,0 +1,14 @@
+controleur.ControleurFilter#actionPerformed(Ljava/awt/event/ActionEvent;)V
+IHM.MainPanel#changeModelElementEquipe(Ljava/util/List;)V
+Object.Equipe#getAllEquipes()Ljava/util/List;
+Object.Nationalite#getByNom(Ljava/lang/String;)LObject/Nationalite;
+IHM.MainPanel#changeModelElementEcurie(Ljava/util/List;)V
+Object.Equipe#getClassementByGame(I)Ljava/util/List;
+IHM.champ.ChampPanel#changeModelResultChamp(Ljava/util/List;)V
+IHM.MainPanel#changeModelElementTournoi(Ljava/util/List;)V
+Object.Ecurie#getAllEcuries()Ljava/util/List;
+Object.Tournoi#getAllTournois()Ljava/util/List;
+Object.Tournoi#getTournoiWithFilter(LObject/Tournoi$EtatTournoi;)Ljava/util/List;
+Object.Equipe#getEquipeFromMode(I)Ljava/util/List;
+Object.Ecurie#getEcurieFromNat(LObject/Nationalite;)Ljava/util/List;
+Object.ModeDeJeu#getModeDeJeuFromNom(Ljava/lang/String;)LObject/ModeDeJeu;

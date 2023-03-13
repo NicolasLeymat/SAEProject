@@ -1,0 +1,15 @@
+IHM.SearchPanel#<init>()V
+java.awt.GridBagLayout#instance-init#
+java.awt.Color#<init>(III)V
+javax.swing.JButton#<init>(Ljava/lang/String;)V
+java.awt.Insets#instance-init#
+java.awt.GridBagConstraints#instance-init#
+java.awt.GridBagConstraints#<init>()V
+java.awt.Insets#<init>(IIII)V
+java.awt.GridBagLayout#<init>()V
+javax.swing.JLabel#<init>(Ljava/lang/String;)V
+java.awt.Color#instance-init#
+javax.swing.JTextField#instance-init#
+javax.swing.JTextField#<init>()V
+javax.swing.JLabel#instance-init#
+javax.swing.JButton#instance-init#

@@ -1,0 +1,2 @@
+IHM.MainPanel#updateListEquipe()V
+Object.Equipe#getAllEquipes()Ljava/util/List;

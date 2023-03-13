@@ -1,0 +1,4 @@
+IHM.tournois.VueInscriptionTournois#equipeDif(LObject/Tournoi;Ljava/util/List;)Ljava/util/List;
+java.util.ArrayList#<init>()V
+Object.Equipe#getAllEquipesFromTournoi(LObject/Tournoi;)Ljava/util/List;
+java.util.ArrayList#instance-init#

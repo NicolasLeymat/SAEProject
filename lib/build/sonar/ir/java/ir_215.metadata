@@ -1,0 +1,9 @@
+IHM.modif.VueModifFrame#<init>(LObject/Joueur;)V
+java.awt.Dimension#<init>(II)V
+IHM.modif.VueModifPanel#instance-init#
+java.awt.GridBagLayout#<init>()V
+java.awt.GridBagLayout#instance-init#
+java.awt.Dimension#instance-init#
+java.awt.GridBagConstraints#instance-init#
+java.awt.GridBagConstraints#<init>()V
+IHM.modif.VueModifPanel#<init>(LObject/Joueur;)V

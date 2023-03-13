@@ -1,0 +1,4 @@
+Object.PhaseDePoule#getClassement(I)Ljava/util/List;
+java.util.ArrayList#<init>()V
+java.util.Collections#sort(Ljava/util/List;Ljava/util/Comparator;)V
+java.util.ArrayList#instance-init#

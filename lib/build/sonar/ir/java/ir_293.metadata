@@ -1,0 +1,3 @@
+controleur.ControleurRecherche#actionPerformed(Ljava/awt/event/ActionEvent;)V
+IHM.MainPanel#changeModelElementEquipe(Ljava/util/List;)V
+IHM.MainPanel#changeModelElementEcurie(Ljava/util/List;)V

@@ -1,0 +1,2 @@
+IHM.MainPanel#updateListTournoi()V
+Object.Tournoi#getAllTournois()Ljava/util/List;

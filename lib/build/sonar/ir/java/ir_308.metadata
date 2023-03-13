@@ -1,0 +1,2 @@
+controleur.ModeleESporter#modifierEcurie(LObject/Ecurie;)V
+Object.Ecurie#modifierEcurie(LObject/Ecurie;)I

@@ -1,0 +1,2 @@
+IHM.modif.VueModifPanel#getAllInfoJoueur()LObject/Joueur;
+Object.Nationalite#getByNom(Ljava/lang/String;)LObject/Nationalite;

@@ -1,0 +1,13 @@
+IHM.add.AddFrame#<init>(Ljava/lang/String;Ljava/lang/Object;)V
+java.lang.Class#toString()Ljava/lang/String;
+java.awt.GridBagLayout#<init>()V
+java.lang.Object#getClass()Ljava/lang/Class;
+java.awt.GridBagLayout#instance-init#
+IHM.add.AddPanel#instance-init#
+java.lang.String#equals(Ljava/lang/Object;)Z
+IHM.add.AddPanel#<init>(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+java.awt.GridBagConstraints#instance-init#
+java.awt.GridBagConstraints#<init>()V
+IHM.add.AddFrame#getMinimumSize(Ljava/lang/String;)Ljava/awt/Dimension;
+==
+setMode IHM.add.AddFrame#setMode(Ljava/lang/String;)V

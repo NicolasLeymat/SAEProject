@@ -1,0 +1,2 @@
+Object.Equipe#getModeDeJeu()LObject/ModeDeJeu;
+Object.ModeDeJeu#getModeDeJeuFromId(I)LObject/ModeDeJeu;

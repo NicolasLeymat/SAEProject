@@ -1,0 +1,2 @@
+IHM.MainPanel#updateListEcuries()V
+Object.Ecurie#getAllEcuries()Ljava/util/List;

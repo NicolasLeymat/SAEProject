@@ -1,0 +1,2 @@
+controleur.ModeleESporter#addParticipation(LObject/Equipe;LObject/Tournoi;)V
+Object.Equipe#inscrireEquipeTournoi(LObject/Equipe;LObject/Tournoi;)I

@@ -1,0 +1,2 @@
+controleur.ModeleESporter#supprimerEquipe(LObject/Equipe;)I
+Object.Equipe#supprimerEquipe(LObject/Equipe;)I
