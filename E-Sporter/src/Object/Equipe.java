@@ -265,6 +265,11 @@ public class Equipe implements Comparable<Equipe> {
 				return -1;
 			}
 			
+			existe = verifierPresenceEquipe(equipe,1);
+			if (existe != 0) {
+				return -1;
+			}
+			
 			pst = connex.prepareStatement("update LMN3783A.sae_equipe set nom = ?, id_ecurie = ?, id_mode = ? where id_equipe = ?" );
 			pst.setString(1, equipe.getNom());
 			pst.setInt(2, equipe.getIdEcurie());

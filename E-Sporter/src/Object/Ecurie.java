@@ -121,7 +121,7 @@ public class Ecurie {
 	 */
 	public Equipe getEquipe(String nom) {
 		for (Equipe equipe : this.listeEquipes) {
-			if (equipe.getNom() == nom) {
+			if (equipe.getNom().equals(nom)) {
 				return equipe;
 			}
 		}
@@ -212,6 +212,11 @@ public class Ecurie {
 			
 			existe = verifierPresenceEcurie(ecurie,0);
 			if (existe == 0) {
+				return -1;
+			}
+			
+			existe = verifierPresenceEcurie(ecurie,1);
+			if (existe != 0) {
 				return -1;
 			}
 			

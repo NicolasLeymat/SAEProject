@@ -165,6 +165,11 @@ public class Joueur {
 				return -1;
 			}
 			
+			existe = verifierPresenceJoueur(j, 1);
+			if (existe != 0) {
+				return -1;
+			}
+			
 			pst = connex
 					.prepareStatement("update LMN3783A.sae_joueur set prenom = ?, nom = ?, pseudonyme = ?, datedenaissance = ?, nationalites = ?, id_equipe = ? where id_joueur = ?" );
 			pst.setString(1, j.getPrenom());

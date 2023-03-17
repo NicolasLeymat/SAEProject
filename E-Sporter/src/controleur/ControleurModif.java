@@ -84,31 +84,58 @@ public class ControleurModif implements ActionListener{
 					
 					Equipe eqNew = ((VueModifPanel) this.vue).getAllInfoEquipe();
 					JDialog dialog = dialog();
+							
+					int info = this.modele.modifierEquipe(eqNew);
 					
-					VueInfoPanel.updateInfoEquipe(eqNew.getNom());
-					MainPanel.updateListEquipe();			
-					this.modele.modifierEquipe(eqNew);
-					MainPanel.updateListEquipe();
-					VueInfoPanel.updateListEquipe();
-					closeDialog(dialog);
-					JOptionPane.showMessageDialog(null, "Modification confirmé.");
+					if (info == -1) {
+						closeDialog(dialog);
+						JOptionPane.showMessageDialog(null,
+								"L'équipe n'a pas pu être modifiée car une équipe du même nom existe déjà");
+						
+					}
+					else {
+						VueInfoPanel.updateInfoEquipe(eqNew.getNom());
+						MainPanel.updateListEquipe();
+						VueInfoPanel.updateListEquipe();
+						closeDialog(dialog);
+						JOptionPane.showMessageDialog(null, "Modification confirmé.");
+					}
 					break;
 				case "Ecurie":
 					Ecurie ecNew = ((VueModifPanel) this.vue).getAllInfoEcurie();
 					dialog = dialog();
 					
-					VueInfoPanel.updateInfoEcurie(ec.getNom());
-					closeDialog(dialog);
-					this.modele.modifierEcurie(ecNew);
+					info = this.modele.modifierEcurie(ecNew);
+					
+					if (info == -1) {
+						closeDialog(dialog);
+						JOptionPane.showMessageDialog(null,
+								"L'ecurie n'a pas pu être modifiée car une ecurie du même nom existe déjà");
+					}
+					else {
+						VueInfoPanel.updateInfoEcurie(ec.getNom());
+						MainPanel.updateListEcuries();
+						JOptionPane.showMessageDialog(null, "Modification confirmé.");
+						closeDialog(dialog);
+					}
 					break;
 				case "Joueur":
 					
 					Joueur jNew = ((VueModifPanel) this.vue).getAllInfoJoueur();
 					dialog = dialog();
-					VueInfoPanel.updateInfoJoueur(jNew);
-					MainPanel.updateListEquipe();
-					closeDialog(dialog);
-					this.modele.modifierJoueur(jNew);
+					info = this.modele.modifierJoueur(jNew);
+					
+					if (info == -1) {
+						closeDialog(dialog);
+						JOptionPane.showMessageDialog(null,
+								"Le joueur n'a pas pu être modifiée car un joueur ayant les mêmes prénom, nom et pseudo existe");
+					}
+					else {
+						VueInfoPanel.updateInfoJoueur(jNew);
+						MainPanel.updateListEquipe();
+						JOptionPane.showMessageDialog(null, "Modification confirmé.");
+						closeDialog(dialog);
+					}
 					break;
 			}
 		}

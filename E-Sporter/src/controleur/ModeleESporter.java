@@ -131,8 +131,8 @@ public class ModeleESporter {
 		resultatRechercheEquipes=  leq;	
 	}
 	
-	public void modifierEquipe(Equipe eq) {
-		Equipe.modifierEquipe(eq);
+	public int modifierEquipe(Equipe eq) {
+		return Equipe.modifierEquipe(eq);
 	}
 	
 
@@ -176,12 +176,12 @@ public class ModeleESporter {
 //		}
 //	}
 	
-	public void modifierEcurie(Ecurie ec) {
-		Ecurie.modifierEcurie(ec);
+	public int modifierEcurie(Ecurie ec) {
+		return Ecurie.modifierEcurie(ec);
 	}
 
-	public void modifierJoueur(Joueur jNew) {
-		Joueur.modifierJoueur(jNew);
+	public int modifierJoueur(Joueur jNew) {
+		return Joueur.modifierJoueur(jNew);
 	}
 	
 	public int supprimerEquipe(Equipe e) {

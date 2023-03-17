@@ -33,7 +33,6 @@ public class ControleurAddPanel implements ActionListener {
 			// System.out.println(obj);
 			JFrame frame = this.modele.getPanelFrame(vue);
 			int info = this.modele.addPlayer(obj);
-			VueInfoPanel.updateListJoueur();
 			if (info == -2) {
 				closeDialog(dialog);
 				JOptionPane.showMessageDialog(this.vue,
