@@ -24,7 +24,7 @@ public abstract class Phase {
     public Phase(Tournoi tournoi) {
         this.tournoi = tournoi;
         this.matchs = new ArrayList<>();
-        this.id =-1;
+        this.id = -1;
     }
 
     public void setId(int id) {

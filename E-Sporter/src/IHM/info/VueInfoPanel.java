@@ -54,7 +54,6 @@ public class VueInfoPanel extends JPanel{
 		modeleJoueur.clear();
 		VueInfoPanel.equipe = equipe;
 		VueInfoPanel.ecurie = Ecurie.getEcurieFromId(equipe.getIdEcurie());
-		System.out.println(modeleJoueur.getSize());
 		ControleurAddFrame c = new ControleurAddFrame(equipe);
 		ControleurModif cm = new ControleurModif(equipe, this);
 		ControleurDelete cd = new ControleurDelete(equipe, this);
@@ -65,9 +64,7 @@ public class VueInfoPanel extends JPanel{
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
-		String nom = "Nom Equipe : " + equipe.getNom();
-		
+				
 		JPanel panelInfo0 = new JPanel();
 		panelInfo0.setLayout(null);
 		GridBagConstraints gbc_panelInfo0 = new GridBagConstraints();

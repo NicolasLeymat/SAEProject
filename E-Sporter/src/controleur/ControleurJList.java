@@ -51,7 +51,9 @@ public class ControleurJList extends MouseListenerImp {
 					windowTournoi = new VueInfoTournoisEnCoursFrame(tournoiSelected);
 				break;
 			}
-			windowTournoi.setVisible(true);
+			if (windowTournoi != null) {
+				windowTournoi.setVisible(true);
+			}
 			break;
 		case "class Object.Joueur":
 			SeeInfoFrame windowJoueur = new SeeInfoFrame((Joueur) element);

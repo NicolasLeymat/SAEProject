@@ -111,7 +111,7 @@ public class Tournoi {
 	//Fonction qui permet de récuperer une équipe d'un tournoi
 	public Equipe getEquipe (String nom) {
 		for (Equipe e : this.listeEquipe) {
-			if (e.getNom() == nom) {
+			if (e.getNom().equals(nom)) {
 				return e;
 			}
 		}
