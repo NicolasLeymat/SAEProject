@@ -9,16 +9,12 @@ import IHM.App;
 public class Application {
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() { 
 				try {
 					App window = new App();
-					window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
 	}
 }

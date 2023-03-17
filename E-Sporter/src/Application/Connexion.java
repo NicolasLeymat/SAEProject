@@ -7,17 +7,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Connexion {
-    private static Connection connexion;
-    
-    private Connexion() {
-    	
-    }
+    private static Connection connection;
 
     public static synchronized Connection connexion() {
-        if (connexion == null) {
+        if (connection == null) {
             return creerConnexion();
         }
-        return connexion;
+        return connection;
     }
 
     private static Connection creerConnexion() {
@@ -39,8 +35,8 @@ public class Connexion {
         }
         try {
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            connexion =DriverManager.getConnection(url,identifiant,mdp);
-            return connexion;
+            connection =DriverManager.getConnection(url,identifiant,mdp);
+            return connection;
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -49,9 +45,9 @@ public class Connexion {
     }
 
     public static void closeConnexion() throws SQLException {
-        if (connexion != null) {
-            connexion.close();
-            connexion = null;
+        if (connection != null) {
+            connection.close();
+            connection = null;
         }
     }
 }
