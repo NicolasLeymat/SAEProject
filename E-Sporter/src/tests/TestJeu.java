@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import Object.Jeu;
+import object.Jeu;
 
 public class TestJeu {
 	

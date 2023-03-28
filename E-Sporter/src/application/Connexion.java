@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 import java.io.FileInputStream;
 import java.sql.Connection;

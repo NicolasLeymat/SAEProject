@@ -1,4 +1,4 @@
-package IHM.champ;
+package ihm.champ;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -8,11 +8,11 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 
-import Object.Equipe;
 import controleur.ControleurFilter;
 import controleur.ControleurJList;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
+import object.Equipe;
 
 import java.awt.Color;
 

@@ -1,8 +1,9 @@
-package IHM.tournois;
+package ihm.tournois;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
-import Object.Tournoi;
+
+import object.Tournoi;
 
 
 public class FrameClassementTournois extends JFrame {

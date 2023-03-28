@@ -8,10 +8,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import IHM.tournois.VueInscriptionTournois;
-import Object.Equipe;
-import Object.Phase;
-import Object.Tournoi;
+import ihm.tournois.VueInscriptionTournois;
+import object.Equipe;
+import object.Phase;
+import object.Tournoi;
 
 public class ControleurInscription implements ActionListener{
 

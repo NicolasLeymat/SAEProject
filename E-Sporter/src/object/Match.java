@@ -1,8 +1,8 @@
-package Object;
-
-import Application.Connexion;
+package object;
 
 import java.sql.*;
+
+import application.Connexion;
 
 public class Match {
 	private Equipe equipe1;

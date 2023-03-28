@@ -1,12 +1,12 @@
-package IHM.modif;
+package ihm.modif;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

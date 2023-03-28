@@ -1,7 +1,8 @@
-package IHM.info;
-import Object.Match;
-
+package ihm.info;
 import javax.swing.table.AbstractTableModel;
+
+import object.Match;
+
 import java.util.List;
 
 public class TableauMatch extends AbstractTableModel {

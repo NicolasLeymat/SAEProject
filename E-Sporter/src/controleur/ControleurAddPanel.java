@@ -6,13 +6,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import IHM.MainPanel;
-import IHM.add.AddPanel;
-import IHM.info.VueInfoPanel;
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.Tournoi;
+import ihm.add.AddPanel;
+import ihm.info.VueInfoPanel;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.Tournoi;
+import ihm.MainPanel;
 
 public class ControleurAddPanel implements ActionListener {
 

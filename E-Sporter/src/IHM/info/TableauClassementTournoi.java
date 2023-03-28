@@ -1,9 +1,9 @@
-package IHM.info;
+package ihm.info;
 
 import javax.swing.table.AbstractTableModel;
-import Object.Tournoi;
-import Object.Equipe;
 
+import object.Equipe;
+import object.Tournoi;
 
 import java.util.Map;
 

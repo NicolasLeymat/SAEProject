@@ -1,4 +1,4 @@
-package Object;
+package object;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Application.Connexion;
+import application.Connexion;
 
 //Classe qui définit les fonctions d'un tournoi
 public class Tournoi {

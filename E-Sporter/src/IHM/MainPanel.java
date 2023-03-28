@@ -1,4 +1,4 @@
-package IHM;
+package ihm;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -7,12 +7,12 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.ScrollPaneConstants;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Tournoi;
 import controleur.ControleurJList;
 import controleur.ControleurFilter;
 import controleur.ModeleESporter;
+import object.Ecurie;
+import object.Equipe;
+import object.Tournoi;
 
 import java.awt.GridLayout;
 import java.util.List;

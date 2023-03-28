@@ -7,13 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import IHM.MainPanel;
-import IHM.info.VueInfoPanel;
-import IHM.modif.VueModifFrame;
-import IHM.modif.VueModifPanel;
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
+
+import ihm.info.VueInfoPanel;
+import ihm.modif.VueModifFrame;
+import ihm.modif.VueModifPanel;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import ihm.MainPanel;
 
 
 public class ControleurModif implements ActionListener{

@@ -1,6 +1,4 @@
-package Object;
-
-import Application.Connexion;
+package object;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -16,6 +14,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import application.Connexion;
 
 public class Equipe implements Comparable<Equipe> {
 

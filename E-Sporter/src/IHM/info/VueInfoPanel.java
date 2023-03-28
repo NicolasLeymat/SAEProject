@@ -1,18 +1,18 @@
-package IHM.info;
+package ihm.info;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.Tournoi;
 import controleur.ControleurAddFrame;
 import controleur.ControleurDelete;
 import controleur.ControleurJList;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.Tournoi;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

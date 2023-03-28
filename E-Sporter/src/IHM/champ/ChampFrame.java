@@ -1,4 +1,4 @@
-package IHM.champ;
+package ihm.champ;
 
 import java.awt.Dimension;
 

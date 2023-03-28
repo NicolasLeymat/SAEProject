@@ -1,13 +1,13 @@
-package IHM.info;
+package ihm.info;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.Tournoi;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.Tournoi;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

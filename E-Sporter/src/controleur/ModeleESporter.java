@@ -11,14 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import Application.Connexion;
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Jeu;
-import Object.Joueur;
-import Object.ModeDeJeu;
-import Object.Nationalite;
-import Object.Tournoi;
+import application.Connexion;
+import object.Ecurie;
+import object.Equipe;
+import object.Jeu;
+import object.Joueur;
+import object.ModeDeJeu;
+import object.Nationalite;
+import object.Tournoi;
 
 public class ModeleESporter {
 

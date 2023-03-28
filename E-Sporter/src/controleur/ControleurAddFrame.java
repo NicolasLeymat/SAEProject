@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import IHM.add.AddFrame;
+import ihm.add.AddFrame;
 
 public class ControleurAddFrame implements ActionListener{
 	

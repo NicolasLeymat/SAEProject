@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import Application.Connexion;
-import Object.Ecurie;
-import Object.Equipe;
+import application.Connexion;
+import object.Ecurie;
+import object.Equipe;
 
 public class TestEcurie {
 

@@ -1,10 +1,11 @@
-package IHM.info;
+package ihm.info;
 
 import java.util.Comparator;
 import java.util.List;
-import Object.Match;
 
 import javax.swing.*;
+
+import object.Match;
 
 public class ListeMatch extends AbstractListModel {
     private List<Match> matchs;

@@ -1,4 +1,4 @@
-package IHM.add;
+package ihm.add;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -11,15 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.ModeDeJeu;
-import Object.Nationalite;
-import Object.Tournoi;
-import Object.Tournoi.EtatTournoi;
 import controleur.ControleurAddPanel;
 import controleur.ModeleESporter;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.ModeDeJeu;
+import object.Nationalite;
+import object.Tournoi;
+import object.Tournoi.EtatTournoi;
 
 import java.awt.Font;
 

@@ -1,4 +1,4 @@
-package IHM.tournois;
+package ihm.tournois;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import IHM.info.ListeJoueur;
-import Object.Joueur;
-import Object.Match;
+import ihm.info.ListeJoueur;
+import object.Joueur;
+import object.Match;
 import controleur.ControleurArbitrageTournoi;
 import controleur.ControleurJList;
 

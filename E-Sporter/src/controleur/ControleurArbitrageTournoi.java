@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import IHM.tournois.VueArbitrageMatch;
-import Object.Match;
+import ihm.tournois.VueArbitrageMatch;
+import object.Match;
 
 public class ControleurArbitrageTournoi implements ActionListener {
     private VueArbitrageMatch vue;

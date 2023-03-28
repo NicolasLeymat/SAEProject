@@ -1,5 +1,5 @@
 
-package Object;
+package object;
 
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Application.Connexion;
+import application.Connexion;
 
 //Classe qui définit les fonctions d'un joueur
 public class Joueur {

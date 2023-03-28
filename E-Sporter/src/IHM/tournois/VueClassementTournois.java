@@ -1,4 +1,4 @@
-package IHM.tournois;
+package ihm.tournois;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-import IHM.info.TableauClassementTournoi;
-import IHM.info.TableauMatchHistorique;
-import Object.Match;
-import Object.Tournoi;
+import ihm.info.TableauClassementTournoi;
+import ihm.info.TableauMatchHistorique;
+import object.Match;
+import object.Tournoi;
 import controleur.ModeleESporter;
 
 public class VueClassementTournois extends JPanel{

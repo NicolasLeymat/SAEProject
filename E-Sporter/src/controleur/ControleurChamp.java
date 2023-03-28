@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import IHM.champ.ChampFrame;
+import ihm.champ.ChampFrame;
 
 public class ControleurChamp implements ActionListener{
 	

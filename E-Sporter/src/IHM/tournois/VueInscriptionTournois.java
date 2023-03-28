@@ -1,4 +1,4 @@
-package IHM.tournois;
+package ihm.tournois;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,13 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import Object.Equipe;
-import Object.Joueur;
-import Object.Nationalite;
-import Object.Tournoi;
 import controleur.ControleurInscription;
 import controleur.ControleurInscriptionMouse;
 import controleur.ModeleESporter;
+import object.Equipe;
+import object.Joueur;
+import object.Nationalite;
+import object.Tournoi;
+
 import java.awt.GridLayout;
 import javax.swing.ScrollPaneConstants;
 

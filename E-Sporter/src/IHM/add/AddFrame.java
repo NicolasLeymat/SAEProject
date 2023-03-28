@@ -1,12 +1,12 @@
-package IHM.add;
+package ihm.add;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import org.hamcrest.core.IsInstanceOf;
 
-import Object.Ecurie;
-import Object.Equipe;
+import object.Ecurie;
+import object.Equipe;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
-import IHM.MainPanel;
-import IHM.VuePrincipale;
-import Object.Ecurie;
-import Object.Equipe;
+
+import ihm.MainPanel;
+import ihm.VuePrincipale;
+import object.Ecurie;
+import object.Equipe;
 
 public class ControleurRecherche implements ActionListener{
 	

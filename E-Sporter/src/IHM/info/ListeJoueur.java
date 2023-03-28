@@ -1,7 +1,8 @@
-package IHM.info;
+package ihm.info;
 
 import javax.swing.*;
-import Object.Joueur;
+
+import object.Joueur;
 
 import java.util.List;
 

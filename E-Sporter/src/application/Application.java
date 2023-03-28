@@ -1,10 +1,10 @@
-package Application;
+package application;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import IHM.App;
+import ihm.App;
 
 public class Application {
 

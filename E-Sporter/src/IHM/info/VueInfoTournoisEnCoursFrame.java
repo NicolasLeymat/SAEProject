@@ -1,8 +1,8 @@
-package IHM.info;
+package ihm.info;
 
-import Object.Tournoi;
 import controleur.ControlleurListeMatch;
 import controleur.ModeleESporter;
+import object.Tournoi;
 
 import javax.swing.*;
 import java.awt.*;

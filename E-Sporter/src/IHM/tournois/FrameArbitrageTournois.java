@@ -1,9 +1,10 @@
-package IHM.tournois;
+package ihm.tournois;
 
 
 
 import javax.swing.JFrame;
-import Object.Match;
+
+import object.Match;
 
 public class FrameArbitrageTournois extends JFrame {
 	private Match match;

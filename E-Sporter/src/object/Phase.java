@@ -1,12 +1,12 @@
-package Object;
-
-import Application.Connexion;
+package object;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import application.Connexion;
 
 public abstract class Phase {
     private Tournoi tournoi;

@@ -1,12 +1,13 @@
-package Tests;
+package tests;
 
 import org.junit.Before;
-import Object.*;
+
+import application.Connexion;
+import object.*;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-
-import Application.Connexion;
 
 import java.sql.Connection;
 import java.sql.Date;

@@ -1,14 +1,14 @@
-package IHM.modif;
+package ihm.modif;
 
 
 import javax.swing.JPanel;
 
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.Nationalite;
 import controleur.ControleurModif;
 import controleur.ModeleESporter;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.Nationalite;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

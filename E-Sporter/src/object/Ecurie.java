@@ -1,6 +1,4 @@
-package Object;
-
-import Application.Connexion;
+package object;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+
+import application.Connexion;
 
 public class Ecurie {
 	

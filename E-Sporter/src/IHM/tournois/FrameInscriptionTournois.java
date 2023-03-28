@@ -1,7 +1,8 @@
-package IHM.tournois;
+package ihm.tournois;
 
 import javax.swing.JFrame;
-import Object.Tournoi;
+
+import object.Tournoi;
 
 import java.awt.Dimension;
 import java.awt.GridBagLayout;

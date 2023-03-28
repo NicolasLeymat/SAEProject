@@ -1,4 +1,4 @@
-package Object;
+package object;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import Application.Connexion;
+import application.Connexion;
 
 public class ModeDeJeu {
 	

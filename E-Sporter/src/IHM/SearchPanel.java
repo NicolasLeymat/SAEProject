@@ -1,4 +1,4 @@
-package IHM;
+package ihm;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;

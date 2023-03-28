@@ -5,15 +5,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-import IHM.info.SeeInfoFrame;
-import IHM.info.VueInfoTournoisEnCoursFrame;
-import IHM.tournois.FrameClassementTournois;
-import IHM.tournois.FrameInscriptionTournois;
-import IHM.tournois.VueInscriptionTournois;
-import Object.Ecurie;
-import Object.Equipe;
-import Object.Joueur;
-import Object.Tournoi;
+import ihm.info.SeeInfoFrame;
+import ihm.info.VueInfoTournoisEnCoursFrame;
+import ihm.tournois.FrameClassementTournois;
+import ihm.tournois.FrameInscriptionTournois;
+import ihm.tournois.VueInscriptionTournois;
+import object.Ecurie;
+import object.Equipe;
+import object.Joueur;
+import object.Tournoi;
 
 public class ControleurInscriptionMouse extends MouseListenerImp {
 

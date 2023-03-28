@@ -1,12 +1,12 @@
 package controleur;
 
-import IHM.info.VueInfoTournoisEnCoursFrame;
+import ihm.info.VueInfoTournoisEnCoursFrame;
+import object.Phase;
+import object.Tournoi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Object.Phase;
-import Object.Tournoi;
 
 public class ControlleurListeMatch implements ActionListener {
     private enum Etat {

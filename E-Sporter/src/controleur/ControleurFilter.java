@@ -6,14 +6,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import IHM.MainPanel;
-import IHM.champ.ChampPanel;
-import Object.Ecurie;
-import Object.Equipe;
-import Object.ModeDeJeu;
-import Object.Nationalite;
-import Object.Tournoi;
-import Object.Tournoi.EtatTournoi;
+import ihm.champ.ChampPanel;
+import object.Ecurie;
+import object.Equipe;
+import object.ModeDeJeu;
+import object.Nationalite;
+import object.Tournoi;
+import object.Tournoi.EtatTournoi;
+import ihm.MainPanel;
 
 public class ControleurFilter<E> implements ActionListener{
 

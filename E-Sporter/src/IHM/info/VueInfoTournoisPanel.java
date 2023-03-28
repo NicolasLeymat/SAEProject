@@ -1,10 +1,10 @@
-package IHM.info;
+package ihm.info;
 
 import javax.swing.*;
 
-import IHM.tournois.FrameArbitrageTournois;
-import Object.Tournoi;
-import Object.Match;
+import ihm.tournois.FrameArbitrageTournois;
+import object.Match;
+import object.Tournoi;
 import controleur.ControlleurListeMatch;
 import controleur.ModeleESporter;
 

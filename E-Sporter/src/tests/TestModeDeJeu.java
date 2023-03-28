@@ -1,10 +1,10 @@
-package Tests;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import Object.ModeDeJeu;
+import object.ModeDeJeu;
 
 public class TestModeDeJeu {
 
