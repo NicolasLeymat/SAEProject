@@ -19,6 +19,7 @@ import object.Match;
 import controleur.ControleurArbitrageTournoi;
 import controleur.ControleurJList;
 
+@SuppressWarnings("serial")
 public class VueArbitrageMatch extends JPanel{
 
 	private Match match;
@@ -37,6 +38,7 @@ public class VueArbitrageMatch extends JPanel{
 		return buttonWin2;
 	}
 
+	@SuppressWarnings("unchecked")
 	public VueArbitrageMatch(Match m) {
 
 		this.match = m;

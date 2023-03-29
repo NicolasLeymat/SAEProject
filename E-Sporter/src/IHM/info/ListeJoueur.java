@@ -7,6 +7,7 @@ import object.Joueur;
 import java.util.List;
 
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class ListeJoueur extends AbstractListModel {
     private List<Joueur> joueurs;
 

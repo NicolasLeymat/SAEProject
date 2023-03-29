@@ -1,9 +1,5 @@
 package application;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
 import ihm.App;
 
 public class Application {

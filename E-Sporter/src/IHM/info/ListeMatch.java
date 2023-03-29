@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import object.Match;
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class ListeMatch extends AbstractListModel {
     private List<Match> matchs;
     private static final int TAILLESEP = 50;

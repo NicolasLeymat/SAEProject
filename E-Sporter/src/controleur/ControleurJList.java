@@ -22,15 +22,15 @@ public class ControleurJList extends MouseListenerImp {
 		Object element = list.getModel().getElementAt(index);
 		String classObject = element.getClass().toString();
 		switch (classObject) {
-		case "class Object.Equipe":
+		case "class object.Equipe":
 			SeeInfoFrame window = new SeeInfoFrame((Equipe) (element));
 			window.setVisible(true);
 			break;
-		case "class Object.Ecurie":
+		case "class object.Ecurie":
 			SeeInfoFrame windowEcurie = new SeeInfoFrame((Ecurie) element);
 			windowEcurie.setVisible(true);
 			break;
-		case "class Object.Tournoi":
+		case "class object.Tournoi":
 			Tournoi tournoiSelected = (Tournoi) element;
 			try {
 				tournoiSelected.getPhasesFromId();
@@ -55,7 +55,7 @@ public class ControleurJList extends MouseListenerImp {
 				windowTournoi.setVisible(true);
 			}
 			break;
-		case "class Object.Joueur":
+		case "class object.Joueur":
 			SeeInfoFrame windowJoueur = new SeeInfoFrame((Joueur) element);
 			windowJoueur.setVisible(true);
 			break; 
