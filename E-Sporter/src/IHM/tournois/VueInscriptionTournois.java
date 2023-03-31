@@ -47,15 +47,18 @@ public class VueInscriptionTournois extends JPanel{
 		VueInscriptionTournois.allTournoiEquipeList = Equipe.getAllEquipesFromTournoi(t);
 		ControleurInscriptionMouse cm1 = new ControleurInscriptionMouse(this, "Equipe");
 		ControleurInscriptionMouse cm2 = new ControleurInscriptionMouse(this, "EquipeTournoi");
-		
 		modeleEquipe.clear();
 		System.out.println(t.getId_Mode().getIdMode());
 		modeleEquipe.addAll(equipeDif(t, allModeList));		
 		modeleEquipeTournoi.clear();
 		modeleEquipeTournoi.addAll(allTournoiEquipeList);
+		
+		listEquipe = new JList<>();
+		listEquipesTournoi = new JList<>();
+		
 		listEquipe.setModel(modeleEquipe);
 		listEquipesTournoi.setModel(modeleEquipeTournoi);
-		
+				
 		listEquipe.addMouseListener(cm1);
 		listEquipesTournoi.addMouseListener(cm2);
 		
